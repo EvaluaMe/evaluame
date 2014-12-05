@@ -53,13 +53,12 @@ public class ChartFragment  extends Fragment {
         // radius of the center hole in percent of maximum radius
         mChart.setHoleRadius(45f);
         mChart.setTransparentCircleRadius(50f);
+        
 
+        mChart.animateXY(2000,2000);
 
         createData();
 
-        //mChart.setTouchEnabled(true);
-
-        mChart.animateXY(3000,3000);
 
 
     }
@@ -94,19 +93,9 @@ public class ChartFragment  extends Fragment {
 
         data.addEntry(new Entry(50.000f, i++), 0);
 
-
-        for (int j = 0; j < yVals.getEntryCount(); j++){
-
-            System.out.println(xVals.get(j));
-
-            System.out.println(yVals.getEntryForXIndex(j));
-
-
-
-        }
-
-
     }
 
-    private void newValue(){}
+
+
+
 }
