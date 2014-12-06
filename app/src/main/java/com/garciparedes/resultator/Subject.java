@@ -35,4 +35,23 @@ public class Subject {
     public ArrayList<Test> getTestList() {
         return testList;
     }
+
+    public Test getTestElement(int i) {
+        try {
+            return getTestList().get(i);
+        } catch (NullPointerException e){
+            return null;
+        }
+    }
+
+    public double getAverage(){
+
+        double sum = 0;
+
+        for (int i = 0 ; i < getTestList().size() ; i++){
+            sum += getTestElement(i).getMark();
+        }
+
+        return  sum/getTestList().size();
+    }
 }
