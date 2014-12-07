@@ -63,12 +63,12 @@ public class ListDB {
         return masterList;
     }
 
-    public static String[] subjectNames(){
-        String[] names = new String[masterList.size()];
+    public static ArrayList<String> subjectNames(){
+        ArrayList<String> names = new ArrayList<String>(masterList.size());
 
         for (int i = 0; i< masterList.size(); i++){
 
-            names[i] = masterList.get(i).getName();
+            names.add(masterList.get(i).getName());
 
         }
 

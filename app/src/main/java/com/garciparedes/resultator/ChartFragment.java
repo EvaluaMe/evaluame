@@ -151,12 +151,13 @@ public class ChartFragment  extends Fragment {
         introduce(datos.get(datos.size()-1),datos.size()-1);
 
         mChart.setData(data);
+        mChart.animateXY(1500, 1500);
+
 
 
     }
 
     private void creaTest(){
-        String name;
         // Created a new Dialog
         final Dialog dialog = new Dialog(getActivity());
 

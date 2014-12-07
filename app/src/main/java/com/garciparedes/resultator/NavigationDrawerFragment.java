@@ -3,6 +3,7 @@ package com.garciparedes.resultator;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -251,6 +255,49 @@ public class NavigationDrawerFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_example) {
             Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+
+
+            // Created a new Dialog
+            final Dialog dialog = new Dialog(getActivity());
+
+            // Set the title
+            dialog.setTitle("Nueva nota");
+
+            // inflate the layout
+            dialog.setContentView(R.layout.dialog_add_subject);
+
+            dialog.setCanceledOnTouchOutside(true);
+
+            // Set the dialog text -- this is better done in the XML
+            TextView textName = (TextView)dialog.findViewById(R.id.text_view_dialog_name_subject);
+            TextView textDescription = (TextView)dialog.findViewById(R.id.text_view_dialog_description_subject);
+
+            final EditText editTextName = (EditText) dialog.findViewById(R.id.edit_text_dialog_name_subject);
+            final EditText editTextDescription = (EditText) dialog.findViewById(R.id.edit_text_dialog_description_subject);
+
+
+            textName.setText("Introduzca un nombre:");
+            textDescription.setText("Introduzca la descripcion de la asignatura:");
+
+            Button btnCreate = (Button) dialog.findViewById(R.id.button_dialog_subject);
+
+            btnCreate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    ListDB.addSubject(editTextName.getText().toString(), editTextDescription.getText().toString());
+                    dialog.dismiss();
+
+                    mDrawerListView.setAdapter(new ArrayAdapter<String>(
+                            getActionBar().getThemedContext(),
+                            android.R.layout.simple_list_item_activated_1,
+                            android.R.id.text1,ListDB.subjectNames()));
+                }
+            });
+
+            // Display the dialog
+            dialog.show();
+
             return true;
         }
 
@@ -281,4 +328,6 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+
+
 }
