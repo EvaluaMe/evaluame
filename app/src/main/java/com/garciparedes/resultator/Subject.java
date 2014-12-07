@@ -44,6 +44,10 @@ public class Subject {
         }
     }
 
+    public void addTestElement(Test test){
+        getTestList().add(test);
+    }
+
     public double getAverage(){
 
         double sum = 0;
@@ -54,4 +58,6 @@ public class Subject {
 
         return  sum/getTestList().size();
     }
+
+
 }

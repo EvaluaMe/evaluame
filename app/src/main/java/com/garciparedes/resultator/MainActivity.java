@@ -52,13 +52,16 @@ public class MainActivity extends Activity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, ChartFragment.newInstance())
+                .replace(R.id.container, ChartFragment.newInstance(position))
                 .commit();
 
 
     }
 
     public void onSectionAttached(int number) {
+        mTitle = ListDB.getMasterList().get(number).getName();
+
+        /*
         switch (number) {
             case 1:
                 mTitle = getString(R.string.title_section1);
@@ -70,6 +73,7 @@ public class MainActivity extends Activity
                 mTitle = getString(R.string.title_section3);
                 break;
         }
+        */
     }
 
     public void restoreActionBar() {

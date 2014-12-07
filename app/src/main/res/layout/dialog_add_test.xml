@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+
+
+    <TextView
+        android:id="@+id/text_view_dialog_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/edit_text_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_dialog_name"/>
+
+    <TextView
+        android:id="@+id/text_view_dialog_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_text_dialog"/>
+
+    <NumberPicker
+        android:id="@+id/number_picker_mark_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text_view_dialog_mark"/>
+
+    <TextView
+        android:id="@+id/text_view_dialog_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/number_picker_mark_dialog"/>
+
+    <NumberPicker
+        android:id="@+id/number_picker_value_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text_view_dialog_value"/>
+
+    <Button
+        android:id="@+id/button_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        />
+
+
+
+
+</RelativeLayout>

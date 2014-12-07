@@ -6,10 +6,10 @@ package com.garciparedes.resultator;
 public class Test {
 
     private String name;
-    private double mark;
-    private double value;
+    private float mark;
+    private float value;
 
-    public Test(String name, double mark, double value){
+    public Test(String name, float mark, float value){
         this.name = name;
         this.mark = mark;
         this.value = value;
@@ -19,11 +19,11 @@ public class Test {
         this.name = name;
     }
 
-    public void setMark(double mark) {
+    public void setMark(float mark) {
         this.mark = mark;
     }
 
-    public void setValue(double value) {
+    public void setValue(float value) {
         this.value = value;
     }
 
@@ -31,11 +31,16 @@ public class Test {
         return name;
     }
 
-    public double getMark() {
+    public float getMark() {
         return mark;
     }
 
-    public double getValue() {
+    public String getMarkString() {
+        return Float.toString(mark);
+    }
+
+
+    public float getValue() {
         return value;
     }
 }
