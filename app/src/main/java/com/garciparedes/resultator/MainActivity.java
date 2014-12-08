@@ -48,6 +48,15 @@ public class MainActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this.getApplicationContext());
+        Gson gson = new Gson();
+        String json = appSharedPrefs.getString("MasterList", "");
+        Type type = new TypeToken<ArrayList<Subject>>(){}.getType();
+        ArrayList<Subject> mList =gson.fromJson(json,type);
+        ListDB.setMasterList(mList);
+
         setContentView(R.layout.activity_main);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -60,13 +69,6 @@ public class MainActivity extends Activity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
 
-        SharedPreferences appSharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this.getApplicationContext());
-        Gson gson = new Gson();
-        String json = appSharedPrefs.getString("MasterList", "");
-        Type type = new TypeToken<ArrayList<Subject>>(){}.getType();
-        ArrayList<Subject> mList =gson.fromJson(json,type);
-        ListDB.setMasterList(mList);
     }
 
     @Override
