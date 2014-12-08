@@ -10,6 +10,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +23,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class MainActivity extends Activity
@@ -50,10 +59,14 @@ public class MainActivity extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        SharedPreferences sharedPref = this.getPreferences(Activity.MODE_PRIVATE);
 
-        String arrayString = sharedPref.getString("yourKey", null);
-
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this.getApplicationContext());
+        Gson gson = new Gson();
+        String json = appSharedPrefs.getString("MasterList", "");
+        Type type = new TypeToken<ArrayList<Subject>>(){}.getType();
+        ArrayList<Subject> mList =gson.fromJson(json,type);
+        ListDB.setMasterList(mList);
     }
 
     @Override
@@ -70,19 +83,6 @@ public class MainActivity extends Activity
     public void onSectionAttached(int number) {
         mTitle = ListDB.getMasterList().get(number).getName();
 
-        /*
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
-        */
     }
 
     public void restoreActionBar() {

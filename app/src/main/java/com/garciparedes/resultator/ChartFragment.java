@@ -3,8 +3,11 @@ package com.garciparedes.resultator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.Highlight;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -37,7 +41,6 @@ public class ChartFragment  extends Fragment {
     ArrayList<Test> datos;
     Subject subject;
 
-
     public static ChartFragment newInstance(int i) {
         ChartFragment f = new ChartFragment();
         Bundle args = new Bundle();
@@ -47,7 +50,6 @@ public class ChartFragment  extends Fragment {
         return f;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -55,7 +57,6 @@ public class ChartFragment  extends Fragment {
         return inflater.inflate(R.layout.fragment_chart, container, false);
 
     }
-
 
     @Override
     public void onActivityCreated(Bundle state) {
@@ -84,8 +85,9 @@ public class ChartFragment  extends Fragment {
             }
         });
 
-    }
 
+
+    }
 
     private void createChart(){
 
@@ -122,8 +124,6 @@ public class ChartFragment  extends Fragment {
 
     }
 
-
-
     private void introduce(Test test, int i){
 
         xVals.add(test.getName());
@@ -138,7 +138,6 @@ public class ChartFragment  extends Fragment {
 
         eventList.setAdapter(new CustomArrayAdapter(this, datos));
     }
-
 
     private void update(){
 
@@ -201,6 +200,15 @@ public class ChartFragment  extends Fragment {
                 dialog.dismiss();
 
                 update();
+
+                SharedPreferences appSharedPrefs = PreferenceManager
+                        .getDefaultSharedPreferences(getActivity().getApplicationContext());
+
+                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+                Gson gson = new Gson();
+                String json = gson.toJson(ListDB.getMasterList());
+                prefsEditor.putString("MasterList", json);
+                prefsEditor.commit();
             }
         });
 
