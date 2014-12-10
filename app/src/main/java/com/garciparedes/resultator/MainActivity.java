@@ -49,13 +49,7 @@ public class MainActivity extends Activity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences appSharedPrefs = PreferenceManager
-                .getDefaultSharedPreferences(this.getApplicationContext());
-        Gson gson = new Gson();
-        String json = appSharedPrefs.getString("MasterList", "");
-        Type type = new TypeToken<ArrayList<Subject>>(){}.getType();
-        ArrayList<Subject> mList =gson.fromJson(json,type);
-        ListDB.setMasterList(mList);
+        getData();
 
         setContentView(R.layout.activity_main);
 
@@ -158,6 +152,20 @@ public class MainActivity extends Activity
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+    }
+
+    public void getData(){
+
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(this.getApplicationContext());
+        Gson gson = new Gson();
+        String json = appSharedPrefs.getString("MasterList", "");
+        Type type = new TypeToken<ArrayList<Subject>>(){}.getType();
+        ArrayList<Subject> mList =gson.fromJson(json,type);
+        if (mList == null){
+            mList = new ArrayList<Subject>();
+        }
+        ListDB.setMasterList(mList);
     }
 
 }

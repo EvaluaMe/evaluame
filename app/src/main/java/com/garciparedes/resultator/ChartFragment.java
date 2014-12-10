@@ -68,7 +68,15 @@ public class ChartFragment  extends Fragment {
         super.onActivityCreated(state);
 
 
-        subject = ListDB.getMasterList().get(getArguments().getInt("subject", 0));
+        int subjectNum = getArguments().getInt("subject", 0);
+        try {
+            subject = ListDB.getMasterList().get(subjectNum);
+
+        } catch (IndexOutOfBoundsException e){
+            ListDB.getMasterList().add(new Subject("",""));
+            subject = ListDB.getMasterList().get(subjectNum);
+
+        }
         datos = subject.getTestList();
         createChart();
 
