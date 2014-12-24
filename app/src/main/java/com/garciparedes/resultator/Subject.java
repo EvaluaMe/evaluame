@@ -60,4 +60,7 @@ public class Subject {
     }
 
 
+    public void removeTest(Test test){
+        testList.remove(test);
+    }
 }

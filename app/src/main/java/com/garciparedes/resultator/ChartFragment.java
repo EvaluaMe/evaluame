@@ -2,6 +2,7 @@ package com.garciparedes.resultator;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.mikephil.charting.charts.PieChart;
@@ -30,6 +32,9 @@ public class ChartFragment  extends Fragment {
     private PieDataSet yVals;
     private PieData data;
     private ArrayList<String> xVals;
+
+    private ListView list;
+    private TestListAdapter listAdapter;
     ArrayList<Test> datos;
     Subject subject;
 
@@ -137,29 +142,49 @@ public class ChartFragment  extends Fragment {
     }
 
     private void createList(ArrayList<Test> datos){
-        ListView eventList;
-        eventList = (ListView)getView().findViewById(R.id.test_listView);
+        list = (ListView)getView().findViewById(R.id.test_listView);
 
-        eventList.setAdapter(new CustomArrayAdapter(this, datos));
+        listAdapter = new TestListAdapter(this, datos);
+        list.setAdapter(listAdapter);
 
 
-        eventList.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
-        eventList.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+
+        list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+
+        list.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
 
             @Override
-            public void onItemCheckedStateChanged(ActionMode mode, int position,
-                                                  long id, boolean checked) {
-                // Here you can do something when items are selected/de-selected,
-                // such as update the title in the CAB
+            public void onItemCheckedStateChanged(ActionMode mode,
+                                                  int position, long id, boolean checked) {
+                // Capture total checked items
+                final int checkedCount = list.getCheckedItemCount();
+                // Set the CAB title according to total checked items
+                mode.setTitle(checkedCount + " Selected");
+                // Calls toggleSelection method from ListViewAdapter Class
+                listAdapter.toggleSelection(position);
             }
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                // Respond to clicks on the actions in the CAB
                 switch (item.getItemId()) {
                     case R.id.action_delete:
-                        //deleteSelectedItems();
-                        mode.finish(); // Action picked, so close the CAB
+                        // Calls getSelectedIds method from ListViewAdapter Class
+                        SparseBooleanArray selected = listAdapter
+                                .getSelectedIds();
+                        // Captures all selected ids with a loop
+                        for (int i = (selected.size() - 1); i >= 0; i--) {
+                            if (selected.valueAt(i)) {
+                                Test selecteditem = listAdapter
+                                        .getItem(selected.keyAt(i));
+                                // Remove selected items following the ids
+                                listAdapter.remove(selecteditem);
+                                subject.removeTest(selecteditem);
+                                ListDB.saveData(getActivity());
+
+                            }
+                        }
+                        // Close CAB
+                        mode.finish();
                         return true;
                     default:
                         return false;
@@ -168,22 +193,19 @@ public class ChartFragment  extends Fragment {
 
             @Override
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                // Inflate the menu for the CAB
-                MenuInflater inflater = mode.getMenuInflater();
-                inflater.inflate(R.menu.folder, menu);
+                mode.getMenuInflater().inflate(R.menu.folder, menu);
                 return true;
             }
 
             @Override
             public void onDestroyActionMode(ActionMode mode) {
-                // Here you can make any necessary updates to the activity when
-                // the CAB is removed. By default, selected items are deselected/unchecked.
+                // TODO Auto-generated method stub
+                listAdapter.removeSelection();
             }
 
             @Override
             public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                // Here you can perform updates to the CAB due to
-                // an invalidate() request
+                // TODO Auto-generated method stub
                 return false;
             }
         });
@@ -196,7 +218,7 @@ public class ChartFragment  extends Fragment {
             datos = subject.getTestList();
 
 
-            createList(datos);
+            list.setAdapter(new TestListAdapter(this, datos));
 
             introduce(datos.get(datos.size() - 1), datos.size() - 1);
 

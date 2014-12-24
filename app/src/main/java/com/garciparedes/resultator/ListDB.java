@@ -1,5 +1,11 @@
 package com.garciparedes.resultator;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 /**
@@ -38,6 +44,17 @@ public class ListDB {
 
         return names;
 
+    }
+
+    public static void saveData(Context context){
+        SharedPreferences appSharedPrefs = PreferenceManager
+                .getDefaultSharedPreferences(context);
+
+        SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(ListDB.getMasterList());
+        prefsEditor.putString("MasterList", json);
+        prefsEditor.commit();
     }
 
     public static ArrayList<Test> getTestList(int i) {

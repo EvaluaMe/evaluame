@@ -2,7 +2,6 @@ package com.garciparedes.resultator;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class TestListFragment extends Fragment {
 
         eventList = (ListView)getView().findViewById(R.id.test_listView);
 
-        eventList.setAdapter(new CustomArrayAdapter(this, datos));
+        eventList.setAdapter(new TestListAdapter(this, datos));
 
 
 

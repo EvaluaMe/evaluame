@@ -30,7 +30,7 @@ public class TestDialog extends Dialog {
 
         this.subject = subject;
         this.chartFragment = chartFragment;
-       
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,17 +76,9 @@ public class TestDialog extends Dialog {
 
                 dismiss();
 
-                SharedPreferences appSharedPrefs = PreferenceManager
-                        .getDefaultSharedPreferences(getContext());
-
-                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(ListDB.getMasterList());
-                prefsEditor.putString("MasterList", json);
-                prefsEditor.commit();
+                ListDB.saveData(getContext());
 
                 chartFragment.update();
-
 
             }
         });

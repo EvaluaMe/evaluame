@@ -71,14 +71,8 @@ public class SubjectDialog extends Dialog {
 
                 dismiss();
 
-                SharedPreferences appSharedPrefs = PreferenceManager
-                        .getDefaultSharedPreferences(getContext());
+                ListDB.saveData(getContext());
 
-                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(ListDB.getMasterList());
-                prefsEditor.putString("MasterList", json);
-                prefsEditor.commit();
                 navigationDrawerFragment.updateListView();
 
 
