@@ -48,7 +48,6 @@ public class TestDialog extends Dialog {
         TextView textName = (TextView)findViewById(R.id.text_view_dialog_name);
         TextView textMark = (TextView)findViewById(R.id.text_view_dialog_mark);
         TextView textValue = (TextView)findViewById(R.id.text_view_dialog_value);
-
         final EditText editText = (EditText) findViewById(R.id.edit_text_dialog);
 
         textName.setText("Introduzca un nombre:");
@@ -76,7 +75,6 @@ public class TestDialog extends Dialog {
 
                 dismiss();
 
-                ListDB.saveData(getContext());
 
                 chartFragment.update();
 

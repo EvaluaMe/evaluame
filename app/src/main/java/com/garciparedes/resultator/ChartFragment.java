@@ -147,8 +147,6 @@ public class ChartFragment  extends Fragment {
         listAdapter = new TestListAdapter(this, datos);
         list.setAdapter(listAdapter);
 
-
-
         list.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
 
         list.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
@@ -177,12 +175,11 @@ public class ChartFragment  extends Fragment {
                                 Test selecteditem = listAdapter
                                         .getItem(selected.keyAt(i));
                                 // Remove selected items following the ids
-                                listAdapter.remove(selecteditem);
                                 subject.removeTest(selecteditem);
-                                ListDB.saveData(getActivity());
 
                             }
                         }
+                        update();
                         // Close CAB
                         mode.finish();
                         return true;
@@ -213,18 +210,33 @@ public class ChartFragment  extends Fragment {
 
     public void update(){
 
-        if (datos.size() > 0) {
-            subject = ListDB.getMasterList().get(getArguments().getInt("subject", 0));
-            datos = subject.getTestList();
+        xVals = new ArrayList<String>();
+        yVals = new PieDataSet(null, "Company 1");
 
+        int[] rainbow = getResources().getIntArray(R.array.rainbow);
+        yVals.setColors(rainbow);
 
-            list.setAdapter(new TestListAdapter(this, datos));
+        data = new PieData(xVals,yVals);
 
-            introduce(datos.get(datos.size() - 1), datos.size() - 1);
+        mChart.setData(data);
 
-            mChart.setData(data);
-            mChart.animateXY(1500, 1500);
-
+        for (int j = 0 ; j< datos.size() ; j++){
+            introduce(datos.get(j),j);
         }
+
+        subject = ListDB.getMasterList().get(getArguments().getInt("subject", 0));
+        datos = subject.getTestList();
+
+
+        list.setAdapter(new TestListAdapter(this, datos));
+
+
+        mChart.setData(data);
+        mChart.animateXY(1500, 1500);
+
+
+        ListDB.saveData(getActivity());
+
     }
+
 }
