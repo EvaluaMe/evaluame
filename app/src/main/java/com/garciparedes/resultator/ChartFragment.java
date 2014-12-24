@@ -1,13 +1,7 @@
 package com.garciparedes.resultator;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,20 +10,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.NumberPicker;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.utils.Highlight;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -85,6 +72,8 @@ public class ChartFragment  extends Fragment {
         for (int j = 0 ; j< datos.size() ; j++){
             introduce(datos.get(j),j);
         }
+        final TestDialog testDialog = new TestDialog(getActivity(), getArguments().getInt("subject", 0),this);
+
 
         FloatingActionButton button = (FloatingActionButton) getActivity().findViewById(R.id.floating_button);
         button.setSize(FloatingActionButton.SIZE_NORMAL);
@@ -95,9 +84,8 @@ public class ChartFragment  extends Fragment {
             @Override
             public void onClick(View v) {
 
-                TestDialog testDialog = new TestDialog(getActivity(), getArguments().getInt("subject", 0));
                 testDialog.show();
-                update();
+
             }
         });
 
@@ -201,7 +189,7 @@ public class ChartFragment  extends Fragment {
         });
     }
 
-    private void update(){
+    public void update(){
 
         if (datos.size() > 0) {
             subject = ListDB.getMasterList().get(getArguments().getInt("subject", 0));

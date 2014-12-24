@@ -24,10 +24,12 @@ public class SubjectDialog extends Dialog {
     private EditText editTextDescription;
     private Button btnCreate;
 
-    public SubjectDialog(Context context) {
+    private NavigationDrawerFragment navigationDrawerFragment;
+
+    public SubjectDialog(Context context, NavigationDrawerFragment navigationDrawerFragment) {
         // Set your theme here
         super(context);
-
+        this.navigationDrawerFragment = navigationDrawerFragment;
         // This is the layout XML file that describes your Dialog layout
         //this.setContentView(R.layout.dialog_add_subject);
 
@@ -77,6 +79,7 @@ public class SubjectDialog extends Dialog {
                 String json = gson.toJson(ListDB.getMasterList());
                 prefsEditor.putString("MasterList", json);
                 prefsEditor.commit();
+                navigationDrawerFragment.updateListView();
 
 
             }

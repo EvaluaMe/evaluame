@@ -19,24 +19,18 @@ import com.google.gson.Gson;
  */
 public class TestDialog extends Dialog {
 
-    private TextView textName;
-    private TextView textDescription;
-    private EditText editTextName;
-    private EditText editTextDescription;
-    private Button btnCreate;
-    private int subject;
 
-    public TestDialog(Context context, int subject) {
+    private int subject;
+    private final ChartFragment chartFragment;
+
+
+    public TestDialog(Context context, int subject, ChartFragment chartFragment) {
         // Set your theme here
         super(context);
 
         this.subject = subject;
-        // This is the layout XML file that describes your Dialog layout
-        //this.setContentView(R.layout.dialog_add_subject);
-
-        /*
-
-        */
+        this.chartFragment = chartFragment;
+       
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +84,8 @@ public class TestDialog extends Dialog {
                 String json = gson.toJson(ListDB.getMasterList());
                 prefsEditor.putString("MasterList", json);
                 prefsEditor.commit();
+
+                chartFragment.update();
 
 
             }

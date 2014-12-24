@@ -260,14 +260,8 @@ public class NavigationDrawerFragment extends Fragment {
 
         if (item.getItemId() == R.id.action_example) {
 
-            SubjectDialog subjectDialog = new SubjectDialog(getActivity());
+            SubjectDialog subjectDialog = new SubjectDialog(getActivity(), this);
             subjectDialog.show();
-
-
-            mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                    getActionBar().getThemedContext(),
-                    android.R.layout.simple_list_item_activated_1,
-                    android.R.id.text1,ListDB.subjectNames()));
             return true;
         }
 
@@ -300,7 +294,10 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     public void updateListView(){
-
+        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+                getActionBar().getThemedContext(),
+                android.R.layout.simple_list_item_activated_1,
+                android.R.id.text1,ListDB.subjectNames()));
     }
 
 }
