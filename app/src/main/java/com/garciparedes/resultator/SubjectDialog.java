@@ -42,7 +42,7 @@ public class SubjectDialog extends Dialog {
         setContentView(R.layout.dialog_add_subject);
 
         // Set the title
-        setTitle("Nueva nota");
+        setTitle("Nueva Asignatura");
 
         setCanceledOnTouchOutside(true);
 
@@ -60,6 +60,7 @@ public class SubjectDialog extends Dialog {
 
         btnCreate = (Button) findViewById(R.id.button_dialog_subject);
 
+        btnCreate.setText("Crear Asignatura");
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

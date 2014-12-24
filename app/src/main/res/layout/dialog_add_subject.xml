@@ -34,8 +34,7 @@
         android:id="@+id/button_dialog_subject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
+        android:layout_below="@id/edit_text_dialog_description_subject"
         />
 
 

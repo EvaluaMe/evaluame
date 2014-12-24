@@ -48,7 +48,7 @@
         android:id="@+id/button_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/number_picker_value_dialog"
         android:layout_gravity="bottom"
         />
 

@@ -299,59 +299,6 @@ public class NavigationDrawerFragment extends Fragment {
         void onNavigationDrawerItemSelected(int position);
     }
 
-    public void newSubject(){
-        // Created a new Dialog
-        final Dialog dialog = new Dialog(getActivity());
-
-        // Set the title
-        dialog.setTitle("Nueva nota");
-
-        // inflate the layout
-        dialog.setContentView(R.layout.dialog_add_subject);
-
-        dialog.setCanceledOnTouchOutside(true);
-
-        // Set the dialog text -- this is better done in the XML
-        TextView textName = (TextView)dialog.findViewById(R.id.text_view_dialog_name_subject);
-        TextView textDescription = (TextView)dialog.findViewById(R.id.text_view_dialog_description_subject);
-
-        final EditText editTextName = (EditText) dialog.findViewById(R.id.edit_text_dialog_name_subject);
-        final EditText editTextDescription = (EditText) dialog.findViewById(R.id.edit_text_dialog_description_subject);
-
-
-        textName.setText("Introduzca un nombre:");
-        textDescription.setText("Introduzca la descripcion de la asignatura:");
-
-        Button btnCreate = (Button) dialog.findViewById(R.id.button_dialog_subject);
-
-        btnCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                ListDB.addSubject(editTextName.getText().toString(), editTextDescription.getText().toString());
-                dialog.dismiss();
-
-                mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                        getActionBar().getThemedContext(),
-                        android.R.layout.simple_list_item_activated_1,
-                        android.R.id.text1,ListDB.subjectNames()));
-
-                SharedPreferences appSharedPrefs = PreferenceManager
-                        .getDefaultSharedPreferences(getActivity().getApplicationContext());
-
-                SharedPreferences.Editor prefsEditor = appSharedPrefs.edit();
-                Gson gson = new Gson();
-                String json = gson.toJson(ListDB.getMasterList());
-                prefsEditor.putString("MasterList", json);
-                prefsEditor.commit();
-
-            }
-        });
-
-        // Display the dialog
-        dialog.show();
-    }
-
     public void updateListView(){
 
     }
