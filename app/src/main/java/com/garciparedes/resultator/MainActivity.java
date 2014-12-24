@@ -155,6 +155,11 @@ public class MainActivity extends Activity
         if (mList == null){
             mList = new ArrayList<Subject>();
         }
+
+        if (mList.isEmpty()){
+            System.out.println("Hola");
+        }
+
         ListDB.setMasterList(mList);
     }
 

@@ -3,9 +3,11 @@ package com.garciparedes.resultator;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -111,6 +113,7 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,ListDB.subjectNames()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
         return mDrawerListView;
     }
 
@@ -262,6 +265,14 @@ public class NavigationDrawerFragment extends Fragment {
 
             SubjectDialog subjectDialog = new SubjectDialog(getActivity(), this);
             subjectDialog.show();
+
+            return true;
+        }
+
+        if (item.getItemId() == R.id.action_delete_subject) {
+
+            deleteSubject();
+
             return true;
         }
 
@@ -300,4 +311,46 @@ public class NavigationDrawerFragment extends Fragment {
                 android.R.id.text1,ListDB.subjectNames()));
     }
 
+
+    public void deleteSubject(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        // set title
+        alertDialogBuilder.setTitle("Your Title");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Está seguro de que desea eliminar la asignatura?")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+
+                        ListDB.getMasterList().remove(ChartFragment.subjectNum);
+                        updateListView();
+                        ListDB.saveData(getActivity());
+
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.container, new DefaultFragment()).commit();
+
+
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+    }
 }

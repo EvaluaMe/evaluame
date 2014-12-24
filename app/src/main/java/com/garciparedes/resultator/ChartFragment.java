@@ -1,6 +1,8 @@
 package com.garciparedes.resultator;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
@@ -37,6 +39,7 @@ public class ChartFragment  extends Fragment {
     private TestListAdapter listAdapter;
     ArrayList<Test> datos;
     Subject subject;
+    public static int subjectNum;
 
     public static ChartFragment newInstance(int i) {
         ChartFragment f = new ChartFragment();
@@ -60,40 +63,43 @@ public class ChartFragment  extends Fragment {
         super.onActivityCreated(state);
 
 
-        int subjectNum = getArguments().getInt("subject", 0);
+        subjectNum = getArguments().getInt("subject", 0);
+
         try {
+
+
             subject = ListDB.getMasterList().get(subjectNum);
 
-        } catch (IndexOutOfBoundsException e){
-            ListDB.getMasterList().add(new Subject("",""));
-            subject = ListDB.getMasterList().get(subjectNum);
+            datos = subject.getTestList();
+            createChart();
 
-        }
-        datos = subject.getTestList();
-        createChart();
+            createList(datos);
 
-        createList(datos);
-
-        for (int j = 0 ; j< datos.size() ; j++){
-            introduce(datos.get(j),j);
-        }
-        final TestDialog testDialog = new TestDialog(getActivity(), getArguments().getInt("subject", 0),this);
-
-
-        FloatingActionButton button = (FloatingActionButton) getActivity().findViewById(R.id.floating_button);
-        button.setSize(FloatingActionButton.SIZE_NORMAL);
-        button.setColorNormalResId(R.color.green);
-        button.setColorPressedResId(R.color.spring_green);
-        button.bringToFront();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                testDialog.show();
-
+            for (int j = 0; j < datos.size(); j++) {
+                introduce(datos.get(j), j);
             }
-        });
+            final TestDialog testDialog = new TestDialog(getActivity(), getArguments().getInt("subject", 0), this);
 
+
+            FloatingActionButton button = (FloatingActionButton) getActivity().findViewById(R.id.floating_button);
+
+            button.setSize(FloatingActionButton.SIZE_NORMAL);
+            button.setColorNormalResId(R.color.green);
+            button.setColorPressedResId(R.color.spring_green);
+            button.bringToFront();
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    testDialog.show();
+
+                }
+            });
+
+        }catch (IndexOutOfBoundsException e){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, new DefaultFragment()).commit();
+        }
 
 
     }
@@ -108,6 +114,7 @@ public class ChartFragment  extends Fragment {
         //mChart.setUsePercentValues(true);
         //mChart.setValueTextColor(getResources().getColor(R.color.grey));
 
+        mChart.setDrawLegend(false);
         mChart.setCenterText(subject.getName());
         mChart.setCenterTextSize(22f);
 
@@ -238,5 +245,4 @@ public class ChartFragment  extends Fragment {
         ListDB.saveData(getActivity());
 
     }
-
 }
