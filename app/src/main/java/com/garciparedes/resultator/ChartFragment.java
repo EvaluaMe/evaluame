@@ -84,8 +84,7 @@ public class ChartFragment  extends Fragment {
             FloatingActionButton button = (FloatingActionButton) getActivity().findViewById(R.id.floating_button);
 
             button.setSize(FloatingActionButton.SIZE_NORMAL);
-            button.setColorNormalResId(R.color.green);
-            button.setColorPressedResId(R.color.spring_green);
+            button.setIcon(R.drawable.ic_action_new);
             button.bringToFront();
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
