@@ -184,11 +184,12 @@ public class ChartFragment  extends Fragment {
                         // Calls getSelectedIds method from ListViewAdapter Class
                         SparseBooleanArray selected = listAdapter
                                 .getSelectedIds();
+                        System.out.println(selected.toString());
+
                         // Captures all selected ids with a loop
                         for (int i = (selected.size() - 1); i >= 0; i--) {
                             if (selected.valueAt(i)) {
-                                Test selecteditem = listAdapter
-                                        .getItem(selected.keyAt(i));
+                                Test selecteditem = listAdapter.getItem(selected.keyAt(i)-1);
                                 // Remove selected items following the ids
                                 subject.removeTest(selecteditem);
 
