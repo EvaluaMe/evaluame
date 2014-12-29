@@ -23,6 +23,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 
 /**
@@ -40,6 +41,7 @@ public class ChartFragment  extends Fragment {
     ArrayList<Test> datos;
     Subject subject;
     public static int subjectNum;
+    private View v;
 
     public static ChartFragment newInstance(int i) {
         ChartFragment f = new ChartFragment();
@@ -71,9 +73,11 @@ public class ChartFragment  extends Fragment {
             subject = ListDB.getMasterList().get(subjectNum);
 
             datos = subject.getTestList();
-            createChart();
 
             createList(datos);
+
+            createChart();
+
 
             for (int j = 0; j < datos.size(); j++) {
                 introduce(datos.get(j), j);
@@ -149,6 +153,11 @@ public class ChartFragment  extends Fragment {
 
     private void createList(ArrayList<Test> datos){
         list = (ListView)getView().findViewById(R.id.test_listView);
+
+
+        v = View.inflate(getActivity(),R.layout.view_chart,null);
+        list.addHeaderView(v);
+
 
         listAdapter = new TestListAdapter(this, datos);
         list.setAdapter(listAdapter);
@@ -240,6 +249,7 @@ public class ChartFragment  extends Fragment {
         mChart.setData(data);
         mChart.animateXY(1500, 1500);
 
+        v.invalidate();
 
         ListDB.saveData(getActivity());
 
