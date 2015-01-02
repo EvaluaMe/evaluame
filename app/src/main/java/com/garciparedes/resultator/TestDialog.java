@@ -22,6 +22,7 @@ public class TestDialog extends Dialog {
 
     private int subject;
     private final ChartFragment chartFragment;
+    private Button btnCreate;
 
 
     public TestDialog(Context context, int subject, ChartFragment chartFragment) {
@@ -39,10 +40,9 @@ public class TestDialog extends Dialog {
         setContentView(R.layout.dialog_add_test);
 
         // Set the title
-        setTitle("Nueva nota");
+        setTitle(getContext().getString(R.string.new_score));
 
         setCanceledOnTouchOutside(true);
-
 
         // Set the dialog text -- this is better done in the XML
         TextView textName = (TextView)findViewById(R.id.text_view_dialog_name);
@@ -50,10 +50,9 @@ public class TestDialog extends Dialog {
         TextView textValue = (TextView)findViewById(R.id.text_view_dialog_value);
         final EditText editText = (EditText) findViewById(R.id.edit_text_dialog);
 
-        textName.setText("Introduzca un nombre:");
-        textMark.setText("Introduzca la nota:");
-        textValue.setText("Introduzca la proporcion:");
-
+        textName.setText(getContext().getString(R.string.set_name));
+        textMark.setText(getContext().getString(R.string.set_score));
+        textValue.setText(getContext().getString(R.string.set_value));
 
         final NumberPicker npMark = (NumberPicker) findViewById(R.id.number_picker_mark_dialog);
         npMark.setMaxValue(10);
@@ -63,10 +62,8 @@ public class TestDialog extends Dialog {
         npValue.setMaxValue(10);
         npValue.setMinValue(0);
 
-
-
-        Button btnCreate = (Button) findViewById(R.id.button_dialog);
-
+        btnCreate = (Button) findViewById(R.id.button_dialog);
+        btnCreate.setText(getContext().getString(R.string.create_test));
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

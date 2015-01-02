@@ -44,7 +44,7 @@ public class SubjectDialog extends Dialog {
         setContentView(R.layout.dialog_add_subject);
 
         // Set the title
-        setTitle("Nueva Asignatura");
+        setTitle(getContext().getString(R.string.new_subject));
 
         setCanceledOnTouchOutside(true);
 
@@ -57,12 +57,12 @@ public class SubjectDialog extends Dialog {
         editTextDescription = (EditText) findViewById(R.id.edit_text_dialog_description_subject);
 
 
-        textName.setText("Introduzca un nombre:");
-        textDescription.setText("Introduzca la descripcion de la asignatura:");
+        textName.setText(getContext().getString(R.string.set_name));
+        textDescription.setText(getContext().getString(R.string.set_description));
 
         btnCreate = (Button) findViewById(R.id.button_dialog_subject);
 
-        btnCreate.setText("Crear Asignatura");
+        btnCreate.setText(getContext().getString(R.string.create_subject));
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

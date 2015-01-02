@@ -317,13 +317,13 @@ public class NavigationDrawerFragment extends Fragment {
                 getActivity());
 
         // set title
-        alertDialogBuilder.setTitle("Your Title");
+        alertDialogBuilder.setTitle(getString(R.string.delete_subject));
 
         // set dialog message
         alertDialogBuilder
-                .setMessage("Está seguro de que desea eliminar la asignatura?")
+                .setMessage(getString(R.string.delete_subject_confirmation))
                 .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                .setPositiveButton(getString(R.string.yes),new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         // if this button is clicked, close
                         // current activity
@@ -338,7 +338,7 @@ public class NavigationDrawerFragment extends Fragment {
 
                     }
                 })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                .setNegativeButton(getString(R.string.no),new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         // if this button is clicked, just close
                         // the dialog box and do nothing

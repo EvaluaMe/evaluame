@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -38,9 +39,11 @@ public class ChartFragment  extends Fragment {
 
     private ListView list;
     private TestListAdapter listAdapter;
-    ArrayList<Test> datos;
-    Subject subject;
+    private ArrayList<Test> datos;
+    private Subject subject;
     public static int subjectNum;
+
+    private TextView textSubjectName;
     private View v;
 
     public static ChartFragment newInstance(int i) {
@@ -78,6 +81,7 @@ public class ChartFragment  extends Fragment {
 
             createChart();
 
+            createValues();
 
             for (int j = 0; j < datos.size(); j++) {
                 introduce(datos.get(j), j);
@@ -114,11 +118,7 @@ public class ChartFragment  extends Fragment {
         mChart.setDescription("");
 
 
-        //mChart.setUsePercentValues(true);
-        //mChart.setValueTextColor(getResources().getColor(R.color.grey));
-
         mChart.setDrawLegend(false);
-        mChart.setCenterText(subject.getName());
         mChart.setCenterTextSize(22f);
 
         // radius of the center hole in percent of maximum radius
@@ -253,6 +253,12 @@ public class ChartFragment  extends Fragment {
         v.invalidate();
 
         ListDB.saveData(getActivity());
+
+    }
+
+    public void createValues(){
+        textSubjectName = (TextView) getActivity().findViewById(R.id.text_view_subject_name);
+        textSubjectName.setText(subject.getName());
 
     }
 }

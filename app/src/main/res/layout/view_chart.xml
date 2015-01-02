@@ -6,23 +6,25 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
+        android:layout_weight=".30"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_weight="0.9"
         android:orientation="vertical" />
 
     <TextView
+        android:id="@+id/text_view_subject_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hola:"/>
+        android:layout_height="match_parent"/>
 
     <TextView
+        android:id="@+id/text_view_subject_average"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Media:"/>
 
     <TextView
+        android:id="@+id/text_view_subject_pass_tests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Aprobados:"/>
