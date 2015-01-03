@@ -61,11 +61,21 @@ public class SubjectDialog extends Dialog {
 
                 ListDB.addSubject(editTextName.getText().toString(), editTextDescription.getText().toString());
 
+                navigationDrawerFragment
+                        .getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container, new ChartFragment()
+                                .newInstance(ListDB.getMasterList().size()-1))
+                        .commit();
+
                 dismiss();
 
                 ListDB.saveData(getContext());
 
                 navigationDrawerFragment.updateListView();
+
+
+
 
 
             }

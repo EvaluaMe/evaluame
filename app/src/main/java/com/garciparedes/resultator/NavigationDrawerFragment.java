@@ -4,9 +4,7 @@ package com.garciparedes.resultator;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
@@ -15,7 +13,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,13 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -64,6 +55,9 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
+    private Button mDefaultFragmentButton;
+    private Button mAddSubjectButton;
+
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
@@ -105,9 +99,13 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position);
+                selectItem(position-mDrawerListView.getHeaderViewsCount());
             }
         });
+
+        mDrawerListView.addHeaderView(View.inflate(
+                getActivity(),R.layout.view_head_navigation_drawer,null));
+
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
@@ -193,6 +191,33 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        mDefaultFragmentButton = (Button) getActivity().findViewById(R.id.button_default_fragment);
+        mDefaultFragmentButton.setText(getString(R.string.stadistics));
+        mDefaultFragmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, new DefaultFragment()).commit();
+                mDrawerLayout.closeDrawer(mFragmentContainerView);
+
+            }
+        });
+
+        mAddSubjectButton = (Button) getActivity().findViewById(R.id.button_add_subject);
+        mAddSubjectButton.setText(getString(R.string.new_subject));
+        final NavigationDrawerFragment nav = this;
+        mAddSubjectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SubjectDialog subjectDialog = new SubjectDialog(getActivity(), nav);
+                subjectDialog.show();
+                mDrawerLayout.closeDrawer(mFragmentContainerView);
+
+
+            }
+        });
     }
 
     private void selectItem(int position) {
@@ -258,14 +283,6 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-
-        if (item.getItemId() == R.id.action_example) {
-
-            SubjectDialog subjectDialog = new SubjectDialog(getActivity(), this);
-            subjectDialog.show();
-
             return true;
         }
 

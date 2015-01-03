@@ -13,9 +13,11 @@
         android:orientation="vertical" />
 
     <TextView
+        style="@style/subject_name_font"
         android:id="@+id/text_view_subject_name"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        />
 
     <TextView
         android:id="@+id/text_view_subject_average"
