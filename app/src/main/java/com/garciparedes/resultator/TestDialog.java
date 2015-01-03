@@ -60,6 +60,12 @@ public class TestDialog extends Dialog {
         final NumberPicker npMarkFloat = (NumberPicker) findViewById(R.id.number_picker_mark_dialog_float);
         npMarkFloat.setMaxValue(99);
         npMarkFloat.setMinValue(0);
+        npMarkFloat.setFormatter(new NumberPicker.Formatter() {
+            @Override
+            public String format(int value) {
+                return "."+value;
+            }
+        });
 
         final NumberPicker npValue = (NumberPicker) findViewById(R.id.number_picker_value_dialog);
         npValue.setMaxValue(100);
@@ -73,7 +79,7 @@ public class TestDialog extends Dialog {
 
                 ListDB.addTest(subject
                         ,editText.getText().toString()
-                        ,npMarkInteger.getValue() + npMarkFloat.getValue()
+                        , npMarkInteger.getValue() + (npMarkFloat.getValue()/100)
                         ,npValue.getValue());
 
                 dismiss();
