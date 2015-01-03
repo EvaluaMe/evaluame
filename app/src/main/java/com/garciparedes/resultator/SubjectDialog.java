@@ -18,8 +18,6 @@ import com.google.gson.Gson;
  */
 public class SubjectDialog extends Dialog {
 
-    private TextView textName;
-    private TextView textDescription;
     private EditText editTextName;
     private EditText editTextDescription;
     private Button btnCreate;
@@ -48,17 +46,11 @@ public class SubjectDialog extends Dialog {
 
         setCanceledOnTouchOutside(true);
 
-
-        // Set the dialog text -- this is better done in the XML
-        textName = (TextView) findViewById(R.id.text_view_dialog_name_subject);
-        textDescription = (TextView) findViewById(R.id.text_view_dialog_description_subject);
-
         editTextName = (EditText) findViewById(R.id.edit_text_dialog_name_subject);
         editTextDescription = (EditText) findViewById(R.id.edit_text_dialog_description_subject);
 
-
-        textName.setText(getContext().getString(R.string.set_name));
-        textDescription.setText(getContext().getString(R.string.set_description));
+        editTextName.setHint(getContext().getString(R.string.set_name));
+        editTextDescription.setHint(getContext().getString(R.string.set_description));
 
         btnCreate = (Button) findViewById(R.id.button_dialog_subject);
 
