@@ -45,21 +45,24 @@ public class TestDialog extends Dialog {
         setCanceledOnTouchOutside(true);
 
         // Set the dialog text -- this is better done in the XML
-        TextView textName = (TextView)findViewById(R.id.text_view_dialog_name);
         TextView textMark = (TextView)findViewById(R.id.text_view_dialog_mark);
         TextView textValue = (TextView)findViewById(R.id.text_view_dialog_value);
         final EditText editText = (EditText) findViewById(R.id.edit_text_dialog);
 
-        textName.setText(getContext().getString(R.string.set_name));
+        editText.setHint(getContext().getString(R.string.set_name));
         textMark.setText(getContext().getString(R.string.set_score));
         textValue.setText(getContext().getString(R.string.set_value));
 
-        final NumberPicker npMark = (NumberPicker) findViewById(R.id.number_picker_mark_dialog);
-        npMark.setMaxValue(10);
-        npMark.setMinValue(0);
+        final NumberPicker npMarkInteger = (NumberPicker) findViewById(R.id.number_picker_mark_dialog_integer);
+        npMarkInteger.setMaxValue(10);
+        npMarkInteger.setMinValue(0);
+
+        final NumberPicker npMarkFloat = (NumberPicker) findViewById(R.id.number_picker_mark_dialog_float);
+        npMarkFloat.setMaxValue(99);
+        npMarkFloat.setMinValue(0);
 
         final NumberPicker npValue = (NumberPicker) findViewById(R.id.number_picker_value_dialog);
-        npValue.setMaxValue(10);
+        npValue.setMaxValue(100);
         npValue.setMinValue(0);
 
         btnCreate = (Button) findViewById(R.id.button_dialog);
@@ -68,7 +71,10 @@ public class TestDialog extends Dialog {
             @Override
             public void onClick(View v) {
 
-                ListDB.addTest(subject, editText.getText().toString(), npMark.getValue(), npValue.getValue());
+                ListDB.addTest(subject
+                        ,editText.getText().toString()
+                        ,npMarkInteger.getValue() + npMarkFloat.getValue()
+                        ,npValue.getValue());
 
                 dismiss();
 

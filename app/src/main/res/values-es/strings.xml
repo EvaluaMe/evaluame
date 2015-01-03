@@ -8,7 +8,7 @@
     <string name="action_settings">Configuración</string>
     <string name="action_delete">Borrar</string>
     <string name="new_subject">Añadir asignatura</string>
-    <string name="set_name">Introduzca el nombre</string>
+    <string name="set_name">Nombre</string>
     <string name="set_description">Introduzca la descripción</string>
     <string name="create_subject">Crear asignatura</string>
     <string name="delete_subject">Eliminar Asignatura</string>
@@ -16,8 +16,8 @@
     <string name="no">No</string>
     <string name="yes">Si</string>
     <string name="new_score">Nueva calificación</string>
-    <string name="set_score">Introduzca la calificación</string>
-    <string name="set_value">Introduzca el valor</string>
+    <string name="set_score">Calificación</string>
+    <string name="set_value">Valor</string>
     <string name="create_test">Crear calificación</string>
 
 

@@ -8,52 +8,92 @@
     android:layout_marginRight="@dimen/activity_horizontal_margin"
     >
 
-
-
-    <TextView
-        android:id="@+id/text_view_dialog_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
     <EditText
         android:id="@+id/edit_text_dialog"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_view_dialog_name"/>
+        android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/text_view_dialog_mark"
+    <GridLayout
+        android:id="@+id/grid_pickers_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_text_dialog"/>
+        android:layout_below="@id/edit_text_dialog"
+        android:layout_centerHorizontal="true">
 
-    <NumberPicker
-        android:id="@+id/number_picker_mark_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/text_view_dialog_mark"/>
+        <RelativeLayout
+            android:layout_margin="@dimen/activity_horizontal_margin">
+            <TextView
+                android:id="@+id/text_view_dialog_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/text_view_dialog_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/number_picker_mark_dialog"/>
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_view_dialog_mark">
 
-    <NumberPicker
-        android:id="@+id/number_picker_value_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:orientation="horizontal"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/text_view_dialog_value"/>
+
+                <NumberPicker
+                    android:id="@+id/number_picker_mark_dialog_integer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true"/>
+                
+
+                <NumberPicker
+                    android:id="@+id/number_picker_mark_dialog_float"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true"/>
+                </GridLayout>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_margin="@dimen/activity_horizontal_margin">
+            <TextView
+                android:id="@+id/text_view_dialog_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                />
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_below="@id/text_view_dialog_value">
+
+                <NumberPicker
+                    android:id="@+id/number_picker_value_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="75dp"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="%"
+                    android:layout_gravity="center_vertical" />
+            </GridLayout>
+
+
+        </RelativeLayout>
+
+    </GridLayout>
+
 
     <Button
         android:id="@+id/button_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/number_picker_value_dialog"
+        android:layout_below="@id/grid_pickers_test"
         android:layout_gravity="bottom"
         style="?android:attr/buttonBarButtonStyle"
 
