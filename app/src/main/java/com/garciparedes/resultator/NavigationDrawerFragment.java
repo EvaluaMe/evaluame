@@ -211,9 +211,11 @@ public class NavigationDrawerFragment extends Fragment {
         mAddSubjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SubjectDialog subjectDialog = new SubjectDialog(getActivity(), nav);
-                subjectDialog.show();
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, FragmentAddSubject.newInstance(nav)).commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
+                updateListView();
 
 
             }

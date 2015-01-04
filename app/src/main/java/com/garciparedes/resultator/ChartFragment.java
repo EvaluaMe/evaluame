@@ -1,21 +1,17 @@
 package com.garciparedes.resultator;
 
-import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.mikephil.charting.charts.PieChart;
@@ -24,7 +20,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 
 import java.util.ArrayList;
-import java.util.logging.Handler;
 
 
 /**
@@ -86,8 +81,6 @@ public class ChartFragment  extends Fragment {
             for (int j = 0; j < datos.size(); j++) {
                 introduce(datos.get(j), j);
             }
-            final TestDialog testDialog = new TestDialog(getActivity(), getArguments().getInt("subject", 0), this);
-
 
             FloatingActionButton button = (FloatingActionButton) getActivity().findViewById(R.id.floating_button);
 
@@ -98,7 +91,8 @@ public class ChartFragment  extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-                    testDialog.show();
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, FragmentAddTest.newInstance(subjectNum)).commit();
 
                 }
             });
@@ -125,21 +119,7 @@ public class ChartFragment  extends Fragment {
         mChart.setHoleRadius(45f);
         mChart.setTransparentCircleRadius(50f);
 
-
-        mChart.animateXY(1500, 1500);
-
-
-        xVals = new ArrayList<String>();
-        yVals = new PieDataSet(null, "Company 1");
-
-        int[] rainbow = getResources().getIntArray(R.array.rainbow);
-        yVals.setColors(rainbow);
-
-
-
-        data = new PieData(xVals,yVals);
-
-        mChart.setData(data);
+        update();
 
     }
 
@@ -243,16 +223,12 @@ public class ChartFragment  extends Fragment {
         subject = ListDB.getMasterList().get(getArguments().getInt("subject", 0));
         datos = subject.getTestList();
 
-
         list.setAdapter(new TestListAdapter(this, datos));
-
 
         mChart.setData(data);
         mChart.animateXY(1500, 1500);
 
         v.invalidate();
-
-        ListDB.saveData(getActivity());
 
     }
 

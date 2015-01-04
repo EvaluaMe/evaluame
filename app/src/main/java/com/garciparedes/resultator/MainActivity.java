@@ -79,6 +79,10 @@ public class MainActivity extends Activity
     }
 
 
+    public void update(){
+        mNavigationDrawerFragment.updateListView();
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -143,6 +147,8 @@ public class MainActivity extends Activity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
+
 
     public void getData(){
 
