@@ -59,7 +59,7 @@ public class NavigationDrawerFragment extends Fragment {
     private Button mAddSubjectButton;
 
 
-    private int mCurrentSelectedPosition = 0;
+    private int mCurrentSelectedPosition = -1;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
@@ -221,23 +221,28 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
-        mCurrentSelectedPosition = position;
-        if (mDrawerListView != null) {
-            mDrawerListView.setItemChecked(position, true);
+        if (position == -1){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, new DefaultFragment())
+                    .commit();
+        } else {
+            mCurrentSelectedPosition = position;
+            if (mDrawerListView != null) {
+                mDrawerListView.setItemChecked(position, true);
+            }
+            if (mDrawerLayout != null) {
+                mDrawerLayout.closeDrawer(mFragmentContainerView);
+            }
+            if (mCallbacks != null) {
+                mCallbacks.onNavigationDrawerItemSelected(position);
+            }
+
+            Fragment chartFragment = (ChartFragment.newInstance(position));
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, chartFragment).commit();
+
         }
-        if (mDrawerLayout != null) {
-            mDrawerLayout.closeDrawer(mFragmentContainerView);
-        }
-        if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(position);
-        }
-
-        Fragment chartFragment = (ChartFragment.newInstance(position));
-
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, chartFragment).commit();
-
-
     }
 
     @Override

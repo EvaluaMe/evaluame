@@ -48,9 +48,9 @@ public class Subject {
         getTestList().add(test);
     }
 
-    public double getAverage(){
+    public float getAverage(){
 
-        double sum = 0;
+        float sum = 0;
 
         for (int i = 0 ; i < getTestList().size() ; i++){
             sum += getTestElement(i).getMark();
