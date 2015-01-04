@@ -228,7 +228,7 @@ public class NavigationDrawerFragment extends Fragment {
         } else {
             mCurrentSelectedPosition = position;
             if (mDrawerListView != null) {
-                mDrawerListView.setItemChecked(position, true);
+                mDrawerListView.setItemChecked(position+mDrawerListView.getHeaderViewsCount(), true);
             }
             if (mDrawerLayout != null) {
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
