@@ -40,6 +40,7 @@ public class ChartFragment  extends Fragment {
 
     private TextView textSubjectName;
     private View v;
+    private FloatingActionButton button;
 
     public static ChartFragment newInstance(int i) {
         ChartFragment f = new ChartFragment();
@@ -77,12 +78,9 @@ public class ChartFragment  extends Fragment {
             createChart();
 
             createValues();
+            update();
 
-            for (int j = 0; j < datos.size(); j++) {
-                introduce(datos.get(j), j);
-            }
-
-            FloatingActionButton button = (FloatingActionButton) getActivity().findViewById(R.id.floating_button);
+            button = (FloatingActionButton) getActivity().findViewById(R.id.floating_button);
 
             button.setSize(FloatingActionButton.SIZE_NORMAL);
             button.setIcon(R.drawable.ic_action_new);
@@ -111,16 +109,12 @@ public class ChartFragment  extends Fragment {
 
         mChart.setDescription("");
 
-
         mChart.setDrawLegend(false);
         mChart.setCenterTextSize(22f);
 
         // radius of the center hole in percent of maximum radius
         mChart.setHoleRadius(45f);
         mChart.setTransparentCircleRadius(50f);
-
-        update();
-
     }
 
     private void introduce(Test test, int i){

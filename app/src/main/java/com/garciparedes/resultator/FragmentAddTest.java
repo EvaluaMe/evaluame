@@ -1,10 +1,12 @@
 package com.garciparedes.resultator;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
@@ -79,6 +81,10 @@ public class FragmentAddTest extends Fragment {
                         ,npValue.getValue());
 
                 ListDB.saveData(getActivity());
+
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, ChartFragment.newInstance(subject)).commit();

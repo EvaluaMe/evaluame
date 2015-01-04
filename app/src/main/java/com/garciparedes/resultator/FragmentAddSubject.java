@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -62,6 +63,11 @@ public class FragmentAddSubject extends Fragment {
                         .commit();
 
                 ListDB.saveData(getActivity());
+
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                        Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTextDescription.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(editTextName.getWindowToken(), 0);
 
                 MainActivity main = (MainActivity) getActivity();
                 main.update();
