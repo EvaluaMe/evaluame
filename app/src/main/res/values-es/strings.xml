@@ -20,6 +20,8 @@
     <string name="set_value">Valor</string>
     <string name="create_test">Crear calificación</string>
     <string name="stadistics">Estadisticas</string>
+    <string name="error_max_score">La nota tiene que ser menor que 10</string>
+    <string name="error_percentage_max">---</string>
 
 
 </resources>

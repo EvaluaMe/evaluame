@@ -60,6 +60,15 @@ public class Subject {
     }
 
 
+    public float getTotalPercentage(){
+        float sum = 0;
+
+        for (int i = 0 ; i < getTestList().size() ; i++){
+            sum += getTestElement(i).getPercentage();
+        }
+        return sum;
+    }
+
     public void removeTest(Test test){
         testList.remove(test);
     }

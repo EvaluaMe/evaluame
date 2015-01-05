@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class DefaultFragment  extends Fragment{
 
     private BarChart mChart;
-    private BarData data;
+    
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -49,7 +49,7 @@ public class DefaultFragment  extends Fragment{
 
     public void setValues(){
 
-        ArrayList<BarEntry> valsComp1 = new ArrayList<>();
+        ArrayList<BarEntry> valsComp1 = new ArrayList<BarEntry>();
         ArrayList<String> xVals = new ArrayList<String>();
 
         for (int i = 0 ; i < ListDB.getMasterList().size(); i++){
@@ -59,7 +59,7 @@ public class DefaultFragment  extends Fragment{
         }
 
         BarDataSet setComp1 = new BarDataSet(valsComp1, "Company 1");
-        ArrayList<BarDataSet> dataSets = new ArrayList<>();
+        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         dataSets.add(setComp1);
 
 

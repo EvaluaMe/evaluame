@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by garciparedes on 10/12/14.
@@ -20,6 +21,16 @@ public class FragmentAddTest extends Fragment {
 
     private int subject;
     private Button btnCreate;
+
+    private EditText editTextName;
+
+    private TextView textMark;
+    private TextView textValue;
+
+    private String name;
+    private float score;
+    private int value;
+
 
     public static FragmentAddTest newInstance(int i) {
         FragmentAddTest f = new FragmentAddTest();
@@ -43,31 +54,24 @@ public class FragmentAddTest extends Fragment {
         subject = getArguments().getInt("subject", 0);
 
         // Set the dialog text -- this is better done in the XML
-        TextView textMark = (TextView) getActivity().findViewById(R.id.text_view_dialog_mark);
-        TextView textValue = (TextView) getActivity().findViewById(R.id.text_view_dialog_value);
-        final EditText editText = (EditText) getActivity().findViewById(R.id.edit_text_dialog);
+        textMark = (TextView) getActivity().findViewById(R.id.text_view_dialog_mark);
+        textValue = (TextView) getActivity().findViewById(R.id.text_view_dialog_value);
+        editTextName = (EditText) getActivity().findViewById(R.id.edit_text_dialog);
 
-        editText.setHint(getString(R.string.set_name));
+        editTextName.setHint(getString(R.string.set_name));
         textMark.setText(getString(R.string.set_score));
         textValue.setText(getString(R.string.set_value));
 
-        final NumberPicker npMarkInteger = (NumberPicker) getActivity().findViewById(R.id.number_picker_mark_dialog_integer);
-        npMarkInteger.setMaxValue(10);
-        npMarkInteger.setMinValue(0);
-
-        final NumberPicker npMarkFloat = (NumberPicker) getActivity().findViewById(R.id.number_picker_mark_dialog_float);
-        npMarkFloat.setMaxValue(99);
-        npMarkFloat.setMinValue(0);
-        npMarkFloat.setFormatter(new NumberPicker.Formatter() {
+        textMark.setOnClickListener(new View.OnClickListener() {
             @Override
-            public String format(int value) {
-                return "."+value;
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), getString(R.string.error_max_score), Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
-        final NumberPicker npValue = (NumberPicker) getActivity().findViewById(R.id.number_picker_value_dialog);
-        npValue.setMaxValue(100);
-        npValue.setMinValue(0);
+
 
         btnCreate = (Button) getActivity().findViewById(R.id.button_dialog);
         btnCreate.setText(getString(R.string.create_test));
@@ -75,20 +79,26 @@ public class FragmentAddTest extends Fragment {
             @Override
             public void onClick(View v) {
 
-                ListDB.addTest(subject
-                        ,editText.getText().toString()
-                        ,npMarkInteger.getValue() + (npMarkFloat.getValue()/100)
-                        ,npValue.getValue());
+                name = editTextName.getText().toString();
+                //score = npMarkInteger.getValue()
+                //        + (float) (npMarkTenths.getValue()*0.1)
+                //        + (float) (npMarkHundredths.getValue()*0.01);
+                //value = npPercentageInteger.getValue();
 
-                ListDB.saveData(getActivity());
+                if (score > 10) {
+                    Toast.makeText(getActivity(), getString(R.string.error_max_score), Toast.LENGTH_SHORT).show();
+                } else {
 
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                        Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+                    ListDB.addTest(subject, name, score, value);
+                    ListDB.saveData(getActivity());
 
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, ChartFragment.newInstance(subject)).commit();
+                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(editTextName.getWindowToken(), 0);
 
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, ChartFragment.newInstance(subject)).commit();
+                }
             }
         });
 

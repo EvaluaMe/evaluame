@@ -20,6 +20,8 @@
     <string name="set_value">Value</string>
     <string name="create_test">Create test</string>
     <string name="stadistics">Stadistics</string>
+    <string name="error_max_score">The score must be less than 10</string>
+    <string name="error_percentage_max">max 100</string>
 
 
 </resources>

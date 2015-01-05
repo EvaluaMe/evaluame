@@ -7,12 +7,12 @@ public class Test {
 
     private String name;
     private float mark;
-    private float value;
+    private float percentage;
 
-    public Test(String name, float mark, float value){
+    public Test(String name, float mark, float percentage){
         this.name = name;
         this.mark = mark;
-        this.value = value;
+        this.percentage = percentage;
     }
 
     public void setName(String name) {
@@ -23,8 +23,8 @@ public class Test {
         this.mark = mark;
     }
 
-    public void setValue(float value) {
-        this.value = value;
+    public void setPercentage(float percentage) {
+        this.percentage = percentage;
     }
 
     public String getName() {
@@ -40,7 +40,7 @@ public class Test {
     }
 
 
-    public float getValue() {
-        return value;
+    public float getPercentage() {
+        return percentage;
     }
 }
