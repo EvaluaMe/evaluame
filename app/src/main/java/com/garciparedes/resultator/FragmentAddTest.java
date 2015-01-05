@@ -67,7 +67,8 @@ public class FragmentAddTest extends Fragment {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), getString(R.string.error_max_score), Toast.LENGTH_SHORT).show();
 
-
+                DecimalNumberDialog subjectDialog = new DecimalNumberDialog(getActivity());
+                subjectDialog.show();
             }
         });
 
