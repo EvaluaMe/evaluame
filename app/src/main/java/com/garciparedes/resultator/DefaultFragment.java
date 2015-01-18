@@ -1,7 +1,7 @@
 package com.garciparedes.resultator;
 
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by garciparedes on 24/12/14.
  */
-public class DefaultFragment  extends Fragment{
+public class DefaultFragment  extends Fragment {
 
     private BarChart mChart;
     
