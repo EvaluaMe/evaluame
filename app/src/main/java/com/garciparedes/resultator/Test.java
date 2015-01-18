@@ -39,8 +39,11 @@ public class Test {
         return Float.toString(mark);
     }
 
-
     public float getPercentage() {
         return percentage;
+    }
+
+    public String getPercentageString() {
+        return Float.toString(percentage);
     }
 }

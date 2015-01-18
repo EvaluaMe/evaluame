@@ -107,11 +107,10 @@ public class ChartFragment  extends Fragment {
 
         mChart = (PieChart) getView().findViewById(R.id.chart);
 
-        mChart.setDescription("");
-
         mChart.setDrawLegend(false);
         mChart.setCenterTextSize(22f);
 
+        mChart.setDescription("");
         // radius of the center hole in percent of maximum radius
         mChart.setHoleRadius(45f);
         mChart.setTransparentCircleRadius(50f);
@@ -120,8 +119,11 @@ public class ChartFragment  extends Fragment {
     private void introduce(Test test, int i){
 
         xVals.add(test.getName());
-        data.addEntry(new Entry(test.getMark(), i), 0);
-        data.addEntry(new Entry(10-test.getMark(),i),1);
+        float f = test.getMark()*test.getPercentage();
+        float t = (10-test.getMark())*test.getPercentage();
+
+        data.addEntry(new Entry(f,i), 0);
+        data.addEntry(new Entry(t,i),1);
 
     }
 

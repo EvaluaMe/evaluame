@@ -137,7 +137,7 @@ public class FragmentAddTest extends Fragment
                 break;
             case 1:
                 textValue.setText(fullNumber + "%");
-                value = (float) fullNumber;
+                value = (float) (0.01 * fullNumber);
                 break;
 
             default:

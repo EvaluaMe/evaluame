@@ -41,6 +41,9 @@ public class TestListAdapter extends ArrayAdapter<Test> {
         TextView lblMark = (TextView)item.findViewById(R.id.LblMark);
         lblMark.setText( datos.get(position).getMarkString());
 
+        TextView lblValue = (TextView)item.findViewById(R.id.LblValue);
+        lblValue.setText( datos.get(position).getPercentageString());
+
 
         return(item);
     }

@@ -25,8 +25,12 @@ public class DefaultFragment  extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_default, container, false);
 
+        View view = inflater.inflate(R.layout.fragment_default, container, false);
+
+        mChart = (BarChart) view.findViewById(R.id.chart_general);
+
+        return view;
     }
 
     @Override
@@ -42,7 +46,6 @@ public class DefaultFragment  extends Fragment {
 
 
     private void createChart() {
-        mChart = (BarChart) getView().findViewById(R.id.chart_general);
         mChart.setDescription("");
         mChart.setDrawLegend(false);
     }
