@@ -79,7 +79,26 @@ public class FragmentAddTest extends Fragment
                 NumberPickerBuilder numberPickerBuilder = new NumberPickerBuilder()
                         .setFragmentManager(getFragmentManager())
                         .setStyleResId(R.style.BetterPickersDialogFragment)
-                        .setTargetFragment(FragmentAddTest.this);
+                        .setTargetFragment(FragmentAddTest.this)
+                        .setReference(0);
+
+                numberPickerBuilder.show();
+
+            }
+        });
+
+        textValue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), getString(R.string.error_max_score), Toast.LENGTH_SHORT).show();
+
+                //DecimalNumberDialog subjectDialog = new DecimalNumberDialog(getActivity());
+                //subjectDialog.show();
+                NumberPickerBuilder numberPickerBuilder = new NumberPickerBuilder()
+                        .setFragmentManager(getFragmentManager())
+                        .setStyleResId(R.style.BetterPickersDialogFragment)
+                        .setTargetFragment(FragmentAddTest.this)
+                        .setReference(1);
 
                 numberPickerBuilder.show();
 
@@ -116,7 +135,19 @@ public class FragmentAddTest extends Fragment
 
     @Override
     public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
-        textMark.setText("Number: " + number + "\nDecimal: " + decimal + "\nIs negative: " + isNegative + "\nFull number: "
-                + fullNumber);
+        switch (reference){
+            case 0:
+                textMark.setText("Puntuacion " + fullNumber);
+                score = (float) fullNumber;
+                break;
+            case 1:
+                textValue.setText("Valor " +number);
+                value = number;
+                break;
+
+            default:
+                break;
+        }
+
     }
 }
