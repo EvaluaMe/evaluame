@@ -168,6 +168,7 @@ public class ChartFragment  extends Fragment {
                                 Test selecteditem = listAdapter.getItem(selected.keyAt(i)-1);
                                 // Remove selected items following the ids
                                 subject.removeTest(selecteditem);
+                                ListDB.saveData(getActivity());
 
                             }
                         }
