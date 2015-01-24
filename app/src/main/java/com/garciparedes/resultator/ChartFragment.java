@@ -13,11 +13,11 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -80,10 +80,11 @@ public class ChartFragment  extends Fragment {
             createValues();
             update();
 
-            button = (FloatingActionButton) getActivity().findViewById(R.id.floating_button);
+            button = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
-            button.setSize(FloatingActionButton.SIZE_NORMAL);
-            button.setIcon(R.drawable.ic_action_new);
+            button.attachToListView(list);
+
+
             button.bringToFront();
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
