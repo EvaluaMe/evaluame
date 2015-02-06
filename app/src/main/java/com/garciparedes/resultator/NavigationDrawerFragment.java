@@ -213,7 +213,7 @@ public class NavigationDrawerFragment extends Fragment {
             public void onClick(View v) {
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, FragmentAddSubject.newInstance(nav)).commit();
+                        .replace(R.id.container, FragmentAddSubject.newInstance()).commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
                 updateListView();
 

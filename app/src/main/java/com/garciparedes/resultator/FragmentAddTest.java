@@ -15,21 +15,20 @@ import android.widget.Toast;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 
-
+/**
+ *
+ */
 public class FragmentAddTest extends Fragment
-        implements NumberPickerDialogFragment.NumberPickerDialogHandler{
+        implements NumberPickerDialogFragment.NumberPickerDialogHandler, AddData{
 
-    private int subject;
     private Button btnCreate;
-
     private EditText editTextName;
-
     private TextView textMark;
     private TextView textValue;
-
     private NumberPickerBuilder numberPickerMark;
     private NumberPickerBuilder numberPickerValue;
 
+    private int subject;
     private String name;
     private float score;
     private float value;
@@ -57,6 +56,9 @@ public class FragmentAddTest extends Fragment
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog);
         btnCreate = (Button) view.findViewById(R.id.button_dialog);
 
+        numberPickerMark = new NumberPickerBuilder();
+        numberPickerValue = new NumberPickerBuilder();
+
         return view;
     }
 
@@ -66,7 +68,7 @@ public class FragmentAddTest extends Fragment
 
         editTextName.setHint(getString(R.string.set_name));
 
-        numberPickerMark = new NumberPickerBuilder()
+        numberPickerMark
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
                 .setTargetFragment(FragmentAddTest.this)
@@ -75,7 +77,7 @@ public class FragmentAddTest extends Fragment
                 .setPlusMinusVisibility(View.INVISIBLE)
                 .setReference(0);
 
-        numberPickerValue = new NumberPickerBuilder()
+        numberPickerValue
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
                 .setTargetFragment(FragmentAddTest.this)
@@ -112,20 +114,14 @@ public class FragmentAddTest extends Fragment
 
                 } else {
 
-                    ListDB.addTest(subject, name, score, value);
-                    ListDB.saveData(getActivity());
+                    ListDB.addTest(getActivity(),subject, name, score, value);
 
-                    InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
-                            Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(editTextName.getWindowToken(), 0);
+                    hideKeyboard();
 
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.container, ChartFragment.newInstance(subject)).commit();
+                    replaceFragment();
                 }
             }
         });
-
-
     }
 
     @Override
@@ -143,6 +139,30 @@ public class FragmentAddTest extends Fragment
             default:
                 break;
         }
+
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editTextName.getWindowToken(), 0);
+
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void replaceFragment() {
+
+        getFragmentManager().beginTransaction()
+            .replace(R.id.container,
+                ChartFragment.newInstance(subject))
+            .commit();
 
     }
 }

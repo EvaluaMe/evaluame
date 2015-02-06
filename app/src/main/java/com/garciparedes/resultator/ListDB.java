@@ -9,32 +9,63 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 
 /**
- * Created by garciparedes on 7/12/14.
+ * ListDB class
  */
 public class ListDB {
 
-    private static ArrayList<Subject> masterList = new ArrayList<Subject>();
+    private static ArrayList<Subject> masterList;
 
+
+    /**
+     *
+     * @param mList MasterList
+     */
     public static void setMasterList(ArrayList<Subject> mList) {
         masterList = mList;
     }
 
-    public static ArrayList<Subject> getMasterList() {
 
+    /**
+     *
+     * @return masterLsit
+     */
+    public static ArrayList<Subject> getMasterList() {
         return masterList;
     }
 
-    public static void addSubject(String name, String description){
+
+    /**
+     *
+     * @param context context
+     * @param name name
+     * @param description description
+     */
+    public static void addSubject(Context context, String name, String description){
         masterList.add(new Subject(name, description));
-
+        saveData(context);
     }
 
-    public static void addTest(int i, String name, float mark, float value){
+
+    /**
+     *
+     * @param context context
+     * @param i i
+     * @param name name
+     * @param mark mark
+     * @param value value
+     */
+    public static void addTest(Context context, int i, String name, float mark, float value){
         masterList.get(i).addTestElement(new Test(name,mark, value));
+        saveData(context);
     }
 
+
+    /**
+     *
+     * @return ArrayList with names of subjects
+     */
     public static ArrayList<String> subjectNames(){
-        ArrayList<String> names = new ArrayList<String>(masterList.size());
+        ArrayList<String> names = new ArrayList<>(masterList.size());
 
         for (int i = 0; i< masterList.size(); i++){
 
@@ -46,6 +77,11 @@ public class ListDB {
 
     }
 
+
+    /**
+     *
+     * @param context context
+     */
     public static void saveData(Context context){
         SharedPreferences appSharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
@@ -54,10 +90,7 @@ public class ListDB {
         Gson gson = new Gson();
         String json = gson.toJson(ListDB.getMasterList());
         prefsEditor.putString("MasterList", json);
-        prefsEditor.commit();
+        prefsEditor.apply();
     }
 
-    public static ArrayList<Test> getTestList(int i) {
-        return masterList.get(i).getTestList();
-    }
 }
