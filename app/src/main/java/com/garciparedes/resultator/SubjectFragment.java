@@ -25,7 +25,7 @@ import java.util.ArrayList;
 /**
  * Created by garciparedes on 5/12/14.
  */
-public class ChartFragment  extends Fragment {
+public class SubjectFragment extends Fragment {
 
     private PieChart mChart;
     private PieDataSet yVals;
@@ -42,8 +42,8 @@ public class ChartFragment  extends Fragment {
     private View v;
     private FloatingActionButton button;
 
-    public static ChartFragment newInstance(int i) {
-        ChartFragment f = new ChartFragment();
+    public static SubjectFragment newInstance(int i) {
+        SubjectFragment f = new SubjectFragment();
         Bundle args = new Bundle();
         args.putInt("subject", i);
         f.setArguments(args);
@@ -55,7 +55,7 @@ public class ChartFragment  extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_chart, container, false);
+        return inflater.inflate(R.layout.fragment_subject, container, false);
 
     }
 
@@ -132,7 +132,7 @@ public class ChartFragment  extends Fragment {
         list = (ListView)getView().findViewById(R.id.test_listView);
 
 
-        v = View.inflate(getActivity(),R.layout.view_chart,null);
+        v = View.inflate(getActivity(),R.layout.fragment_chart,null);
         list.addHeaderView(v);
 
 

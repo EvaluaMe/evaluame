@@ -239,7 +239,7 @@ public class NavigationDrawerFragment extends Fragment {
                 mCallbacks.onNavigationDrawerItemSelected(position);
             }
 
-            Fragment chartFragment = (ChartFragment.newInstance(position));
+            Fragment chartFragment = (SubjectFragment.newInstance(position));
 
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, chartFragment).commit();
@@ -352,7 +352,7 @@ public class NavigationDrawerFragment extends Fragment {
                         // if this button is clicked, close
                         // current activity
 
-                        ListDB.getMasterList().remove(ChartFragment.subjectNum);
+                        ListDB.getMasterList().remove(SubjectFragment.subjectNum);
                         updateListView();
                         ListDB.saveData(getActivity());
 

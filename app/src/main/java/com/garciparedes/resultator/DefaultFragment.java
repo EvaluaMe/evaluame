@@ -37,18 +37,13 @@ public class DefaultFragment  extends Fragment {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        createChart();
-        setValues();
-
-
-
-    }
-
-
-    private void createChart() {
         mChart.setDescription("");
         mChart.setDrawLegend(false);
+
+        setValues();
+
     }
+
 
     public void setValues(){
 

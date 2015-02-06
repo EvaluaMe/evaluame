@@ -161,7 +161,7 @@ public class FragmentAddTest extends Fragment
 
         getFragmentManager().beginTransaction()
             .replace(R.id.container,
-                ChartFragment.newInstance(subject))
+                SubjectFragment.newInstance(subject))
             .commit();
 
     }

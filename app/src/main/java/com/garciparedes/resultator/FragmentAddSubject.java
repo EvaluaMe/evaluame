@@ -72,7 +72,7 @@ public class FragmentAddSubject extends Fragment implements AddData {
             @Override
             public void onClick(View v) {
 
-                ListDB.addSubject(getActivity(),editTextName.getText().toString(), editTextDescription.getText().toString());
+                ListDB.addSubject(getActivity(), editTextName.getText().toString(), editTextDescription.getText().toString());
 
                 replaceFragment();
 
@@ -104,7 +104,7 @@ public class FragmentAddSubject extends Fragment implements AddData {
     public void replaceFragment(){
         getFragmentManager().beginTransaction()
                 .replace(R.id.container,
-                        ChartFragment.newInstance(ListDB.getMasterList().size() - 1))
+                        SubjectFragment.newInstance(ListDB.getMasterList().size() - 1))
                 .commit();
     }
 }

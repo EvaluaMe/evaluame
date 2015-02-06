@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import android.app.ActionBar;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -61,7 +60,7 @@ public class MainActivity extends FragmentActivity
         // update the main content by replacing fragments
         //FragmentManager fragmentManager = getFragmentManager();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, ChartFragment.newInstance(position))
+                .replace(R.id.container, SubjectFragment.newInstance(position))
                 .commit();
 
 
