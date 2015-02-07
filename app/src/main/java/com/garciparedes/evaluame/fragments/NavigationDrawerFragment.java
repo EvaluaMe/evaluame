@@ -202,7 +202,7 @@ public class NavigationDrawerFragment extends Fragment {
             public void onClick(View v) {
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, new DefaultFragment()).commit();
+                        .replace(R.id.container, DefaultFragment.newInstance()).commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
 
             }
@@ -228,7 +228,7 @@ public class NavigationDrawerFragment extends Fragment {
     private void selectItem(int position) {
         if (position == -1){
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, new DefaultFragment())
+                    .replace(R.id.container, DefaultFragment.newInstance())
                     .commit();
         } else {
             mCurrentSelectedPosition = position;
@@ -242,7 +242,7 @@ public class NavigationDrawerFragment extends Fragment {
                 mCallbacks.onNavigationDrawerItemSelected(position);
             }
 
-            Fragment chartFragment = (SubjectFragment.newInstance(position));
+            SubjectFragment chartFragment = SubjectFragment.newInstance(position);
 
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, chartFragment).commit();
@@ -355,12 +355,11 @@ public class NavigationDrawerFragment extends Fragment {
                         // if this button is clicked, close
                         // current activity
 
-                        ListDB.getMasterList().remove(SubjectFragment.subjectNum);
+                        ListDB.removeSubject(getActivity(), SubjectFragment.subjectNum);
                         updateListView();
-                        ListDB.saveData(getActivity());
 
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.container, new DefaultFragment()).commit();
+                                .replace(R.id.container, DefaultFragment.newInstance()).commit();
 
 
                     }

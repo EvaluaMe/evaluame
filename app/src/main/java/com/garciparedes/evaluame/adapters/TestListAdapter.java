@@ -25,7 +25,7 @@ public class TestListAdapter extends ArrayAdapter<Test> {
     private SparseBooleanArray mSelectedItemsIds;
 
 
-    TestListAdapter(Fragment context, ArrayList<Test> datos) {
+    public TestListAdapter(Fragment context, ArrayList<Test> datos) {
         super(context.getActivity(), R.layout.listitem_test, datos);
         this.context = context.getActivity();
         this.datos = datos;

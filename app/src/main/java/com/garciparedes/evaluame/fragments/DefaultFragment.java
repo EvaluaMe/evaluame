@@ -21,7 +21,13 @@ import java.util.ArrayList;
 public class DefaultFragment  extends Fragment {
 
     private BarChart mChart;
-    
+
+
+    public static DefaultFragment newInstance() {
+        DefaultFragment defaultFragment = new DefaultFragment();
+
+        return defaultFragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,

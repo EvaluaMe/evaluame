@@ -51,6 +51,28 @@ public class ListDB {
     /**
      *
      * @param context context
+     * @param subjectId subjectid
+     */
+    public static void removeSubject(Context context, int subjectId){
+        masterList.remove(subjectId);
+        saveData(context);
+    }
+
+
+    /**
+     *
+     * @param context context
+     * @param subject subject
+     */
+    public static void removeSubject(Context context, Subject subject){
+        masterList.remove(subject);
+        saveData(context);
+    }
+
+
+    /**
+     *
+     * @param context context
      * @param i i
      * @param name name
      * @param mark mark
@@ -60,6 +82,8 @@ public class ListDB {
         masterList.get(i).addTestElement(new Test(name,mark, value));
         saveData(context);
     }
+
+
 
 
     /**
