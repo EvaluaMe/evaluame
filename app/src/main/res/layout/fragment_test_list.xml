@@ -1,12 +1,10 @@
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<ListView
-    android:id="@+id/containerL"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:divider="@android:color/transparent"
-    android:dividerHeight="0dp" />
+<?xml version="1.0" encoding="utf-8"?>
 
-</LinearLayout>
+<it.gmariotti.cardslib.library.view.CardListView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/myList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout"
+    style="@style/list_card.thumbnail"/>

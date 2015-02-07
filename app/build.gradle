@@ -26,4 +26,10 @@ dependencies {
     provided('com.doomonafireball.betterpickers:library:1.5.3') {
         exclude group: 'com.android.support', module: 'support-v4'
     }
+
+    //Core
+    compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1'
+
+    //Optional for built-in cards
+    compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
 }
