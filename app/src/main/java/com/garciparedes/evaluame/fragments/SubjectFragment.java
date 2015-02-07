@@ -13,6 +13,8 @@ import android.widget.ListView;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.cards.ChartCard;
 
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;

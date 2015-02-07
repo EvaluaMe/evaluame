@@ -20,6 +20,8 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.provider.ListDB;
+import com.github.amlcurran.showcaseview.ShowcaseView;
+import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -166,6 +168,15 @@ public class MainActivity extends FragmentActivity
         if (mList == null){
             mList = new ArrayList<Subject>();
         }
+
+        /*
+        new ShowcaseView.Builder(this)
+                .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
+                .setContentTitle("ShowcaseView")
+                .setContentText("This is highlighting the Home button")
+                .hideOnTouchOutside()
+                .build();
+        */
 
         ListDB.setMasterList(mList);
     }
