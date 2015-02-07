@@ -32,7 +32,6 @@ public class SubjectFragment extends Fragment {
     private PieData data;
     private ArrayList<String> xVals;
 
-    private ListView list;
     private TestListAdapter listAdapter;
     private ArrayList<Test> datos;
     private Subject subject;
@@ -51,6 +50,7 @@ public class SubjectFragment extends Fragment {
         return f;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -59,6 +59,7 @@ public class SubjectFragment extends Fragment {
 
     }
 
+    /*
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
@@ -82,7 +83,7 @@ public class SubjectFragment extends Fragment {
 
             button = (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
-            button.attachToListView(list);
+            //button.attachToListView(list);
 
 
             button.bringToFront();
@@ -235,4 +236,6 @@ public class SubjectFragment extends Fragment {
         textSubjectName.setText(subject.getName());
 
     }
+
+    */
 }

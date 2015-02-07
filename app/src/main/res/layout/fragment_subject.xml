@@ -13,12 +13,10 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_action_new"/>
 
-    <ListView
-        android:id="@+id/test_listView"
-        android:layout_alignParentLeft="true"
+    <fragment class="com.garciparedes.resultator.TestListFragment"
+        android:layout_weight="60"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_height="0px" />
 
 </FrameLayout>
 

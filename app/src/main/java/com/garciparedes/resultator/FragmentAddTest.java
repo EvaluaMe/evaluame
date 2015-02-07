@@ -14,12 +14,13 @@ import android.widget.Toast;
 
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
+import com.garciparedes.resultator.interfaces.AddData;
 
 /**
  *
  */
 public class FragmentAddTest extends Fragment
-        implements NumberPickerDialogFragment.NumberPickerDialogHandler, AddData{
+        implements NumberPickerDialogFragment.NumberPickerDialogHandler, AddData {
 
     private Button btnCreate;
     private EditText editTextName;
