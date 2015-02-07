@@ -13,10 +13,13 @@
         android:layout_margin="16dp"
         android:src="@drawable/ic_action_new"/>
 
-    <fragment class="com.garciparedes.evaluame.TestListFragment"
+    <!--
+    <fragment class="com.garciparedes.evaluame.fragments.TestListFragment"
         android:layout_weight="60"
         android:layout_width="match_parent"
         android:layout_height="0px" />
+
+        -->
 
 </FrameLayout>
 

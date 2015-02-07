@@ -1,9 +1,11 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.provider;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.items.Test;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;

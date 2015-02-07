@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.fragments;
 
 
 import android.app.Activity;
@@ -23,6 +23,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -109,7 +112,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,ListDB.subjectNames()));
+                android.R.id.text1, ListDB.subjectNames()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
         return mDrawerListView;
@@ -213,7 +216,7 @@ public class NavigationDrawerFragment extends Fragment {
             public void onClick(View v) {
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, FragmentAddSubject.newInstance()).commit();
+                        .replace(R.id.container, AddSubjectFragment.newInstance()).commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
                 updateListView();
 

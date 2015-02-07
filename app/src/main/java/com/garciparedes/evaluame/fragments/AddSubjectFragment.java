@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.fragments;
 
 
 import android.content.Context;
@@ -11,12 +11,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.interfaces.AddData;
+import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  * FramentAddSubject Class
  */
-public class FragmentAddSubject extends Fragment implements AddData {
+public class AddSubjectFragment extends Fragment implements AddData {
 
     private EditText editTextName;
     private EditText editTextDescription;
@@ -26,10 +29,10 @@ public class FragmentAddSubject extends Fragment implements AddData {
     /**
      * NewInstance method
      *
-     * @return FragmentAddSubject
+     * @return AddSubjectFragment
      */
-    public static FragmentAddSubject newInstance() {
-        FragmentAddSubject f = new FragmentAddSubject();
+    public static AddSubjectFragment newInstance() {
+        AddSubjectFragment f = new AddSubjectFragment();
         Bundle args = new Bundle();
         f.setArguments(args);
         return f;

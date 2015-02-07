@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.items;
 
 import java.util.ArrayList;
 

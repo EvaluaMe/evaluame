@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.activities;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
+
+import com.garciparedes.evaluame.R;
 
 public class SplashScreenActivity extends Activity {
 

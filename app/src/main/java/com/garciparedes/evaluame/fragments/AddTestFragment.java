@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,12 +14,14 @@ import android.widget.Toast;
 
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
+import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.interfaces.AddData;
+import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  *
  */
-public class FragmentAddTest extends Fragment
+public class AddTestFragment extends Fragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler, AddData {
 
     private Button btnCreate;
@@ -35,8 +37,8 @@ public class FragmentAddTest extends Fragment
     private float value;
 
 
-    public static FragmentAddTest newInstance(int i) {
-        FragmentAddTest f = new FragmentAddTest();
+    public static AddTestFragment newInstance(int i) {
+        AddTestFragment f = new AddTestFragment();
         Bundle args = new Bundle();
         args.putInt("subject", i);
         f.setArguments(args);
@@ -72,7 +74,7 @@ public class FragmentAddTest extends Fragment
         numberPickerMark
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
-                .setTargetFragment(FragmentAddTest.this)
+                .setTargetFragment(AddTestFragment.this)
                 .setMaxNumber(10)
                 .setMinNumber(0)
                 .setPlusMinusVisibility(View.INVISIBLE)
@@ -81,7 +83,7 @@ public class FragmentAddTest extends Fragment
         numberPickerValue
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
-                .setTargetFragment(FragmentAddTest.this)
+                .setTargetFragment(AddTestFragment.this)
                 .setMaxNumber(100)
                 .setMinNumber(0)
                 .setPlusMinusVisibility(View.INVISIBLE)
@@ -115,7 +117,7 @@ public class FragmentAddTest extends Fragment
 
                 } else {
 
-                    ListDB.addTest(getActivity(),subject, name, score, value);
+                    ListDB.addTest(getActivity(), subject, name, score, value);
 
                     hideKeyboard();
 

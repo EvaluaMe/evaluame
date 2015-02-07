@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.activities;
 
 import android.app.Activity;
 
@@ -15,6 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
+import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.fragments.SubjectFragment;
+import com.garciparedes.evaluame.provider.ListDB;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

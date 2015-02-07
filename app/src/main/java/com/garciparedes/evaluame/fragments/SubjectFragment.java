@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.items.Test;
+import com.garciparedes.evaluame.adapters.TestListAdapter;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -85,7 +89,7 @@ public class SubjectFragment extends Fragment {
                 public void onClick(View v) {
 
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.container, FragmentAddTest.newInstance(subjectNum)).commit();
+                            .replace(R.id.container, AddTestFragment.newInstance(subjectNum)).commit();
 
                 }
             });

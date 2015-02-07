@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame;
+package com.garciparedes.evaluame.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+
+import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.items.Test;
+import com.garciparedes.evaluame.adapters.TestListAdapter;
+import com.garciparedes.evaluame.provider.ListDB;
 
 import java.util.ArrayList;
 
