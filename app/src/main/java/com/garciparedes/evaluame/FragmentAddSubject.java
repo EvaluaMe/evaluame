@@ -1,4 +1,4 @@
-package com.garciparedes.resultator;
+package com.garciparedes.evaluame;
 
 
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.garciparedes.resultator.interfaces.AddData;
+import com.garciparedes.evaluame.interfaces.AddData;
 
 /**
  * FramentAddSubject Class

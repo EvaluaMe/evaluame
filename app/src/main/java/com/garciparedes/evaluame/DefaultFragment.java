@@ -1,4 +1,4 @@
-package com.garciparedes.resultator;
+package com.garciparedes.evaluame;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +10,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 
 import java.util.ArrayList;
 

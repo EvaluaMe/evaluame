@@ -1,4 +1,4 @@
-package com.garciparedes.resultator;
+package com.garciparedes.evaluame;
 
 import android.content.Context;
 import android.content.SharedPreferences;

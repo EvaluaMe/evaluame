@@ -1,4 +1,4 @@
-package com.garciparedes.resultator;
+package com.garciparedes.evaluame;
 
 import java.util.ArrayList;
 

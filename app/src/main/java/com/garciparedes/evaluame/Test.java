@@ -1,4 +1,4 @@
-package com.garciparedes.resultator;
+package com.garciparedes.evaluame;
 
 /**
  * Created by garciparedes on 5/12/14.

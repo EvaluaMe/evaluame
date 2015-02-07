@@ -1,4 +1,4 @@
-package com.garciparedes.resultator.interfaces;
+package com.garciparedes.evaluame.interfaces;
 
 /**
  * Created by garciparedes on 6/2/15.
