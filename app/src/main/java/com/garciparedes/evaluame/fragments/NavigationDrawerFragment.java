@@ -242,11 +242,13 @@ public class NavigationDrawerFragment extends Fragment {
                 mCallbacks.onNavigationDrawerItemSelected(position);
             }
 
-            SubjectFragment chartFragment = SubjectFragment.newInstance(position);
+            /*
+            SubjectFragment subjectFragment = SubjectFragment.newInstance(position);
 
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, chartFragment).commit();
+                    .replace(R.id.container, subjectFragment).commit();
 
+            */
         }
     }
 

@@ -44,6 +44,6 @@ public class Test {
     }
 
     public String getPercentageString() {
-        return Float.toString(percentage);
+        return (Float.toString(percentage) + "%");
     }
 }

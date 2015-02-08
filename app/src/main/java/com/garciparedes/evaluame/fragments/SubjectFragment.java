@@ -1,20 +1,17 @@
 package com.garciparedes.evaluame.fragments;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.cards.ChartCard;
+import com.garciparedes.evaluame.cards.DetailsCard;
+import com.garciparedes.evaluame.cards.PieChartCard;
 
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
+import com.garciparedes.evaluame.cards.TestCard;
+import com.garciparedes.evaluame.provider.ListDB;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -43,10 +40,7 @@ public class SubjectFragment extends Fragment {
 
     public static SubjectFragment newInstance(int i) {
         SubjectFragment subjectFragment = new SubjectFragment();
-        //Bundle args = new Bundle();
-        //args.putInt("subject", i);
         subjectNum = i;
-        //subjectFragment.setArguments(args);
 
         return subjectFragment;
     }
@@ -69,26 +63,16 @@ public class SubjectFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        int listImages[] = new int[]{R.drawable.angry_1, R.drawable.angry_1,
-                R.drawable.angry_1, R.drawable.angry_1, R.drawable.angry_1};
 
         ArrayList<Card> cards = new ArrayList<Card>();
 
-        cards.add(new ChartCard(getActivity()));
+        cards.add(new PieChartCard(getActivity()));
 
-        for (int i = 0; i<5; i++) {
+        cards.add(new DetailsCard(getActivity(), "Sergio", "García", (float) 4.7));
+
+        for (int i = 0; i < ListDB.getMasterList().get(subjectNum).getTestList().size(); i++) {
             // Create a Card
-            Card card = new Card(getActivity());
-            // Create a CardHeader
-            CardHeader header = new CardHeader(getActivity());
-            // Add Header to card
-            header.setTitle("Angry bird: " + i);
-            card.setTitle("sample title");
-            card.addCardHeader(header);
-
-            CardThumbnail thumb = new CardThumbnail(getActivity());
-            thumb.setDrawableResource(listImages[i]);
-            card.addCardThumbnail(thumb);
+            TestCard card = new TestCard(getActivity(), ListDB.getMasterList().get(subjectNum).getTestElement(i));
 
             cards.add(card);
         }
@@ -98,8 +82,8 @@ public class SubjectFragment extends Fragment {
 
         // Define your sections
         List<CardSection> sections =  new ArrayList<CardSection>();
-        sections.add(new CardSection(0,"Section 1"));
-        sections.add(new CardSection(3,"Section 2"));
+        //sections.add(new CardSection(0,"Section 1"));
+        //sections.add(new CardSection(3,"Section 2"));
         CardSection[] dummy = new CardSection[sections.size()];
 
         //Define your Sectioned adapter
