@@ -7,16 +7,16 @@
     android:gravity="center_vertical"
     android:layout_height="wrap_content">
 
-    <RatingBar
-        android:id="@+id/card_test_mark_ratingBar"
-        android:numStars="5"
-        android:stepSize="1.0"
-        android:layout_width="wrap_content"
+    <ProgressBar
+        android:id="@+id/card_test_mark_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
 
     <RelativeLayout
-        android:layout_below="@id/card_test_mark_ratingBar"
+        android:layout_below="@id/card_test_mark_progressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
@@ -36,12 +36,6 @@
             android:text="Valor"
             android:layout_alignParentRight="true"/>
 
-
         </RelativeLayout>
-
-
-
-
-
 
 </RelativeLayout>

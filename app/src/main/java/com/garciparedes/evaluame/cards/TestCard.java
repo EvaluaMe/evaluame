@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.cards;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
  */
 public class TestCard extends Card {
 
-    private RatingBar markRatingBar;
+    private ProgressBar markProgressBar;
     private TextView markTextView;
     private TextView percentageTextView;
 
@@ -77,7 +78,7 @@ public class TestCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view) {
 
         //Retrieve elements
-        markRatingBar = (RatingBar) parent.findViewById(R.id.card_test_mark_ratingBar);
+        markProgressBar = (ProgressBar) parent.findViewById(R.id.card_test_mark_progressBar);
         markTextView = (TextView) parent.findViewById(R.id.card_test_mark_textView);
         percentageTextView = (TextView) parent.findViewById(R.id.card_test_percentage_textView);
 
@@ -89,11 +90,9 @@ public class TestCard extends Card {
             percentageTextView.setText(test.getPercentageString());
         }
 
-        if (markRatingBar != null) {
-            markRatingBar.setNumStars(5);
-            markRatingBar.setMax(5);
-            markRatingBar.setStepSize(0.5f);
-            markRatingBar.setRating((test.getMark()/2));
+        if (markProgressBar != null) {
+            markProgressBar.setMax(10);
+            markProgressBar.setProgress((int)(test.getMark()));
 
         }
     }
