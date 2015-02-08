@@ -74,7 +74,7 @@ public class MainActivity extends FragmentActivity
     }
 
     public void onSectionAttached(int number) {
-        mTitle = ListDB.getMasterList().get(number).getName();
+        mTitle = ListDB.get(number).getName();
 
     }
 

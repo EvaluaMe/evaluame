@@ -31,10 +31,18 @@ public class ListDB {
      *
      * @return masterLsit
      */
-    public static ArrayList<Subject> getMasterList() {
+    private static ArrayList<Subject> getMasterList() {
         return masterList;
     }
 
+
+    public static Subject get(int i){
+        return getMasterList().get(i);
+    }
+
+    public static int size(){
+        return getMasterList().size();
+    }
 
     /**
      *
@@ -79,7 +87,7 @@ public class ListDB {
      * @param value value
      */
     public static void addTest(Context context, int i, String name, float mark, float value){
-        masterList.get(i).addTestElement(new Test(name,mark, value));
+        masterList.get(i).addTestElement(new Test(name, null, mark, value));
         saveData(context);
     }
 

@@ -10,8 +10,6 @@ import android.widget.Toast;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Test;
 
-import it.gmariotti.cardslib.library.cards.material.MaterialLargeImageCard;
-import it.gmariotti.cardslib.library.cards.topcolored.TopColoredCard;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardExpand;
 import it.gmariotti.cardslib.library.internal.CardHeader;
@@ -24,7 +22,8 @@ public class TestCard extends Card {
     private RatingBar markRatingBar;
     private TextView markTextView;
     private TextView percentageTextView;
-    private Test test;
+
+     Test test;
 
 
     public TestCard(Context context, Test test){
@@ -42,7 +41,6 @@ public class TestCard extends Card {
         header.setButtonExpandVisible(true);
 
         addCardHeader(header);
-
 
         CardExpand cardExpand = new CardExpand(context);
         cardExpand.setTitle("hooooooooola");
@@ -83,10 +81,6 @@ public class TestCard extends Card {
         markTextView = (TextView) parent.findViewById(R.id.card_test_mark_textView);
         percentageTextView = (TextView) parent.findViewById(R.id.card_test_percentage_textView);
 
-
-        System.out.println(test.getMark());
-        System.out.println(test.getPercentage());
-
         if(markTextView != null){
             markTextView.setText(test.getMarkString());
         }
@@ -102,8 +96,6 @@ public class TestCard extends Card {
             markRatingBar.setRating((test.getMark()/2));
 
         }
-
-
     }
 
 }

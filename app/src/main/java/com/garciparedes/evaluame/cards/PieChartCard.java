@@ -19,7 +19,7 @@ public class PieChartCard extends Card {
      * @param context
      */
     public PieChartCard(Context context) {
-        this(context, R.layout.card_chart);
+        this(context, R.layout.card_chart_pie);
     }
 
     /**

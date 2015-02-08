@@ -10,6 +10,7 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.cards.DetailsCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
 
+import com.garciparedes.evaluame.cards.StatsCard;
 import com.garciparedes.evaluame.cards.TestCard;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.melnykov.fab.FloatingActionButton;
@@ -19,8 +20,6 @@ import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.CardThumbnail;
 import it.gmariotti.cardslib.library.prototypes.CardSection;
 import it.gmariotti.cardslib.library.prototypes.SectionedCardAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
@@ -66,13 +65,15 @@ public class SubjectFragment extends Fragment {
 
         ArrayList<Card> cards = new ArrayList<Card>();
 
+        cards.add(new DetailsCard(getActivity(), ListDB.get(subjectNum)));
+
         cards.add(new PieChartCard(getActivity()));
 
-        cards.add(new DetailsCard(getActivity(), "Sergio", "García", (float) 4.7));
+        cards.add(new StatsCard(getActivity(), ListDB.get(subjectNum)));
 
-        for (int i = 0; i < ListDB.getMasterList().get(subjectNum).getTestList().size(); i++) {
+        for (int i = 0; i < ListDB.get(subjectNum).getTestList().size(); i++) {
             // Create a Card
-            TestCard card = new TestCard(getActivity(), ListDB.getMasterList().get(subjectNum).getTestElement(i));
+            TestCard card = new TestCard(getActivity(), ListDB.get(subjectNum).getTestElement(i));
 
             cards.add(card);
         }
@@ -90,14 +91,14 @@ public class SubjectFragment extends Fragment {
         SectionedCardAdapter mAdapter = new SectionedCardAdapter(getActivity(), mCardArrayAdapter);
         mAdapter.setCardSections(sections.toArray(dummy));
 
-        CardListView listView = (CardListView) getActivity().findViewById(R.id.myList);
+        CardListView listView = (CardListView) getActivity().findViewById(R.id.subject_card_list);
         if (listView!=null){
             //Use the external adapter.
             listView.setExternalAdapter(mAdapter, mCardArrayAdapter);
         }
 
-        button.attachToListView(listView);
-        button.bringToFront();
+        //button.attachToListView(listView);
+        //button.bringToFront();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

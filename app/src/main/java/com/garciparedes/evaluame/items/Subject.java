@@ -11,30 +11,37 @@ public class Subject {
     private String description;
     private ArrayList<Test> testList = new ArrayList<Test>();
 
+
     public Subject(String name, String description){
         this.name = name;
         this.description = description;
     }
 
+
     public void setName(String name) {
         this.name = name;
     }
+
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+
     public String getName() {
         return name;
     }
+
 
     public String getDescription() {
         return description;
     }
 
+
     public ArrayList<Test> getTestList() {
         return testList;
     }
+
 
     public Test getTestElement(int i) {
         try {
@@ -48,6 +55,7 @@ public class Subject {
         getTestList().add(test);
     }
 
+
     public float getAverage(){
 
         float sum = 0;
@@ -57,6 +65,26 @@ public class Subject {
         }
 
         return  sum/getTestList().size();
+    }
+
+    public float getRatio(){
+        int pass = 0;
+
+        if (getTestList().size() > 0 ){
+
+            for (int i = 0 ; i < getTestList().size() ; i++){
+                if (getTestList().get(i).getMark() >= 5) {
+                    pass++;
+                }
+            }
+
+            return  ((float) pass/getTestList().size());
+
+        } else {
+
+            return 0;
+        }
+
     }
 
 

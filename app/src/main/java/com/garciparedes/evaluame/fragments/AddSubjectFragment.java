@@ -109,7 +109,7 @@ public class AddSubjectFragment extends Fragment implements AddData {
     public void replaceFragment(){
         getFragmentManager().beginTransaction()
                 .replace(R.id.container,
-                        SubjectFragment.newInstance(ListDB.getMasterList().size() - 1))
+                        SubjectFragment.newInstance(ListDB.size() - 1))
                 .commit();
     }
 }
