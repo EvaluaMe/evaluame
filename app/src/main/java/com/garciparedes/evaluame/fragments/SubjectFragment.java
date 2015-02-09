@@ -67,7 +67,7 @@ public class SubjectFragment extends Fragment {
 
         cards.add(new DetailsCard(getActivity(), ListDB.get(subjectNum)));
 
-        cards.add(new PieChartCard(getActivity()));
+        cards.add(new PieChartCard(getActivity(), ListDB.get(subjectNum)));
 
         cards.add(new StatsCard(getActivity(), ListDB.get(subjectNum)));
 
