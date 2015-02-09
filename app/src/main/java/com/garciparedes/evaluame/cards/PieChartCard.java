@@ -26,7 +26,10 @@ public class PieChartCard extends Card {
     private PieDataSet yVals;
     private PieData data;
     private ArrayList<String> xVals;
+    
     private Subject subject;
+
+
     /**
      * Constructor with a custom inner layout
      * @param context
@@ -35,6 +38,7 @@ public class PieChartCard extends Card {
         this(context, R.layout.card_chart_pie);
         this.subject = subject;
     }
+
 
     /**
      *
@@ -47,6 +51,7 @@ public class PieChartCard extends Card {
 
     }
 
+
     /**
      * Init
      */
@@ -54,9 +59,11 @@ public class PieChartCard extends Card {
 
     }
 
+
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
         mChart = (PieChart) parent.findViewById(R.id.chart);
+        mChart.setTouchEnabled(false);
         mChart.setDrawLegend(false);
         mChart.setCenterTextSize(22f);
 
@@ -79,12 +86,11 @@ public class PieChartCard extends Card {
             introduce(subject.getTestList().get(j),j);
         }
 
-
-
         mChart.setData(data);
         mChart.animateXY(1500, 1500);
 
     }
+
 
     private void introduce(Test test, int i){
 
