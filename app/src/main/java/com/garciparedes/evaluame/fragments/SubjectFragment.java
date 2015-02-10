@@ -12,6 +12,7 @@ import com.garciparedes.evaluame.cards.PieChartCard;
 
 import com.garciparedes.evaluame.cards.StatsCard;
 import com.garciparedes.evaluame.cards.TestCard;
+import com.garciparedes.evaluame.cards.TestListCard;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -20,7 +21,9 @@ import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
+import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.prototypes.CardSection;
+import it.gmariotti.cardslib.library.prototypes.CardWithList;
 import it.gmariotti.cardslib.library.prototypes.SectionedCardAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
 
@@ -70,6 +73,8 @@ public class SubjectFragment extends Fragment {
         cards.add(new PieChartCard(getActivity(), ListDB.get(subjectNum)));
 
         cards.add(new StatsCard(getActivity(), ListDB.get(subjectNum)));
+
+        cards.add(new TestListCard(getActivity(), ListDB.get(subjectNum)));
 
         for (int i = 0; i < ListDB.get(subjectNum).getTestList().size(); i++) {
             // Create a Card

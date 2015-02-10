@@ -1,5 +1,7 @@
 package com.garciparedes.evaluame.items;
 
+import com.garciparedes.evaluame.Util.Number;
+
 import java.util.GregorianCalendar;
 
 /**
@@ -8,8 +10,8 @@ import java.util.GregorianCalendar;
 public class Test {
 
     private String name;
-    private float mark;
-    private float percentage;
+    private Float mark;
+    private Float percentage;
 
     private GregorianCalendar date;
 
@@ -41,7 +43,7 @@ public class Test {
     }
 
     public String getMarkString() {
-        return Float.toString(mark);
+        return Number.toString(getMark());
     }
 
     public float getPercentage() {
@@ -49,6 +51,6 @@ public class Test {
     }
 
     public String getPercentageString() {
-        return (Float.toString(percentage) + "%");
+        return (com.garciparedes.evaluame.Util.Number.toString(getPercentage()) + "%");
     }
 }
