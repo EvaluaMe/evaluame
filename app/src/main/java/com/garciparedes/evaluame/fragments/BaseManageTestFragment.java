@@ -12,24 +12,31 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.doomonafireball.betterpickers.datepicker.DatePickerBuilder;
+import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.interfaces.AddData;
-import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  *
  */
-public abstract class NativeManageTestFragment extends Fragment
-        implements NumberPickerDialogFragment.NumberPickerDialogHandler,AddData {
+public abstract class BaseManageTestFragment extends Fragment
+        implements NumberPickerDialogFragment.NumberPickerDialogHandler, AddData,
+        DatePickerDialogFragment.DatePickerDialogHandler {
 
     private Button btnCreate;
     private EditText editTextName;
     private TextView textMark;
     private TextView textValue;
+    private TextView textDate;
+
     private NumberPickerBuilder numberPickerMark;
     private NumberPickerBuilder numberPickerValue;
+
+    private DatePickerBuilder datePicker;
 
     protected int subject;
     protected String name;
@@ -47,11 +54,13 @@ public abstract class NativeManageTestFragment extends Fragment
         // Set the dialog text -- this is better done in the XML
         textMark = (TextView) view.findViewById(R.id.textView_set_mark);
         textValue = (TextView) view.findViewById(R.id.textView_set_value);
+        textDate = (TextView) view.findViewById(R.id.textView_set_date);
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog);
         btnCreate = (Button) view.findViewById(R.id.button_dialog);
 
         numberPickerMark = new NumberPickerBuilder();
         numberPickerValue = new NumberPickerBuilder();
+        datePicker = new DatePickerBuilder();
 
         return view;
     }
@@ -66,7 +75,7 @@ public abstract class NativeManageTestFragment extends Fragment
         numberPickerMark
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
-                .setTargetFragment(NativeManageTestFragment.this)
+                .setTargetFragment(BaseManageTestFragment.this)
                 .setMaxNumber(10)
                 .setMinNumber(0)
                 .setPlusMinusVisibility(View.INVISIBLE)
@@ -75,12 +84,18 @@ public abstract class NativeManageTestFragment extends Fragment
         numberPickerValue
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
-                .setTargetFragment(NativeManageTestFragment.this)
+                .setTargetFragment(BaseManageTestFragment.this)
                 .setMaxNumber(100)
                 .setMinNumber(0)
                 .setPlusMinusVisibility(View.INVISIBLE)
                 .setLabelText("%")
                 .setReference(1);
+
+        datePicker
+                .setFragmentManager(getFragmentManager())
+                .setStyleResId(R.style.BetterPickersDialogFragment)
+                .setTargetFragment(BaseManageTestFragment.this)
+                .setReference(0);
 
         textMark.setText(setTextMark());
         textMark.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +105,7 @@ public abstract class NativeManageTestFragment extends Fragment
             }
         });
 
-        textValue.setText(setTextValue() + " %");
+        textValue.setText(setTextPercentage() + " %");
         textValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +113,12 @@ public abstract class NativeManageTestFragment extends Fragment
             }
         });
 
+        textDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datePicker.show();
+            }
+        });
 
         btnCreate.setText(setTextButton());
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -112,6 +133,9 @@ public abstract class NativeManageTestFragment extends Fragment
                 } else {
 
                     setOnClickButton();
+
+                    hideKeyboard();
+                    replaceFragment();
                 }
             }
         });
@@ -125,7 +149,7 @@ public abstract class NativeManageTestFragment extends Fragment
 
     public abstract String setTextMark();
 
-    public abstract String setTextValue();
+    public abstract String setTextPercentage();
 
     @Override
     public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
@@ -144,6 +168,18 @@ public abstract class NativeManageTestFragment extends Fragment
         }
 
     }
+
+    @Override
+    public void onDialogDateSet(int reference, int year, int monthOfYear, int dayOfMonth) {
+        textDate.setText(
+                dayOfMonth
+                + "-"
+                + Date.intToStringMonth(getActivity(), monthOfYear)
+                + "-"
+                + year
+        );
+    }
+
 
     /**
      *

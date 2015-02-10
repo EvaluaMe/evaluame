@@ -25,6 +25,23 @@
     <string name="title_exams">Exams</string>
     <string name="title_average">Average</string>
     <string name="title_ratio">Ratio</string>
+    <string name="set_date">Date</string>
 
+    <array name="month">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
+    <string name="error_name">Error on name</string>
+    <string name="edit_test">Edit Test</string>
 
 </resources>

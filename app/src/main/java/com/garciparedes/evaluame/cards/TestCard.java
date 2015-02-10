@@ -1,6 +1,9 @@
 package com.garciparedes.evaluame.cards;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
@@ -9,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.fragments.AddTestFragment;
+import com.garciparedes.evaluame.fragments.EditTestFragment;
 import com.garciparedes.evaluame.items.Test;
 
 import it.gmariotti.cardslib.library.internal.Card;
@@ -24,28 +29,31 @@ public class TestCard extends Card {
     private TextView markTextView;
     private TextView percentageTextView;
 
-     Test test;
+    private Test test;
 
 
-    public TestCard(Context context, Test test){
+    public TestCard(FragmentActivity context, Test test){
         super(context, R.layout.card_test);
         this.test = test;
         init(context);
     }
 
+    public Test getTest() {
+        return test;
+    }
 
     private void init(Context context){
 
         //Create a CardHeader
         CardHeader header = new CardHeader(context);
         header.setTitle(test.getName());
-        header.setButtonExpandVisible(true);
+        //header.setButtonExpandVisible(true);
+        header.setOtherButtonVisible(true);
 
+        //Set visible the expand/collapse button
+        header.setOtherButtonVisible(true);
+        header.setOtherButtonDrawable(R.drawable.ic_action_edit);
         addCardHeader(header);
-
-        CardExpand cardExpand = new CardExpand(context);
-        cardExpand.setTitle("hooooooooola");
-        addCardExpand(cardExpand);
 
 
 

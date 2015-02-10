@@ -29,26 +29,6 @@
             android:textSize="@dimen/medium_font_size_header"/>
 
         <TextView
-            android:id="@+id/text_view_dialog_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/set_value"
-            android:layout_below="@+id/text_view_dialog_mark"
-            android:layout_alignLeft="@+id/text_view_dialog_mark"
-            android:layout_alignStart="@+id/text_view_dialog_mark"
-            android:layout_marginTop="19dp"
-            android:textSize="@dimen/medium_font_size_header" />
-
-        <Button
-            android:id="@+id/button_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_dialog_value"
-            android:layout_gravity="bottom"
-            android:text="@string/create_test"
-            style="?android:attr/buttonBarButtonStyle"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -57,9 +37,7 @@
             android:layout_above="@+id/text_view_dialog_value"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="65dp"
-            android:layout_marginEnd="65dp"
-
+            android:layout_marginRight="100dp"
             android:textSize="@dimen/medium_font_size_header"/>
 
         <TextView
@@ -73,6 +51,47 @@
             android:layout_alignLeft="@+id/textView_set_mark"
             android:layout_alignStart="@+id/textView_set_mark" />
 
+        <TextView
+            android:id="@+id/text_view_dialog_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_value"
+            android:layout_below="@+id/text_view_dialog_mark"
+            android:layout_alignLeft="@+id/text_view_dialog_mark"
+            android:layout_alignStart="@+id/text_view_dialog_mark"
+            android:layout_marginTop="19dp"
+            android:textSize="@dimen/medium_font_size_header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="xx-xx-xxxx"
+            android:id="@+id/textView_set_date"
+            android:textSize="@dimen/medium_font_size_header"
+            android:layout_alignBottom="@+id/text_view_dialog_date"
+            android:layout_alignLeft="@+id/textView_set_mark"
+            android:layout_alignStart="@+id/textView_set_mark" />
+
+        <TextView
+            android:id="@+id/text_view_dialog_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_date"
+            android:layout_below="@+id/text_view_dialog_value"
+            android:layout_alignLeft="@+id/text_view_dialog_mark"
+            android:layout_alignStart="@+id/text_view_dialog_mark"
+            android:layout_marginTop="19dp"
+            android:textSize="@dimen/medium_font_size_header" />
+
+        <Button
+            android:id="@+id/button_dialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text_view_dialog_date"
+            android:layout_gravity="bottom"
+            android:text="@string/create_test"
+            style="?android:attr/buttonBarButtonStyle"/>
 
     </RelativeLayout>
 </ScrollView>

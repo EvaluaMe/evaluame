@@ -51,6 +51,6 @@ public class Test {
     }
 
     public String getPercentageString() {
-        return (com.garciparedes.evaluame.Util.Number.toString(getPercentage()) + "%");
+        return (Number.toString(getPercentage()) + "%");
     }
 }

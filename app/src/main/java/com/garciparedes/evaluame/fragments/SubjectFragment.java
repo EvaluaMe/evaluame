@@ -21,6 +21,7 @@ import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
+import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.prototypes.CardSection;
 import it.gmariotti.cardslib.library.prototypes.SectionedCardAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
@@ -78,6 +79,14 @@ public class SubjectFragment extends Fragment {
             // Create a Card
             TestCard card = new TestCard(getActivity(), ListDB.get(subjectNum).getTestElement(i));
 
+            card.getCardHeader().setOtherButtonClickListener(new CardHeader.OnClickCardHeaderOtherButtonListener() {
+                @Override
+                public void onButtonItemClick(Card card, View view) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, EditTestFragment.newInstance(subjectNum, ( (TestCard) card).getTest() ) ).commit();
+
+                }
+            });
             cards.add(card);
         }
 

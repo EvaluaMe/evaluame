@@ -3,46 +3,48 @@ package com.garciparedes.evaluame.fragments;
 import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.provider.ListDB;
+import com.garciparedes.evaluame.items.Test;
 
 /**
  * Created by garciparedes on 10/2/15.
  */
-public class AddTestFragment extends BaseManageTestFragment {
+public class EditTestFragment extends BaseManageTestFragment {
 
-    private final String defaultText = "- - . - -";
+    private static Test test;
 
-    public static AddTestFragment newInstance(int i) {
-        AddTestFragment f = new AddTestFragment();
+    public static EditTestFragment newInstance(int i, Test test1) {
+        EditTestFragment f = new EditTestFragment();
         Bundle args = new Bundle();
         args.putInt("subject", i);
         f.setArguments(args);
+        test = test1;
         return f;
     }
 
-
     @Override
     public void setOnClickButton() {
-        ListDB.addTest(getActivity(), subject, name, mark, value);
+        test.setName(name);
+        test.setMark(mark);
+        test.setPercentage(value);
     }
 
     @Override
     public String setTextButton() {
-        return getString(R.string.create_test);
+        return getResources().getString(R.string.edit_test);
     }
 
     @Override
     public String setTextName() {
-        return null;
+        return test.getName();
     }
 
     @Override
     public String setTextMark() {
-        return defaultText;
+        return test.getMarkString();
     }
 
     @Override
     public String setTextPercentage() {
-        return defaultText;
+        return test.getPercentageString();
     }
 }
