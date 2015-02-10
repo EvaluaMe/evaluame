@@ -28,6 +28,8 @@
     <string name="error_name">Error en el nombre</string>
     <string name="edit_test">Editar Examen</string>
     <string name="title_weighted_average">Media Ponderada</string>
+    <string name="action_edit">Modificar</string>
+    <string name="edit_subject">Editar Asignatura</string>
 
 
 </resources>

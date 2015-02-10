@@ -11,7 +11,15 @@ public class Subject {
 
     private String name;
     private String description;
-    private ArrayList<Test> testList = new ArrayList<Test>();
+    private ArrayList<Test> testList;
+
+
+    /**
+     *
+     */
+    public Subject(){
+        this.testList = new ArrayList<>();
+    }
 
 
     /**
@@ -22,6 +30,7 @@ public class Subject {
     public Subject(String name, String description){
         this.name = name;
         this.description = description;
+        this.testList = new ArrayList<>();
     }
 
 

@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -242,13 +243,6 @@ public class NavigationDrawerFragment extends Fragment {
                 mCallbacks.onNavigationDrawerItemSelected(position);
             }
 
-            /*
-            SubjectFragment subjectFragment = SubjectFragment.newInstance(position);
-
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, subjectFragment).commit();
-
-            */
         }
     }
 
@@ -302,6 +296,17 @@ public class NavigationDrawerFragment extends Fragment {
 
             deleteSubject();
 
+            return true;
+        }
+
+
+        if (item.getItemId() == R.id.action_edit_subject) {
+
+
+            System.out.println("MIELDA!!!!");
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, EditSubjectFragment.newInstance(ListDB.get(SubjectFragment.subjectNum)))
+                    .commit();
             return true;
         }
 

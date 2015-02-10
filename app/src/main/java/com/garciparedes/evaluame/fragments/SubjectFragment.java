@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,6 +14,7 @@ import com.garciparedes.evaluame.cards.PieChartCard;
 import com.garciparedes.evaluame.cards.StatsCard;
 import com.garciparedes.evaluame.cards.TestCard;
 import com.garciparedes.evaluame.cards.TestListCard;
+import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -36,6 +38,8 @@ public class SubjectFragment extends Fragment {
 
     public static int subjectNum;
 
+    private Subject subject;
+
     private FloatingActionButton button;
 
 
@@ -54,6 +58,7 @@ public class SubjectFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
 
+        subject = ListDB.get(subjectNum);
         button = (FloatingActionButton) view.findViewById(R.id.floating_button);
 
         return view;
@@ -67,17 +72,17 @@ public class SubjectFragment extends Fragment {
 
         ArrayList<Card> cards = new ArrayList<Card>();
 
-        cards.add(new DetailsCard(getActivity(), ListDB.get(subjectNum)));
+        cards.add(new DetailsCard(getActivity(), subject));
 
-        cards.add(new PieChartCard(getActivity(), ListDB.get(subjectNum)));
+        cards.add(new PieChartCard(getActivity(), subject));
 
-        cards.add(new StatsCard(getActivity(), ListDB.get(subjectNum)));
+        cards.add(new StatsCard(getActivity(), subject));
 
-        cards.add(new TestListCard(getActivity(), ListDB.get(subjectNum)));
+        cards.add(new TestListCard(getActivity(), subject));
 
-        for (int i = 0; i < ListDB.get(subjectNum).getTestList().size(); i++) {
+        for (int i = 0; i < subject.getTestList().size(); i++) {
             // Create a Card
-            TestCard card = new TestCard(getActivity(), ListDB.get(subjectNum).getTestElement(i));
+            TestCard card = new TestCard(getActivity(), subject.getTestElement(i));
 
             card.getCardHeader().setOtherButtonClickListener(new CardHeader.OnClickCardHeaderOtherButtonListener() {
                 @Override
@@ -116,9 +121,37 @@ public class SubjectFragment extends Fragment {
             public void onClick(View v) {
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, AddTestFragment.newInstance(subjectNum)).commit();
+                        .replace(R.id.container, AddTestFragment.newInstance(subjectNum))
+                        .commit();
 
             }
         });
     }
+
+
+
+    /*
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_delete_subject) {
+
+            //deleteSubject();
+
+            return true;
+        }
+
+        if (item.getItemId() == R.id.action_edit_subject) {
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, EditSubjectFragment.newInstance(subject))
+                    .commit();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    */
+
 }

@@ -54,6 +54,15 @@ public class ListDB {
         masterList.add(new Subject(name, description));
         saveData(context);
     }
+    /**
+     *
+     * @param context context
+     * @param subject newSubject
+     */
+    public static void addSubject(Context context, Subject subject){
+        masterList.add(subject);
+        saveData(context);
+    }
 
 
     /**
@@ -70,7 +79,7 @@ public class ListDB {
     /**
      *
      * @param context context
-     * @param subject subject
+     * @param subject newSubject
      */
     public static void removeSubject(Context context, Subject subject){
         masterList.remove(subject);

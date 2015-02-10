@@ -44,5 +44,7 @@
     <string name="error_name">Error on name</string>
     <string name="edit_test">Edit Test</string>
     <string name="title_weighted_average">Weighted Average</string>
+    <string name="action_edit">Edit</string>
+    <string name="edit_subject">Edit Subject</string>
 
 </resources>
