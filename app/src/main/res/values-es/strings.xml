@@ -27,6 +27,7 @@
     <string name="set_date">Fecha</string>
     <string name="error_name">Error en el nombre</string>
     <string name="edit_test">Editar Examen</string>
+    <string name="title_weighted_average">Media Ponderada</string>
 
 
 </resources>

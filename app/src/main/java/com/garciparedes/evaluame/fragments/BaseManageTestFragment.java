@@ -10,7 +10,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.doomonafireball.betterpickers.datepicker.DatePickerBuilder;
 import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
@@ -19,6 +18,7 @@ import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.interfaces.AddData;
+import com.garciparedes.evaluame.items.Test;
 
 /**
  *
@@ -39,9 +39,8 @@ public abstract class BaseManageTestFragment extends Fragment
     private DatePickerBuilder datePicker;
 
     protected int subject;
-    protected String name;
-    protected float mark;
-    protected float value;
+
+    protected Test newTest;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -50,6 +49,7 @@ public abstract class BaseManageTestFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_manage_test, container, false);
 
         subject = getArguments().getInt("subject", 0);
+        newTest = initTest();
 
         // Set the dialog text -- this is better done in the XML
         textMark = (TextView) view.findViewById(R.id.textView_set_mark);
@@ -125,21 +125,18 @@ public abstract class BaseManageTestFragment extends Fragment
             @Override
             public void onClick(View v) {
 
-                name = editTextName.getText().toString();
+                newTest.setName(editTextName.getText().toString());
 
-                if (mark > 10) {
-                    Toast.makeText(getActivity(), getString(R.string.error_max_score), Toast.LENGTH_SHORT).show();
+                setOnClickButton();
 
-                } else {
+                hideKeyboard();
+                replaceFragment();
 
-                    setOnClickButton();
-
-                    hideKeyboard();
-                    replaceFragment();
-                }
             }
         });
     }
+
+    public abstract Test initTest();
 
     public abstract void setOnClickButton();
 
@@ -156,17 +153,16 @@ public abstract class BaseManageTestFragment extends Fragment
         switch (reference){
             case 0:
                 textMark.setText(fullNumber+"");
-                mark = (float) fullNumber;
+                newTest.setMark((float) fullNumber);
                 break;
             case 1:
                 textValue.setText(fullNumber + "%");
-                value = (float) (fullNumber);
+                newTest.setPercentage((float) (fullNumber));
                 break;
 
             default:
                 break;
         }
-
     }
 
     @Override

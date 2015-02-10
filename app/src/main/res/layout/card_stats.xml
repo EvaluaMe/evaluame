@@ -9,9 +9,28 @@
 
 
     <TextView
+        android:id="@+id/card_stats_weightedAverage_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26dp"
+        android:textAlignment="center"
+        android:text="Weighted Average:"/>
+
+    <TextView
+        android:id="@+id/card_stats_weightedAverage_value_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26dp"
+        android:textAlignment="center"
+        android:text="6.7"
+        android:layout_alignParentRight="true"
+        />
+
+    <TextView
         android:id="@+id/card_stats_average_title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/card_stats_weightedAverage_title_textView"
         android:textSize="26dp"
         android:textAlignment="center"
         android:text="Average:"/>
@@ -19,6 +38,7 @@
         android:id="@+id/card_stats_average_value_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/card_stats_weightedAverage_value_textView"
         android:textSize="26dp"
         android:textAlignment="center"
         android:text="8"

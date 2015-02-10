@@ -43,5 +43,6 @@
     </array>
     <string name="error_name">Error on name</string>
     <string name="edit_test">Edit Test</string>
+    <string name="title_weighted_average">Weighted Average</string>
 
 </resources>

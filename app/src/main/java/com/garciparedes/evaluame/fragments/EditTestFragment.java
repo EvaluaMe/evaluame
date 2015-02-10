@@ -22,10 +22,13 @@ public class EditTestFragment extends BaseManageTestFragment {
     }
 
     @Override
+    public Test initTest() {
+        return test;
+    }
+
+    @Override
     public void setOnClickButton() {
-        test.setName(name);
-        test.setMark(mark);
-        test.setPercentage(value);
+        test = newTest;
     }
 
     @Override

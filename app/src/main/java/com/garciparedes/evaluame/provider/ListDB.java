@@ -92,6 +92,16 @@ public class ListDB {
     }
 
 
+    /**
+     *
+     * @param context context
+     * @param i i
+     * @param test test
+     */
+    public static void addTest(Context context, int i, Test test){
+        masterList.get(i).addTestElement(test);
+        saveData(context);
+    }
 
 
     /**

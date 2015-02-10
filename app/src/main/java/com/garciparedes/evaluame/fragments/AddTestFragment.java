@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.fragments;
 import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.items.Test;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -22,8 +23,13 @@ public class AddTestFragment extends BaseManageTestFragment {
 
 
     @Override
+    public Test initTest() {
+        return new Test();
+    }
+
+    @Override
     public void setOnClickButton() {
-        ListDB.addTest(getActivity(), subject, name, mark, value);
+        ListDB.addTest(getActivity(), subject, newTest);
     }
 
     @Override
