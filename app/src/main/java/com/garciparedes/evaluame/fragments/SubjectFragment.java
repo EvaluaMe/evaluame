@@ -3,32 +3,25 @@ package com.garciparedes.evaluame.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.cards.DetailsCard;
+import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
 
 import com.garciparedes.evaluame.cards.StatsCard;
-import com.garciparedes.evaluame.cards.TestCard;
-import com.garciparedes.evaluame.cards.TestListCard;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.prototypes.CardSection;
-import it.gmariotti.cardslib.library.prototypes.SectionedCardAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
-import it.gmariotti.cardslib.library.view.listener.UndoBarController;
 
 
 /**
@@ -83,11 +76,11 @@ public class SubjectFragment extends Fragment {
 
         cards.add(new StatsCard(getActivity(), subject));
 
-        //cards.add(new TestListCard(getActivity(), subject));
+        //cards.add(new ExamListCard(getActivity(), subject));
 
-        for (int i = 0; i < subject.getTestList().size(); i++) {
+        for (int i = 0; i < subject.getExamList().size(); i++) {
             // Create a Card
-            TestCard card = new TestCard(getActivity(), subject.getTestElement(i));
+            ExamCard card = new ExamCard(getActivity(), subject.getTestElement(i));
 
             card.setSwipeable(true);
             card.setId(subject.getTestElement(i).getName());
@@ -96,7 +89,7 @@ public class SubjectFragment extends Fragment {
                 @Override
                 public void onButtonItemClick(Card card, View view) {
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.container, EditTestFragment.newInstance(subjectNum, ( (TestCard) card).getTest() ) ).commit();
+                            .replace(R.id.container, EditTestFragment.newInstance(subjectNum, ( (ExamCard) card).getExam() ) ).commit();
 
                 }
             });
@@ -106,7 +99,7 @@ public class SubjectFragment extends Fragment {
             card.setOnUndoHideSwipeListListener(new Card.OnUndoHideSwipeListListener() {
                 @Override
                 public void onUndoHideSwipe(Card card) {
-                    subject.removeTest( ((TestCard) card).getTest() );
+                    subject.removeTest( ((ExamCard) card).getExam() );
                     ListDB.saveData(getActivity());
                 }
             });

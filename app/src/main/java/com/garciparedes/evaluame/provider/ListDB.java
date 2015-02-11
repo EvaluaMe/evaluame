@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
-import com.garciparedes.evaluame.items.Test;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class ListDB {
      * @param value value
      */
     public static void addTest(Context context, int i, String name, float mark, float value){
-        masterList.get(i).addTestElement(new Test(name, null, mark, value));
+        masterList.get(i).addTestElement(new Exam(name, null, mark, value));
         saveData(context);
     }
 
@@ -105,10 +105,10 @@ public class ListDB {
      *
      * @param context context
      * @param i i
-     * @param test test
+     * @param exam exam
      */
-    public static void addTest(Context context, int i, Test test){
-        masterList.get(i).addTestElement(test);
+    public static void addTest(Context context, int i, Exam exam){
+        masterList.get(i).addTestElement(exam);
         saveData(context);
     }
 

@@ -3,13 +3,12 @@ package com.garciparedes.evaluame.cards;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
-import com.garciparedes.evaluame.items.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,13 +22,13 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
 /**
  * Created by garciparedes on 9/2/15.
  */
-public class TestListCard extends CardWithList {
+public class ExamListCard extends CardWithList {
 
 
     private Subject subject;
 
 
-    public TestListCard(Context context, Subject subject) {
+    public ExamListCard(Context context, Subject subject) {
         super(context);
         this.subject = subject;
         init();
@@ -65,7 +64,7 @@ public class TestListCard extends CardWithList {
         //Init the list
         List<ListObject> mObjects = new ArrayList<ListObject>();
 
-        for (int i = 0 ; i< subject.getTestList().size(); i++) {
+        for (int i = 0 ; i< subject.getExamList().size(); i++) {
             TestObject testObject = new TestObject(this, subject.getTestElement(i));
             testObject.setObjectId(subject.getTestElement(i).getName());
             testObject.setSwipeable(true);
@@ -111,16 +110,16 @@ public class TestListCard extends CardWithList {
 
     private class TestObject extends DefaultListObject {
 
-        private Test mTest;
+        private Exam mExam;
 
-        public TestObject(Card parentCard, Test test) {
+        public TestObject(Card parentCard, Exam exam) {
             super(parentCard);
-            this.mTest = test;
+            this.mExam = exam;
             init();
         }
 
-        public Test getTest() {
-            return mTest;
+        public Exam getTest() {
+            return mExam;
         }
 
         private void init() {
@@ -140,7 +139,7 @@ public class TestListCard extends CardWithList {
 
                     Toast.makeText(getContext(),
                             "Swipe on "
-                            + ((TestObject) object).getTest().getName()
+                            + ((TestObject) object).getExam().getName()
                             , Toast.LENGTH_SHORT
                     ).show();
                 }

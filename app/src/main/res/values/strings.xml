@@ -18,7 +18,7 @@
     <string name="new_score">New score</string>
     <string name="set_score">Score</string>
     <string name="set_value">Value</string>
-    <string name="create_test">Create test</string>
+    <string name="create_test">Create exam</string>
     <string name="title_stats">Stats</string>
     <string name="error_max_score">The score must be less than 10</string>
     <string name="error_percentage_max">max 100</string>

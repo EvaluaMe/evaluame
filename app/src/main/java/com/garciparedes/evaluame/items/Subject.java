@@ -11,14 +11,14 @@ public class Subject {
 
     private String name;
     private String description;
-    private ArrayList<Test> testList;
+    private ArrayList<Exam> examList;
 
 
     /**
      *
      */
     public Subject(){
-        this.testList = new ArrayList<>();
+        this.examList = new ArrayList<>();
     }
 
 
@@ -30,7 +30,7 @@ public class Subject {
     public Subject(String name, String description){
         this.name = name;
         this.description = description;
-        this.testList = new ArrayList<>();
+        this.examList = new ArrayList<>();
     }
 
 
@@ -74,8 +74,8 @@ public class Subject {
      *
      * @return
      */
-    public ArrayList<Test> getTestList() {
-        return testList;
+    public ArrayList<Exam> getExamList() {
+        return examList;
     }
 
 
@@ -84,9 +84,9 @@ public class Subject {
      * @param i
      * @return
      */
-    public Test getTestElement(int i) {
+    public Exam getTestElement(int i) {
         try {
-            return getTestList().get(i);
+            return getExamList().get(i);
         } catch (NullPointerException e){
             return null;
         }
@@ -95,10 +95,10 @@ public class Subject {
 
     /**
      *
-     * @param test
+     * @param exam
      */
-    public void addTestElement(Test test){
-        getTestList().add(test);
+    public void addTestElement(Exam exam){
+        getExamList().add(exam);
     }
 
 
@@ -110,11 +110,11 @@ public class Subject {
 
         float sum = 0;
 
-        for (int i = 0 ; i < getTestList().size() ; i++){
+        for (int i = 0 ; i < getExamList().size() ; i++){
             sum += getTestElement(i).getMark();
         }
 
-        return  sum/getTestList().size();
+        return  sum/ getExamList().size();
     }
 
     /**
@@ -133,15 +133,15 @@ public class Subject {
     public float getRatio(){
         int pass = 0;
 
-        if (getTestList().size() > 0 ){
+        if (getExamList().size() > 0 ){
 
-            for (int i = 0 ; i < getTestList().size() ; i++){
-                if (getTestList().get(i).getMark() >= 5) {
+            for (int i = 0 ; i < getExamList().size() ; i++){
+                if (getExamList().get(i).getMark() >= 5) {
                     pass++;
                 }
             }
 
-            return  ((float) pass/getTestList().size());
+            return  ((float) pass/ getExamList().size());
 
         } else {
 
@@ -167,7 +167,7 @@ public class Subject {
     public float getTotalPercentage(){
         float sum = 0;
 
-        for (int i = 0 ; i < getTestList().size() ; i++){
+        for (int i = 0 ; i < getExamList().size() ; i++){
             sum += getTestElement(i).getPercentage();
         }
         return sum;
@@ -177,7 +177,7 @@ public class Subject {
     public float getWeightedAverage(){
         float dividend = 0;
         float divisor = 0;
-        for(int i = 0; i < getTestList().size();i++ ){
+        for(int i = 0; i < getExamList().size();i++ ){
             dividend += getTestElement(i).getMark() * getTestElement(i).getPercentage();
             divisor += getTestElement(i).getPercentage();
         }
@@ -194,9 +194,9 @@ public class Subject {
 
     /**
      *
-     * @param test
+     * @param exam
      */
-    public void removeTest(Test test){
-        testList.remove(test);
+    public void removeTest(Exam exam){
+        examList.remove(exam);
     }
 }

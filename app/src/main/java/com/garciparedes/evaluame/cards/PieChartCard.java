@@ -5,8 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
-import com.garciparedes.evaluame.items.Test;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -82,8 +82,8 @@ public class PieChartCard extends Card {
 
         mChart.setData(data);
 
-        for (int j = 0 ; j< subject.getTestList().size() ; j++){
-            introduce(subject.getTestList().get(j),j);
+        for (int j = 0 ; j< subject.getExamList().size() ; j++){
+            introduce(subject.getExamList().get(j),j);
         }
 
         mChart.setData(data);
@@ -92,11 +92,11 @@ public class PieChartCard extends Card {
     }
 
 
-    private void introduce(Test test, int i){
+    private void introduce(Exam exam, int i){
 
-        xVals.add(test.getName());
-        float f = test.getMark()*test.getPercentage();
-        float t = (10-test.getMark())*test.getPercentage();
+        xVals.add(exam.getName());
+        float f = exam.getMark()* exam.getPercentage();
+        float t = (10- exam.getMark())* exam.getPercentage();
 
         data.addEntry(new Entry(f,i), 0);
         data.addEntry(new Entry(t,i),1);

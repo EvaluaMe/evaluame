@@ -18,7 +18,7 @@ import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.interfaces.AddData;
-import com.garciparedes.evaluame.items.Test;
+import com.garciparedes.evaluame.items.Exam;
 
 /**
  *
@@ -40,7 +40,7 @@ public abstract class BaseManageTestFragment extends Fragment
 
     protected int subject;
 
-    protected Test newTest;
+    protected Exam newExam;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -49,7 +49,7 @@ public abstract class BaseManageTestFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_manage_test, container, false);
 
         subject = getArguments().getInt("subject", 0);
-        newTest = initTest();
+        newExam = initTest();
 
         // Set the dialog text -- this is better done in the XML
         textMark = (TextView) view.findViewById(R.id.textView_set_mark);
@@ -125,7 +125,7 @@ public abstract class BaseManageTestFragment extends Fragment
             @Override
             public void onClick(View v) {
 
-                newTest.setName(editTextName.getText().toString());
+                newExam.setName(editTextName.getText().toString());
 
                 setOnClickButton();
 
@@ -136,7 +136,7 @@ public abstract class BaseManageTestFragment extends Fragment
         });
     }
 
-    public abstract Test initTest();
+    public abstract Exam initTest();
 
     public abstract void setOnClickButton();
 
@@ -153,11 +153,11 @@ public abstract class BaseManageTestFragment extends Fragment
         switch (reference){
             case 0:
                 textMark.setText(fullNumber+"");
-                newTest.setMark((float) fullNumber);
+                newExam.setMark((float) fullNumber);
                 break;
             case 1:
                 textValue.setText(fullNumber + "%");
-                newTest.setPercentage((float) (fullNumber));
+                newExam.setPercentage((float) (fullNumber));
                 break;
 
             default:

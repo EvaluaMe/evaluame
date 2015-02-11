@@ -3,7 +3,7 @@ package com.garciparedes.evaluame.fragments;
 import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.items.Test;
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -11,25 +11,25 @@ import com.garciparedes.evaluame.provider.ListDB;
  */
 public class EditTestFragment extends BaseManageTestFragment {
 
-    private static Test test;
+    private static Exam exam;
 
-    public static EditTestFragment newInstance(int i, Test test1) {
+    public static EditTestFragment newInstance(int i, Exam exam1) {
         EditTestFragment f = new EditTestFragment();
         Bundle args = new Bundle();
         args.putInt("subject", i);
         f.setArguments(args);
-        test = test1;
+        exam = exam1;
         return f;
     }
 
     @Override
-    public Test initTest() {
-        return test;
+    public Exam initTest() {
+        return exam;
     }
 
     @Override
     public void setOnClickButton() {
-        test = newTest;
+        exam = newExam;
         ListDB.saveData(getActivity());
     }
 
@@ -40,16 +40,16 @@ public class EditTestFragment extends BaseManageTestFragment {
 
     @Override
     public String setTextName() {
-        return test.getName();
+        return exam.getName();
     }
 
     @Override
     public String setTextMark() {
-        return test.getMarkString();
+        return exam.getMarkString();
     }
 
     @Override
     public String setTextPercentage() {
-        return test.getPercentageString();
+        return exam.getPercentageString();
     }
 }

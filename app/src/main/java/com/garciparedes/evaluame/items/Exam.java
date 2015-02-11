@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by garciparedes on 5/12/14.
  */
-public class Test {
+public class Exam {
 
 
     private String name;
@@ -24,7 +24,7 @@ public class Test {
     /**
      *
      */
-    public Test(){
+    public Exam(){
         super();
     }
 
@@ -36,7 +36,7 @@ public class Test {
      * @param mark
      * @param percentage
      */
-    public Test(String name, GregorianCalendar date, float mark, float percentage){
+    public Exam(String name, GregorianCalendar date, float mark, float percentage){
         this.name = name;
         this.date = date;
         this.mark = mark;
