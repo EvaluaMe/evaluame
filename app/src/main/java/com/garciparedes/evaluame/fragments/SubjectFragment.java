@@ -10,7 +10,6 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.cards.DetailsCard;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
-
 import com.garciparedes.evaluame.cards.StatsCard;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;

@@ -1,7 +1,8 @@
 package com.garciparedes.evaluame.items;
 
-import java.util.ArrayList;
 import com.garciparedes.evaluame.Util.Number;
+
+import java.util.ArrayList;
 
 /**
  * Created by garciparedes on 5/12/14.

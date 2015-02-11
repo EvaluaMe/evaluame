@@ -1,27 +1,24 @@
 package com.garciparedes.evaluame.activities;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
 
-import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
 import com.garciparedes.evaluame.fragments.SubjectFragment;
+import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
-import com.github.amlcurran.showcaseview.ShowcaseView;
-import com.github.amlcurran.showcaseview.targets.ActionViewTarget;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
