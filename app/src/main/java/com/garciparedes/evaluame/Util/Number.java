@@ -7,15 +7,21 @@ import java.math.BigDecimal;
  */
 public class Number {
 
+    public static final String NAN_STRING = "--";
+
+
     public static boolean isExact(float f){
         return((f % 1)== 0);
     }
 
-    public static String toString (float f){
+
+    public static String toString (Float f){
         String str;
 
-        if (isExact(f)){
-            str = Integer.toString((int) f);
+        if(f.isNaN()){
+            str = NAN_STRING;
+        } else if (isExact(f)){
+            str = Integer.toString(f.intValue());
         } else {
             str = round(f, 3).toString();
         }

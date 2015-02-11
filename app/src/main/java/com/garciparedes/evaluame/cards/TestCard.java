@@ -56,7 +56,7 @@ public class TestCard extends Card {
         addCardHeader(header);
 
 
-
+        /*
         setSwipeable(true);
 
         setOnSwipeListener(new OnSwipeListener() {
@@ -80,6 +80,7 @@ public class TestCard extends Card {
                 Toast.makeText(getContext(), "Hide undo card=" + test.getName(), Toast.LENGTH_SHORT).show();
             }
         });
+        */
     }
 
     @Override

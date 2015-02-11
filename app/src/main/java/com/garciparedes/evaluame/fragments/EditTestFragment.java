@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Test;
+import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  * Created by garciparedes on 10/2/15.
@@ -29,6 +30,7 @@ public class EditTestFragment extends BaseManageTestFragment {
     @Override
     public void setOnClickButton() {
         test = newTest;
+        ListDB.saveData(getActivity());
     }
 
     @Override

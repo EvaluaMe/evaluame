@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.cards.DetailsCard;
@@ -27,6 +28,7 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.prototypes.CardSection;
 import it.gmariotti.cardslib.library.prototypes.SectionedCardAdapter;
 import it.gmariotti.cardslib.library.view.CardListView;
+import it.gmariotti.cardslib.library.view.listener.UndoBarController;
 
 
 /**
@@ -42,6 +44,9 @@ public class SubjectFragment extends Fragment {
 
     private FloatingActionButton button;
 
+    private CardArrayAdapter mCardArrayAdapter;
+
+    private CardListView mListView;
 
     public static SubjectFragment newInstance(int i) {
         SubjectFragment subjectFragment = new SubjectFragment();
@@ -78,11 +83,14 @@ public class SubjectFragment extends Fragment {
 
         cards.add(new StatsCard(getActivity(), subject));
 
-        cards.add(new TestListCard(getActivity(), subject));
+        //cards.add(new TestListCard(getActivity(), subject));
 
         for (int i = 0; i < subject.getTestList().size(); i++) {
             // Create a Card
             TestCard card = new TestCard(getActivity(), subject.getTestElement(i));
+
+            card.setSwipeable(true);
+            card.setId(subject.getTestElement(i).getName());
 
             card.getCardHeader().setOtherButtonClickListener(new CardHeader.OnClickCardHeaderOtherButtonListener() {
                 @Override
@@ -92,26 +100,30 @@ public class SubjectFragment extends Fragment {
 
                 }
             });
+
+            card.setSwipeable(true);
+
+            card.setOnUndoHideSwipeListListener(new Card.OnUndoHideSwipeListListener() {
+                @Override
+                public void onUndoHideSwipe(Card card) {
+                    subject.removeTest( ((TestCard) card).getTest() );
+                    ListDB.saveData(getActivity());
+                }
+            });
+
             cards.add(card);
         }
 
         //Standard array
-        CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity(),cards);
+        mCardArrayAdapter = new CardArrayAdapter(getActivity(),cards);
 
-        // Define your sections
-        List<CardSection> sections =  new ArrayList<CardSection>();
-        //sections.add(new CardSection(0,"Section 1"));
-        //sections.add(new CardSection(3,"Section 2"));
-        CardSection[] dummy = new CardSection[sections.size()];
+        mCardArrayAdapter.setEnableUndo(true);
 
-        //Define your Sectioned adapter
-        SectionedCardAdapter mAdapter = new SectionedCardAdapter(getActivity(), mCardArrayAdapter);
-        mAdapter.setCardSections(sections.toArray(dummy));
 
-        CardListView listView = (CardListView) getActivity().findViewById(R.id.subject_card_list);
-        if (listView!=null){
-            //Use the external adapter.
-            listView.setExternalAdapter(mAdapter, mCardArrayAdapter);
+
+        mListView = (CardListView) getActivity().findViewById(R.id.subject_card_list);
+        if (mListView!=null){
+            mListView.setAdapter(mCardArrayAdapter);
         }
 
         //button.attachToListView(listView);
@@ -126,6 +138,12 @@ public class SubjectFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mCardArrayAdapter.getUndoBarController().onSaveInstanceState(outState);
     }
 
 

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Subject;
@@ -16,6 +17,7 @@ import java.util.List;
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.prototypes.CardWithList;
+import it.gmariotti.cardslib.library.prototypes.LinearListView;
 
 
 /**
@@ -36,15 +38,23 @@ public class TestListCard extends CardWithList {
 
     @Override
     protected CardHeader initCardHeader() {
+
         CardHeader cardHeader = new CardHeader(getContext());
         cardHeader.setTitle(getContext().getString(R.string.title_exams));
+
         return cardHeader;
     }
 
 
     @Override
     protected void initCard() {
-        //setSwipeable(true);
+        setSwipeable(true);
+        setOnSwipeListener(new OnSwipeListener() {
+            @Override
+            public void onSwipe(Card card) {
+                Toast.makeText(getContext(), "Swipe on " + card.getCardHeader().getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -57,6 +67,7 @@ public class TestListCard extends CardWithList {
 
         for (int i = 0 ; i< subject.getTestList().size(); i++) {
             TestObject testObject = new TestObject(this, subject.getTestElement(i));
+            testObject.setObjectId(subject.getTestElement(i).getName());
             testObject.setSwipeable(true);
             mObjects.add(testObject);
         }
@@ -74,11 +85,19 @@ public class TestListCard extends CardWithList {
         TextView percentageTextView = (TextView) view.findViewById(R.id.card_test_list_inner_percentage);
 
         //Retrieve the values from the object
-        TestObject testObject= (TestObject) listObject;
-        nameMarkView.setText(testObject.test.getName());
+        final TestObject testObject= (TestObject) listObject;
 
-        markTextView.setText(testObject.test.getMarkString());
-        percentageTextView.setText(testObject.test.getPercentageString());
+        nameMarkView.setText(testObject.getTest().getName());
+        markTextView.setText(testObject.getTest().getMarkString());
+        percentageTextView.setText(testObject.getTest().getPercentageString());
+
+
+        testObject.setOnItemSwipeListener(new OnItemSwipeListener() {
+            @Override
+            public void onItemSwipe(ListObject listObject, boolean b) {
+                subject.removeTest(((TestObject)listObject).getTest());
+            }
+        });
 
         return  view;
     }
@@ -90,13 +109,43 @@ public class TestListCard extends CardWithList {
     }
 
 
-    private class TestObject extends DefaultListObject{
+    private class TestObject extends DefaultListObject {
 
-        Test test;
+        private Test mTest;
 
         public TestObject(Card parentCard, Test test) {
             super(parentCard);
-            this.test = test;
+            this.mTest = test;
+            init();
+        }
+
+        public Test getTest() {
+            return mTest;
+        }
+
+        private void init() {
+            //OnClick Listener
+            setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
+                    Toast.makeText(getContext(), "Click on " + getObjectId(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            /*
+            //OnItemSwipeListener
+            setOnItemSwipeListener(new OnItemSwipeListener() {
+                @Override
+                public void onItemSwipe(ListObject object, boolean dismissRight) {
+
+                    Toast.makeText(getContext(),
+                            "Swipe on "
+                            + ((TestObject) object).getTest().getName()
+                            , Toast.LENGTH_SHORT
+                    ).show();
+                }
+            });
+            */
         }
     }
 }

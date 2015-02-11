@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  * Created by garciparedes on 10/2/15.
@@ -43,6 +44,7 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
     @Override
     public void setOnClickButton() {
         subject = newSubject;
+        ListDB.saveData(getActivity());
     }
 
 
