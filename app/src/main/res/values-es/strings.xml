@@ -30,6 +30,7 @@
     <string name="title_weighted_average">Media Ponderada</string>
     <string name="action_edit">Modificar</string>
     <string name="edit_subject">Editar Asignatura</string>
+    <string name="title_chart">Gráfico</string>
 
 
 </resources>

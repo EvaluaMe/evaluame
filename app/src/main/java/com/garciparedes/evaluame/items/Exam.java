@@ -11,8 +11,8 @@ public class Exam {
 
 
     private String name;
-    private Float mark;
-    private Float percentage;
+    private float mark;
+    private float percentage;
 
 
     /**

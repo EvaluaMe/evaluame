@@ -48,32 +48,6 @@ public class ExamCard extends Card {
         header.setOtherButtonDrawable(R.drawable.ic_action_edit);
         addCardHeader(header);
 
-
-        /*
-        setSwipeable(true);
-
-        setOnSwipeListener(new OnSwipeListener() {
-            @Override
-            public void onSwipe(Card card) {
-                Toast.makeText(getContext(), "Removed card=" + exam.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        setOnUndoSwipeListListener(new OnUndoSwipeListListener() {
-            @Override
-            public void onUndoSwipe(Card card) {
-                Toast.makeText(getContext(), "Undo card=" + exam.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        setOnUndoHideSwipeListListener(new OnUndoHideSwipeListListener() {
-            @Override
-            public void onUndoHideSwipe(Card card) {
-                Toast.makeText(getContext(), "Hide undo card=" + exam.getName(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        */
     }
 
     @Override

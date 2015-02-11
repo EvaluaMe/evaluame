@@ -12,6 +12,7 @@ import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
 
 import com.garciparedes.evaluame.cards.StatsCard;
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.melnykov.fab.FloatingActionButton;
@@ -67,7 +68,6 @@ public class SubjectFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
         ArrayList<Card> cards = new ArrayList<Card>();
 
         cards.add(new DetailsCard(getActivity(), subject));
@@ -79,32 +79,7 @@ public class SubjectFragment extends Fragment {
         //cards.add(new ExamListCard(getActivity(), subject));
 
         for (int i = 0; i < subject.getExamList().size(); i++) {
-            // Create a Card
-            ExamCard card = new ExamCard(getActivity(), subject.getTestElement(i));
-
-            card.setSwipeable(true);
-            card.setId(subject.getTestElement(i).getName());
-
-            card.getCardHeader().setOtherButtonClickListener(new CardHeader.OnClickCardHeaderOtherButtonListener() {
-                @Override
-                public void onButtonItemClick(Card card, View view) {
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.container, EditTestFragment.newInstance(subjectNum, ( (ExamCard) card).getExam() ) ).commit();
-
-                }
-            });
-
-            card.setSwipeable(true);
-
-            card.setOnUndoHideSwipeListListener(new Card.OnUndoHideSwipeListListener() {
-                @Override
-                public void onUndoHideSwipe(Card card) {
-                    subject.removeTest( ((ExamCard) card).getExam() );
-                    ListDB.saveData(getActivity());
-                }
-            });
-
-            cards.add(card);
+            cards.add(initCard(subject.getTestElement(i)));
         }
 
         //Standard array
@@ -119,8 +94,6 @@ public class SubjectFragment extends Fragment {
             mListView.setAdapter(mCardArrayAdapter);
         }
 
-        //button.attachToListView(listView);
-        //button.bringToFront();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +106,7 @@ public class SubjectFragment extends Fragment {
         });
     }
 
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -140,29 +114,49 @@ public class SubjectFragment extends Fragment {
     }
 
 
+    public ExamCard initCard(Exam exam){
+        // Create a Card
+        ExamCard card = new ExamCard(getActivity(), exam);
 
-    /*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+        card.setSwipeable(true);
+        card.setId(exam.getName());
 
-        if (item.getItemId() == R.id.action_delete_subject) {
+        card.getCardHeader().setOtherButtonClickListener(new CardHeader.OnClickCardHeaderOtherButtonListener() {
+            @Override
+            public void onButtonItemClick(Card card, View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container,
+                                EditTestFragment.newInstance(subjectNum, ((ExamCard) card).getExam()))
+                        .commit();
 
-            //deleteSubject();
+            }
+        });
 
-            return true;
-        }
+        card.setSwipeable(true);
 
-        if (item.getItemId() == R.id.action_edit_subject) {
+        card.setOnSwipeListener(new Card.OnSwipeListener() {
+            @Override
+            public void onSwipe(Card card) {
+                button.hide(true);
+            }
+        });
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, EditSubjectFragment.newInstance(subject))
-                    .commit();
+        card.setOnUndoSwipeListListener(new Card.OnUndoSwipeListListener() {
+            @Override
+            public void onUndoSwipe(Card card) {
+                button.show();
+            }
+        });
 
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        card.setOnUndoHideSwipeListListener(new Card.OnUndoHideSwipeListListener() {
+            @Override
+            public void onUndoHideSwipe(Card card) {
+                subject.removeTest( ((ExamCard) card).getExam() );
+                ListDB.saveData(getActivity());
+                button.show(true);
+            }
+        });
+        return card;
     }
-    */
 
 }
