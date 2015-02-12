@@ -1,5 +1,8 @@
 package com.garciparedes.evaluame.items;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.garciparedes.evaluame.Util.Number;
 
 import java.util.GregorianCalendar;
@@ -7,7 +10,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by garciparedes on 5/12/14.
  */
-public class Exam {
+public class Exam implements Parcelable{
 
 
     private String name;
@@ -112,5 +115,48 @@ public class Exam {
      */
     public String getPercentageString() {
         return (Number.toString(getPercentage()) + "%");
+    }
+
+    /**
+     * Describe the kinds of special objects contained in this Parcelable's
+     * marshalled representation.
+     *
+     * @return a bitmask indicating the set of special object types marshalled
+     * by the Parcelable.
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**
+     * Flatten this object in to a Parcel.
+     *
+     * @param dest  The Parcel in which the object should be written.
+     * @param flags Additional flags about how the object should be written.
+     *              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeFloat(mark);
+        dest.writeFloat(percentage);
+    }
+
+    public static final Parcelable.Creator<Exam> CREATOR
+            = new Parcelable.Creator<Exam>() {
+        public Exam createFromParcel(Parcel in) {
+            return new Exam(in);
+        }
+
+        public Exam[] newArray(int size) {
+            return new Exam[size];
+        }
+    };
+
+    private Exam(Parcel in) {
+        name = in.readString();
+        mark = in.readFloat();
+        percentage = in.readFloat();
     }
 }

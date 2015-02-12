@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -11,19 +12,21 @@ import com.garciparedes.evaluame.provider.ListDB;
  */
 public class EditTestFragment extends BaseManageTestFragment {
 
-    private static Exam exam;
+    private Exam exam;
 
-    public static EditTestFragment newInstance(int i, Exam exam1) {
+    public static EditTestFragment newInstance(Subject subject, Exam exam) {
         EditTestFragment f = new EditTestFragment();
         Bundle args = new Bundle();
-        args.putInt("subject", i);
+        args.putParcelable("subject", subject);
+        args.putParcelable("exam", exam);
         f.setArguments(args);
-        exam = exam1;
         return f;
     }
 
     @Override
     public Exam initTest() {
+
+        exam = getArguments().getParcelable("exam");
         return exam;
     }
 

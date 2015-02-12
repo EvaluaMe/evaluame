@@ -30,9 +30,6 @@ import it.gmariotti.cardslib.library.view.CardListView;
 public class SubjectFragment extends Fragment {
 
 
-
-    public static int subjectNum;
-
     private Subject subject;
 
     private FloatingActionButton button;
@@ -41,10 +38,11 @@ public class SubjectFragment extends Fragment {
 
     private CardListView mListView;
 
-    public static SubjectFragment newInstance(int i) {
+    public static SubjectFragment newInstance(Subject subject) {
         SubjectFragment subjectFragment = new SubjectFragment();
-        subjectNum = i;
-
+        Bundle args = new Bundle();
+        args.putParcelable("subject", subject);
+        subjectFragment.setArguments(args);
         return subjectFragment;
     }
 
@@ -56,7 +54,7 @@ public class SubjectFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
 
-        subject = ListDB.get(subjectNum);
+        subject = getArguments().getParcelable("subject");
         button = (FloatingActionButton) view.findViewById(R.id.floating_button);
 
         return view;
@@ -98,7 +96,7 @@ public class SubjectFragment extends Fragment {
             public void onClick(View v) {
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, AddTestFragment.newInstance(subjectNum))
+                        .replace(R.id.container, AddTestFragment.newInstance(subject))
                         .commit();
 
             }
@@ -125,7 +123,7 @@ public class SubjectFragment extends Fragment {
             public void onButtonItemClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container,
-                                EditTestFragment.newInstance(subjectNum, ((ExamCard) card).getExam()))
+                                EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
                         .commit();
 
             }

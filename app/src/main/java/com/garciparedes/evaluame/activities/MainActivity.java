@@ -63,11 +63,13 @@ public class MainActivity extends FragmentActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         //FragmentManager fragmentManager = getFragmentManager();
+        /*
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, SubjectFragment.newInstance(position))
                 .commit();
 
 
+        */
     }
 
     public void onSectionAttached(int number) {

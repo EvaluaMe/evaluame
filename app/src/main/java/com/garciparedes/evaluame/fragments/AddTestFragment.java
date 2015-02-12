@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -13,10 +14,10 @@ public class AddTestFragment extends BaseManageTestFragment {
 
     private final String defaultText = "- - . - -";
 
-    public static AddTestFragment newInstance(int i) {
+    public static AddTestFragment newInstance(Subject subject) {
         AddTestFragment f = new AddTestFragment();
         Bundle args = new Bundle();
-        args.putInt("subject", i);
+        args.putParcelable("subject", subject);
         f.setArguments(args);
         return f;
     }

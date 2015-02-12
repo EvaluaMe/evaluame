@@ -104,11 +104,11 @@ public class ListDB {
     /**
      *
      * @param context context
-     * @param i i
+     * @param subject subject
      * @param exam exam
      */
-    public static void addTest(Context context, int i, Exam exam){
-        masterList.get(i).addTestElement(exam);
+    public static void addTest(Context context, Subject subject, Exam exam){
+        subject.addTestElement(exam);
         saveData(context);
     }
 

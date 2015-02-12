@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -65,6 +66,8 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = -1;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+
+    private Subject subject;
 
     public NavigationDrawerFragment() {
     }
@@ -242,6 +245,13 @@ public class NavigationDrawerFragment extends Fragment {
                 mCallbacks.onNavigationDrawerItemSelected(position);
             }
 
+            subject = ListDB.get(position);
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, SubjectFragment.newInstance(subject))
+                    .commit();
+
+
         }
     }
 
@@ -304,7 +314,7 @@ public class NavigationDrawerFragment extends Fragment {
 
             System.out.println("MIELDA!!!!");
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, EditSubjectFragment.newInstance(ListDB.get(SubjectFragment.subjectNum)))
+                    .replace(R.id.container, EditSubjectFragment.newInstance(subject))
                     .commit();
             return true;
         }
@@ -361,7 +371,7 @@ public class NavigationDrawerFragment extends Fragment {
                         // if this button is clicked, close
                         // current activity
 
-                        ListDB.removeSubject(getActivity(), SubjectFragment.subjectNum);
+                        ListDB.removeSubject(getActivity(), subject);
                         updateListView();
 
                         getFragmentManager().beginTransaction()

@@ -113,9 +113,11 @@ public abstract class BaseManageSubjectFragment  extends Fragment implements Add
      */
     @Override
     public void replaceFragment(){
+
         getFragmentManager().beginTransaction()
                 .replace(R.id.container,
-                        SubjectFragment.newInstance(ListDB.size() - 1))
+                        SubjectFragment.newInstance(ListDB.get(ListDB.size() - 1)))
                 .commit();
+
     }
 }

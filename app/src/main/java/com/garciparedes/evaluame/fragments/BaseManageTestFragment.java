@@ -19,6 +19,7 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.items.Subject;
 
 /**
  *
@@ -38,7 +39,7 @@ public abstract class BaseManageTestFragment extends Fragment
 
     private DatePickerBuilder datePicker;
 
-    protected int subject;
+    protected Subject subject;
 
     protected Exam newExam;
 
@@ -48,7 +49,7 @@ public abstract class BaseManageTestFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage_test, container, false);
 
-        subject = getArguments().getInt("subject", 0);
+        subject = getArguments().getParcelable("subject");
         newExam = initTest();
 
         // Set the dialog text -- this is better done in the XML
@@ -194,10 +195,12 @@ public abstract class BaseManageTestFragment extends Fragment
     @Override
     public void replaceFragment() {
 
+
         getFragmentManager().beginTransaction()
             .replace(R.id.container,
                 SubjectFragment.newInstance(subject))
             .commit();
+
 
     }
 }
