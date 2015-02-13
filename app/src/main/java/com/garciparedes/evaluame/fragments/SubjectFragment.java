@@ -27,10 +27,8 @@ import it.gmariotti.cardslib.library.view.CardListView;
 /**
  * Created by garciparedes on 5/12/14.
  */
-public class SubjectFragment extends Fragment {
+public class SubjectFragment extends BaseSubjectFragment {
 
-
-    private Subject subject;
 
     private FloatingActionButton button;
 
@@ -54,7 +52,6 @@ public class SubjectFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
 
-        subject = getArguments().getParcelable("subject");
         button = (FloatingActionButton) view.findViewById(R.id.floating_button);
 
         return view;

@@ -33,7 +33,7 @@ import com.garciparedes.evaluame.provider.ListDB;
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends BaseSubjectFragment {
 
     /**
      * Remember the position of the selected item.
@@ -66,8 +66,6 @@ public class NavigationDrawerFragment extends Fragment {
     private int mCurrentSelectedPosition = -1;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
-
-    private Subject subject;
 
     public NavigationDrawerFragment() {
     }
@@ -301,24 +299,6 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
 
-        if (item.getItemId() == R.id.action_delete_subject) {
-
-            deleteSubject();
-
-            return true;
-        }
-
-
-        if (item.getItemId() == R.id.action_edit_subject) {
-
-
-            System.out.println("MIELDA!!!!");
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, EditSubjectFragment.newInstance(subject))
-                    .commit();
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -352,47 +332,5 @@ public class NavigationDrawerFragment extends Fragment {
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,ListDB.subjectNames()));
-    }
-
-
-    public void deleteSubject(){
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                getActivity());
-
-        // set title
-        alertDialogBuilder.setTitle(getString(R.string.delete_subject));
-
-        // set dialog message
-        alertDialogBuilder
-                .setMessage(getString(R.string.delete_subject_confirmation))
-                .setCancelable(false)
-                .setPositiveButton(getString(R.string.yes),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, close
-                        // current activity
-
-                        ListDB.removeSubject(getActivity(), subject);
-                        updateListView();
-
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.container, DefaultFragment.newInstance()).commit();
-
-
-                    }
-                })
-                .setNegativeButton(getString(R.string.no),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        dialog.cancel();
-                    }
-                });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-
     }
 }

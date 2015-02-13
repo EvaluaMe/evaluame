@@ -18,13 +18,19 @@ import com.garciparedes.evaluame.provider.ListDB;
 /**
  * Created by garciparedes on 10/2/15.
  */
-public abstract class BaseManageSubjectFragment  extends Fragment implements AddData {
+public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment implements AddData {
 
     private EditText editTextName;
     private EditText editTextDescription;
     private Button btnCreate;
 
     protected Subject newSubject;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        newSubject = initNewSubject();
+    }
 
     /**
      *
@@ -39,8 +45,6 @@ public abstract class BaseManageSubjectFragment  extends Fragment implements Add
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage_subject, container, false);
 
-        newSubject = initSubject();
-
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog_name_subject);
         editTextDescription = (EditText) view.findViewById(R.id.edit_text_dialog_description_subject);
         btnCreate = (Button) view.findViewById(R.id.button_dialog_subject);
@@ -48,7 +52,6 @@ public abstract class BaseManageSubjectFragment  extends Fragment implements Add
         return view;
 
     }
-
 
     /**
      *
@@ -59,10 +62,10 @@ public abstract class BaseManageSubjectFragment  extends Fragment implements Add
         super.onActivityCreated(state);
 
         editTextName.setHint(getString(R.string.set_name));
-        editTextName.setText(setTextName());
+        editTextName.setText(newSubject.getName());
 
         editTextDescription.setHint(getString(R.string.set_description));
-        editTextDescription.setText(setTextDescription());
+        editTextDescription.setText(newSubject.getDescription());
 
         btnCreate.setText(setTextButton());
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -84,17 +87,22 @@ public abstract class BaseManageSubjectFragment  extends Fragment implements Add
         });
     }
 
-    public abstract Subject initSubject();
+    /**
+     *
+     * @return
+     */
+    public abstract Subject initNewSubject();
 
+    /**
+     *
+     */
     public abstract void setOnClickButton();
 
+    /**
+     *
+     * @return
+     */
     public abstract String setTextButton();
-
-    public abstract String setTextName();
-
-    public abstract String setTextDescription();
-
-
 
     /**
      *
@@ -106,7 +114,6 @@ public abstract class BaseManageSubjectFragment  extends Fragment implements Add
         imm.hideSoftInputFromWindow(editTextDescription.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(editTextName.getWindowToken(), 0);
     }
-
 
     /**
      *

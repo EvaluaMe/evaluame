@@ -11,6 +11,7 @@ import com.garciparedes.evaluame.provider.ListDB;
  * FramentAddSubject Class
  */
 public class AddSubjectFragment extends BaseManageSubjectFragment{
+
     /**
      * NewInstance method
      *
@@ -34,17 +35,7 @@ public class AddSubjectFragment extends BaseManageSubjectFragment{
     }
 
     @Override
-    public Subject initSubject() {
+    public Subject initNewSubject() {
         return new Subject();
-    }
-
-    @Override
-    public String setTextName() {
-        return null;
-    }
-
-    @Override
-    public String setTextDescription() {
-        return null;
     }
 }

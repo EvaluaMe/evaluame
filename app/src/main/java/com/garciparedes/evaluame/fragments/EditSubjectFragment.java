@@ -11,10 +11,6 @@ import com.garciparedes.evaluame.provider.ListDB;
  */
 public class EditSubjectFragment extends BaseManageSubjectFragment {
 
-
-    private Subject subject;
-
-
     /**
      * NewInstance method
      *
@@ -28,18 +24,15 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
         return f;
     }
 
-
     /**
      *
      *
      * @return
      */
     @Override
-    public Subject initSubject() {
-        subject = getArguments().getParcelable("subject");
+    public Subject initNewSubject() {
         return subject;
     }
-
 
     /**
      *
@@ -50,7 +43,6 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
         ListDB.saveData(getActivity());
     }
 
-
     /**
      *
      * @return
@@ -58,25 +50,5 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
     @Override
     public String setTextButton() {
         return getResources().getString(R.string.edit_subject);
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String setTextName() {
-        return subject.getName();
-    }
-
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public String setTextDescription() {
-        return subject.getDescription();
     }
 }

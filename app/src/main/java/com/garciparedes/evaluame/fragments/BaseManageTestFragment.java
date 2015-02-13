@@ -24,7 +24,7 @@ import com.garciparedes.evaluame.items.Subject;
 /**
  *
  */
-public abstract class BaseManageTestFragment extends Fragment
+public abstract class BaseManageTestFragment extends BaseSubjectFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler, AddData,
         DatePickerDialogFragment.DatePickerDialogHandler {
 
@@ -39,8 +39,6 @@ public abstract class BaseManageTestFragment extends Fragment
 
     private DatePickerBuilder datePicker;
 
-    protected Subject subject;
-
     protected Exam newExam;
 
     @Override
@@ -49,7 +47,6 @@ public abstract class BaseManageTestFragment extends Fragment
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage_test, container, false);
 
-        subject = getArguments().getParcelable("subject");
         newExam = initTest();
 
         // Set the dialog text -- this is better done in the XML
