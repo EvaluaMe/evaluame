@@ -1,10 +1,13 @@
 package com.garciparedes.evaluame.items;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -76,6 +79,15 @@ public class Exam implements Parcelable{
 
     /**
      *
+     * @param date
+     */
+    public void setDate(GregorianCalendar date) {
+        this.date = date;
+    }
+
+
+    /**
+     *
      * @return
      */
     public String getName() {
@@ -114,7 +126,17 @@ public class Exam implements Parcelable{
      * @return
      */
     public String getPercentageString() {
-        return (Number.toString(getPercentage()) + "%");
+        return (Number.toString(getPercentage(), "%"));
+    }
+
+
+    public GregorianCalendar getDate() {
+        return date;
+    }
+
+    public String getDateString(Context context){
+        return Date.dateToString(context, getDate());
+
     }
 
     /**
@@ -141,6 +163,7 @@ public class Exam implements Parcelable{
         dest.writeString(name);
         dest.writeFloat(mark);
         dest.writeFloat(percentage);
+        dest.writeSerializable(date);
     }
 
     public static final Parcelable.Creator<Exam> CREATOR
@@ -158,5 +181,6 @@ public class Exam implements Parcelable{
         name = in.readString();
         mark = in.readFloat();
         percentage = in.readFloat();
+        date = (GregorianCalendar) in.readSerializable();
     }
 }

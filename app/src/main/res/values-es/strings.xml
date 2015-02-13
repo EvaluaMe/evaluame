@@ -31,6 +31,7 @@
     <string name="action_edit">Modificar</string>
     <string name="edit_subject">Editar Asignatura</string>
     <string name="title_chart">Gráfico</string>
+    <string name="over_ten">Sobre 10</string>
 
 
 </resources>

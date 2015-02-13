@@ -15,6 +15,10 @@ public class Number {
     }
 
 
+    public static String toString (Float f, String symbol){
+        return toString(f) + symbol;
+    }
+
     public static String toString (Float f){
         String str;
 

@@ -18,7 +18,7 @@ import it.gmariotti.cardslib.library.internal.Card;
 /**
  * Created by garciparedes on 8/2/15.
  */
-public class BarChartCard extends Card {
+public class BarChartCard extends BaseChartCard {
 
     private BarChart barChart;
 
@@ -42,6 +42,10 @@ public class BarChartCard extends Card {
         }
     }
 
+    /**
+     *
+     */
+    @Override
     public void setValues(){
 
         ArrayList<BarEntry> valsComp1 = new ArrayList<BarEntry>();

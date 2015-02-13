@@ -16,10 +16,13 @@ import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Date;
+import com.garciparedes.evaluame.Util.*;
+import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
+
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -77,6 +80,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                 .setMaxNumber(10)
                 .setMinNumber(0)
                 .setPlusMinusVisibility(View.INVISIBLE)
+                .setLabelText(getString(R.string.over_ten))
                 .setReference(0);
 
         numberPickerValue
@@ -103,13 +107,16 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             }
         });
 
-        textValue.setText(setTextPercentage() + " %");
+        textValue.setText(setTextPercentage());
         textValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 numberPickerValue.show();
             }
         });
+
+        textDate.setText(newExam.getDateString(getActivity()));
+        System.out.println(newExam.getDateString(getActivity()));
 
         textDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,11 +157,11 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
         switch (reference){
             case 0:
-                textMark.setText(fullNumber+"");
+                textMark.setText(Number.toString((float) fullNumber));
                 newExam.setMark((float) fullNumber);
                 break;
             case 1:
-                textValue.setText(fullNumber + "%");
+                textValue.setText(Number.toString((float)fullNumber, "%"));
                 newExam.setPercentage((float) (fullNumber));
                 break;
 
@@ -167,11 +174,13 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     public void onDialogDateSet(int reference, int year, int monthOfYear, int dayOfMonth) {
         textDate.setText(
                 dayOfMonth
-                + "-"
+                + "/"
                 + Date.intToStringMonth(getActivity(), monthOfYear)
-                + "-"
+                + "/"
                 + year
         );
+
+        newExam.setDate(new GregorianCalendar(year, monthOfYear, dayOfMonth));
     }
 
 

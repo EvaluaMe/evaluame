@@ -20,7 +20,7 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 /**
  * Created by garciparedes on 7/2/15.
  */
-public class PieChartCard extends Card {
+public class PieChartCard extends BaseChartCard {
 
 
     private PieChart mChart;
@@ -46,7 +46,7 @@ public class PieChartCard extends Card {
      * @param context
      * @param innerLayout
      */
-    public PieChartCard(Context context, int innerLayout) {
+    private PieChartCard(Context context, int innerLayout) {
         super(context, innerLayout);
         init(context);
 
@@ -71,10 +71,16 @@ public class PieChartCard extends Card {
         mChart.setCenterTextSize(22f);
 
         mChart.setDescription("");
+
         // radius of the center hole in percent of maximum radius
         mChart.setHoleRadius(45f);
         mChart.setTransparentCircleRadius(50f);
 
+        setValues();
+    }
+
+    @Override
+    public void setValues() {
         xVals = new ArrayList<String>();
         yVals = new PieDataSet(null, "Company 1");
 
@@ -91,9 +97,7 @@ public class PieChartCard extends Card {
 
         mChart.setData(data);
         mChart.animateXY(1500, 1500);
-
     }
-
 
     private void introduce(Exam exam, int i){
 
