@@ -31,74 +31,81 @@ public class LineChartCard extends BaseChartCard {
     public void setupInnerViewElements(ViewGroup parent, View view) {
         mChart = (LineChart) view.findViewById(R.id.card_chart_line);
 
-        //if (mChart != null) {
-            mChart.setDescription("");
-            mChart.setDrawLegend(false);
+        // if enabled, the chart will always start at zero on the y-axis
+        mChart.setStartAtZero(true);
 
-            // if enabled, the chart will always start at zero on the y-axis
-            mChart.setStartAtZero(true);
+        // disable the drawing of values into the chart
+        mChart.setDrawYValues(false);
 
-            // disable the drawing of values into the chart
-            mChart.setDrawYValues(false);
+        mChart.setDrawBorder(false);
 
-            mChart.setDrawBorder(false);
+        mChart.setDrawLegend(false);
 
-            mChart.setDrawLegend(false);
+        // no description text
+        mChart.setDescription("");
+        mChart.setUnit(" $");
 
+        // enable value highlighting
+        mChart.setHighlightEnabled(true);
 
-            // enable value highlighting
-            mChart.setHighlightEnabled(true);
+        // enable touch gestures
+        mChart.setTouchEnabled(true);
 
-            // disable touch gestures
-            mChart.setTouchEnabled(false);
+        // enable scaling and dragging
+        mChart.setDragEnabled(true);
+        mChart.setScaleEnabled(true);
 
-            // enable scaling and dragging
-            mChart.setDragEnabled(true);
-            mChart.setScaleEnabled(true);
+        // if disabled, scaling can be done on x- and y-axis separately
+        mChart.setPinchZoom(false);
 
-            // if disabled, scaling can be done on x- and y-axis separately
-            mChart.setPinchZoom(false);
+        mChart.setDrawGridBackground(false);
+        mChart.setDrawVerticalGrid(false);
 
-            mChart.setDrawGridBackground(false);
-            mChart.setDrawVerticalGrid(false);
-            setValues();
+        // add data
+        setValues();
 
-            mChart.animateXY(2000, 2000);
+        mChart.animateXY(2000, 2000);
 
-            // dont forget to refresh the drawing
-            mChart.invalidate();
-        //}
+        // dont forget to refresh the drawing
+        mChart.invalidate();
     }
 
     @Override
     public void setValues() {
+
         ArrayList<String> xVals = new ArrayList<String>();
-        ArrayList<Entry> yVals = new ArrayList<>();
-
-
 
         for (int i = 0 ; i < ListDB.size(); i++){
-            Entry subject = new Entry(ListDB.get(i).getAverage(), i);
-            yVals.add(subject);
+
             xVals.add(ListDB.get(i).getName());
         }
 
-        LineDataSet lineDataSet = new LineDataSet(yVals,"");
+        ArrayList<Entry> vals1 = new ArrayList<Entry>();
 
+        for (int i = 0 ; i < ListDB.size(); i++){
+            Entry subject = new Entry((int) ListDB.get(i).getAverage(), i);
 
-        lineDataSet.setDrawCubic(true);
-        lineDataSet.setCubicIntensity(0.2f);
-        lineDataSet.setDrawFilled(true);
-        lineDataSet.setDrawCircles(false);
-        lineDataSet.setLineWidth(2f);
-        lineDataSet.setCircleSize(5f);
-        lineDataSet.setHighLightColor(Color.rgb(244, 117, 117));
-        lineDataSet.setColor(Color.rgb(104, 241, 175));
+            vals1.add(subject);
+        }
+
+        // create a dataset and give it a type
+        LineDataSet set1 = new LineDataSet(vals1, "DataSet 1");
+        set1.setDrawCubic(true);
+        set1.setCubicIntensity(0.2f);
+        set1.setDrawFilled(true);
+        set1.setDrawCircles(false);
+        set1.setLineWidth(2f);
+        set1.setCircleSize(5f);
+        set1.setHighLightColor(Color.rgb(244, 117, 117));
+        set1.setColor(Color.rgb(104, 241, 175));
 
         ArrayList<LineDataSet> dataSets = new ArrayList<LineDataSet>();
-        dataSets.add(lineDataSet);
+        dataSets.add(set1);
 
+        // create a data object with the datasets
         LineData data = new LineData(xVals, dataSets);
+
+        // set data
         mChart.setData(data);
     }
 }

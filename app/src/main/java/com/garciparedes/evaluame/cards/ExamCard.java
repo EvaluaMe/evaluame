@@ -18,9 +18,10 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
  */
 public class ExamCard extends Card {
 
-    private ProgressBar markProgressBar;
-    private TextView markTextView;
-    private TextView percentageTextView;
+    private ProgressBar mMarkProgressBar;
+    private TextView mMarkTextView;
+    private TextView mPercentageTextView;
+    private TextView mDateTextView;
 
     private Exam exam;
 
@@ -54,21 +55,26 @@ public class ExamCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view) {
 
         //Retrieve elements
-        markProgressBar = (ProgressBar) parent.findViewById(R.id.card_test_mark_progressBar);
-        markTextView = (TextView) parent.findViewById(R.id.card_test_mark_textView);
-        percentageTextView = (TextView) parent.findViewById(R.id.card_test_percentage_textView);
+        mMarkProgressBar = (ProgressBar) parent.findViewById(R.id.card_test_mark_progressBar);
+        mMarkTextView = (TextView) parent.findViewById(R.id.card_test_mark_textView);
+        mPercentageTextView = (TextView) parent.findViewById(R.id.card_test_percentage_textView);
+        mDateTextView = (TextView) parent.findViewById(R.id.card_test_date_textView);
 
-        if(markTextView != null){
-            markTextView.setText(exam.getMarkString());
+        if(mMarkTextView != null){
+            mMarkTextView.setText(exam.getMarkString());
         }
 
-        if (percentageTextView != null) {
-            percentageTextView.setText(exam.getPercentageString());
+        if (mPercentageTextView != null) {
+            mPercentageTextView.setText(exam.getPercentageString());
         }
 
-        if (markProgressBar != null) {
-            markProgressBar.setMax(10);
-            markProgressBar.setProgress((int)(exam.getMark()));
+        if (mDateTextView != null) {
+            mDateTextView.setText(exam.getDateString(getContext()));
+        }
+
+        if (mMarkProgressBar != null) {
+            mMarkProgressBar.setMax(10);
+            mMarkProgressBar.setProgress((int)(exam.getMark()));
 
         }
     }

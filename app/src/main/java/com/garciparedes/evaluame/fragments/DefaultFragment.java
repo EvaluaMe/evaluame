@@ -46,7 +46,7 @@ public class DefaultFragment  extends Fragment {
         ArrayList<Card> cards = new ArrayList<>();
 
         cards.add(new BarChartCard(getActivity()));
-        //cards.add(new LineChartCard(getActivity()));
+        cards.add(new LineChartCard(getActivity()));
 
 
         //Standard array

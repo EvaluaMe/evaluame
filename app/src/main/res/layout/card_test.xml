@@ -3,7 +3,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_margin="5dp"
     android:gravity="center_vertical"
     android:layout_height="wrap_content">
 
@@ -19,8 +18,8 @@
         android:layout_below="@id/card_test_mark_progressBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp">
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp">
         <TextView
             android:id="@+id/card_test_mark_textView"
             android:layout_width="wrap_content"
@@ -32,8 +31,17 @@
             android:id="@+id/card_test_percentage_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="36dp"
+            android:textSize="18dp"
             android:text="Valor"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:id="@+id/card_test_date_textView"
+            android:layout_below="@id/card_test_percentage_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="Fecha"
             android:layout_alignParentRight="true"/>
 
         </RelativeLayout>

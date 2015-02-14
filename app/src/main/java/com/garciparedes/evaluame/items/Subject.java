@@ -118,7 +118,11 @@ public class Subject  implements Parcelable{
             sum += getTestElement(i).getMark();
         }
 
-        return  sum/ getExamList().size();
+        Float f = sum/ getExamList().size();
+        if (f.isNaN()){
+            f = (float) 0;
+        }
+        return f ;
     }
 
     /**
