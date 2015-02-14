@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.cards.BarChartCard;
+import com.garciparedes.evaluame.cards.LineChartCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,7 @@ public class DefaultFragment  extends Fragment {
         ArrayList<Card> cards = new ArrayList<>();
 
         cards.add(new BarChartCard(getActivity()));
-
+        //cards.add(new LineChartCard(getActivity()));
 
 
         //Standard array

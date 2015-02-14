@@ -14,7 +14,6 @@ import com.github.mikephil.charting.data.PieDataSet;
 
 import java.util.ArrayList;
 
-import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
@@ -65,7 +64,7 @@ public class PieChartCard extends BaseChartCard {
 
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
-        mChart = (PieChart) parent.findViewById(R.id.chart);
+        mChart = (PieChart) parent.findViewById(R.id.card_chart_pie);
         mChart.setTouchEnabled(false);
         mChart.setDrawLegend(false);
         mChart.setCenterTextSize(22f);

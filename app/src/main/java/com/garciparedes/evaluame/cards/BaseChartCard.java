@@ -1,6 +1,8 @@
 package com.garciparedes.evaluame.cards;
 
 import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
 
@@ -31,4 +33,7 @@ public abstract class BaseChartCard extends Card {
     }
 
     public abstract void setValues();
+
+    @Override
+    public abstract void setupInnerViewElements(ViewGroup parent, View view);
 }

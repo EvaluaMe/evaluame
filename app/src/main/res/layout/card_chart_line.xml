@@ -4,10 +4,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" >
 
-    <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/card_chart_pie"
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/card_chart_line"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:orientation="vertical" />
+        android:layout_weight=".30"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical"/>
 
 </RelativeLayout>
+
