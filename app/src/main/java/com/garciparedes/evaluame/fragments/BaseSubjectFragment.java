@@ -25,6 +25,7 @@ public abstract class BaseSubjectFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         subject = initSubject();
     }
 
@@ -118,7 +119,6 @@ public abstract class BaseSubjectFragment extends Fragment {
     public void editSubject(){
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, EditSubjectFragment.newInstance(subject))
-                .addToBackStack(null)
                 .commit();
 
     }

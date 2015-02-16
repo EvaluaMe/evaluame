@@ -25,7 +25,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -33,7 +32,7 @@ import com.garciparedes.evaluame.provider.ListDB;
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends BaseSubjectFragment {
+public class NavigationDrawerFragment extends Fragment {
 
     /**
      * Remember the position of the selected item.
@@ -204,7 +203,6 @@ public class NavigationDrawerFragment extends BaseSubjectFragment {
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, DefaultFragment.newInstance())
-                        .addToBackStack(null)
                         .commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
 
@@ -220,7 +218,6 @@ public class NavigationDrawerFragment extends BaseSubjectFragment {
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, AddSubjectFragment.newInstance())
-                        .addToBackStack(null)
                         .commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
                 updateListView();
@@ -247,11 +244,8 @@ public class NavigationDrawerFragment extends BaseSubjectFragment {
                 mCallbacks.onNavigationDrawerItemSelected(position);
             }
 
-            subject = ListDB.get(position);
-
             getFragmentManager().beginTransaction()
-                    .replace(R.id.container, SubjectFragment.newInstance(subject))
-                    .addToBackStack(null)
+                    .replace(R.id.container, SubjectFragment.newInstance(ListDB.get(position)))
                     .commit();
 
 
@@ -314,7 +308,6 @@ public class NavigationDrawerFragment extends BaseSubjectFragment {
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
     }
 

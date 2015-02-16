@@ -13,13 +13,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:lines="1"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:imeOptions="actionGo"
+        android:inputType="text"/>
 
     <EditText
         android:id="@+id/edit_text_dialog_description_subject"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_text_dialog_name_subject"/>
+        android:layout_below="@id/edit_text_dialog_name_subject"
+        android:imeOptions="actionGo"
+        android:inputType="text"/>
 
 
     <Button

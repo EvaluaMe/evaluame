@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,7 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Subject;
-import com.garciparedes.evaluame.provider.ListDB;
+
 /**
  * Created by garciparedes on 10/2/15.
  */
@@ -48,6 +49,22 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog_name_subject);
         editTextDescription = (EditText) view.findViewById(R.id.edit_text_dialog_description_subject);
         btnCreate = (Button) view.findViewById(R.id.button_dialog_subject);
+
+        //You need to add the following line for this solution to work; thanks skayred
+        view.setFocusableInTouchMode(true);
+
+        view.setOnKeyListener( new View.OnKeyListener() {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event ) {
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, DefaultFragment.newInstance())
+                            .commit();
+                    return true;
+                }
+                return false;
+            }
+        } );
 
         return view;
 
@@ -122,9 +139,7 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
     public void replaceFragment(){
 
         getFragmentManager().beginTransaction()
-                .replace(R.id.container,
-                        SubjectFragment.newInstance(newSubject))
-                .addToBackStack(null)
+                .replace(R.id.container, SubjectFragment.newInstance(newSubject))
                 .commit();
 
     }

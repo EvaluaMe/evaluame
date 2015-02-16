@@ -2,7 +2,7 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +18,9 @@ import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.*;
 import com.garciparedes.evaluame.Util.Number;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Exam;
-import com.garciparedes.evaluame.items.Subject;
 
 import java.util.GregorianCalendar;
 
@@ -44,13 +44,18 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     protected Exam newExam;
 
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        newExam = initTest();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage_test, container, false);
-
-        newExam = initTest();
 
         // Set the dialog text -- this is better done in the XML
         textMark = (TextView) view.findViewById(R.id.textView_set_mark);
@@ -59,10 +64,22 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog);
         btnCreate = (Button) view.findViewById(R.id.button_dialog);
 
-        numberPickerMark = new NumberPickerBuilder();
-        numberPickerValue = new NumberPickerBuilder();
-        datePicker = new DatePickerBuilder();
 
+        //You need to add the following line for this solution to work; thanks skayred
+        view.setFocusableInTouchMode(true);
+        view.setOnKeyListener( new View.OnKeyListener() {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event ) {
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, DefaultFragment.newInstance())
+                            .commit();
+                    return true;
+                }
+                return false;
+            }
+        } );
+        
         return view;
     }
 
@@ -73,6 +90,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         editTextName.setHint(getString(R.string.set_name));
         editTextName.setText(setTextName());
 
+        numberPickerMark = new NumberPickerBuilder();
         numberPickerMark
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
@@ -83,6 +101,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                 .setLabelText(getString(R.string.over_ten))
                 .setReference(0);
 
+        numberPickerValue = new NumberPickerBuilder();
         numberPickerValue
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
@@ -93,6 +112,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                 .setLabelText("%")
                 .setReference(1);
 
+        datePicker = new DatePickerBuilder();
         datePicker
                 .setFragmentManager(getFragmentManager())
                 .setStyleResId(R.style.BetterPickersDialogFragment)
@@ -116,7 +136,6 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         });
 
         textDate.setText(newExam.getDateString(getActivity()));
-        System.out.println(newExam.getDateString(getActivity()));
 
         textDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,7 +224,6 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         getFragmentManager().beginTransaction()
             .replace(R.id.container,
                 SubjectFragment.newInstance(subject))
-            .addToBackStack(null)
             .commit();
 
 

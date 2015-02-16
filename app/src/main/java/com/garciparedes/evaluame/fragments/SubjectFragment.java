@@ -1,12 +1,17 @@
 package com.garciparedes.evaluame.fragments;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.cards.DetailsCard;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
@@ -55,6 +60,22 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         mFAButton = (FloatingActionButton) view.findViewById(R.id.floating_button);
 
+        //You need to add the following line for this solution to work; thanks skayred
+        view.setFocusableInTouchMode(true);
+
+        view.setOnKeyListener( new View.OnKeyListener() {
+            @Override
+            public boolean onKey( View v, int keyCode, KeyEvent event ) {
+                if( keyCode == KeyEvent.KEYCODE_BACK ) {
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, DefaultFragment.newInstance())
+                            .commit();
+                    return true;
+                }
+                return false;
+            }
+        } );
+
         return view;
     }
 
@@ -95,7 +116,6 @@ public class SubjectFragment extends BaseSubjectFragment {
 
                     getFragmentManager().beginTransaction()
                             .replace(R.id.container, AddTestFragment.newInstance(subject))
-                            .addToBackStack(null)
                             .commit();
 
                 }
@@ -117,7 +137,6 @@ public class SubjectFragment extends BaseSubjectFragment {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container,
                                 EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
-                        .addToBackStack(null)
                         .commit();
 
             }
@@ -149,5 +168,4 @@ public class SubjectFragment extends BaseSubjectFragment {
         });
         return card;
     }
-
 }

@@ -47,5 +47,6 @@
     <string name="edit_subject">Edit Subject</string>
     <string name="title_chart">Chart</string>
     <string name="over_ten">Over 10</string>
+    <string name="error_percentage_max"></string>
 
 </resources>
