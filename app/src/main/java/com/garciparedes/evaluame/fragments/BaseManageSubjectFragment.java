@@ -123,7 +123,8 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container,
-                        SubjectFragment.newInstance(ListDB.get(ListDB.size() - 1)))
+                        SubjectFragment.newInstance(newSubject))
+                .addToBackStack(null)
                 .commit();
 
     }

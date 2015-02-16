@@ -85,17 +85,6 @@ public class SubjectFragment extends BaseSubjectFragment {
         mListView = (CardListView) getActivity().findViewById(R.id.subject_card_list);
         if (mListView!=null){
             mListView.setAdapter(mCardArrayAdapter);
-            mListView.setOnScrollListener(new AbsListView.OnScrollListener() {
-                @Override
-                public void onScrollStateChanged(AbsListView view, int scrollState) {
-                    System.out.println(scrollState);
-
-                }
-
-                @Override
-                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                }
-            });
         }
 
         if (mFAButton != null) {
@@ -106,18 +95,12 @@ public class SubjectFragment extends BaseSubjectFragment {
 
                     getFragmentManager().beginTransaction()
                             .replace(R.id.container, AddTestFragment.newInstance(subject))
+                            .addToBackStack(null)
                             .commit();
 
                 }
             });
         }
-    }
-
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mCardArrayAdapter.getUndoBarController().onSaveInstanceState(outState);
     }
 
 
@@ -134,6 +117,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container,
                                 EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
+                        .addToBackStack(null)
                         .commit();
 
             }

@@ -203,7 +203,9 @@ public class NavigationDrawerFragment extends BaseSubjectFragment {
             public void onClick(View v) {
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, DefaultFragment.newInstance()).commit();
+                        .replace(R.id.container, DefaultFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
 
             }
@@ -217,7 +219,9 @@ public class NavigationDrawerFragment extends BaseSubjectFragment {
             public void onClick(View v) {
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, AddSubjectFragment.newInstance()).commit();
+                        .replace(R.id.container, AddSubjectFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
                 updateListView();
 
@@ -247,6 +251,7 @@ public class NavigationDrawerFragment extends BaseSubjectFragment {
 
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, SubjectFragment.newInstance(subject))
+                    .addToBackStack(null)
                     .commit();
 
 
