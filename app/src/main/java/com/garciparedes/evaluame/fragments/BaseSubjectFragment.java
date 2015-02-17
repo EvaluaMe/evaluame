@@ -93,7 +93,9 @@ public abstract class BaseSubjectFragment extends Fragment {
                         ((MainActivity) getActivity()).update();
 
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.container, DefaultFragment.newInstance()).commit();
+                                .replace(R.id.container, DefaultFragment.newInstance())
+                                .addToBackStack(null)
+                                .commit();
 
 
                     }
@@ -119,6 +121,7 @@ public abstract class BaseSubjectFragment extends Fragment {
     public void editSubject(){
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, EditSubjectFragment.newInstance(subject))
+                .addToBackStack(null)
                 .commit();
 
     }

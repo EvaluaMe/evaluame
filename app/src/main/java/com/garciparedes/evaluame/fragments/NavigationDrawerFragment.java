@@ -218,6 +218,7 @@ public class NavigationDrawerFragment extends Fragment {
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, AddSubjectFragment.newInstance())
+                        .addToBackStack(null)
                         .commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
                 updateListView();
@@ -246,6 +247,7 @@ public class NavigationDrawerFragment extends Fragment {
 
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, SubjectFragment.newInstance(ListDB.get(position)))
+                    .addToBackStack(null)
                     .commit();
 
 

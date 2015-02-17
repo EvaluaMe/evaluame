@@ -60,22 +60,6 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         mFAButton = (FloatingActionButton) view.findViewById(R.id.floating_button);
 
-        //You need to add the following line for this solution to work; thanks skayred
-        view.setFocusableInTouchMode(true);
-
-        view.setOnKeyListener( new View.OnKeyListener() {
-            @Override
-            public boolean onKey( View v, int keyCode, KeyEvent event ) {
-                if( keyCode == KeyEvent.KEYCODE_BACK ) {
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.container, DefaultFragment.newInstance())
-                            .commit();
-                    return true;
-                }
-                return false;
-            }
-        } );
-
         return view;
     }
 
@@ -116,6 +100,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
                     getFragmentManager().beginTransaction()
                             .replace(R.id.container, AddTestFragment.newInstance(subject))
+                            .addToBackStack(null)
                             .commit();
 
                 }
@@ -135,8 +120,8 @@ public class SubjectFragment extends BaseSubjectFragment {
             @Override
             public void onButtonItemClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container,
-                                EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
+                        .replace(R.id.container,EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
+                        .addToBackStack(null)
                         .commit();
 
             }

@@ -63,22 +63,6 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         textDate = (TextView) view.findViewById(R.id.textView_set_date);
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog);
         btnCreate = (Button) view.findViewById(R.id.button_dialog);
-
-
-        //You need to add the following line for this solution to work; thanks skayred
-        view.setFocusableInTouchMode(true);
-        view.setOnKeyListener( new View.OnKeyListener() {
-            @Override
-            public boolean onKey( View v, int keyCode, KeyEvent event ) {
-                if( keyCode == KeyEvent.KEYCODE_BACK ) {
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.container, DefaultFragment.newInstance())
-                            .commit();
-                    return true;
-                }
-                return false;
-            }
-        } );
         
         return view;
     }
@@ -222,8 +206,8 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
 
         getFragmentManager().beginTransaction()
-            .replace(R.id.container,
-                SubjectFragment.newInstance(subject))
+            .replace(R.id.container,SubjectFragment.newInstance(subject))
+            .addToBackStack(null)
             .commit();
 
 
