@@ -60,6 +60,7 @@ public class LineChartCard extends BaseChartCard {
 
         mChart.setDrawGridBackground(false);
         mChart.setDrawVerticalGrid(false);
+        mChart.setDrawXLabels(false);
 
         // add data
         setValues();

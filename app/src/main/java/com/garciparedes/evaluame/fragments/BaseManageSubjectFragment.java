@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
@@ -76,14 +77,18 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
                 newSubject.setName(editTextName.getText().toString());
                 newSubject.setDescription(editTextDescription.getText().toString());
 
-                setOnClickButton();
+                if (!isEmptyFields()) {
+                    setOnClickButton();
 
-                replaceFragment();
 
-                hideKeyboard();
+                    hideKeyboard();
 
-                ((MainActivity) getActivity()).update();
-
+                    ((MainActivity) getActivity()).update();
+                    replaceFragment();
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.error_empty_field), Toast.LENGTH_SHORT)
+                            .show();
+                }
             }
         });
     }
@@ -114,6 +119,17 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editTextDescription.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(editTextName.getWindowToken(), 0);
+    }
+
+    @Override
+    public boolean isEmptyFields() {
+
+        if (!(newSubject.getName().length()>0))
+            return true;
+        if (!(newSubject.getName().length()>0))
+            return true;
+
+        return false;
     }
 
     /**

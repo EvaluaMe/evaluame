@@ -12,6 +12,8 @@ public interface AddData {
     public void hideKeyboard();
 
 
+    public boolean isEmptyFields();
+
     /**
      *
      */

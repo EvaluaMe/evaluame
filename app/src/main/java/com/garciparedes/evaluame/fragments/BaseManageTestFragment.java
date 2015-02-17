@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.doomonafireball.betterpickers.datepicker.DatePickerBuilder;
 import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
@@ -135,11 +136,15 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
                 newExam.setName(editTextName.getText().toString());
 
-                setOnClickButton();
+                if (!isEmptyFields()) {
+                    setOnClickButton();
 
-                hideKeyboard();
-                replaceFragment();
-
+                    hideKeyboard();
+                    replaceFragment();
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.error_empty_field), Toast.LENGTH_SHORT)
+                        .show();
+                }
             }
         });
     }
@@ -196,6 +201,17 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editTextName.getWindowToken(), 0);
 
+    }
+
+    @Override
+    public boolean isEmptyFields() {
+        if(!(newExam.getName().length() > 0))
+            return true;
+
+        if(!(newExam.getPercentage() >0))
+            return true;
+
+        return false;
     }
 
     /**

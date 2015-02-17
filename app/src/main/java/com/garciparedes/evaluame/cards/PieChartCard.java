@@ -11,6 +11,7 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
@@ -67,13 +68,14 @@ public class PieChartCard extends BaseChartCard {
         mChart = (PieChart) parent.findViewById(R.id.card_chart_pie);
         mChart.setTouchEnabled(false);
         mChart.setDrawLegend(false);
-        mChart.setCenterTextSize(22f);
 
         mChart.setDescription("");
 
         // radius of the center hole in percent of maximum radius
         mChart.setHoleRadius(45f);
         mChart.setTransparentCircleRadius(50f);
+        mChart.setDrawHoleEnabled(true);
+
 
         setValues();
     }
@@ -82,9 +84,16 @@ public class PieChartCard extends BaseChartCard {
     public void setValues() {
         xVals = new ArrayList<String>();
         yVals = new PieDataSet(null, "Company 1");
+        yVals.setSliceSpace(3f);
 
-        //int[] rainbow = getResources().getIntArray(R.array.rainbow);
-        //yVals.setColors(rainbow);
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+
+        yVals.setColors(colors);
 
         data = new PieData(xVals,yVals);
 

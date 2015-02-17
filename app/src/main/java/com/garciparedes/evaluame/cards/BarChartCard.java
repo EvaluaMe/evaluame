@@ -13,14 +13,12 @@ import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 
-import it.gmariotti.cardslib.library.internal.Card;
-
 /**
  * Created by garciparedes on 8/2/15.
  */
 public class BarChartCard extends BaseChartCard {
 
-    private BarChart barChart;
+    private BarChart mBarChart;
 
 
     public BarChartCard(Context context){
@@ -32,12 +30,12 @@ public class BarChartCard extends BaseChartCard {
     public void setupInnerViewElements(ViewGroup parent, View view) {
 
         //Retrieve elements
-        barChart = (BarChart) parent.findViewById(R.id.card_chart_bar);
+        mBarChart = (BarChart) parent.findViewById(R.id.card_chart_bar);
 
-        if (barChart != null) {
-            barChart.setDescription("");
-            barChart.setDrawLegend(false);
-
+        if (mBarChart != null) {
+            mBarChart.setDescription("");
+            mBarChart.setDrawLegend(false);
+            mBarChart.setDrawXLabels(false);
             setValues();
         }
     }
@@ -63,9 +61,9 @@ public class BarChartCard extends BaseChartCard {
 
 
         BarData data = new BarData(xVals, dataSets);
-        barChart.setData(data);
+        mBarChart.setData(data);
 
-        barChart.animateY(1000);
+        mBarChart.animateY(1000);
 
     }
 }
