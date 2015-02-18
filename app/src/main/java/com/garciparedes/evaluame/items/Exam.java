@@ -6,6 +6,7 @@ import android.os.Parcelable;
 
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
+import com.garciparedes.evaluame.enums.ExamType;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -19,6 +20,7 @@ public class Exam implements Parcelable{
     private String name;
     private float mark;
     private float percentage;
+    private ExamType mType;
 
 
     /**
@@ -32,6 +34,7 @@ public class Exam implements Parcelable{
      */
     public Exam(){
         super();
+        this.mType = ExamType.EXAM;
     }
 
 
@@ -42,11 +45,12 @@ public class Exam implements Parcelable{
      * @param mark
      * @param percentage
      */
-    public Exam(String name, GregorianCalendar date, float mark, float percentage){
+    public Exam(String name, GregorianCalendar date, float mark, float percentage, ExamType Type){
         this.name = name;
         this.date = date;
         this.mark = mark;
         this.percentage = percentage;
+        this.mType = Type;
     }
 
 
@@ -85,6 +89,10 @@ public class Exam implements Parcelable{
         this.date = date;
     }
 
+
+    public void setType(ExamType type) {
+        this.mType = type;
+    }
 
     /**
      *
@@ -125,6 +133,22 @@ public class Exam implements Parcelable{
      *
      * @return
      */
+    public ExamType getType() {
+        return this.mType;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getTypeString(Context context) {
+        return this.mType.toString();
+    }
+
+    /**
+     *
+     * @return
+     */
     public String getPercentageString() {
         return (Number.toString(getPercentage(), "%"));
     }
@@ -138,6 +162,15 @@ public class Exam implements Parcelable{
         return Date.dateToString(context, getDate());
 
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+    /*
+    *<--------------------------------PARCELABLE-------------------------------->
+    */
+
 
     /**
      * Describe the kinds of special objects contained in this Parcelable's

@@ -22,42 +22,15 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/edit_text_dialog"
             android:id="@+id/text_view_relative_global"
-            android:layout_marginRight="60dp"
-            android:layout_marginLeft="60dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginLeft="40dp"
             >
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/text_view_relative_mark"
-                android:layout_marginTop="@dimen/text_vertical_margin"
-                android:layout_marginBottom="@dimen/text_vertical_margin">
 
-                <TextView
-                    android:id="@+id/text_view_dialog_mark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/set_score"
-                    android:textSize="@dimen/text_size_medium"
-                    android:layout_alignParentLeft="true"/>
-
-                <TextView
-                    android:id="@+id/textView_set_mark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="- - . - -"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_size_large"
-                    android:layout_alignParentRight="true"
-                    />
-
-            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/text_view_relative_mark"
                 android:id="@+id/text_view_relative_value"
                 android:layout_marginTop="@dimen/text_vertical_margin"
                 android:layout_marginBottom="@dimen/text_vertical_margin">
@@ -84,10 +57,38 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/text_view_relative_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/text_view_relative_type"
                 android:layout_below="@id/text_view_relative_value"
+                android:layout_marginTop="@dimen/text_vertical_margin"
+                android:layout_marginBottom="@dimen/text_vertical_margin">
+
+
+                <TextView
+                    android:id="@+id/text_view_dialog_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_type"
+                    android:textSize="@dimen/text_size_medium"
+                    android:layout_alignParentLeft="true"/>
+
+                <Spinner
+                    android:id="@+id/spinner_set_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:spinnerMode="dropdown"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_alignParentRight="true"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/text_view_relative_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/text_view_relative_type"
                 android:layout_marginTop="@dimen/text_vertical_margin"
                 android:layout_marginBottom="@dimen/text_vertical_margin">
 
@@ -110,6 +111,35 @@
                     android:textSize="@dimen/text_size_large"
                     android:layout_alignParentRight="true"/>
 
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_view_relative_mark"
+                android:layout_below="@id/text_view_relative_date"
+                android:layout_marginTop="@dimen/text_vertical_margin"
+                android:layout_marginBottom="@dimen/text_vertical_margin">
+
+                <TextView
+                    android:id="@+id/text_view_dialog_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_score"
+                    android:textSize="@dimen/text_size_medium"
+                    android:layout_alignParentLeft="true"/>
+
+                <TextView
+                    android:id="@+id/textView_set_mark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="- - . - -"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_large"
+                    android:layout_alignParentRight="true"
+                    />
 
             </RelativeLayout>
         </RelativeLayout>

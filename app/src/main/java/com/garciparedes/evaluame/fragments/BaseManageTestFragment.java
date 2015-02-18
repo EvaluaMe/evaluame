@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.*;
 import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.activities.MainActivity;
+import com.garciparedes.evaluame.enums.ExamType;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Exam;
 
@@ -40,6 +43,8 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     private NumberPickerBuilder numberPickerMark;
     private NumberPickerBuilder numberPickerValue;
+
+    private Spinner mSpinnerType;
 
     private DatePickerBuilder datePicker;
 
@@ -63,6 +68,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         textValue = (TextView) view.findViewById(R.id.textView_set_value);
         textDate = (TextView) view.findViewById(R.id.textView_set_date);
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog);
+        mSpinnerType = (Spinner) view.findViewById(R.id.spinner_set_type);
         btnCreate = (Button) view.findViewById(R.id.button_dialog);
         
         return view;
@@ -129,13 +135,19 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             }
         });
 
+        mSpinnerType.setAdapter(new ArrayAdapter<ExamType>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item,
+                ExamType.values())
+        );
+        mSpinnerType.setSelection(newExam.getType().ordinal());
+
         btnCreate.setText(setTextButton());
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 newExam.setName(editTextName.getText().toString());
-
+                newExam.setType((ExamType) mSpinnerType.getSelectedItem());
                 if (!isEmptyFields()) {
                     setOnClickButton();
 

@@ -22,6 +22,7 @@ public class ExamCard extends Card {
     private TextView mMarkTextView;
     private TextView mPercentageTextView;
     private TextView mDateTextView;
+    private TextView mTypeTextView;
 
     private Exam exam;
 
@@ -59,6 +60,7 @@ public class ExamCard extends Card {
         mMarkTextView = (TextView) parent.findViewById(R.id.card_test_mark_textView);
         mPercentageTextView = (TextView) parent.findViewById(R.id.card_test_percentage_textView);
         mDateTextView = (TextView) parent.findViewById(R.id.card_test_date_textView);
+        mTypeTextView = (TextView) parent.findViewById(R.id.card_test_type_textView);
 
         if(mMarkTextView != null){
             mMarkTextView.setText(exam.getMarkString());
@@ -70,6 +72,10 @@ public class ExamCard extends Card {
 
         if (mDateTextView != null) {
             mDateTextView.setText(exam.getDateString(getContext()));
+        }
+
+        if (mTypeTextView != null) {
+            mTypeTextView.setText(exam.getTypeString(getContext()));
         }
 
         if (mMarkProgressBar != null) {

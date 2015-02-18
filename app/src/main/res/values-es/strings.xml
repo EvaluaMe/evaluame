@@ -32,6 +32,7 @@
     <string name="title_chart">Gráfico</string>
     <string name="over_ten">Sobre 10</string>
     <string name="error_empty_field">Completa todos los campos</string>
+    <string name="set_type">Tipo</string>
 
 
 </resources>

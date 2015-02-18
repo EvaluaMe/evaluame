@@ -96,7 +96,7 @@ public class ListDB {
      * @param value value
      */
     public static void addTest(Context context, int i, String name, float mark, float value){
-        masterList.get(i).addTestElement(new Exam(name, null, mark, value));
+        masterList.get(i).addTestElement(new Exam(name, null, mark, value, null));
         saveData(context);
     }
 
