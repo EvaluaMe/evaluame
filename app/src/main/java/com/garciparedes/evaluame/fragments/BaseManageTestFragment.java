@@ -2,7 +2,6 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,9 @@ import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.*;
+import com.garciparedes.evaluame.Util.Constant;
+import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
-import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.enums.ExamType;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Exam;
@@ -70,7 +69,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog);
         mSpinnerType = (Spinner) view.findViewById(R.id.spinner_set_type);
         btnCreate = (Button) view.findViewById(R.id.button_dialog);
-        
+
         return view;
     }
 
@@ -136,8 +135,8 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         });
 
         mSpinnerType.setAdapter(new ArrayAdapter<ExamType>(getActivity(),
-                android.R.layout.simple_spinner_dropdown_item,
-                ExamType.values())
+                        android.R.layout.simple_spinner_dropdown_item,
+                        ExamType.values())
         );
         mSpinnerType.setSelection(newExam.getType().ordinal());
 
@@ -155,7 +154,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                     replaceFragment();
                 } else {
                     Toast.makeText(getActivity(), getString(R.string.error_empty_field), Toast.LENGTH_SHORT)
-                        .show();
+                            .show();
                 }
             }
         });
@@ -175,13 +174,13 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     @Override
     public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
-        switch (reference){
+        switch (reference) {
             case 0:
                 textMark.setText(Number.toString((float) fullNumber));
                 newExam.setMark((float) fullNumber);
                 break;
             case 1:
-                textValue.setText(Number.toString((float)fullNumber, "%"));
+                textValue.setText(Number.toString((float) fullNumber, "%"));
                 newExam.setPercentage((float) (fullNumber));
                 break;
 
@@ -194,10 +193,10 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     public void onDialogDateSet(int reference, int year, int monthOfYear, int dayOfMonth) {
         textDate.setText(
                 dayOfMonth
-                + "/"
-                + Date.intToStringMonth(getActivity(), monthOfYear)
-                + "/"
-                + year
+                        + "/"
+                        + Date.intToStringMonth(getActivity(), monthOfYear)
+                        + "/"
+                        + year
         );
 
         newExam.setDate(new GregorianCalendar(year, monthOfYear, dayOfMonth));
@@ -217,10 +216,10 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     @Override
     public boolean isEmptyFields() {
-        if(!(newExam.getName().length() > 0))
+        if (!(newExam.getName().length() > 0))
             return true;
 
-        if(!(newExam.getPercentage() >0))
+        if (!(newExam.getPercentage() > 0))
             return true;
 
         return false;
@@ -234,9 +233,9 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
 
         getFragmentManager().beginTransaction()
-            .replace(R.id.container,SubjectFragment.newInstance(subject))
-            .addToBackStack(Constant.DISABLE_BACK_FRAGMENT)
-            .commit();
+                .replace(R.id.container, SubjectFragment.newInstance(subject))
+                .addToBackStack(Constant.DISABLE_BACK_FRAGMENT)
+                .commit();
 
 
     }

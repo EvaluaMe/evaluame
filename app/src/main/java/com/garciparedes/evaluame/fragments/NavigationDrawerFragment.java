@@ -3,8 +3,6 @@ package com.garciparedes.evaluame.fragments;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -88,7 +86,7 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public void onActivityCreated (Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
@@ -96,18 +94,18 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectItem(position-mDrawerListView.getHeaderViewsCount());
+                selectItem(position - mDrawerListView.getHeaderViewsCount());
             }
         });
 
         mDrawerListView.addHeaderView(View.inflate(
-                getActivity(),R.layout.view_head_navigation_drawer,null));
+                getActivity(), R.layout.view_head_navigation_drawer, null));
 
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
@@ -228,19 +226,19 @@ public class NavigationDrawerFragment extends Fragment {
         });
     }
 
-    public void closeDrawer(){
+    public void closeDrawer() {
         mDrawerLayout.closeDrawer(mFragmentContainerView);
     }
 
     private void selectItem(int position) {
-        if (position == -1){
+        if (position == -1) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, DefaultFragment.newInstance())
                     .commit();
         } else {
             mCurrentSelectedPosition = position;
             if (mDrawerListView != null) {
-                mDrawerListView.setItemChecked(position+mDrawerListView.getHeaderViewsCount(), true);
+                mDrawerListView.setItemChecked(position + mDrawerListView.getHeaderViewsCount(), true);
             }
             if (mDrawerLayout != null) {
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
@@ -331,10 +329,10 @@ public class NavigationDrawerFragment extends Fragment {
         void onNavigationDrawerItemSelected(int position);
     }
 
-    public void updateListView(){
+    public void updateListView() {
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,ListDB.subjectNames()));
+                android.R.id.text1, ListDB.subjectNames()));
     }
 }

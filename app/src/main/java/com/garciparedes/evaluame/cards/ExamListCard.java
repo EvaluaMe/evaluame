@@ -64,7 +64,7 @@ public class ExamListCard extends CardWithList {
         //Init the list
         List<ListObject> mObjects = new ArrayList<ListObject>();
 
-        for (int i = 0 ; i< subject.getExamList().size(); i++) {
+        for (int i = 0; i < subject.getExamList().size(); i++) {
             TestObject testObject = new TestObject(this, subject.getTestElement(i));
             testObject.setObjectId(subject.getTestElement(i).getName());
             testObject.setSwipeable(true);
@@ -84,7 +84,7 @@ public class ExamListCard extends CardWithList {
         TextView percentageTextView = (TextView) view.findViewById(R.id.card_test_list_inner_percentage);
 
         //Retrieve the values from the object
-        final TestObject testObject= (TestObject) listObject;
+        final TestObject testObject = (TestObject) listObject;
 
         nameMarkView.setText(testObject.getTest().getName());
         markTextView.setText(testObject.getTest().getMarkString());
@@ -94,11 +94,11 @@ public class ExamListCard extends CardWithList {
         testObject.setOnItemSwipeListener(new OnItemSwipeListener() {
             @Override
             public void onItemSwipe(ListObject listObject, boolean b) {
-                subject.removeTest(((TestObject)listObject).getTest());
+                subject.removeTest(((TestObject) listObject).getTest());
             }
         });
 
-        return  view;
+        return view;
     }
 
 

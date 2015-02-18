@@ -10,7 +10,7 @@ import com.garciparedes.evaluame.provider.ListDB;
 /**
  * FramentAddSubject Class
  */
-public class AddSubjectFragment extends BaseManageSubjectFragment{
+public class AddSubjectFragment extends BaseManageSubjectFragment {
 
     /**
      * NewInstance method

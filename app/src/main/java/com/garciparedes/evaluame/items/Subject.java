@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by garciparedes on 5/12/14.
  */
-public class Subject  implements Parcelable{
+public class Subject implements Parcelable {
 
 
     private String name;
@@ -21,17 +21,16 @@ public class Subject  implements Parcelable{
     /**
      *
      */
-    public Subject(){
+    public Subject() {
         this.examList = new ArrayList<>();
     }
 
 
     /**
-     *
      * @param name
      * @param description
      */
-    public Subject(String name, String description){
+    public Subject(String name, String description) {
         this.name = name;
         this.description = description;
         this.examList = new ArrayList<>();
@@ -39,7 +38,6 @@ public class Subject  implements Parcelable{
 
 
     /**
-     *
      * @param name
      */
     public void setName(String name) {
@@ -48,7 +46,6 @@ public class Subject  implements Parcelable{
 
 
     /**
-     *
      * @param description
      */
     public void setDescription(String description) {
@@ -57,7 +54,6 @@ public class Subject  implements Parcelable{
 
 
     /**
-     *
      * @return
      */
     public String getName() {
@@ -66,7 +62,6 @@ public class Subject  implements Parcelable{
 
 
     /**
-     *
      * @return
      */
     public String getDescription() {
@@ -75,7 +70,6 @@ public class Subject  implements Parcelable{
 
 
     /**
-     *
      * @return
      */
     public ArrayList<Exam> getExamList() {
@@ -84,72 +78,67 @@ public class Subject  implements Parcelable{
 
 
     /**
-     *
      * @param i
      * @return
      */
     public Exam getTestElement(int i) {
         try {
             return getExamList().get(i);
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             return null;
         }
     }
 
 
     /**
-     *
      * @param exam
      */
-    public void addTestElement(Exam exam){
+    public void addTestElement(Exam exam) {
         getExamList().add(exam);
     }
 
 
     /**
-     *
      * @return
      */
-    public float getAverage(){
+    public float getAverage() {
 
         float sum = 0;
 
-        for (int i = 0 ; i < getExamList().size() ; i++){
+        for (int i = 0; i < getExamList().size(); i++) {
             sum += getTestElement(i).getMark();
         }
 
-        Float f = sum/ getExamList().size();
-        if (f.isNaN()){
+        Float f = sum / getExamList().size();
+        if (f.isNaN()) {
             f = (float) 0;
         }
-        return f ;
+        return f;
     }
 
     /**
-     *
      * @return
      */
-    public String getAverageString(){
+    public String getAverageString() {
         return Number.toString(getAverage());
     }
 
 
     /**
-     *
      * @return
      */
-    public float getRatio(){
+    public float getRatio() {
         int pass = 0;
 
-        if (getExamList().size() > 0 ){
+        if (getExamList().size() > 0) {
 
-            for (int i = 0 ; i < getExamList().size() ; i++){
+            for (int i = 0; i < getExamList().size(); i++) {
                 if (getExamList().get(i).getMark() >= 5) {
                     pass++;
                 }
             }
 
-            return  ((float) pass/ getExamList().size());
+            return ((float) pass / getExamList().size());
 
         } else {
 
@@ -160,51 +149,47 @@ public class Subject  implements Parcelable{
 
 
     /**
-     *
      * @return
      */
-    public String getRatioString(){
+    public String getRatioString() {
         return Number.toString(getRatio());
     }
 
 
     /**
-     *
      * @return
      */
-    public float getTotalPercentage(){
+    public float getTotalPercentage() {
         float sum = 0;
 
-        for (int i = 0 ; i < getExamList().size() ; i++){
+        for (int i = 0; i < getExamList().size(); i++) {
             sum += getTestElement(i).getPercentage();
         }
         return sum;
     }
 
 
-    public float getWeightedAverage(){
+    public float getWeightedAverage() {
         float dividend = 0;
         float divisor = 0;
-        for(int i = 0; i < getExamList().size();i++ ){
+        for (int i = 0; i < getExamList().size(); i++) {
             dividend += getTestElement(i).getMark() * getTestElement(i).getPercentage();
             divisor += getTestElement(i).getPercentage();
         }
-        return dividend/divisor;
+        return dividend / divisor;
     }
 
     /**
-     *
      * @return
      */
-    public String getWeightedAverageString(){
+    public String getWeightedAverageString() {
         return Number.toString(getWeightedAverage());
     }
 
     /**
-     *
      * @param exam
      */
-    public void removeTest(Exam exam){
+    public void removeTest(Exam exam) {
         examList.remove(exam);
     }
 

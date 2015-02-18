@@ -22,13 +22,14 @@ import it.gmariotti.cardslib.library.view.CardListView;
 /**
  * Created by garciparedes on 24/12/14.
  */
-public class DefaultFragment  extends Fragment {
+public class DefaultFragment extends Fragment {
 
     public static DefaultFragment newInstance() {
         DefaultFragment defaultFragment = new DefaultFragment();
 
         return defaultFragment;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
@@ -50,10 +51,10 @@ public class DefaultFragment  extends Fragment {
 
 
         //Standard array
-        CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity(),cards);
+        CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity(), cards);
 
         // Define your sections
-        List<CardSection> sections =  new ArrayList<CardSection>();
+        List<CardSection> sections = new ArrayList<CardSection>();
         //sections.add(new CardSection(0,"Section 1"));
         //sections.add(new CardSection(3,"Section 2"));
         CardSection[] dummy = new CardSection[sections.size()];
@@ -63,7 +64,7 @@ public class DefaultFragment  extends Fragment {
         mAdapter.setCardSections(sections.toArray(dummy));
 
         CardListView listView = (CardListView) getActivity().findViewById(R.id.default_card_list);
-        if (listView!=null){
+        if (listView != null) {
             //Use the external adapter.
             listView.setExternalAdapter(mAdapter, mCardArrayAdapter);
         }

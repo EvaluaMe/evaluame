@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
  * Created by garciparedes on 10/2/15.
  */
 public class Date {
-    public static String intToStringMonth(Context context, int month){
+    public static String intToStringMonth(Context context, int month) {
         return context.getResources().getStringArray(R.array.month)[month];
     }
 
@@ -24,14 +24,14 @@ public class Date {
             result.append(intToStringMonth(context, gregorianCalendar.get(Calendar.MONTH)));
             result.append("/");
             result.append(gregorianCalendar.get(Calendar.YEAR));
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             result = nullDateToString();
         }
 
         return result.toString();
     }
 
-    public static String dateToString(Context context, int year, int month, int day){
+    public static String dateToString(Context context, int year, int month, int day) {
         StringBuilder result = new StringBuilder();
         result.append(day);
         result.append("/");
@@ -42,7 +42,7 @@ public class Date {
         return result.toString();
     }
 
-    private static StringBuilder nullDateToString(){
+    private static StringBuilder nullDateToString() {
         StringBuilder result = new StringBuilder();
         result.append("--");
         result.append("/");

@@ -11,6 +11,8 @@ import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
+import java.util.Collections;
+
 /**
  * Created by garciparedes on 13/2/15.
  */
@@ -19,7 +21,6 @@ public abstract class BaseSubjectFragment extends Fragment {
     protected Subject subject;
 
     /**
-     *
      * @param savedInstanceState
      */
     @Override
@@ -27,24 +28,25 @@ public abstract class BaseSubjectFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         subject = initSubject();
+        Collections.sort(subject.getExamList());
+        Collections.reverse(subject.getExamList());
+
     }
 
     /**
-     *
      * @return
      */
-    public Subject initSubject(){
+    public Subject initSubject() {
         Subject subject;
         try {
             subject = getArguments().getParcelable("subject");
-        } catch (NullPointerException e){
+        } catch (NullPointerException e) {
             subject = null;
         }
         return subject;
     }
 
     /**
-     *
      * @param item
      * @return
      */
@@ -72,7 +74,7 @@ public abstract class BaseSubjectFragment extends Fragment {
     /**
      *
      */
-    public void deleteSubject(){
+    public void deleteSubject() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 getActivity());
 
@@ -83,8 +85,8 @@ public abstract class BaseSubjectFragment extends Fragment {
         alertDialogBuilder
                 .setMessage(getString(R.string.delete_subject_confirmation))
                 .setCancelable(false)
-                .setPositiveButton(getString(R.string.yes),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         // if this button is clicked, close
                         // current activity
 
@@ -100,8 +102,8 @@ public abstract class BaseSubjectFragment extends Fragment {
 
                     }
                 })
-                .setNegativeButton(getString(R.string.no),new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         // if this button is clicked, just close
                         // the dialog box and do nothing
                         dialog.cancel();
@@ -118,7 +120,7 @@ public abstract class BaseSubjectFragment extends Fragment {
     /**
      *
      */
-    public void editSubject(){
+    public void editSubject() {
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, EditSubjectFragment.newInstance(subject))
                 .addToBackStack(null)

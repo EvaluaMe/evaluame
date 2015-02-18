@@ -2,8 +2,6 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,7 @@ import com.garciparedes.evaluame.items.Subject;
 /**
  * Created by garciparedes on 10/2/15.
  */
-public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment implements AddData {
+public abstract class BaseManageSubjectFragment extends BaseSubjectFragment implements AddData {
 
     private EditText editTextName;
     private EditText editTextDescription;
@@ -36,9 +34,8 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
     }
 
     /**
-     *
-     * @param inflater inflater
-     * @param container container
+     * @param inflater           inflater
+     * @param container          container
      * @param savedInstanceState savedInstanceState
      * @return view
      */
@@ -57,7 +54,6 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
     }
 
     /**
-     *
      * @param state state
      */
     @Override
@@ -95,7 +91,6 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
     }
 
     /**
-     *
      * @return
      */
     public abstract Subject initNewSubject();
@@ -106,7 +101,6 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
     public abstract void setOnClickButton();
 
     /**
-     *
      * @return
      */
     public abstract String setTextButton();
@@ -115,7 +109,7 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
      *
      */
     @Override
-    public void hideKeyboard(){
+    public void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editTextDescription.getWindowToken(), 0);
@@ -125,9 +119,9 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
     @Override
     public boolean isEmptyFields() {
 
-        if (!(newSubject.getName().length()>0))
+        if (!(newSubject.getName().length() > 0))
             return true;
-        if (!(newSubject.getName().length()>0))
+        if (!(newSubject.getName().length() > 0))
             return true;
 
         return false;
@@ -137,7 +131,7 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
      *
      */
     @Override
-    public void replaceFragment(){
+    public void replaceFragment() {
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, SubjectFragment.newInstance(newSubject))

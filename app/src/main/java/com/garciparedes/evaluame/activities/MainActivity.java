@@ -15,12 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
-import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.google.gson.Gson;
@@ -88,10 +86,11 @@ public class MainActivity extends FragmentActivity
     }
 
 
-    public void update(){
+    public void update() {
         mNavigationDrawerFragment.updateListView();
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
@@ -144,7 +143,7 @@ public class MainActivity extends FragmentActivity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
         }
@@ -158,16 +157,16 @@ public class MainActivity extends FragmentActivity
     }
 
 
-
-    public void getData(){
+    public void getData() {
 
         SharedPreferences appSharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(this.getApplicationContext());
         Gson gson = new Gson();
         String json = appSharedPrefs.getString("MasterList", "");
-        Type type = new TypeToken<ArrayList<Subject>>(){}.getType();
-        ArrayList<Subject> mList =gson.fromJson(json,type);
-        if (mList == null){
+        Type type = new TypeToken<ArrayList<Subject>>() {
+        }.getType();
+        ArrayList<Subject> mList = gson.fromJson(json, type);
+        if (mList == null) {
             mList = new ArrayList<Subject>();
         }
 
@@ -187,11 +186,11 @@ public class MainActivity extends FragmentActivity
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
 
-        if (mNavigationDrawerFragment.isDrawerOpen()){
+        if (mNavigationDrawerFragment.isDrawerOpen()) {
             mNavigationDrawerFragment.closeDrawer();
         } else if (fm.getBackStackEntryCount() > 0) {
             Log.i("MainActivity", "popping backstack");
-            if (fm.getBackStackEntryAt(fm.getBackStackEntryCount()-1).getName() == Constant.DISABLE_BACK_FRAGMENT) {
+            if (fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 1).getName() == Constant.DISABLE_BACK_FRAGMENT) {
                 fm.popBackStack();
                 fm.popBackStack();
             } else {

@@ -21,7 +21,7 @@ public class BarChartCard extends BaseChartCard {
     private BarChart mBarChart;
 
 
-    public BarChartCard(Context context){
+    public BarChartCard(Context context) {
         super(context, R.layout.card_chart_bar);
     }
 
@@ -44,12 +44,12 @@ public class BarChartCard extends BaseChartCard {
      *
      */
     @Override
-    public void setValues(){
+    public void setValues() {
 
         ArrayList<BarEntry> valsComp1 = new ArrayList<BarEntry>();
         ArrayList<String> xVals = new ArrayList<String>();
 
-        for (int i = 0 ; i < ListDB.size(); i++){
+        for (int i = 0; i < ListDB.size(); i++) {
             BarEntry subject = new BarEntry(ListDB.get(i).getAverage(), i);
             valsComp1.add(subject);
             xVals.add(ListDB.get(i).getName());

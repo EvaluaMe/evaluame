@@ -34,7 +34,7 @@ public class StatsCard extends Card {
         this.subject = subject;
     }
 
-    private void init(Context context){
+    private void init(Context context) {
 
         //Create a CardHeader
         CardHeader header = new CardHeader(context);

@@ -13,7 +13,7 @@ import it.gmariotti.cardslib.library.internal.Card;
 /**
  * Created by garciparedes on 7/2/15.
  */
-public class DetailsCard extends Card {
+public class DescriptionCard extends Card {
 
     private TextView mTitle;
     private TextView mSecondaryTitle;
@@ -21,14 +21,13 @@ public class DetailsCard extends Card {
     private Subject subject;
 
 
-
-    public DetailsCard(Context context, Subject subject) {
+    public DescriptionCard(Context context, Subject subject) {
         super(context, R.layout.card_details);
         init(context);
         this.subject = subject;
     }
 
-    private void init(Context context){
+    private void init(Context context) {
 
     }
 

@@ -1,18 +1,12 @@
 package com.garciparedes.evaluame.fragments;
 
-import android.app.ActionBar;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.activities.MainActivity;
-import com.garciparedes.evaluame.cards.DetailsCard;
+import com.garciparedes.evaluame.cards.DescriptionCard;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
 import com.garciparedes.evaluame.cards.StatsCard;
@@ -20,7 +14,6 @@ import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.melnykov.fab.FloatingActionButton;
-import com.melnykov.fab.ObservableScrollView;
 
 import java.util.ArrayList;
 
@@ -70,7 +63,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         ArrayList<Card> cards = new ArrayList<Card>();
 
-        cards.add(new DetailsCard(getActivity(), subject));
+        cards.add(new DescriptionCard(getActivity(), subject));
         cards.add(new PieChartCard(getActivity(), subject));
         cards.add(new StatsCard(getActivity(), subject));
         //cards.add(new ExamListCard(getActivity(), subject));
@@ -80,7 +73,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
 
         //Standard array
-        mCardArrayAdapter = new CardArrayAdapter(getActivity(),cards);
+        mCardArrayAdapter = new CardArrayAdapter(getActivity(), cards);
 
         if (mCardArrayAdapter != null) {
             mCardArrayAdapter.setEnableUndo(true);
@@ -88,7 +81,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         mListView = (CardListView) getActivity().findViewById(R.id.subject_card_list);
-        if (mListView!=null){
+        if (mListView != null) {
             mListView.setAdapter(mCardArrayAdapter);
         }
 
@@ -109,7 +102,7 @@ public class SubjectFragment extends BaseSubjectFragment {
     }
 
 
-    public ExamCard initCard(Exam exam){
+    public ExamCard initCard(Exam exam) {
         // Create a Card
         ExamCard card = new ExamCard(getActivity(), exam);
 
@@ -120,7 +113,7 @@ public class SubjectFragment extends BaseSubjectFragment {
             @Override
             public void onButtonItemClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container,EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
+                        .replace(R.id.container, EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
                         .addToBackStack(null)
                         .commit();
 
@@ -146,7 +139,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         card.setOnUndoHideSwipeListListener(new Card.OnUndoHideSwipeListListener() {
             @Override
             public void onUndoHideSwipe(Card card) {
-                subject.removeTest( ((ExamCard) card).getExam() );
+                subject.removeTest(((ExamCard) card).getExam());
                 ListDB.saveData(getActivity());
                 mFAButton.show(true);
             }

@@ -8,13 +8,12 @@ import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.enums.ExamType;
 
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
  * Created by garciparedes on 5/12/14.
  */
-public class Exam implements Parcelable{
+public class Exam implements Parcelable, Comparable<Exam> {
 
 
     private String name;
@@ -32,20 +31,19 @@ public class Exam implements Parcelable{
     /**
      *
      */
-    public Exam(){
+    public Exam() {
         super();
         this.mType = ExamType.EXAM;
     }
 
 
     /**
-     *
      * @param name
      * @param date
      * @param mark
      * @param percentage
      */
-    public Exam(String name, GregorianCalendar date, float mark, float percentage, ExamType Type){
+    public Exam(String name, GregorianCalendar date, float mark, float percentage, ExamType Type) {
         this.name = name;
         this.date = date;
         this.mark = mark;
@@ -55,7 +53,6 @@ public class Exam implements Parcelable{
 
 
     /**
-     *
      * @param name
      */
     public void setName(String name) {
@@ -64,7 +61,6 @@ public class Exam implements Parcelable{
 
 
     /**
-     *
      * @param mark
      */
     public void setMark(float mark) {
@@ -73,7 +69,6 @@ public class Exam implements Parcelable{
 
 
     /**
-     *
      * @param percentage
      */
     public void setPercentage(float percentage) {
@@ -82,7 +77,6 @@ public class Exam implements Parcelable{
 
 
     /**
-     *
      * @param date
      */
     public void setDate(GregorianCalendar date) {
@@ -95,7 +89,6 @@ public class Exam implements Parcelable{
     }
 
     /**
-     *
      * @return
      */
     public String getName() {
@@ -104,7 +97,6 @@ public class Exam implements Parcelable{
 
 
     /**
-     *
      * @return
      */
     public float getMark() {
@@ -113,7 +105,6 @@ public class Exam implements Parcelable{
 
 
     /**
-     *
      * @return
      */
     public String getMarkString() {
@@ -121,7 +112,6 @@ public class Exam implements Parcelable{
     }
 
     /**
-     *
      * @return
      */
     public float getPercentage() {
@@ -130,7 +120,6 @@ public class Exam implements Parcelable{
 
 
     /**
-     *
      * @return
      */
     public ExamType getType() {
@@ -138,7 +127,6 @@ public class Exam implements Parcelable{
     }
 
     /**
-     *
      * @return
      */
     public String getTypeString(Context context) {
@@ -146,7 +134,6 @@ public class Exam implements Parcelable{
     }
 
     /**
-     *
      * @return
      */
     public String getPercentageString() {
@@ -158,7 +145,7 @@ public class Exam implements Parcelable{
         return date;
     }
 
-    public String getDateString(Context context){
+    public String getDateString(Context context) {
         return Date.dateToString(context, getDate());
 
     }
@@ -215,5 +202,26 @@ public class Exam implements Parcelable{
         mark = in.readFloat();
         percentage = in.readFloat();
         date = (GregorianCalendar) in.readSerializable();
+    }
+
+    /**
+     * Compares this object to the specified object to determine their relative
+     * order.
+     *
+     * @param another the object to compare to this instance.
+     * @return a negative integer if this instance is less than {@code another};
+     * a positive integer if this instance is greater than
+     * {@code another}; 0 if this instance has the same order as
+     * {@code another}.
+     * @throws ClassCastException if {@code another} cannot be converted into something
+     *                            comparable to {@code this} instance.
+     */
+    @Override
+    public int compareTo(Exam another) {
+        try {
+            return getDate().compareTo(another.getDate());
+        } catch (NullPointerException e) {
+            return 1;
+        }
     }
 }

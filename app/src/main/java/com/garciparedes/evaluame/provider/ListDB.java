@@ -19,7 +19,6 @@ public class ListDB {
 
 
     /**
-     *
      * @param mList MasterList
      */
     public static void setMasterList(ArrayList<Subject> mList) {
@@ -28,7 +27,6 @@ public class ListDB {
 
 
     /**
-     *
      * @return masterLsit
      */
     private static ArrayList<Subject> getMasterList() {
@@ -36,91 +34,85 @@ public class ListDB {
     }
 
 
-    public static Subject get(int i){
+    public static Subject get(int i) {
         return getMasterList().get(i);
     }
 
-    public static int size(){
+    public static int size() {
         return getMasterList().size();
     }
 
     /**
-     *
-     * @param context context
-     * @param name name
+     * @param context     context
+     * @param name        name
      * @param description description
      */
-    public static void addSubject(Context context, String name, String description){
+    public static void addSubject(Context context, String name, String description) {
         masterList.add(new Subject(name, description));
         saveData(context);
     }
+
     /**
-     *
      * @param context context
      * @param subject newSubject
      */
-    public static void addSubject(Context context, Subject subject){
+    public static void addSubject(Context context, Subject subject) {
         masterList.add(subject);
         saveData(context);
     }
 
 
     /**
-     *
-     * @param context context
+     * @param context   context
      * @param subjectId subjectid
      */
-    public static void removeSubject(Context context, int subjectId){
+    public static void removeSubject(Context context, int subjectId) {
         masterList.remove(subjectId);
         saveData(context);
     }
 
 
     /**
-     *
      * @param context context
      * @param subject newSubject
      */
-    public static void removeSubject(Context context, Subject subject){
+    public static void removeSubject(Context context, Subject subject) {
         masterList.remove(subject);
         saveData(context);
     }
 
 
     /**
-     *
      * @param context context
-     * @param i i
-     * @param name name
-     * @param mark mark
-     * @param value value
+     * @param i       i
+     * @param name    name
+     * @param mark    mark
+     * @param value   value
      */
-    public static void addTest(Context context, int i, String name, float mark, float value){
+    public static void addTest(Context context, int i, String name, float mark, float value) {
         masterList.get(i).addTestElement(new Exam(name, null, mark, value, null));
         saveData(context);
     }
 
 
     /**
-     *
      * @param context context
      * @param subject subject
-     * @param exam exam
+     * @param exam    exam
      */
-    public static void addTest(Context context, Subject subject, Exam exam){
+    public static void addTest(Context context, Subject subject, Exam exam) {
         subject.addTestElement(exam);
         saveData(context);
     }
 
 
     /**
-     *
      * @return ArrayList with names of subjects
      */
-    public static ArrayList<String> subjectNames(){
+    public static ArrayList<String> subjectNames() {
         ArrayList<String> names = new ArrayList<>(masterList.size());
 
-        for (int i = 0; i< masterList.size(); i++){
+        for (int i = 0; i < masterList.size(); i++) {
 
             names.add(masterList.get(i).getName());
 
@@ -132,10 +124,9 @@ public class ListDB {
 
 
     /**
-     *
      * @param context context
      */
-    public static void saveData(Context context){
+    public static void saveData(Context context) {
         SharedPreferences appSharedPrefs = PreferenceManager
                 .getDefaultSharedPreferences(context);
 

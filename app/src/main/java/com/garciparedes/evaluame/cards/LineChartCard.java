@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class LineChartCard extends BaseChartCard {
 
     private LineChart mChart;
+
     /**
      * @param context
      */
@@ -76,14 +77,14 @@ public class LineChartCard extends BaseChartCard {
 
         ArrayList<String> xVals = new ArrayList<String>();
 
-        for (int i = 0 ; i < ListDB.size(); i++){
+        for (int i = 0; i < ListDB.size(); i++) {
 
             xVals.add(ListDB.get(i).getName());
         }
 
         ArrayList<Entry> vals1 = new ArrayList<Entry>();
 
-        for (int i = 0 ; i < ListDB.size(); i++){
+        for (int i = 0; i < ListDB.size(); i++) {
             Entry subject = new Entry((int) ListDB.get(i).getAverage(), i);
 
             vals1.add(subject);

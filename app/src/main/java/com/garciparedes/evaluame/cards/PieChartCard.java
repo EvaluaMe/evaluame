@@ -27,12 +27,13 @@ public class PieChartCard extends BaseChartCard {
     private PieDataSet yVals;
     private PieData data;
     private ArrayList<String> xVals;
-    
+
     private Subject subject;
 
 
     /**
      * Constructor with a custom inner layout
+     *
      * @param context
      */
     public PieChartCard(Context context, Subject subject) {
@@ -42,7 +43,6 @@ public class PieChartCard extends BaseChartCard {
 
 
     /**
-     *
      * @param context
      * @param innerLayout
      */
@@ -56,7 +56,7 @@ public class PieChartCard extends BaseChartCard {
     /**
      * Init
      */
-    private void init(Context context){
+    private void init(Context context) {
         CardHeader cardHeader = new CardHeader(context);
         cardHeader.setTitle(getContext().getString(R.string.title_chart));
         addCardHeader(cardHeader);
@@ -95,26 +95,26 @@ public class PieChartCard extends BaseChartCard {
 
         yVals.setColors(colors);
 
-        data = new PieData(xVals,yVals);
+        data = new PieData(xVals, yVals);
 
         mChart.setData(data);
 
-        for (int j = 0 ; j< subject.getExamList().size() ; j++){
-            introduce(subject.getExamList().get(j),j);
+        for (int j = 0; j < subject.getExamList().size(); j++) {
+            introduce(subject.getExamList().get(j), j);
         }
 
         mChart.setData(data);
         mChart.animateXY(1500, 1500);
     }
 
-    private void introduce(Exam exam, int i){
+    private void introduce(Exam exam, int i) {
 
         xVals.add(exam.getName());
-        float f = exam.getMark()* exam.getPercentage();
-        float t = (10- exam.getMark())* exam.getPercentage();
+        float f = exam.getMark() * exam.getPercentage();
+        float t = (10 - exam.getMark()) * exam.getPercentage();
 
-        data.addEntry(new Entry(f,i), 0);
-        data.addEntry(new Entry(t,i),1);
+        data.addEntry(new Entry(f, i), 0);
+        data.addEntry(new Entry(t, i), 1);
 
     }
 }

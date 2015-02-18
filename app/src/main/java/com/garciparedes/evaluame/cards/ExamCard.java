@@ -27,7 +27,7 @@ public class ExamCard extends Card {
     private Exam exam;
 
 
-    public ExamCard(FragmentActivity context, Exam exam){
+    public ExamCard(FragmentActivity context, Exam exam) {
         super(context, R.layout.card_test);
         this.exam = exam;
         init(context);
@@ -37,7 +37,7 @@ public class ExamCard extends Card {
         return exam;
     }
 
-    private void init(Context context){
+    private void init(Context context) {
 
         //Create a CardHeader
         CardHeader header = new CardHeader(context);
@@ -62,7 +62,7 @@ public class ExamCard extends Card {
         mDateTextView = (TextView) parent.findViewById(R.id.card_test_date_textView);
         mTypeTextView = (TextView) parent.findViewById(R.id.card_test_type_textView);
 
-        if(mMarkTextView != null){
+        if (mMarkTextView != null) {
             mMarkTextView.setText(exam.getMarkString());
         }
 
@@ -80,7 +80,7 @@ public class ExamCard extends Card {
 
         if (mMarkProgressBar != null) {
             mMarkProgressBar.setMax(10);
-            mMarkProgressBar.setProgress((int)(exam.getMark()));
+            mMarkProgressBar.setProgress((int) (exam.getMark()));
 
         }
     }

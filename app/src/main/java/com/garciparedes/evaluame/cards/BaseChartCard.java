@@ -15,7 +15,6 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 public abstract class BaseChartCard extends Card {
 
     /**
-     *
      * @param context
      * @param innerLayout
      */
@@ -23,10 +22,11 @@ public abstract class BaseChartCard extends Card {
         super(context, innerLayout);
         init(context);
     }
+
     /**
      * Init
      */
-    private void init(Context context){
+    private void init(Context context) {
         CardHeader cardHeader = new CardHeader(context);
         cardHeader.setTitle(getContext().getString(R.string.title_chart));
         addCardHeader(cardHeader);

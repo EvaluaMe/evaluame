@@ -25,8 +25,6 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
     }
 
     /**
-     *
-     *
      * @return
      */
     @Override
@@ -44,7 +42,6 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
     }
 
     /**
-     *
      * @return
      */
     @Override

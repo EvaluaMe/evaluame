@@ -10,21 +10,21 @@ public class Number {
     public static final String NAN_STRING = "--";
 
 
-    public static boolean isExact(float f){
-        return((f % 1)== 0);
+    public static boolean isExact(float f) {
+        return ((f % 1) == 0);
     }
 
 
-    public static String toString (Float f, String symbol){
+    public static String toString(Float f, String symbol) {
         return toString(f) + symbol;
     }
 
-    public static String toString (Float f){
+    public static String toString(Float f) {
         String str;
 
-        if(f.isNaN()){
+        if (f.isNaN()) {
             str = NAN_STRING;
-        } else if (isExact(f)){
+        } else if (isExact(f)) {
             str = Integer.toString(f.intValue());
         } else {
             str = round(f, 3).toString();
@@ -35,9 +35,9 @@ public class Number {
 
     /**
      * Code from Internet (StackOverFlow)
-     *
+     * <p/>
      * Author: Jav_Rock     http://stackoverflow.com/users/744859/jav-rock
-     *
+     * <p/>
      * URL: http://stackoverflow.com/a/8911683/3921457
      *
      * @param d
