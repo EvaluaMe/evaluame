@@ -139,8 +139,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         card.setOnUndoHideSwipeListListener(new Card.OnUndoHideSwipeListListener() {
             @Override
             public void onUndoHideSwipe(Card card) {
-                subject.removeTest(((ExamCard) card).getExam());
-                ListDB.saveData(getActivity());
+                ListDB.removeTest(getActivity(), subject,((ExamCard) card).getExam());
                 mFAButton.show(true);
             }
         });

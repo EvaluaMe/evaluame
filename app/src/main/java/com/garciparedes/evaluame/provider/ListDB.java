@@ -9,6 +9,7 @@ import com.garciparedes.evaluame.items.Subject;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * ListDB class
@@ -81,20 +82,6 @@ public class ListDB {
         saveData(context);
     }
 
-
-    /**
-     * @param context context
-     * @param i       i
-     * @param name    name
-     * @param mark    mark
-     * @param value   value
-     */
-    public static void addTest(Context context, int i, String name, float mark, float value) {
-        masterList.get(i).addTestElement(new Exam(name, null, mark, value, null));
-        saveData(context);
-    }
-
-
     /**
      * @param context context
      * @param subject subject
@@ -102,9 +89,15 @@ public class ListDB {
      */
     public static void addTest(Context context, Subject subject, Exam exam) {
         subject.addTestElement(exam);
+        sortExams(subject);
         saveData(context);
     }
 
+    public static void removeTest(Context context, Subject subject, Exam exam){
+        subject.removeTest(exam);
+        sortExams(subject);
+        ListDB.saveData(context);
+    }
 
     /**
      * @return ArrayList with names of subjects
@@ -120,6 +113,11 @@ public class ListDB {
 
         return names;
 
+    }
+
+    public static void sortExams(Subject subject){
+        Collections.sort(subject.getExamList());
+        Collections.reverse(subject.getExamList());
     }
 
 

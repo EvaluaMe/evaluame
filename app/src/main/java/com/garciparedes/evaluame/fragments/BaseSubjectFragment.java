@@ -28,9 +28,6 @@ public abstract class BaseSubjectFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         subject = initSubject();
-        Collections.sort(subject.getExamList());
-        Collections.reverse(subject.getExamList());
-
     }
 
     /**

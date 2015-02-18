@@ -33,6 +33,7 @@ public class EditTestFragment extends BaseManageTestFragment {
     @Override
     public void setOnClickButton() {
         exam = newExam;
+        ListDB.sortExams(subject);
         ListDB.saveData(getActivity());
     }
 

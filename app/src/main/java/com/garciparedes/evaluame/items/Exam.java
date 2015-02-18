@@ -218,10 +218,12 @@ public class Exam implements Parcelable, Comparable<Exam> {
      */
     @Override
     public int compareTo(Exam another) {
-        try {
-            return getDate().compareTo(another.getDate());
-        } catch (NullPointerException e) {
+        if (getDate() == null){
+            return -1;
+        } else if (another.getDate() == null){
             return 1;
+        } else {
+            return getDate().compareTo(another.getDate());
         }
     }
 }
