@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Subject;
@@ -140,7 +141,7 @@ public abstract class BaseManageSubjectFragment  extends BaseSubjectFragment imp
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, SubjectFragment.newInstance(newSubject))
-                .addToBackStack(null)
+                .addToBackStack(Constant.DISABLE_BACK_FRAGMENT)
                 .commit();
 
     }

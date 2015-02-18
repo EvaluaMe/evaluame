@@ -15,8 +15,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
 import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
@@ -184,10 +186,17 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
-        if (fm.getBackStackEntryCount() > 0) {
-            Log.i("MainActivity", "popping backstack");
-            fm.popBackStack();
 
+        if (mNavigationDrawerFragment.isDrawerOpen()){
+            mNavigationDrawerFragment.closeDrawer();
+        } else if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            if (fm.getBackStackEntryAt(fm.getBackStackEntryCount()-1).getName() == Constant.DISABLE_BACK_FRAGMENT) {
+                fm.popBackStack();
+                fm.popBackStack();
+            } else {
+                fm.popBackStack();
+            }
         } else {
             Log.i("MainActivity", "nothing on backstack, calling super");
             super.onBackPressed();

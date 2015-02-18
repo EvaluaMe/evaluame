@@ -223,7 +223,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
         getFragmentManager().beginTransaction()
             .replace(R.id.container,SubjectFragment.newInstance(subject))
-            .addToBackStack(null)
+            .addToBackStack(Constant.DISABLE_BACK_FRAGMENT)
             .commit();
 
 

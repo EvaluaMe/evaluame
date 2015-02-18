@@ -228,6 +228,10 @@ public class NavigationDrawerFragment extends Fragment {
         });
     }
 
+    public void closeDrawer(){
+        mDrawerLayout.closeDrawer(mFragmentContainerView);
+    }
+
     private void selectItem(int position) {
         if (position == -1){
             getFragmentManager().beginTransaction()
