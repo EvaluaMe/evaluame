@@ -50,7 +50,7 @@ public class BarChartCard extends BaseChartCard {
         ArrayList<String> xVals = new ArrayList<String>();
 
         for (int i = 0; i < ListDB.size(); i++) {
-            BarEntry subject = new BarEntry(ListDB.get(i).getAverage(), i);
+            BarEntry subject = new BarEntry(ListDB.get(i).getWeightedAverage(), i);
             valsComp1.add(subject);
             xVals.add(ListDB.get(i).getName());
         }

@@ -201,8 +201,13 @@ public class NavigationDrawerFragment extends Fragment {
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, DefaultFragment.newInstance())
+                        .addToBackStack(null)
                         .commit();
+
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
+                mDrawerListView.setItemChecked(mCurrentSelectedPosition
+                        + mDrawerListView.getHeaderViewsCount(), false);
+
 
             }
         });
