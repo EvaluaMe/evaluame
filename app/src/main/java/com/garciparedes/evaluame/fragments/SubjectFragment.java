@@ -1,11 +1,17 @@
 package com.garciparedes.evaluame.fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.cards.DescriptionCard;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
@@ -30,9 +36,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
     private FloatingActionButton mFAButton;
-
     private CardArrayAdapter mCardArrayAdapter;
-
     private CardListView mListView;
 
     public static SubjectFragment newInstance(Subject subject) {
@@ -101,7 +105,6 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
     }
 
-
     public ExamCard initCard(Exam exam) {
         // Create a Card
         ExamCard card = new ExamCard(getActivity(), exam);
@@ -144,5 +147,95 @@ public class SubjectFragment extends BaseSubjectFragment {
             }
         });
         return card;
+    }
+
+    /**
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (item.getItemId() == R.id.action_delete_subject) {
+
+            deleteSubject();
+
+            return true;
+        }
+
+
+        if (item.getItemId() == R.id.action_edit_subject) {
+
+            editSubject();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     *
+     */
+    public void deleteSubject() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        // set title
+        alertDialogBuilder.setTitle(getString(R.string.delete_subject));
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(getString(R.string.delete_subject_confirmation))
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, close
+                        // current activity
+
+                        ListDB.removeSubject(getActivity(), subject);
+                        //updateListView();
+                        ((MainActivity) getActivity()).update();
+
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.container, DefaultFragment.newInstance())
+                                .addToBackStack(null)
+                                .commit();
+
+
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // If the drawer is open, show the global app actions in the action bar. See also
+        // showGlobalContextActionBar, which controls the top-left area of the action bar.
+        inflater.inflate(R.menu.menu_subject, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    /**
+     *
+     */
+    public void editSubject() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, EditSubjectFragment.newInstance(subject))
+                .addToBackStack(null)
+                .commit();
+
     }
 }
