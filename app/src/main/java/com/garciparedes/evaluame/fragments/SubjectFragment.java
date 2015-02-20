@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
+import com.garciparedes.evaluame.cards.BannerCard;
 import com.garciparedes.evaluame.cards.DescriptionCard;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
@@ -75,6 +76,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         for (int i = 0; i < subject.getExamList().size(); i++) {
             cards.add(initCard(subject.getTestElement(i)));
         }
+        cards.add(new BannerCard(getActivity()));
 
         //Standard array
         mCardArrayAdapter = new CardArrayAdapter(getActivity(), cards);
