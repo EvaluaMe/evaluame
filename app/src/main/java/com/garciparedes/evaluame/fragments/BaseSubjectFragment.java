@@ -8,7 +8,7 @@ import com.garciparedes.evaluame.items.Subject;
 /**
  * Created by garciparedes on 13/2/15.
  */
-public abstract class BaseSubjectFragment extends Fragment {
+public abstract class BaseSubjectFragment extends BaseFragment {
 
     protected Subject subject;
 

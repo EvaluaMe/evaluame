@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.cards.BannerCard;
 import com.garciparedes.evaluame.cards.DescriptionCard;
@@ -99,7 +100,6 @@ public class SubjectFragment extends BaseSubjectFragment {
 
                     getFragmentManager().beginTransaction()
                             .replace(R.id.container, AddTestFragment.newInstance(subject))
-                            .addToBackStack(null)
                             .commit();
 
                 }
@@ -119,7 +119,6 @@ public class SubjectFragment extends BaseSubjectFragment {
             public void onButtonItemClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
-                        .addToBackStack(null)
                         .commit();
 
             }
@@ -201,7 +200,6 @@ public class SubjectFragment extends BaseSubjectFragment {
 
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container, DefaultFragment.newInstance())
-                                .addToBackStack(null)
                                 .commit();
 
 
@@ -236,8 +234,14 @@ public class SubjectFragment extends BaseSubjectFragment {
     public void editSubject() {
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, EditSubjectFragment.newInstance(subject))
-                .addToBackStack(null)
                 .commit();
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, DefaultFragment.newInstance())
+                .commit();
     }
 }

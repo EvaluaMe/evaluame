@@ -22,7 +22,7 @@ import it.gmariotti.cardslib.library.view.CardListView;
 /**
  * Created by garciparedes on 24/12/14.
  */
-public class DefaultFragment extends Fragment {
+public class DefaultFragment extends BaseFragment {
 
     public static DefaultFragment newInstance() {
         DefaultFragment defaultFragment = new DefaultFragment();
@@ -71,4 +71,8 @@ public class DefaultFragment extends Fragment {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        getActivity().supportFinishAfterTransition();
+    }
 }

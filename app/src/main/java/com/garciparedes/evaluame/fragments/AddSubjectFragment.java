@@ -38,4 +38,11 @@ public class AddSubjectFragment extends BaseManageSubjectFragment {
     public Subject initNewSubject() {
         return new Subject();
     }
+
+    @Override
+    public void onBackPressed() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, DefaultFragment.newInstance())
+                .commit();
+    }
 }

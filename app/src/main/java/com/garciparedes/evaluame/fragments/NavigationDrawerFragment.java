@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -81,8 +82,9 @@ public class NavigationDrawerFragment extends Fragment {
             mFromSavedInstanceState = true;
         }
 
+        mCallbacks.onNavigationDrawerItemSelected(mCurrentSelectedPosition);
         // Select either the default item (0) or the last selected item.
-        selectItem(mCurrentSelectedPosition);
+        //selectItem(mCurrentSelectedPosition);
     }
 
     @Override
@@ -201,7 +203,6 @@ public class NavigationDrawerFragment extends Fragment {
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, DefaultFragment.newInstance())
-                        .addToBackStack(null)
                         .commit();
 
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
@@ -221,7 +222,6 @@ public class NavigationDrawerFragment extends Fragment {
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, AddSubjectFragment.newInstance())
-                        .addToBackStack(null)
                         .commit();
                 mDrawerLayout.closeDrawer(mFragmentContainerView);
                 updateListView();
@@ -236,29 +236,27 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void selectItem(int position) {
-        if (position == -1) {
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, DefaultFragment.newInstance())
-                    .commit();
-        } else {
+
+        if (mDrawerListView != null) {
+            mDrawerListView.setItemChecked(position + mDrawerListView.getHeaderViewsCount(), true);
+        }
+        if (mDrawerLayout != null) {
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
+        }
+
+        System.out.println(mCurrentSelectedPosition);
+        System.out.println(position);
+
+        if(mCurrentSelectedPosition != position){
+
             mCurrentSelectedPosition = position;
-            if (mDrawerListView != null) {
-                mDrawerListView.setItemChecked(position + mDrawerListView.getHeaderViewsCount(), true);
-            }
-            if (mDrawerLayout != null) {
-                mDrawerLayout.closeDrawer(mFragmentContainerView);
-            }
             if (mCallbacks != null) {
                 mCallbacks.onNavigationDrawerItemSelected(position);
             }
-
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, SubjectFragment.newInstance(ListDB.get(position)))
-                    .addToBackStack(null)
-                    .commit();
-
-
         }
+
+
+
     }
 
     @Override

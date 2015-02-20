@@ -230,13 +230,13 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
      */
     @Override
     public void replaceFragment() {
-
-
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, SubjectFragment.newInstance(subject))
-                .addToBackStack(Constant.DISABLE_BACK_FRAGMENT)
                 .commit();
+    }
 
-
+    @Override
+    public void onBackPressed() {
+        replaceFragment();
     }
 }

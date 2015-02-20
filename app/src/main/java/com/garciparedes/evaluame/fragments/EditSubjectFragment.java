@@ -48,4 +48,11 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
     public String setTextButton() {
         return getResources().getString(R.string.edit_subject);
     }
+
+    @Override
+    public void onBackPressed() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, SubjectFragment.newInstance(subject))
+                .commit();
+    }
 }

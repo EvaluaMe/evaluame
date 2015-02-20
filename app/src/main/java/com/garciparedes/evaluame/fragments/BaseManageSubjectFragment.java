@@ -135,7 +135,6 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
 
         getFragmentManager().beginTransaction()
                 .replace(R.id.container, SubjectFragment.newInstance(newSubject))
-                .addToBackStack(Constant.DISABLE_BACK_FRAGMENT)
                 .commit();
 
     }

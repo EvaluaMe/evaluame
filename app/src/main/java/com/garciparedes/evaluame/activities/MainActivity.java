@@ -18,7 +18,10 @@ import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Constant;
+import com.garciparedes.evaluame.fragments.BaseFragment;
+import com.garciparedes.evaluame.fragments.DefaultFragment;
 import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
+import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.google.gson.Gson;
@@ -29,13 +32,14 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, BaseFragment.FragmentCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
+    private BaseFragment mCurrentFragment;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -65,13 +69,20 @@ public class MainActivity extends FragmentActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         //FragmentManager fragmentManager = getFragmentManager();
-        /*
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(position))
-                .commit();
+
+        if (position == -1) {
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, DefaultFragment.newInstance())
+                    .commit();
+        } else {
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, SubjectFragment.newInstance(ListDB.get(position)))
+                    .commit();
 
 
-        */
+        }
     }
 
     public void onSectionAttached(int number) {
@@ -117,45 +128,14 @@ public class MainActivity extends FragmentActivity
     }
 
     /**
-     * A placeholder fragment containing a simple view.
+     * Called when an item in the navigation drawer is selected.
+     *
+     * @param baseFragment
      */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
+    @Override
+    public void onCurrentFragmentChanged(BaseFragment baseFragment) {
+        mCurrentFragment = baseFragment;
     }
-
 
     public void getData() {
 
@@ -185,20 +165,11 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
-
         if (mNavigationDrawerFragment.isDrawerOpen()) {
             mNavigationDrawerFragment.closeDrawer();
-        } else if (fm.getBackStackEntryCount() > 0) {
-            Log.i("MainActivity", "popping backstack");
-            if (fm.getBackStackEntryAt(fm.getBackStackEntryCount() - 1).getName() == Constant.DISABLE_BACK_FRAGMENT) {
-                fm.popBackStack();
-                fm.popBackStack();
-            } else {
-                fm.popBackStack();
-            }
+
         } else {
-            Log.i("MainActivity", "nothing on backstack, calling super");
-            super.onBackPressed();
+            mCurrentFragment.onBackPressed();
         }
     }
 }
