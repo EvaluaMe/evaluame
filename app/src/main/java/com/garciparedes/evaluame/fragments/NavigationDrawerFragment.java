@@ -201,31 +201,23 @@ public class NavigationDrawerFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, DefaultFragment.newInstance())
-                        .commit();
-
-                mDrawerLayout.closeDrawer(mFragmentContainerView);
+                selectItem(-1);
                 mDrawerListView.setItemChecked(mCurrentSelectedPosition
                         + mDrawerListView.getHeaderViewsCount(), false);
-
 
             }
         });
 
         mAddSubjectButton = (Button) getActivity().findViewById(R.id.button_add_subject);
         mAddSubjectButton.setText(getString(R.string.new_subject));
-        final NavigationDrawerFragment nav = this;
         mAddSubjectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, AddSubjectFragment.newInstance())
-                        .commit();
-                mDrawerLayout.closeDrawer(mFragmentContainerView);
+                selectItem(-2);
+                mDrawerListView.setItemChecked(mCurrentSelectedPosition
+                        + mDrawerListView.getHeaderViewsCount(), false);
                 updateListView();
-
 
             }
         });
@@ -243,9 +235,6 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
-
-        System.out.println(mCurrentSelectedPosition);
-        System.out.println(position);
 
         if(mCurrentSelectedPosition != position){
 

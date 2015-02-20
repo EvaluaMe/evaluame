@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Constant;
+import com.garciparedes.evaluame.fragments.AddSubjectFragment;
 import com.garciparedes.evaluame.fragments.BaseFragment;
 import com.garciparedes.evaluame.fragments.DefaultFragment;
 import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
@@ -70,19 +71,25 @@ public class MainActivity extends FragmentActivity
         // update the main content by replacing fragments
         //FragmentManager fragmentManager = getFragmentManager();
 
-        if (position == -1) {
+    switch (position){
+        case -2:
 
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, AddSubjectFragment.newInstance())
+                    .commit();
+            break;
+        case -1:
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, DefaultFragment.newInstance())
                     .commit();
-        } else {
-
+            break;
+        default:
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, SubjectFragment.newInstance(ListDB.get(position)))
                     .commit();
+            break;
+    }
 
-
-        }
     }
 
     public void onSectionAttached(int number) {
