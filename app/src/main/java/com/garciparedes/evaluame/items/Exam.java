@@ -43,14 +43,26 @@ public class Exam implements Parcelable, Comparable<Exam> {
      * @param mark
      * @param percentage
      */
-    public Exam(String name, GregorianCalendar date, float mark, float percentage, ExamType Type) {
+    public Exam(String name, GregorianCalendar date, float mark, float percentage, ExamType type) {
         this.name = name;
         this.date = date;
         this.mark = mark;
         this.percentage = percentage;
-        this.mType = Type;
+        this.mType = type;
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Exam copy(){
+        try {
+            return (Exam) clone();
+        }catch (CloneNotSupportedException e){
+            return new Exam();
+        }
+    }
 
     /**
      * @param name

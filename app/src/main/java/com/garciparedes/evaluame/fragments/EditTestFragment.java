@@ -27,11 +27,21 @@ public class EditTestFragment extends BaseManageTestFragment {
     public Exam initTest() {
 
         exam = getArguments().getParcelable("exam");
-        return exam;
+        return exam.copy();
     }
 
     @Override
     public void setOnClickButton() {
+
+        if(exam.getName().length() <= 0)
+            throw new IllegalArgumentException("Introduce el nombre");
+
+        if(exam.getPercentage() <= 0)
+            throw new IllegalArgumentException("Introduce el porcentaje");
+
+        if((subject.getTotalPercentage()+ exam.getPercentage()) > 100)
+            throw new IllegalArgumentException("El porcentaje no puede superar el 100%");
+
         exam = newExam;
         ListDB.sortExams(subject);
         ListDB.saveData(getActivity());

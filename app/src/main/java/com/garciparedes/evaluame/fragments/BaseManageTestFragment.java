@@ -2,6 +2,7 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,13 +148,14 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
                 newExam.setName(editTextName.getText().toString());
                 newExam.setType((ExamType) mSpinnerType.getSelectedItem());
-                if (!isEmptyFields()) {
-                    setOnClickButton();
+                try {
 
+                    setOnClickButton();
                     hideKeyboard();
                     replaceFragment();
-                } else {
-                    Toast.makeText(getActivity(), getString(R.string.error_empty_field), Toast.LENGTH_SHORT)
+
+                } catch (IllegalArgumentException e){
+                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT)
                             .show();
                 }
             }
@@ -212,17 +214,6 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                 Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editTextName.getWindowToken(), 0);
 
-    }
-
-    @Override
-    public boolean isEmptyFields() {
-        if (!(newExam.getName().length() > 0))
-            return true;
-
-        if (!(newExam.getPercentage() > 0))
-            return true;
-
-        return false;
     }
 
     /**

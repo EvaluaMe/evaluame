@@ -36,6 +36,18 @@ public class Subject implements Parcelable {
         this.examList = new ArrayList<>();
     }
 
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Subject copy(){
+        try {
+            return (Subject) clone();
+        }catch (CloneNotSupportedException e){
+            return new Subject();
+        }
+    }
 
     /**
      * @param name

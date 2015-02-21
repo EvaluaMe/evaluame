@@ -26,6 +26,9 @@ public class AddSubjectFragment extends BaseManageSubjectFragment {
 
     @Override
     public void setOnClickButton() {
+        if (newSubject.getName().length() <= 0)
+            throw new IllegalArgumentException("Introduzca el nombre");
+        
         ListDB.addSubject(getActivity(), newSubject);
     }
 

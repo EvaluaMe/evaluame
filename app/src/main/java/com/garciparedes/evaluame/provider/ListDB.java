@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.provider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
@@ -58,17 +59,10 @@ public class ListDB {
      * @param subject newSubject
      */
     public static void addSubject(Context context, Subject subject) {
+        if (subject.getName().length() <= 0)
+            throw new IllegalArgumentException("Introduce el nombre");
+
         masterList.add(subject);
-        saveData(context);
-    }
-
-
-    /**
-     * @param context   context
-     * @param subjectId subjectid
-     */
-    public static void removeSubject(Context context, int subjectId) {
-        masterList.remove(subjectId);
         saveData(context);
     }
 
@@ -88,6 +82,16 @@ public class ListDB {
      * @param exam    exam
      */
     public static void addTest(Context context, Subject subject, Exam exam) {
+
+        if(exam.getName().length() <= 0)
+            throw new IllegalArgumentException("Introduce el nombre");
+
+        if(exam.getPercentage() <= 0)
+            throw new IllegalArgumentException("Introduce el porcentaje");
+
+        if((subject.getTotalPercentage()+ exam.getPercentage()) > 100)
+            throw new IllegalArgumentException("El porcentaje no puede superar el 100%");
+
         subject.addTestElement(exam);
         sortExams(subject);
         saveData(context);
