@@ -146,6 +146,9 @@ public class SubjectFragment extends BaseSubjectFragment {
                 mFAButton.show(true);
             }
         });
+
+        card.setCardElevation(getResources().getDimension(R.dimen.card_shadow_elevation));
+
         return card;
     }
 

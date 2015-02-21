@@ -15,5 +15,6 @@
     <dimen name="text_size_large">22sp</dimen>
 
     <dimen name="text_vertical_margin">15dp</dimen>
+    <dimen name="card_shadow_elevation">10dp</dimen>
 
 </resources>
