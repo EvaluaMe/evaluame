@@ -10,9 +10,11 @@
         android:id="@+id/card_test_mark_progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="5dp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:progressDrawable="@drawable/my_progress_background"
+        />
 
     <RelativeLayout
         android:layout_below="@id/card_test_mark_progressBar"

@@ -28,4 +28,8 @@
         <item>@color/violet</item>
         <item>@color/magenta</item>
     </array>
+
+    <color name="green_app">#4CAF50</color>
+    <color name="green_app_pressed">#81C784</color>
+
 </resources>

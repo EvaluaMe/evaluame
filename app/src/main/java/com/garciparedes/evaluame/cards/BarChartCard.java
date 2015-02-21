@@ -56,6 +56,7 @@ public class BarChartCard extends BaseChartCard {
         }
 
         BarDataSet setComp1 = new BarDataSet(valsComp1, "Company 1");
+        setComp1.setColor(getContext().getResources().getColor(R.color.green_app));
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         dataSets.add(setComp1);
 

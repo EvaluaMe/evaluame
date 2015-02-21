@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.cards.BannerCard;
 import com.garciparedes.evaluame.cards.DescriptionCard;
@@ -21,6 +20,7 @@ import com.garciparedes.evaluame.cards.StatsCard;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
+
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
-
+        mListView = (CardListView) view.findViewById(R.id.subject_card_list);
         mFAButton = (FloatingActionButton) view.findViewById(R.id.floating_button);
 
         return view;
@@ -87,7 +87,6 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
 
 
-        mListView = (CardListView) getActivity().findViewById(R.id.subject_card_list);
         if (mListView != null) {
             mListView.setAdapter(mCardArrayAdapter);
         }
