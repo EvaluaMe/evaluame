@@ -24,6 +24,7 @@ import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Constant;
+import com.garciparedes.evaluame.adapters.NavDrawerAdapter;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -109,10 +110,8 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerListView.addHeaderView(View.inflate(
                 getActivity(), R.layout.view_head_navigation_drawer, null));
 
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1, ListDB.subjectNames()));
+        mDrawerListView.setAdapter(new NavDrawerAdapter(getActivity(), ListDB.getMasterList()));
+
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
         return mDrawerListView;
@@ -236,13 +235,12 @@ public class NavigationDrawerFragment extends Fragment {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
 
-        if(mCurrentSelectedPosition != position){
 
-            mCurrentSelectedPosition = position;
-            if (mCallbacks != null) {
-                mCallbacks.onNavigationDrawerItemSelected(position);
-            }
+        mCurrentSelectedPosition = position;
+        if (mCallbacks != null) {
+            mCallbacks.onNavigationDrawerItemSelected(position);
         }
+
 
 
 
@@ -322,9 +320,6 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     public void updateListView() {
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1, ListDB.subjectNames()));
+        mDrawerListView.setAdapter(new NavDrawerAdapter(getActivity(), ListDB.getMasterList()));
     }
 }

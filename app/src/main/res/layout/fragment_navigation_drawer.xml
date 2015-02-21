@@ -4,5 +4,5 @@
     android:layout_height="match_parent"
     android:choiceMode="singleChoice"
     android:dividerHeight="0dp"
-    android:background="#616161"
+    android:background="#F3F3F3"
     tools:context=".NavigationDrawerFragment" />

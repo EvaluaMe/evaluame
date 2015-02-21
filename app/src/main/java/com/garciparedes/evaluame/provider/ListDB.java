@@ -31,7 +31,7 @@ public class ListDB {
     /**
      * @return masterLsit
      */
-    private static ArrayList<Subject> getMasterList() {
+    public static ArrayList<Subject> getMasterList() {
         return masterList;
     }
 
