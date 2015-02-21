@@ -14,7 +14,7 @@ import it.gmariotti.cardslib.library.internal.CardHeader;
 /**
  * Created by garciparedes on 7/2/15.
  */
-public class StatsCard extends Card {
+public class StatsSubjectCard extends Card {
 
     private TextView weightedAverageTitleTextView;
     private TextView weightedAverageValueTextView;
@@ -28,7 +28,7 @@ public class StatsCard extends Card {
     private Subject subject;
 
 
-    public StatsCard(Context context, Subject subject) {
+    public StatsSubjectCard(Context context, Subject subject) {
         super(context, R.layout.card_stats);
         init(context);
         this.subject = subject;

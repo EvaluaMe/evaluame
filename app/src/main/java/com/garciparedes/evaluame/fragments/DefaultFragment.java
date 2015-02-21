@@ -1,7 +1,6 @@
 package com.garciparedes.evaluame.fragments;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,7 @@ public class DefaultFragment extends BaseFragment {
         ArrayList<Card> cards = new ArrayList<>();
 
         cards.add(new BarChartCard(getActivity()));
-        cards.add(new LineChartCard(getActivity()));
+        //cards.add(new LineChartCard(getActivity()));
 
 
         //Standard array

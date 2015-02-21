@@ -16,7 +16,7 @@ import com.garciparedes.evaluame.cards.BannerCard;
 import com.garciparedes.evaluame.cards.DescriptionCard;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
-import com.garciparedes.evaluame.cards.StatsCard;
+import com.garciparedes.evaluame.cards.StatsSubjectCard;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -71,7 +71,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         cards.add(new DescriptionCard(getActivity(), subject));
         cards.add(new PieChartCard(getActivity(), subject));
-        cards.add(new StatsCard(getActivity(), subject));
+        cards.add(new StatsSubjectCard(getActivity(), subject));
         //cards.add(new ExamListCard(getActivity(), subject));
 
         for (int i = 0; i < subject.getExamList().size(); i++) {
