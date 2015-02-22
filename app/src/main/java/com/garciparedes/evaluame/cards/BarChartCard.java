@@ -1,6 +1,7 @@
 package com.garciparedes.evaluame.cards;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 

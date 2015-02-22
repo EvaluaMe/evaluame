@@ -2,16 +2,19 @@ package com.garciparedes.evaluame.cards;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Exam;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
+import it.gmariotti.cardslib.library.internal.base.BaseCard;
 
 /**
  * Created by garciparedes on 8/2/15.
@@ -42,12 +45,6 @@ public class ExamCard extends Card {
         //Create a CardHeader
         CardHeader header = new CardHeader(context);
         header.setTitle(exam.getName());
-        //header.setButtonExpandVisible(true);
-        header.setOtherButtonVisible(true);
-
-        //Set visible the expand/collapse button
-        header.setOtherButtonVisible(true);
-        header.setOtherButtonDrawable(R.drawable.ic_action_edit);
         addCardHeader(header);
 
     }

@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:card="http://schemas.android.com/tools">
 
-    <it.gmariotti.cardslib.library.view.CardListView
+    <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card="http://schemas.android.com/apk/res-auto"
         android:id="@+id/subject_card_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,8 +27,5 @@
         app:fab_colorNormal="@color/green_app"
         app:fab_colorPressed="@color/green_app_pressed"
         android:src="@drawable/ic_action_new"/>
-
-    <!-- Include undo message layout -->
-    <include layout="@layout/list_card_undo_message"/>
 
 </FrameLayout>

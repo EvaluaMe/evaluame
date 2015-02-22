@@ -33,6 +33,9 @@ dependencies {
     //Optional for built-in cards
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
 
+    //Optional for RecyclerView
+    compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.0.1'
+
     compile 'com.github.amlcurran.showcaseview:library:5.0.0'
 
     compile 'com.google.android.gms:play-services:6.+'

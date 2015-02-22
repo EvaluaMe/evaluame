@@ -3,12 +3,19 @@ package com.garciparedes.evaluame.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
+import android.view.ActionMode;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
@@ -26,9 +33,9 @@ import com.melnykov.fab.FloatingActionButton;
 import java.util.ArrayList;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.view.CardListView;
+import it.gmariotti.cardslib.library.recyclerview.internal.CardArrayRecyclerViewAdapter;
+import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 
 
 /**
@@ -38,8 +45,10 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
     private FloatingActionButton mFAButton;
-    private CardArrayAdapter mCardArrayAdapter;
-    private CardListView mListView;
+    private CardArrayRecyclerViewAdapter mCardArrayAdapter;
+    private CardRecyclerView mRecyclerView;
+
+    private Exam clickedExam;
 
     public static SubjectFragment newInstance(Subject subject) {
         SubjectFragment subjectFragment = new SubjectFragment();
@@ -56,7 +65,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
-        mListView = (CardListView) view.findViewById(R.id.subject_card_list);
+        mRecyclerView = (CardRecyclerView) view.findViewById(R.id.subject_card_list);
         mFAButton = (FloatingActionButton) view.findViewById(R.id.floating_button);
 
         return view;
@@ -72,27 +81,33 @@ public class SubjectFragment extends BaseSubjectFragment {
         cards.add(new DescriptionCard(getActivity(), subject));
         cards.add(new PieChartCard(getActivity(), subject));
         cards.add(new StatsSubjectCard(getActivity(), subject));
-        //cards.add(new ExamListCard(getActivity(), subject));
+        //cards.add(new UpcomingExamListCard(getActivity(), subject));
 
         for (int i = 0; i < subject.getExamList().size(); i++) {
             cards.add(initCard(subject.getTestElement(i)));
         }
-        cards.add(new BannerCard(getActivity()));
+        //cards.add(new BannerCard(getActivity()));
 
         //Standard array
-        mCardArrayAdapter = new CardArrayAdapter(getActivity(), cards);
+        mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), cards);
 
         if (mCardArrayAdapter != null) {
-            mCardArrayAdapter.setEnableUndo(true);
+            //mCardArrayAdapter.setEnableUndo(true);
         }
 
 
-        if (mListView != null) {
-            mListView.setAdapter(mCardArrayAdapter);
+        if (mRecyclerView != null) {
+            mRecyclerView.setAdapter(mCardArrayAdapter);
+            //LinearLayoutManager l = new LinearLayoutManager(getActivity());
+
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
         }
+
+        registerForContextMenu(mRecyclerView);
 
         if (mFAButton != null) {
-
+            mFAButton.attachToRecyclerView(mRecyclerView);
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -113,6 +128,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         card.setSwipeable(true);
         card.setId(exam.getName());
 
+
         card.getCardHeader().setOtherButtonClickListener(new CardHeader.OnClickCardHeaderOtherButtonListener() {
             @Override
             public void onButtonItemClick(Card card, View view) {
@@ -123,34 +139,51 @@ public class SubjectFragment extends BaseSubjectFragment {
             }
         });
 
-        card.setSwipeable(true);
-
-        card.setOnSwipeListener(new Card.OnSwipeListener() {
+        card.setLongClickable(true);
+        card.setOnLongClickListener(new Card.OnLongCardClickListener() {
             @Override
-            public void onSwipe(Card card) {
-                mFAButton.hide(true);
+            public boolean onLongClick(Card card, View view) {
+                clickedExam =((ExamCard) card).getExam();
+                return false;
             }
         });
 
-        card.setOnUndoSwipeListListener(new Card.OnUndoSwipeListListener() {
-            @Override
-            public void onUndoSwipe(Card card) {
-                mFAButton.show();
-            }
-        });
-
-        card.setOnUndoHideSwipeListListener(new Card.OnUndoHideSwipeListListener() {
-            @Override
-            public void onUndoHideSwipe(Card card) {
-                ListDB.removeTest(getActivity(), subject,((ExamCard) card).getExam());
-                mFAButton.show(true);
-            }
-        });
-
-        card.setCardElevation(getResources().getDimension(R.dimen.card_shadow_elevation));
 
         return card;
     }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_subject, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.action_edit_subject:
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, EditTestFragment.newInstance(subject,  clickedExam))
+                        .commit();
+
+                return true;
+            case R.id.action_delete_subject:
+                ListDB.removeTest(getActivity(), subject, clickedExam);
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, this.newInstance(subject))
+                        .commit();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+
+        }
+    }
+
 
     /**
      * @param item

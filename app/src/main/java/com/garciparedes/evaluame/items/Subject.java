@@ -183,12 +183,10 @@ public class Subject implements Parcelable {
 
     public float getWeightedAverage() {
         float dividend = 0;
-        float divisor = 0;
         for (int i = 0; i < getExamList().size(); i++) {
             dividend += getTestElement(i).getMark() * getTestElement(i).getPercentage();
-            divisor += getTestElement(i).getPercentage();
         }
-        return dividend / divisor;
+        return dividend / 100;
     }
 
     /**
