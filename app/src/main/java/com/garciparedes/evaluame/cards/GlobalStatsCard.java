@@ -6,15 +6,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.*;
+import com.garciparedes.evaluame.Util.Number;
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.provider.ListDB;
+
+import java.util.Calendar;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
- * Created by garciparedes on 7/2/15.
+ * Created by garciparedes on 22/2/15.
  */
-public class StatsSubjectCard extends Card {
+public class GlobalStatsCard extends Card {
 
     private TextView weightedAverageTitleTextView;
     private TextView weightedAverageValueTextView;
@@ -25,13 +31,15 @@ public class StatsSubjectCard extends Card {
     private TextView ratioTitleTextView;
     private TextView ratioValueTextView;
 
-    private Subject subject;
+    private float average;
+    private float ratio;
 
 
-    public StatsSubjectCard(Context context, Subject subject) {
-        super(context, R.layout.card_stats);
+    public GlobalStatsCard(Context context) {
+        super(context, R.layout.card_global_stats);
         init(context);
-        this.subject = subject;
+        calcule();
+
     }
 
     private void init(Context context) {
@@ -40,8 +48,39 @@ public class StatsSubjectCard extends Card {
         CardHeader header = new CardHeader(context);
         header.setTitle(context.getString(R.string.title_stats));
         //header.setButtonExpandVisible(true);
-
         addCardHeader(header);
+
+
+
+    }
+
+    private void calcule(){
+        Calendar now = Calendar.getInstance();
+
+        int count = 0, pass = 0;
+        float total=0;
+        for(int i = 0; i < ListDB.getMasterList().size(); i++){
+            Subject subject = ListDB.get(i);
+
+            for (int j = 0; j < subject.getExamList().size(); j++) {
+
+                Exam exam = subject.getTestElement(j);
+                try {
+                    if (exam.getDate().before(now)) {
+                        total += exam.getMark();
+
+                        if (exam.getMark() >= 5) {
+                            pass++;
+                        }
+                        count++;
+                    }
+                }catch (NullPointerException ignored){};
+            }
+        }
+        if (count != 0){
+            average = (total/count);
+            ratio = ((float) pass/count);
+        }
     }
 
 
@@ -49,23 +88,12 @@ public class StatsSubjectCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view) {
 
         //Retrieve elements
-        weightedAverageTitleTextView = (TextView) parent.findViewById(R.id.card_stats_weightedAverage_title_textView);
-        weightedAverageValueTextView = (TextView) parent.findViewById(R.id.card_stats_weightedAverage_value_textView);
-
         averageTitleTextView = (TextView) parent.findViewById(R.id.card_stats_average_title_textView);
         averageValueTextView = (TextView) parent.findViewById(R.id.card_stats_average_value_textView);
 
         ratioTitleTextView = (TextView) parent.findViewById(R.id.card_stats_ratio_title_textView);
         ratioValueTextView = (TextView) parent.findViewById(R.id.card_stats_ratio_value_textView);
 
-        if (weightedAverageTitleTextView != null)
-            weightedAverageTitleTextView.setText(
-                    getContext().getString(R.string.title_weighted_average)
-                            + ": "
-            );
-
-        if (weightedAverageValueTextView != null)
-            weightedAverageValueTextView.setText(subject.getWeightedAverageString());
 
 
         if (averageTitleTextView != null)
@@ -75,7 +103,7 @@ public class StatsSubjectCard extends Card {
             );
 
         if (averageValueTextView != null)
-            averageValueTextView.setText(subject.getAverageString());
+            averageValueTextView.setText(com.garciparedes.evaluame.Util.Number.toString(average));
 
 
         if (ratioTitleTextView != null)
@@ -85,6 +113,7 @@ public class StatsSubjectCard extends Card {
             );
 
         if (ratioValueTextView != null)
-            ratioValueTextView.setText(subject.getRatioString());
+            ratioValueTextView.setText(Number.toString(ratio));
     }
+
 }

@@ -38,7 +38,6 @@ dependencies {
 
     compile 'com.github.amlcurran.showcaseview:library:5.0.0'
 
-    compile 'com.google.android.gms:play-services:6.+'
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
 }
