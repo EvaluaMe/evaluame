@@ -36,18 +36,32 @@ public class Subject implements Parcelable {
         this.examList = new ArrayList<>();
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    /**
+     * @param name
+     * @param description
+     */
+    public Subject(String name, String description, ArrayList<Exam> examList) {
+        this.name = name;
+        this.description = description;
+        this.examList = examList;
     }
 
+
     public Subject copy(){
-        try {
-            return (Subject) clone();
-        }catch (CloneNotSupportedException e){
-            return new Subject();
-        }
+        return new Subject(getName(), getDescription(), getExamList());
+
     }
+
+    public void paste(Subject subject){
+        if (subject.getName().length() <= 0)
+            throw new IllegalArgumentException("Introduzca el nombre");
+
+        setName(subject.getName());
+        setDescription(subject.getDescription());
+        setExamList(subject.getExamList());
+
+    }
+
 
     /**
      * @param name
@@ -64,6 +78,10 @@ public class Subject implements Parcelable {
         this.description = description;
     }
 
+
+    public void setExamList(ArrayList<Exam> examList) {
+        this.examList = examList;
+    }
 
     /**
      * @return

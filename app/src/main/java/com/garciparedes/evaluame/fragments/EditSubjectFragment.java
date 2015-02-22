@@ -1,6 +1,7 @@
 package com.garciparedes.evaluame.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Subject;
@@ -29,7 +30,7 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
      */
     @Override
     public Subject initNewSubject() {
-        return subject;
+        return subject.copy();
     }
 
     /**
@@ -37,10 +38,9 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
      */
     @Override
     public void setOnClickButton() {
-        if (newSubject.getName().length() <= 0)
-            throw new IllegalArgumentException("Introduzca el nombre");
 
-        subject = newSubject;
+        subject.paste(newSubject);
+
         ListDB.saveData(getActivity());
     }
 

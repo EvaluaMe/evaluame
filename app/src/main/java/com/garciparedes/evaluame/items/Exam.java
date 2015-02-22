@@ -51,17 +51,24 @@ public class Exam implements Parcelable, Comparable<Exam> {
         this.mType = type;
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public Exam copy(){
+        return new Exam(getName(), getDate(),getMark(),getPercentage(),getType());
     }
 
-    public Exam copy(){
-        try {
-            return (Exam) clone();
-        }catch (CloneNotSupportedException e){
-            return new Exam();
-        }
+
+    public void paste(Exam exam){
+
+        if(exam.getName().length() <= 0)
+            throw new IllegalArgumentException("Introduce el nombre");
+
+        if(exam.getPercentage() <= 0)
+            throw new IllegalArgumentException("Introduce el porcentaje");
+
+        setName(exam.getName());
+        setDate(exam.getDate());
+        setMark(exam.getMark());
+        setPercentage(exam.getPercentage());
+        setType(exam.getType());
     }
 
     /**
