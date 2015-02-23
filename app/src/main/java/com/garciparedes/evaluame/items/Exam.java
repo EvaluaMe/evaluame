@@ -8,6 +8,7 @@ import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.enums.ExamType;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -127,6 +128,12 @@ public class Exam implements Parcelable, Comparable<Exam> {
      * @return
      */
     public String getMarkString() {
+
+        try {
+            if (getDate().after(Calendar.getInstance()))
+                return "--";
+        } catch (NullPointerException ignored){};
+
         return Number.toString(getMark());
     }
 
@@ -149,7 +156,7 @@ public class Exam implements Parcelable, Comparable<Exam> {
      * @return
      */
     public String getTypeString(Context context) {
-        return this.mType.toString();
+        return mType.toString(context);
     }
 
     /**

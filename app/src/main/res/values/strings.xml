@@ -40,6 +40,16 @@
         <item>November</item>
         <item>December</item>
     </array>
+
+
+    <array name="exam_type">
+        <item>Delivery</item>
+        <item>Continue Work</item>
+        <item>Homework</item>
+        <item>Practice</item>
+        <item>Exam</item>
+    </array>
+
     <string name="error_name">Error on name</string>
     <string name="edit_test">Edit Test</string>
     <string name="title_weighted_average">Weighted Average</string>

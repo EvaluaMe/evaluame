@@ -69,6 +69,7 @@ public class PieChartCard extends BaseChartCard {
         mChart.setTouchEnabled(false);
         mChart.setDrawLegend(false);
 
+        mChart.setDrawYValues(false);
         mChart.setDescription("");
 
         // radius of the center hole in percent of maximum radius
