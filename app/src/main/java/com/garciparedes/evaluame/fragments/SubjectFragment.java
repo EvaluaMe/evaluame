@@ -119,7 +119,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
     }
 
-    public ExamCard initCard(Exam exam) {
+    public ExamCard initCard(final Exam exam) {
         // Create a Card
         ExamCard card = new ExamCard(getActivity(), exam);
 
@@ -156,24 +156,24 @@ public class SubjectFragment extends BaseSubjectFragment {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         MenuInflater inflater = getActivity().getMenuInflater();
-        inflater.inflate(R.menu.menu_subject, menu);
+        inflater.inflate(R.menu.edit, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
-            case R.id.action_edit_subject:
+            case R.id.action_edit:
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, EditTestFragment.newInstance(subject,  clickedExam))
                         .commit();
 
                 return true;
-            case R.id.action_delete_subject:
+            case R.id.action_delete:
                 ListDB.removeTest(getActivity(), subject, clickedExam);
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, this.newInstance(subject))
+                        .replace(R.id.container, newInstance(subject))
                         .commit();
                 return true;
             default:
@@ -184,7 +184,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_subject, menu);
+        inflater.inflate(R.menu.edit, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -195,7 +195,7 @@ public class SubjectFragment extends BaseSubjectFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == R.id.action_delete_subject) {
+        if (item.getItemId() == R.id.action_delete) {
 
             deleteSubject();
 
@@ -203,7 +203,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
 
 
-        if (item.getItemId() == R.id.action_edit_subject) {
+        if (item.getItemId() == R.id.action_edit) {
 
             editSubject();
 
