@@ -33,7 +33,7 @@ public class EditTestFragment extends BaseManageTestFragment {
     @Override
     public void setOnClickButton() {
 
-        if((subject.getTotalPercentage()+ newExam.getPercentage()) > 100)
+        if((subject.getTotalPercentage() - exam.getPercentage() + newExam.getPercentage()) > 100)
             throw new IllegalArgumentException("El porcentaje no puede superar el 100%");
 
         exam.paste(newExam);

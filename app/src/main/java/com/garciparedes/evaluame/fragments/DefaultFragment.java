@@ -48,7 +48,7 @@ public class DefaultFragment extends BaseFragment {
         ArrayList<Card> cards = new ArrayList<>();
 
         cards.add(new BarChartCard(getActivity()));
-        //cards.add(new LineChartCard(getActivity()));
+        //mCards.add(new LineChartCard(getActivity()));
         cards.add(new GlobalStatsCard(getActivity()));
         cards.add(new UpcomingExamListCard(getActivity()));
 

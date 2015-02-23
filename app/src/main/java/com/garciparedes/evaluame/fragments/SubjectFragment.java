@@ -41,8 +41,10 @@ public class SubjectFragment extends BaseSubjectFragment {
     private FloatingActionButton mFAButton;
     private CardArrayRecyclerViewAdapter mCardArrayAdapter;
     private CardRecyclerView mRecyclerView;
+    private LinearLayoutManager mLayoutManager;
 
     private Exam clickedExam;
+    ArrayList<Card> mCards;
 
     public static SubjectFragment newInstance(Subject subject) {
         SubjectFragment subjectFragment = new SubjectFragment();
@@ -62,6 +64,12 @@ public class SubjectFragment extends BaseSubjectFragment {
         mRecyclerView = (CardRecyclerView) view.findViewById(R.id.subject_card_list);
         mFAButton = (FloatingActionButton) view.findViewById(R.id.floating_button);
 
+        mCards = new ArrayList<Card>();
+
+        //Standard array
+        mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), mCards);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
         return view;
     }
 
@@ -70,35 +78,31 @@ public class SubjectFragment extends BaseSubjectFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ArrayList<Card> cards = new ArrayList<Card>();
 
-        cards.add(new DescriptionCard(getActivity(), subject));
-        cards.add(new PieChartCard(getActivity(), subject));
-        cards.add(new StatsSubjectCard(getActivity(), subject));
-        //cards.add(new UpcomingExamListCard(getActivity(), subject));
+        mCards.add(new DescriptionCard(getActivity(), subject));
+        mCards.add(new PieChartCard(getActivity(), subject));
+        mCards.add(new StatsSubjectCard(getActivity(), subject));
 
-        for (int i = 0; i < subject.getExamList().size(); i++) {
-            cards.add(initCard(subject.getTestElement(i)));
+        try {
+            for (int i = 0; i < subject.getExamList().size(); i++) {
+                mCards.add(initCard(subject.getTestElement(i)));
+            }
+        } catch (NullPointerException e){
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.container, DefaultFragment.newInstance())
+                    .commit();
         }
-        //cards.add(new BannerCard(getActivity()));
 
-        //Standard array
-        mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), cards);
-
-        if (mCardArrayAdapter != null) {
-            //mCardArrayAdapter.setEnableUndo(true);
-        }
 
 
         if (mRecyclerView != null) {
             mRecyclerView.setAdapter(mCardArrayAdapter);
-            //LinearLayoutManager l = new LinearLayoutManager(getActivity());
-
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+            if (mRecyclerView.getLayoutManager() == null) {
+                mRecyclerView.setLayoutManager(mLayoutManager);
+            }
+            registerForContextMenu(mRecyclerView);
         }
 
-        registerForContextMenu(mRecyclerView);
 
         if (mFAButton != null) {
             mFAButton.attachToRecyclerView(mRecyclerView);
@@ -178,6 +182,11 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_subject, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     /**
      * @param item
@@ -247,14 +256,6 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         // show it
         alertDialog.show();
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // If the drawer is open, show the global app actions in the action bar. See also
-        // showGlobalContextActionBar, which controls the top-left area of the action bar.
-        inflater.inflate(R.menu.menu_subject, menu);
-        super.onCreateOptionsMenu(menu, inflater);
     }
 
     /**
