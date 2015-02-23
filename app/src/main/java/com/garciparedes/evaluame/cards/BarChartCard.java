@@ -34,6 +34,7 @@ public class BarChartCard extends BaseChartCard {
         mBarChart = (BarChart) parent.findViewById(R.id.card_chart_bar);
 
         if (mBarChart != null) {
+            mBarChart.setTouchEnabled(false);
             mBarChart.setDescription("");
             mBarChart.setDrawLegend(false);
             mBarChart.setDrawXLabels(false);

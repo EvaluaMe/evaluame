@@ -33,6 +33,8 @@
     <string name="over_ten">Sobre 10</string>
     <string name="error_empty_field">Completa todos los campos</string>
     <string name="set_type">Tipo</string>
+    <string name="card_empty_cardwithlist_text">No hay exámenes próximos</string>
+    <string name="days_left">dias restantes</string>
 
 
 </resources>

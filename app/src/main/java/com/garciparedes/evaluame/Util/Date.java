@@ -42,6 +42,17 @@ public class Date {
         return result.toString();
     }
 
+    public static String upcomingDays(Context context, GregorianCalendar gregorianCalendar){
+        long millis = (gregorianCalendar.getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
+        long days = 1 + (millis /(1000*60*60*24));
+        StringBuilder result = new StringBuilder();
+        result.append(days);
+        result.append(" ");
+        result.append(context.getResources().getString(R.string.days_left));
+
+        return result.toString();
+    }
+
     private static StringBuilder nullDateToString() {
         StringBuilder result = new StringBuilder();
         result.append("--");

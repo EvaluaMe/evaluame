@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -58,7 +59,7 @@ public class UpcomingExamListCard extends CardWithList {
     protected List<ListObject> initChildren() {
 
         Calendar twoWeeks = Calendar.getInstance();
-        twoWeeks.add(Calendar.DAY_OF_MONTH, 14);
+        twoWeeks.add(Calendar.DAY_OF_MONTH, 21);
 
         Calendar now = Calendar.getInstance();
         now.add(Calendar.DAY_OF_MONTH, -1);
@@ -124,11 +125,12 @@ public class UpcomingExamListCard extends CardWithList {
         public TestObject(Card parentCard, Exam exam) {
             super(parentCard);
             this.mName = exam.getName();
-            this.mDays =""+ ( (exam.getDate().getTimeInMillis() - Calendar.getInstance().getTimeInMillis()) / (1000*60*60*24));
+            this.mDays = Date.upcomingDays(getContext(), exam.getDate());
             init();
         }
 
         private void init() {
+            /*
             //OnClick Listener
             setOnItemClickListener(new OnItemClickListener() {
                 @Override
@@ -136,7 +138,7 @@ public class UpcomingExamListCard extends CardWithList {
                     Toast.makeText(getContext(), "Click on " + getObjectId(), Toast.LENGTH_SHORT).show();
                 }
             });
-
+            */
         }
     }
 }
