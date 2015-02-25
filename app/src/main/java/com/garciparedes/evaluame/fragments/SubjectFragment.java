@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
@@ -184,7 +185,12 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.star, menu);
         inflater.inflate(R.menu.edit, menu);
+
+        if (subject.isStarred()){
+            menu.getItem(0).setIcon(R.drawable.ic_action_important_dark);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -210,7 +216,27 @@ public class SubjectFragment extends BaseSubjectFragment {
             return true;
         }
 
+        if (item.getItemId() == R.id.action_starred) {
+
+            starSubject(item);
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    public  void starSubject(MenuItem item){
+        if (subject.isStarred()) {
+            subject.setStarred(false);
+            item.setIcon(getResources().getDrawable(R.drawable.ic_action_not_important_dark));
+            ListDB.saveData(getActivity());
+        } else {
+            subject.setStarred(true);
+            item.setIcon(getResources().getDrawable(R.drawable.ic_action_important_dark));
+            ListDB.saveData(getActivity());
+
+        }
     }
 
     /**

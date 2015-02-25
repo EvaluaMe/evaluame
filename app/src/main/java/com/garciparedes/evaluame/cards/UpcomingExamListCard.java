@@ -42,7 +42,7 @@ public class UpcomingExamListCard extends CardWithList {
     protected CardHeader initCardHeader() {
 
         CardHeader cardHeader = new CardHeader(getContext());
-        cardHeader.setTitle(getContext().getString(R.string.title_exams));
+        cardHeader.setTitle(getContext().getString(R.string.title_upcoming_exams));
 
         return cardHeader;
     }

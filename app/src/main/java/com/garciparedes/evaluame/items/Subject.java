@@ -15,6 +15,7 @@ public class Subject implements Parcelable {
 
     private String name;
     private String description;
+    private boolean mStarred;
     private ArrayList<Exam> examList;
 
 
@@ -33,6 +34,7 @@ public class Subject implements Parcelable {
     public Subject(String name, String description) {
         this.name = name;
         this.description = description;
+        this.mStarred = false;
         this.examList = new ArrayList<>();
     }
 
@@ -43,6 +45,7 @@ public class Subject implements Parcelable {
     public Subject(String name, String description, ArrayList<Exam> examList) {
         this.name = name;
         this.description = description;
+        this.mStarred = false;
         this.examList = examList;
     }
 
@@ -83,6 +86,10 @@ public class Subject implements Parcelable {
         this.examList = examList;
     }
 
+    public void setStarred(boolean Starred) {
+        this.mStarred = Starred;
+    }
+
     /**
      * @return
      */
@@ -98,6 +105,10 @@ public class Subject implements Parcelable {
         return description;
     }
 
+
+    public boolean isStarred() {
+        return mStarred;
+    }
 
     /**
      * @return
@@ -244,6 +255,7 @@ public class Subject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(description);
+        dest.writeByte((byte) (mStarred ? 1 : 0));
         dest.writeTypedList(examList);
     }
 
@@ -261,6 +273,7 @@ public class Subject implements Parcelable {
     private Subject(Parcel in) {
         name = in.readString();
         description = in.readString();
+        mStarred = in.readByte() != 0;
         in.readTypedList(examList, Exam.CREATOR);
     }
 }
