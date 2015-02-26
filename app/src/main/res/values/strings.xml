@@ -64,5 +64,6 @@
     <string name="action_starred">Starred</string>
     <string name="starred_subjects">Starred Subjects</string>
     <string name="title_upcoming_exams">Upcoming Exams</string>
+    <string name="star_subject_suggest">You can star subjets to show here</string>
 
 </resources>

@@ -33,8 +33,8 @@ public class NavDrawerAdapter extends ArrayAdapter<Subject> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
 
+        Subject subject = modelsArrayList.get(position);
         // 1. Create inflater
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -49,14 +49,14 @@ public class NavDrawerAdapter extends ArrayAdapter<Subject> {
         //TextView counterView = (TextView) rowView.findViewById(R.id.item_counter);
 
         TextDrawable drawable = TextDrawable.builder().buildRound(
-                modelsArrayList.get(position).getName().substring(0,1)
-                , generator.getRandomColor()
+                subject.getDropCap()
+                , subject.getColor()
         );
         imgView.setImageDrawable(drawable);
 
         // 4. Set the text for textView
         //imgView.setImageResource(modelsArrayList.get(position).getIcon());
-        titleView.setText(modelsArrayList.get(position).getName());
+        titleView.setText(subject.getName());
 //      counterView.setText(modelsArrayList.get(position).getExamList().size());
 
         return rowView;

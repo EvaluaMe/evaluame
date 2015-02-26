@@ -3,6 +3,10 @@ package com.garciparedes.evaluame.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Menu;
+import android.view.MenuInflater;
+
+import com.garciparedes.evaluame.R;
 
 /**
  * Created by garciparedes on 20/2/15.
@@ -22,6 +26,12 @@ public abstract class BaseFragment extends Fragment {
     }
     public abstract void onBackPressed();
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.global, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */

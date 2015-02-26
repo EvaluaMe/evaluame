@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.items;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.garciparedes.evaluame.Util.Color;
 import com.garciparedes.evaluame.Util.Number;
 
 import java.util.ArrayList;
@@ -15,10 +16,11 @@ public class Subject implements Parcelable {
 
     private String name;
     private String description;
-    private boolean mStarred;
     private ArrayList<Exam> examList;
 
 
+    private boolean mStarred;
+    private int mColor;
     /**
      *
      */
@@ -36,6 +38,7 @@ public class Subject implements Parcelable {
         this.description = description;
         this.mStarred = false;
         this.examList = new ArrayList<>();
+        this.mColor = Color.getRandomColor();
     }
 
     /**
@@ -47,6 +50,7 @@ public class Subject implements Parcelable {
         this.description = description;
         this.mStarred = false;
         this.examList = examList;
+        this.mColor = Color.getRandomColor();
     }
 
 
@@ -90,6 +94,10 @@ public class Subject implements Parcelable {
         this.mStarred = Starred;
     }
 
+    public void setColor(int Color) {
+        this.mColor = mColor;
+    }
+
     /**
      * @return
      */
@@ -117,6 +125,16 @@ public class Subject implements Parcelable {
         return examList;
     }
 
+    public int getColor() {
+        if(mColor == 0){
+            mColor = Color.getRandomColor();
+        }
+        return mColor;
+    }
+
+    public String getDropCap(){
+        return getName().substring(0,1);
+    }
 
     /**
      * @param i
@@ -257,6 +275,7 @@ public class Subject implements Parcelable {
         dest.writeString(description);
         dest.writeByte((byte) (mStarred ? 1 : 0));
         dest.writeTypedList(examList);
+        dest.writeInt(mColor);
     }
 
     public static final Parcelable.Creator<Subject> CREATOR
@@ -275,5 +294,6 @@ public class Subject implements Parcelable {
         description = in.readString();
         mStarred = in.readByte() != 0;
         in.readTypedList(examList, Exam.CREATOR);
+        mColor = in.readInt();
     }
 }

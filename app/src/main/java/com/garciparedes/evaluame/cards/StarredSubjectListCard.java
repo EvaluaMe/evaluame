@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
@@ -47,6 +49,7 @@ public class StarredSubjectListCard extends CardWithList {
 
     @Override
     protected void initCard() {
+        setEmptyViewViewStubLayoutId(R.layout.card_extras_empty_starred_subjects);
 
 
     }
@@ -62,7 +65,6 @@ public class StarredSubjectListCard extends CardWithList {
             if(ListDB.get(i).isStarred()){
                 mObjects.add(new TestObject(this, ListDB.get(i)));
             }
-
         }
 
 
@@ -75,11 +77,17 @@ public class StarredSubjectListCard extends CardWithList {
     public View setupChildView(int i, ListObject listObject, View view, ViewGroup viewGroup) {
         //Setup the ui elements inside the item
         TextView nameMarkView = (TextView) view.findViewById(R.id.card_subject_list_starred_inner_name);
+        ImageView imgView = (ImageView) view.findViewById(R.id.card_subject_list_starred_inner_image);
 
         //Retrieve the values from the object
         final TestObject testObject = (TestObject) listObject;
 
         nameMarkView.setText(testObject.mSubject.getName());
+        TextDrawable drawable = TextDrawable.builder().buildRound(
+                testObject.mSubject.getDropCap()
+                , testObject.mSubject.getColor()
+        );
+        imgView.setImageDrawable(drawable);
 
 
         return view;
