@@ -45,17 +45,17 @@ public class Subject implements Parcelable {
      * @param name
      * @param description
      */
-    public Subject(String name, String description, ArrayList<Exam> examList) {
+    public Subject(String name, String description, ArrayList<Exam> examList, int color) {
         this.name = name;
         this.description = description;
         this.mStarred = false;
         this.examList = examList;
-        this.mColor = Color.getRandomColor();
+        this.mColor = color;
     }
 
 
     public Subject copy(){
-        return new Subject(getName(), getDescription(), getExamList());
+        return new Subject(getName(), getDescription(), getExamList(), getColor());
 
     }
 
@@ -66,6 +66,7 @@ public class Subject implements Parcelable {
         setName(subject.getName());
         setDescription(subject.getDescription());
         setExamList(subject.getExamList());
+        setColor(subject.getColor());
 
     }
 
