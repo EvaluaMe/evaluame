@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.items.Subject;
 
 import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
@@ -27,12 +28,14 @@ public class ExamCard extends Card {
     private TextView mDateTextView;
     private TextView mTypeTextView;
 
+    private Subject subject;
     private Exam exam;
 
 
-    public ExamCard(FragmentActivity context, Exam exam) {
+    public ExamCard(FragmentActivity context,Subject subject, Exam exam) {
         super(context, R.layout.card_test);
         this.exam = exam;
+        this.subject = subject;
         init(context);
     }
 
@@ -43,7 +46,7 @@ public class ExamCard extends Card {
     private void init(Context context) {
 
         //Create a CardHeader
-        CustomCardHeader header = new CustomCardHeader(context);
+        CustomCardHeader header = new CustomCardHeader(context, subject.getColor());
         header.setTitle(exam.getName());
         addCardHeader(header);
 

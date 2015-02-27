@@ -117,7 +117,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     public ExamCard initCard(final Exam exam) {
         // Create a Card
-        ExamCard card = new ExamCard(getActivity(), exam);
+        ExamCard card = new ExamCard(getActivity(), subject, exam);
 
         card.setSwipeable(true);
         card.setId(exam.getName());
