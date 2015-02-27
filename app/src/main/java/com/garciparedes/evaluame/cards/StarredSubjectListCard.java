@@ -40,7 +40,7 @@ public class StarredSubjectListCard extends CardWithList {
     @Override
     protected CardHeader initCardHeader() {
 
-        CustomCardHeader cardHeader = new CustomCardHeader(getContext(), getContext().getResources().getColor(R.color.green_app));
+        CustomCardHeader cardHeader = new CustomCardHeader(getContext());
         cardHeader.setTitle(getContext().getString(R.string.starred_subjects));
 
         return cardHeader;

@@ -23,6 +23,11 @@ public class CustomCardHeader extends CardHeader {
         this.mColor = color;
     }
 
+    public CustomCardHeader(Context context) {
+        super(context, R.layout.card_header_custom);
+        this.mColor = context.getResources().getColor(R.color.green_app);
+    }
+
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
         super.setupInnerViewElements(parent, view);

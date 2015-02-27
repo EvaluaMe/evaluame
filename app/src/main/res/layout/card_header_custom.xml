@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
-    android:layout_margin="20dp">
+    android:layout_margin="15dp">
 
     <!-- This is the Inner Content Header which you can populate runtime
          with setupInnerViewElements(android.view.ViewGroup, android.view.View) method in CardHeader class. -->

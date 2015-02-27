@@ -30,17 +30,14 @@ public class StatsSubjectCard extends Card {
 
     public StatsSubjectCard(Context context, Subject subject) {
         super(context, R.layout.card_stats);
-        init(context);
         this.subject = subject;
+        init(context);
     }
 
     private void init(Context context) {
-
         //Create a CardHeader
-        CardHeader header = new CardHeader(context);
+        CustomCardHeader header = new CustomCardHeader(context, subject.getColor());
         header.setTitle(context.getString(R.string.title_stats));
-        //header.setButtonExpandVisible(true);
-
         addCardHeader(header);
     }
 
