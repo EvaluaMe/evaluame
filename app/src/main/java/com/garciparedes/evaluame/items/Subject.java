@@ -276,6 +276,7 @@ public class Subject implements Parcelable {
         dest.writeString(description);
         dest.writeByte((byte) (mStarred ? 1 : 0));
         dest.writeTypedList(examList);
+        //dest.writeList(examList);
         dest.writeInt(mColor);
     }
 
@@ -294,7 +295,7 @@ public class Subject implements Parcelable {
         name = in.readString();
         description = in.readString();
         mStarred = in.readByte() != 0;
-        in.readTypedList(examList, Exam.CREATOR);
+        examList = in.readArrayList(Exam.class.getClassLoader());
         mColor = in.readInt();
     }
 }

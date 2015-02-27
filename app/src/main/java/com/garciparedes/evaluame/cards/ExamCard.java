@@ -43,7 +43,7 @@ public class ExamCard extends Card {
     private void init(Context context) {
 
         //Create a CardHeader
-        CardHeader header = new CardHeader(context);
+        CustomCardHeader header = new CustomCardHeader(context);
         header.setTitle(exam.getName());
         addCardHeader(header);
 

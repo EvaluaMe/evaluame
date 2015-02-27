@@ -85,17 +85,9 @@ public class SubjectFragment extends BaseSubjectFragment {
         mCards.add(new PieChartCard(getActivity(), subject));
         mCards.add(new StatsSubjectCard(getActivity(), subject));
 
-        try {
-            for (int i = 0; i < subject.getExamList().size(); i++) {
-                mCards.add(initCard(subject.getTestElement(i)));
-            }
-        } catch (NullPointerException e){
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, DefaultFragment.newInstance())
-                    .commit();
+        for (int i = 0; i < subject.getExamList().size(); i++) {
+            mCards.add(initCard(subject.getTestElement(i)));
         }
-
-
 
         if (mRecyclerView != null) {
             mRecyclerView.setAdapter(mCardArrayAdapter);
