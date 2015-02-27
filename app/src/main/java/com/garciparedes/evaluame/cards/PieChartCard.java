@@ -87,14 +87,7 @@ public class PieChartCard extends BaseChartCard {
         yVals = new PieDataSet(null, "Company 1");
         yVals.setSliceSpace(3f);
 
-        ArrayList<Integer> colors = new ArrayList<Integer>();
-
-
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-
-
-        yVals.setColors(colors);
+        yVals.setColor(subject.getColor());
 
         data = new PieData(xVals, yVals);
 

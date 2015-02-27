@@ -2,6 +2,7 @@ package com.garciparedes.evaluame.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.ContextMenu;
@@ -106,6 +107,8 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         if (mFAButton != null) {
+            mFAButton.setColorNormal(subject.getColor());
+            mFAButton.setColorPressed(subject.getColor());
             mFAButton.attachToRecyclerView(mRecyclerView);
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
