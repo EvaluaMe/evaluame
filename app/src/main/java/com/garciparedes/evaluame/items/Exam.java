@@ -210,6 +210,7 @@ public class Exam implements Parcelable, Comparable<Exam> {
         dest.writeFloat(mark);
         dest.writeFloat(percentage);
         dest.writeSerializable(date);
+        dest.writeInt(mType.ordinal());
     }
 
     public static final Parcelable.Creator<Exam> CREATOR
@@ -228,6 +229,7 @@ public class Exam implements Parcelable, Comparable<Exam> {
         mark = in.readFloat();
         percentage = in.readFloat();
         date = (GregorianCalendar) in.readSerializable();
+        mType = ExamType.values()[in.readInt()];
     }
 
     /**
