@@ -61,5 +61,9 @@
     <string name="set_type">Type</string>
     <string name="card_empty_cardwithlist_text">No upcoming exams</string>
     <string name="days_left">days left</string>
+    <string name="action_starred">Starred</string>
+    <string name="starred_subjects">Starred Subjects</string>
+    <string name="title_upcoming_exams">Upcoming Exams</string>
+    <string name="star_subject_suggest">You can star subjets to show here</string>
 
 </resources>

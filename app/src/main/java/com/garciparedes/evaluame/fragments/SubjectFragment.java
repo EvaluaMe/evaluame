@@ -2,6 +2,7 @@ package com.garciparedes.evaluame.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.ContextMenu;
@@ -11,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
@@ -83,17 +85,9 @@ public class SubjectFragment extends BaseSubjectFragment {
         mCards.add(new PieChartCard(getActivity(), subject));
         mCards.add(new StatsSubjectCard(getActivity(), subject));
 
-        try {
-            for (int i = 0; i < subject.getExamList().size(); i++) {
-                mCards.add(initCard(subject.getTestElement(i)));
-            }
-        } catch (NullPointerException e){
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.container, DefaultFragment.newInstance())
-                    .commit();
+        for (int i = 0; i < subject.getExamList().size(); i++) {
+            mCards.add(initCard(subject.getTestElement(i)));
         }
-
-
 
         if (mRecyclerView != null) {
             mRecyclerView.setAdapter(mCardArrayAdapter);
@@ -121,7 +115,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     public ExamCard initCard(final Exam exam) {
         // Create a Card
-        ExamCard card = new ExamCard(getActivity(), exam);
+        ExamCard card = new ExamCard(getActivity(), subject, exam);
 
         card.setSwipeable(true);
         card.setId(exam.getName());
@@ -184,7 +178,12 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.star, menu);
         inflater.inflate(R.menu.edit, menu);
+
+        if (subject.isStarred()){
+            menu.getItem(0).setIcon(R.drawable.ic_action_important_dark);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -210,7 +209,27 @@ public class SubjectFragment extends BaseSubjectFragment {
             return true;
         }
 
+        if (item.getItemId() == R.id.action_starred) {
+
+            starSubject(item);
+
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    public  void starSubject(MenuItem item){
+        if (subject.isStarred()) {
+            subject.setStarred(false);
+            item.setIcon(getResources().getDrawable(R.drawable.ic_action_not_important_dark));
+            ListDB.saveData(getActivity());
+        } else {
+            subject.setStarred(true);
+            item.setIcon(getResources().getDrawable(R.drawable.ic_action_important_dark));
+            ListDB.saveData(getActivity());
+
+        }
     }
 
     /**
