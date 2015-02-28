@@ -82,10 +82,6 @@ public class NavigationDrawerFragment extends Fragment {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
-
-        mCallbacks.onNavigationDrawerItemSelected(mCurrentSelectedPosition);
-        // Select either the default item (0) or the last selected item.
-        //selectItem(mCurrentSelectedPosition);
     }
 
     @Override
@@ -260,12 +256,6 @@ public class NavigationDrawerFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mCallbacks = null;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
     }
 
     @Override

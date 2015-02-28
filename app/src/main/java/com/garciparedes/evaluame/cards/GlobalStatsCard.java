@@ -45,7 +45,7 @@ public class GlobalStatsCard extends Card {
     private void init(Context context) {
 
         //Create a CardHeader
-        CardHeader header = new CardHeader(context);
+        CustomCardHeader header = new CustomCardHeader(context);
         header.setTitle(context.getString(R.string.title_stats));
         //header.setButtonExpandVisible(true);
         addCardHeader(header);

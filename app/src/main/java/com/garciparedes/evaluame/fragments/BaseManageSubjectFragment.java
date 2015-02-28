@@ -27,12 +27,6 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
 
     protected Subject newSubject;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        newSubject = initNewSubject();
-    }
-
     /**
      * @param inflater           inflater
      * @param container          container
@@ -59,6 +53,7 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+        newSubject = initNewSubject();
 
         editTextName.setHint(getString(R.string.set_name));
         editTextName.setText(newSubject.getName());

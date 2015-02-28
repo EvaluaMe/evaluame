@@ -9,6 +9,7 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.cards.BarChartCard;
 import com.garciparedes.evaluame.cards.GlobalStatsCard;
 import com.garciparedes.evaluame.cards.LineChartCard;
+import com.garciparedes.evaluame.cards.StarredSubjectListCard;
 import com.garciparedes.evaluame.cards.UpcomingExamListCard;
 
 import java.util.ArrayList;
@@ -47,10 +48,12 @@ public class DefaultFragment extends BaseFragment {
 
         ArrayList<Card> cards = new ArrayList<>();
 
+        cards.add(new StarredSubjectListCard(getActivity(), getFragmentManager()));
         cards.add(new BarChartCard(getActivity()));
+        cards.add(new UpcomingExamListCard(getActivity()));
+
         //mCards.add(new LineChartCard(getActivity()));
         cards.add(new GlobalStatsCard(getActivity()));
-        cards.add(new UpcomingExamListCard(getActivity()));
 
         //Standard array
         CardArrayAdapter mCardArrayAdapter = new CardArrayAdapter(getActivity(), cards);

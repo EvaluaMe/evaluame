@@ -23,18 +23,18 @@ public class DescriptionCard extends Card {
 
     public DescriptionCard(Context context, Subject subject) {
         super(context, R.layout.card_details);
-        init(context);
         this.subject = subject;
+        init(context);
     }
 
     private void init(Context context) {
-
     }
 
 
     @Override
     public void setupInnerViewElements(ViewGroup parent, View view) {
 
+        parent.setBackgroundColor(subject.getColor());
         //Retrieve elements
         mTitle = (TextView) parent.findViewById(R.id.card_details_name_textView);
         mSecondaryTitle = (TextView) parent.findViewById(R.id.card_details_description_textView);
