@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:layout_alignParentLeft="true"
-    android:layout_margin="15dp">
+    android:layout_margin="10dp">
 
     <!-- This is the Inner Content Header which you can populate runtime
          with setupInnerViewElements(android.view.ViewGroup, android.view.View) method in CardHeader class. -->
@@ -20,6 +20,7 @@
         android:id="@+id/card_header_inner_simple_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_large"
         style="@style/card.header_simple_title"/>
 
 </RelativeLayout>

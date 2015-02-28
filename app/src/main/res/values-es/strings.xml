@@ -61,7 +61,7 @@
     <string name="card_empty_cardwithlist_text">No hay exámenes próximos</string>
     <string name="days_left">dias restantes</string>
     <string name="action_starred">Favorito</string>
-    <string name="starred_subjects">Asignaturas Favoritas</string>
+    <string name="starred_subjects">Asignaturas Destacadas</string>
     <string name="title_upcoming_exams">Proximos Exámenes</string>
     <string name="star_subject_suggest">Puedes destacar asignaturas para verlas aquí</string>
 

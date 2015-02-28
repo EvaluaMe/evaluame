@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Color;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.github.mikephil.charting.charts.PieChart;
@@ -77,8 +78,6 @@ public class PieChartCard extends Card {
         yVals = new PieDataSet(null, "Company 1");
         yVals.setSliceSpace(3f);
 
-        yVals.setColor(subject.getColor());
-
         data = new PieData(xVals, yVals);
 
         mChart.setData(data);
@@ -86,6 +85,7 @@ public class PieChartCard extends Card {
         for (int j = 0; j < subject.getExamList().size(); j++) {
             introduce(subject.getExamList().get(j), j);
         }
+        yVals.setColors(Color.getColorPalette(subject.getColor()));
 
         mChart.setData(data);
         mChart.animateXY(1500, 1500);

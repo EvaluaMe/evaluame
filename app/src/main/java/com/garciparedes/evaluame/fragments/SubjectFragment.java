@@ -99,8 +99,6 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         if (mFAButton != null) {
-            mFAButton.setColorNormal(subject.getColor());
-            mFAButton.setColorPressed(subject.getColor());
             mFAButton.attachToRecyclerView(mRecyclerView);
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
