@@ -64,7 +64,28 @@ public class MainActivity extends FragmentActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
 
+        if (savedInstanceState != null) {
+            //Restore the fragment's instance
+            mCurrentFragment = (BaseFragment) getSupportFragmentManager().getFragment(
+                    savedInstanceState, "mContent");
+        } else {
+            mCurrentFragment = DefaultFragment.newInstance();
+        }
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container,mCurrentFragment)
+                .commit();
+
+
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getSupportFragmentManager().putFragment(outState, "mContent", mCurrentFragment);
+    }
+
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {

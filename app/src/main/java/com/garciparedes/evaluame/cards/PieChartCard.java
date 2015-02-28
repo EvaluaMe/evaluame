@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Color;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.github.mikephil.charting.charts.PieChart;
@@ -15,12 +16,13 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
+import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
  * Created by garciparedes on 7/2/15.
  */
-public class PieChartCard extends BaseChartCard {
+public class PieChartCard extends Card {
 
 
     private PieChart mChart;
@@ -37,19 +39,9 @@ public class PieChartCard extends BaseChartCard {
      * @param context
      */
     public PieChartCard(Context context, Subject subject) {
-        this(context, R.layout.card_chart_pie);
+        super(context, R.layout.card_chart_pie);
         this.subject = subject;
-    }
-
-
-    /**
-     * @param context
-     * @param innerLayout
-     */
-    private PieChartCard(Context context, int innerLayout) {
-        super(context, innerLayout);
         init(context);
-
     }
 
 
@@ -57,7 +49,7 @@ public class PieChartCard extends BaseChartCard {
      * Init
      */
     private void init(Context context) {
-        CardHeader cardHeader = new CardHeader(context);
+        CustomCardHeader cardHeader = new CustomCardHeader(context,subject.getColor());
         cardHeader.setTitle(getContext().getString(R.string.title_chart));
         addCardHeader(cardHeader);
     }
@@ -81,20 +73,10 @@ public class PieChartCard extends BaseChartCard {
         setValues();
     }
 
-    @Override
     public void setValues() {
         xVals = new ArrayList<String>();
         yVals = new PieDataSet(null, "Company 1");
         yVals.setSliceSpace(3f);
-
-        ArrayList<Integer> colors = new ArrayList<Integer>();
-
-
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-
-
-        yVals.setColors(colors);
 
         data = new PieData(xVals, yVals);
 
@@ -103,6 +85,7 @@ public class PieChartCard extends BaseChartCard {
         for (int j = 0; j < subject.getExamList().size(); j++) {
             introduce(subject.getExamList().get(j), j);
         }
+        yVals.setColors(Color.getColorPalette(subject.getColor()));
 
         mChart.setData(data);
         mChart.animateXY(1500, 1500);

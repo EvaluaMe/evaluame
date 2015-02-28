@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.items;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.garciparedes.evaluame.Util.Color;
 import com.garciparedes.evaluame.Util.Number;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ public class Subject implements Parcelable {
     private ArrayList<Exam> examList;
 
 
+    private boolean mStarred;
+    private int mColor;
     /**
      *
      */
@@ -33,22 +36,26 @@ public class Subject implements Parcelable {
     public Subject(String name, String description) {
         this.name = name;
         this.description = description;
+        this.mStarred = false;
         this.examList = new ArrayList<>();
+        this.mColor = Color.getRandomColor();
     }
 
     /**
      * @param name
      * @param description
      */
-    public Subject(String name, String description, ArrayList<Exam> examList) {
+    public Subject(String name, String description, ArrayList<Exam> examList, int color) {
         this.name = name;
         this.description = description;
+        this.mStarred = false;
         this.examList = examList;
+        this.mColor = color;
     }
 
 
     public Subject copy(){
-        return new Subject(getName(), getDescription(), getExamList());
+        return new Subject(getName(), getDescription(), getExamList(), getColor());
 
     }
 
@@ -59,6 +66,7 @@ public class Subject implements Parcelable {
         setName(subject.getName());
         setDescription(subject.getDescription());
         setExamList(subject.getExamList());
+        setColor(subject.getColor());
 
     }
 
@@ -83,6 +91,14 @@ public class Subject implements Parcelable {
         this.examList = examList;
     }
 
+    public void setStarred(boolean Starred) {
+        this.mStarred = Starred;
+    }
+
+    public void setColor(int Color) {
+        this.mColor = mColor;
+    }
+
     /**
      * @return
      */
@@ -99,6 +115,10 @@ public class Subject implements Parcelable {
     }
 
 
+    public boolean isStarred() {
+        return mStarred;
+    }
+
     /**
      * @return
      */
@@ -106,6 +126,16 @@ public class Subject implements Parcelable {
         return examList;
     }
 
+    public int getColor() {
+        if(mColor == 0){
+            mColor = Color.getRandomColor();
+        }
+        return mColor;
+    }
+
+    public String getDropCap(){
+        return getName().substring(0,1);
+    }
 
     /**
      * @param i
@@ -244,7 +274,9 @@ public class Subject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
         dest.writeString(description);
-        dest.writeTypedList(examList);
+        dest.writeByte((byte) (mStarred ? 1 : 0));
+        dest.writeList(examList);
+        dest.writeInt(mColor);
     }
 
     public static final Parcelable.Creator<Subject> CREATOR
@@ -261,6 +293,8 @@ public class Subject implements Parcelable {
     private Subject(Parcel in) {
         name = in.readString();
         description = in.readString();
-        in.readTypedList(examList, Exam.CREATOR);
+        mStarred = in.readByte() != 0;
+        examList = in.readArrayList(Exam.class.getClassLoader());
+        mColor = in.readInt();
     }
 }

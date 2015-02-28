@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_text_dialog_name_subject"
         android:imeOptions="actionGo"
-        android:inputType="textCapSentences"
+        android:inputType="textCapSentences|textMultiLine"
         />
 
 
