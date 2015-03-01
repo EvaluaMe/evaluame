@@ -81,6 +81,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         super.onActivityCreated(savedInstanceState);
 
 
+
         mCards.add(new DescriptionCard(getActivity(), subject));
         mCards.add(new PieChartCard(getActivity(), subject));
         mCards.add(new StatsSubjectCard(getActivity(), subject));
@@ -181,10 +182,18 @@ public class SubjectFragment extends BaseSubjectFragment {
         inflater.inflate(R.menu.star, menu);
         inflater.inflate(R.menu.edit, menu);
 
-        if (subject.isStarred()){
-            menu.getItem(0).setIcon(R.drawable.ic_action_important_dark);
-        }
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        if (subject != null) {
+            if (subject.isStarred()) {
+                menu.getItem(0).setIcon(R.drawable.ic_action_important_dark);
+            }
+        }
+
+        super.onPrepareOptionsMenu(menu);
     }
 
     /**
