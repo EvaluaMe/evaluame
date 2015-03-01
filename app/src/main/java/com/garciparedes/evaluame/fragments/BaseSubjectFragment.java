@@ -20,8 +20,6 @@ public abstract class BaseSubjectFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        subject = getArguments().getParcelable("subject");
-
     }
 
     @Override
@@ -30,6 +28,8 @@ public abstract class BaseSubjectFragment extends BaseFragment {
 
         if (savedInstanceState != null) {
             subject = savedInstanceState.getParcelable("subject_saved");
+        } else {
+            subject = getArguments().getParcelable("subject");
         }
 
     }

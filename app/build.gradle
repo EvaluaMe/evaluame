@@ -7,8 +7,8 @@ android {
         applicationId 'com.garciparedes.evaluame'
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 4
-        versionName '1.1.2'
+        versionCode 3
+        versionName '1.1.1'
     }
     buildTypes {
         release {
@@ -23,15 +23,21 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:support-v4:21.0.3'
     provided 'com.melnykov:floatingactionbutton:1.1.0'
-    provided('com.doomonafireball.betterpickers:library:1.5.4') {
+    provided('com.doomonafireball.betterpickers:library:1.5.3') {
         exclude group: 'com.android.support', module: 'support-v4'
     }
+
     //Core
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.0.1'
+
     //Optional for built-in cards
     compile 'com.github.gabrielemariotti.cards:cardslib-cards:2.0.1'
+
     //Optional for RecyclerView
     compile 'com.github.gabrielemariotti.cards:cardslib-recyclerview:2.0.1'
+
     compile 'com.github.amlcurran.showcaseview:library:5.0.0'
+
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
+
 }
