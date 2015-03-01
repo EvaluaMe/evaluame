@@ -44,6 +44,7 @@ public class SubjectFragment extends BaseSubjectFragment {
     private CardArrayRecyclerViewAdapter mCardArrayAdapter;
     private CardRecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
+    private Menu mOptionsMenu;
 
     private Exam clickedExam;
     ArrayList<Card> mCards;
@@ -72,6 +73,9 @@ public class SubjectFragment extends BaseSubjectFragment {
         mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), mCards);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
+
+        updateOptionsMenu();
+
         return view;
     }
 
@@ -180,13 +184,20 @@ public class SubjectFragment extends BaseSubjectFragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.star, menu);
         inflater.inflate(R.menu.edit, menu);
-
-        if (subject.isStarred()){
-            menu.getItem(0).setIcon(R.drawable.ic_action_important_dark);
-        }
+        mOptionsMenu = menu;
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+
+    private void updateOptionsMenu() {
+        if (mOptionsMenu != null) {
+
+            if (subject.isStarred()){
+                mOptionsMenu.getItem(0).setIcon(R.drawable.ic_action_important_dark);
+            }
+
+        }
+    }
     /**
      * @param item
      * @return
