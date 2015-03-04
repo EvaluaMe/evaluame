@@ -78,7 +78,7 @@ public class ListDB {
 
     /**
      * @param context context
-     * @param subject subject
+     * @param subject mSubject
      * @param exam    exam
      */
     public static void addTest(Context context, Subject subject, Exam exam) {

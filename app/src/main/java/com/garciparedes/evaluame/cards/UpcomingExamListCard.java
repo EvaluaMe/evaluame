@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
+import com.garciparedes.evaluame.fragments.ExamFragment;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -81,8 +82,8 @@ public class UpcomingExamListCard extends CardWithList {
                     }
                 }catch (NullPointerException ignored){};
 
-                //TestObject testObject = new TestObject(this, subject.getTestElement(i));
-                //testObject.setObjectId(subject.getTestElement(i).getName());
+                //TestObject testObject = new TestObject(this, mSubject.getTestElement(i));
+                //testObject.setObjectId(mSubject.getTestElement(i).getName());
                 //testObject.setSwipeable(true);
                 //mObjects.add(testObject);
             }
@@ -130,15 +131,17 @@ public class UpcomingExamListCard extends CardWithList {
         }
 
         private void init() {
-            /*
+
             //OnClick Listener
             setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
-                    Toast.makeText(getContext(), "Click on " + getObjectId(), Toast.LENGTH_SHORT).show();
+                    //getFragmentManager().beginTransaction()
+                    //        .replace(R.id.container, ExamFragment.newInstance(mSubject, exam))
+                    //        .commit();
                 }
             });
-            */
+
         }
     }
 }

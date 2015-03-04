@@ -2,7 +2,6 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.enums.ExamType;
@@ -222,7 +220,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void replaceFragment() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(subject))
+                .replace(R.id.container, ExamFragment.newInstance(mSubject, newExam))
                 .commit();
     }
 

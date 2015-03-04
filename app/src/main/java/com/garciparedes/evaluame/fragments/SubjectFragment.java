@@ -2,7 +2,6 @@ package com.garciparedes.evaluame.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.ContextMenu;
@@ -12,7 +11,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
@@ -51,7 +49,7 @@ public class SubjectFragment extends BaseSubjectFragment {
     public static SubjectFragment newInstance(Subject subject) {
         SubjectFragment subjectFragment = new SubjectFragment();
         Bundle args = new Bundle();
-        args.putParcelable("subject", subject);
+        args.putParcelable(SUBJECT, subject);
         subjectFragment.setArguments(args);
         return subjectFragment;
     }
@@ -82,12 +80,12 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
 
-        mCards.add(new DescriptionCard(getActivity(), subject));
-        mCards.add(new PieChartCard(getActivity(), subject));
-        mCards.add(new StatsSubjectCard(getActivity(), subject));
+        mCards.add(new DescriptionCard(getActivity(), mSubject));
+        mCards.add(new PieChartCard(getActivity(), mSubject));
+        mCards.add(new StatsSubjectCard(getActivity(), mSubject));
 
-        for (int i = 0; i < subject.getExamList().size(); i++) {
-            mCards.add(initCard(subject.getTestElement(i)));
+        for (int i = 0; i < mSubject.getExamList().size(); i++) {
+            mCards.add(initCard(mSubject.getTestElement(i)));
         }
 
         if (mRecyclerView != null) {
@@ -106,7 +104,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                 public void onClick(View v) {
 
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.container, AddTestFragment.newInstance(subject))
+                            .replace(R.id.container, AddTestFragment.newInstance(mSubject))
                             .commit();
 
                 }
@@ -116,7 +114,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     public ExamCard initCard(final Exam exam) {
         // Create a Card
-        ExamCard card = new ExamCard(getActivity(), subject, exam);
+        ExamCard card = new ExamCard(getActivity(), mSubject, exam);
 
         card.setSwipeable(true);
         card.setId(exam.getName());
@@ -126,12 +124,20 @@ public class SubjectFragment extends BaseSubjectFragment {
             @Override
             public void onButtonItemClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, EditTestFragment.newInstance(subject, ((ExamCard) card).getExam()))
+                        .replace(R.id.container, EditTestFragment.newInstance(mSubject, ((ExamCard) card).getExam()))
                         .commit();
 
             }
         });
 
+        card.setOnClickListener(new Card.OnCardClickListener() {
+            @Override
+            public void onClick(Card card, View view) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, ExamFragment.newInstance(mSubject, exam))
+                        .commit();
+            }
+        });
         card.setLongClickable(true);
         card.setOnLongClickListener(new Card.OnLongCardClickListener() {
             @Override
@@ -160,15 +166,15 @@ public class SubjectFragment extends BaseSubjectFragment {
         switch (item.getItemId()) {
             case R.id.action_edit:
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, EditTestFragment.newInstance(subject,  clickedExam))
+                        .replace(R.id.container, EditTestFragment.newInstance(mSubject,  clickedExam))
                         .commit();
 
                 return true;
             case R.id.action_delete:
-                ListDB.removeTest(getActivity(), subject, clickedExam);
+                ListDB.removeTest(getActivity(), mSubject, clickedExam);
 
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, newInstance(subject))
+                        .replace(R.id.container, newInstance(mSubject))
                         .commit();
                 return true;
             default:
@@ -187,8 +193,8 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        if (subject != null) {
-            if (subject.isStarred()) {
+        if (mSubject != null) {
+            if (mSubject.isStarred()) {
                 menu.getItem(0).setIcon(R.drawable.ic_action_important_dark);
             }
         }
@@ -229,12 +235,12 @@ public class SubjectFragment extends BaseSubjectFragment {
     }
 
     public  void starSubject(MenuItem item){
-        if (subject.isStarred()) {
-            subject.setStarred(false);
+        if (mSubject.isStarred()) {
+            mSubject.setStarred(false);
             item.setIcon(getResources().getDrawable(R.drawable.ic_action_not_important_dark));
             ListDB.saveData(getActivity());
         } else {
-            subject.setStarred(true);
+            mSubject.setStarred(true);
             item.setIcon(getResources().getDrawable(R.drawable.ic_action_important_dark));
             ListDB.saveData(getActivity());
 
@@ -260,7 +266,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                         // if this button is clicked, close
                         // current activity
 
-                        ListDB.removeSubject(getActivity(), subject);
+                        ListDB.removeSubject(getActivity(), mSubject);
                         //updateListView();
                         ((MainActivity) getActivity()).update();
 
@@ -291,7 +297,7 @@ public class SubjectFragment extends BaseSubjectFragment {
      */
     public void editSubject() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, EditSubjectFragment.newInstance(subject))
+                .replace(R.id.container, EditSubjectFragment.newInstance(mSubject))
                 .commit();
 
     }
