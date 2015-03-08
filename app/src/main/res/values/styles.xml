@@ -7,7 +7,7 @@
         <!-- Set AppCompat’s color theming attrs -->
 
         <item name="colorPrimary">@color/green_app</item>
-        <item name="colorPrimaryDark">@color/green_app</item>
+        <item name="colorPrimaryDark">@color/green_app_dark</item>
 
 
     <!-- The rest of your attributes -->
