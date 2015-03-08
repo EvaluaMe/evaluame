@@ -1,6 +1,7 @@
 package com.garciparedes.evaluame.cards;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.fragments.ExamFragment;
+import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -31,10 +33,13 @@ public class UpcomingExamListCard extends CardWithList {
 
 
     private ArrayList<Exam> upcomingExams;
+    private FragmentManager fragmentManager;
 
 
-    public UpcomingExamListCard(Context context) {
+    public UpcomingExamListCard(Context context,  FragmentManager fragmentManager) {
         super(context);
+        this.fragmentManager = fragmentManager;
+
         init();
     }
 
@@ -68,17 +73,17 @@ public class UpcomingExamListCard extends CardWithList {
         List<ListObject> mObjects = new ArrayList<ListObject>();
 
         for(int i = 0; i < ListDB.getMasterList().size(); i++){
-            Subject subject = ListDB.get(i);
+            final Subject subject = ListDB.get(i);
 
             for (int j = 0; j < subject.getExamList().size(); j++) {
 
-                Exam exam = subject.getTestElement(j);
+                final Exam exam = subject.getTestElement(j);
                 try {
 
 
                     if (exam.getDate().before(twoWeeks) && exam.getDate().after(now)) {
                         System.out.print(exam.getName());
-                        mObjects.add(new TestObject(this, exam));
+                        mObjects.add(new TestObject(this, exam, subject));
                     }
                 }catch (NullPointerException ignored){};
 
@@ -123,22 +128,22 @@ public class UpcomingExamListCard extends CardWithList {
         String mName;
         String mDays;
 
-        public TestObject(Card parentCard, Exam exam) {
+        public TestObject(Card parentCard, Exam exam, Subject subject) {
             super(parentCard);
             this.mName = exam.getName();
             this.mDays = Date.upcomingDays(getContext(), exam.getDate());
-            init();
+            init(exam, subject);
         }
 
-        private void init() {
+        private void init(final Exam exam, final Subject subject) {
 
             //OnClick Listener
             setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
-                    //getFragmentManager().beginTransaction()
-                    //        .replace(R.id.container, ExamFragment.newInstance(mSubject, exam))
-                    //        .commit();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, ExamFragment.newInstance(subject, exam))
+                            .commit();
                 }
             });
 

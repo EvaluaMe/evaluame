@@ -64,5 +64,6 @@
     <string name="starred_subjects">Asignaturas Destacadas</string>
     <string name="title_upcoming_exams">Proximos Exámenes</string>
     <string name="star_subject_suggest">Puedes destacar asignaturas para acceder a ellas desde aquí.</string>
+    <string name="delete_mark_confirmation">¿Estás seguro de que quieres eliminar esta calificación?</string>
 
 </resources>

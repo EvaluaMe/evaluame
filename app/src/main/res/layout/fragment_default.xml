@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout"
-        style="@style/list_card.thumbnail"/>
+        card:list_card_layout_resourceID="@layout/list_card_thumbnail_layout"/>
 
 </FrameLayout>

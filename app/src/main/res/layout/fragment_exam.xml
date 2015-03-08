@@ -5,10 +5,37 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exam Fragment"/>
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/fragment_exam_name_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exam Fragment"/>
+        <TextView
+            android:id="@+id/fragment_exam_value_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exam Fragment"/>
+        <TextView
+            android:id="@+id/fragment_exam_date_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exam Fragment"/>
 
+        <TextView
+            android:id="@+id/fragment_exam_type_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exam Fragment"/>
+        <TextView
+            android:id="@+id/fragment_exam_mark_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exam Fragment"/>
+
+    </LinearLayout>
 </LinearLayout>
