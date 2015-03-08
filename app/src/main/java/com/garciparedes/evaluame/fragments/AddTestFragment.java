@@ -52,4 +52,11 @@ public class AddTestFragment extends BaseManageTestFragment {
     public String setTextPercentage() {
         return defaultText;
     }
+
+    @Override
+    public void onBackPressed() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
+                .commit();
+    }
 }
