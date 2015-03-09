@@ -1,67 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_margin="18dp"
-    android:gravity="center_vertical"
     android:layout_height="wrap_content">
 
 
-    <TextView
-        android:id="@+id/card_stats_weightedAverage_title_textView"
-        android:layout_width="wrap_content"
+    <!-- 2 columns -->
+    <TableRow
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="26dp"
-        android:textAlignment="center"
-        android:text="Weighted Average:"/>
+        android:padding="5dip">
 
-    <TextView
-        android:id="@+id/card_stats_weightedAverage_value_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="26dp"
-        android:textAlignment="center"
-        android:text="6.7"
-        android:layout_alignParentRight="true"
-        />
 
-    <TextView
-        android:id="@+id/card_stats_average_title_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/card_stats_weightedAverage_title_textView"
-        android:textSize="26dp"
-        android:textAlignment="center"
-        android:text="Average:"/>
-    <TextView
-        android:id="@+id/card_stats_average_value_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/card_stats_weightedAverage_value_textView"
-        android:textSize="26dp"
-        android:textAlignment="center"
-        android:text="8"
-        android:layout_alignParentRight="true"/>
+        <TextView
+            android:id="@+id/card_stats_weightedAverage_title_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_large"
+            android:text="Weighted Average:"
+            android:layout_weight="1"/>
 
-    <TextView
-        android:id="@+id/card_stats_ratio_title_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/card_stats_average_title_textView"
-        android:textSize="26dp"
-        android:textAlignment="center"
-        android:text="Ratio:"/>
+        <TextView
+            android:id="@+id/card_stats_weightedAverage_value_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size_large"
+            android:text="6.722"
+            android:gravity="center"
+            android:singleLine="true"
+            />
+    </TableRow>
 
-    <TextView
-        android:id="@+id/card_stats_ratio_value_textView"
-        android:layout_width="wrap_content"
+    <TableRow
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/card_stats_average_value_textView"
-        android:textSize="26dp"
-        android:textAlignment="center"
-        android:text="1"
-        android:layout_alignParentRight="true"
-        />
+        android:padding="5dip" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/card_stats_average_title_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size_large"
+            android:text="Average:"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/card_stats_average_value_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size_large"
+            android:gravity="center"
+            android:text="8" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip" >
+
+        <TextView
+            android:id="@+id/card_stats_ratio_title_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size_large"
+            android:text="Ratio: "
+            android:layout_weight="1"
+            />
+
+        <TextView
+            android:id="@+id/card_stats_ratio_value_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/text_size_large"
+            android:text="1"
+            android:gravity="center"
+            />
+    </TableRow>
+
+
+</TableLayout>
