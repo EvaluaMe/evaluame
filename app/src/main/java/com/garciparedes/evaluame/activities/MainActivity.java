@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
 import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -39,13 +41,20 @@ public class MainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         getData();
-
         setContentView(R.layout.activity_main);
+
+        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        //setSupportActionBar(mToolbar);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -113,8 +122,13 @@ public class MainActivity extends ActionBarActivity
 
     public void restoreActionBar() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        if (mToolbar == null) {
+            mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+            if (mToolbar != null){
+                mToolbar.setBackgroundColor(getResources().getColor(R.color.violet));
+            }
+        }
+
 
         //ActionBar actionBar = getActionBar();
         //actionBar.setDisplayShowTitleEnabled(true);
@@ -134,7 +148,7 @@ public class MainActivity extends ActionBarActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             //getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
+            //restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);

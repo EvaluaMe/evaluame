@@ -2,15 +2,19 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Set AppCompat’s actionBarStyle -->
-
-        <!-- Set AppCompat’s color theming attrs -->
-
         <item name="colorPrimary">@color/green_app</item>
         <item name="colorPrimaryDark">@color/green_app_dark</item>
+        <item name="colorAccent">@color/green_app_pressed</item>
+        <item name="android:windowContentOverlay">@null</item>
 
+        <!--<item name="alertDialogTheme">@style/AppTheme.AlertDialog</item>-->
+        <!--<item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>-->
+        <!--<item name="android:actionBarTabBarStyle">@style/AppTheme.ActionBar.TabBar</item>-->
+        <!--<item name="circleButtonStyle">@style/AppTheme.CircleButton</item>-->
+    </style>
 
-    <!-- The rest of your attributes -->
+    <style name="AppTheme.Toolbar" parent="AppTheme">
+        <item name="android:textColorPrimary">@android:color/white</item>
     </style>
 
     <style name="subject_name_font" parent="@android:style/TextAppearance.Medium">
