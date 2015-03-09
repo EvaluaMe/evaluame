@@ -81,7 +81,9 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         mCards.add(new DescriptionCard(getActivity(), mSubject));
-        mCards.add(new PieChartCard(getActivity(), mSubject));
+        if (mSubject.getWeightedAverage() > 0) {
+            mCards.add(new PieChartCard(getActivity(), mSubject));
+        }
         mCards.add(new StatsSubjectCard(getActivity(), mSubject));
 
         for (int i = 0; i < mSubject.getExamList().size(); i++) {
