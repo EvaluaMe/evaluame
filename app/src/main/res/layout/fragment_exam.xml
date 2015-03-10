@@ -1,41 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <LinearLayout
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_edit"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/fragment_exam_name_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="Name"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_edit"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/fragment_exam_value_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+
+            android:text="30%"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_edit"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/fragment_exam_date_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="23/marzo/2015"/>
+
+    </TableRow>
+
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_margin="10dp">
-        <TextView
-            android:id="@+id/fragment_exam_name_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exam Fragment"/>
-        <TextView
-            android:id="@+id/fragment_exam_value_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exam Fragment"/>
-        <TextView
-            android:id="@+id/fragment_exam_date_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exam Fragment"/>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_edit"
+            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/fragment_exam_type_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exam Fragment"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="Exam"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_edit"
+            android:layout_weight="1"/>
+
         <TextView
             android:id="@+id/fragment_exam_mark_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exam Fragment"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="4"/>
 
-    </LinearLayout>
-</LinearLayout>
+    </TableRow>
+
+</TableLayout>
