@@ -6,16 +6,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.*;
 import com.garciparedes.evaluame.Util.Number;
-import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.items.Mark;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 import java.util.Calendar;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
  * Created by garciparedes on 22/2/15.
@@ -62,14 +60,14 @@ public class GlobalStatsCard extends Card {
         for(int i = 0; i < ListDB.getMasterList().size(); i++){
             Subject subject = ListDB.get(i);
 
-            for (int j = 0; j < subject.getExamList().size(); j++) {
+            for (int j = 0; j < subject.getMarkList().size(); j++) {
 
-                Exam exam = subject.getTestElement(j);
+                Mark mark = subject.getTestElement(j);
                 try {
-                    if (exam.getDate().before(now)) {
-                        total += exam.getMark();
+                    if (mark.getDate().before(now)) {
+                        total += mark.getValue();
 
-                        if (exam.getMark() >= 5) {
+                        if (mark.getValue() >= 5) {
                             pass++;
                         }
                         count++;

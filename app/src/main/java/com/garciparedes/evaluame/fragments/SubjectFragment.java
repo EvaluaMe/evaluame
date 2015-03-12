@@ -18,7 +18,7 @@ import com.garciparedes.evaluame.cards.DescriptionCard;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
 import com.garciparedes.evaluame.cards.StatsSubjectCard;
-import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.items.Mark;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
@@ -43,7 +43,7 @@ public class SubjectFragment extends BaseSubjectFragment {
     private CardRecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
 
-    private Exam clickedExam;
+    private Mark clickedMark;
     ArrayList<Card> mCards;
 
     public static SubjectFragment newInstance(Subject subject) {
@@ -86,7 +86,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
         mCards.add(new StatsSubjectCard(getActivity(), mSubject));
 
-        for (int i = 0; i < mSubject.getExamList().size(); i++) {
+        for (int i = 0; i < mSubject.getMarkList().size(); i++) {
             mCards.add(initCard(mSubject.getTestElement(i)));
         }
 
@@ -106,7 +106,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                 public void onClick(View v) {
 
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.container, AddTestFragment.newInstance(mSubject))
+                            .replace(R.id.container, AddMarkFragment.newInstance(mSubject))
                             .commit();
 
                 }
@@ -114,19 +114,19 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
     }
 
-    public ExamCard initCard(final Exam exam) {
+    public ExamCard initCard(final Mark mark) {
         // Create a Card
-        ExamCard card = new ExamCard(getActivity(), mSubject, exam);
+        ExamCard card = new ExamCard(getActivity(), mSubject, mark);
 
         card.setSwipeable(true);
-        card.setId(exam.getName());
+        card.setId(mark.getName());
 
 
         card.getCardHeader().setOtherButtonClickListener(new CardHeader.OnClickCardHeaderOtherButtonListener() {
             @Override
             public void onButtonItemClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, EditTestFragment.newInstance(mSubject, ((ExamCard) card).getExam()))
+                        .replace(R.id.container, EditMarkFragment.newInstance(mSubject, ((ExamCard) card).getMark()))
                         .commit();
 
             }
@@ -136,7 +136,7 @@ public class SubjectFragment extends BaseSubjectFragment {
             @Override
             public void onClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, ExamFragment.newInstance(mSubject, exam))
+                        .replace(R.id.container, MarkFragment.newInstance(mSubject, mark))
                         .commit();
             }
         });
@@ -144,7 +144,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         card.setOnLongClickListener(new Card.OnLongCardClickListener() {
             @Override
             public boolean onLongClick(Card card, View view) {
-                clickedExam =((ExamCard) card).getExam();
+                clickedMark =((ExamCard) card).getMark();
                 return false;
             }
         });
@@ -168,12 +168,12 @@ public class SubjectFragment extends BaseSubjectFragment {
         switch (item.getItemId()) {
             case R.id.action_edit:
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, EditTestFragment.newInstance(mSubject,  clickedExam))
+                        .replace(R.id.container, EditMarkFragment.newInstance(mSubject, clickedMark))
                         .commit();
 
                 return true;
             case R.id.action_delete:
-                ListDB.removeTest(getActivity(), mSubject, clickedExam);
+                ListDB.removeTest(getActivity(), mSubject, clickedMark);
 
                 getFragmentManager().beginTransaction()
                         .replace(R.id.container, newInstance(mSubject))

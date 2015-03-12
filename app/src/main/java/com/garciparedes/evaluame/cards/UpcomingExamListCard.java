@@ -5,19 +5,16 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
-import com.garciparedes.evaluame.fragments.ExamFragment;
-import com.garciparedes.evaluame.fragments.SubjectFragment;
-import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.fragments.MarkFragment;
+import com.garciparedes.evaluame.items.Mark;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import it.gmariotti.cardslib.library.internal.Card;
@@ -32,7 +29,7 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
 public class UpcomingExamListCard extends CardWithList {
 
 
-    private ArrayList<Exam> upcomingExams;
+    private ArrayList<Mark> upcomingMarks;
     private FragmentManager fragmentManager;
 
 
@@ -75,15 +72,15 @@ public class UpcomingExamListCard extends CardWithList {
         for(int i = 0; i < ListDB.getMasterList().size(); i++){
             final Subject subject = ListDB.get(i);
 
-            for (int j = 0; j < subject.getExamList().size(); j++) {
+            for (int j = 0; j < subject.getMarkList().size(); j++) {
 
-                final Exam exam = subject.getTestElement(j);
+                final Mark mark = subject.getTestElement(j);
                 try {
 
 
-                    if (exam.getDate().before(twoWeeks) && exam.getDate().after(now)) {
-                        System.out.print(exam.getName());
-                        mObjects.add(new TestObject(this, exam, subject));
+                    if (mark.getDate().before(twoWeeks) && mark.getDate().after(now)) {
+                        System.out.print(mark.getName());
+                        mObjects.add(new TestObject(this, mark, subject));
                     }
                 }catch (NullPointerException ignored){};
 
@@ -128,21 +125,21 @@ public class UpcomingExamListCard extends CardWithList {
         String mName;
         String mDays;
 
-        public TestObject(Card parentCard, Exam exam, Subject subject) {
+        public TestObject(Card parentCard, Mark mark, Subject subject) {
             super(parentCard);
-            this.mName = exam.getName();
-            this.mDays = Date.upcomingDays(getContext(), exam.getDate());
-            init(exam, subject);
+            this.mName = mark.getName();
+            this.mDays = Date.upcomingDays(getContext(), mark.getDate());
+            init(mark, subject);
         }
 
-        private void init(final Exam exam, final Subject subject) {
+        private void init(final Mark mark, final Subject subject) {
 
             //OnClick Listener
             setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, ExamFragment.newInstance(subject, exam))
+                            .replace(R.id.container, MarkFragment.newInstance(subject, mark))
                             .commit();
                 }
             });

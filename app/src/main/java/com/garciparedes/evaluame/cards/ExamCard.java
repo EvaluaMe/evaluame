@@ -2,20 +2,16 @@ package com.garciparedes.evaluame.cards;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.items.Mark;
 import com.garciparedes.evaluame.items.Subject;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
-import it.gmariotti.cardslib.library.internal.base.BaseCard;
 
 /**
  * Created by garciparedes on 8/2/15.
@@ -29,25 +25,25 @@ public class ExamCard extends Card {
     private TextView mTypeTextView;
 
     private Subject subject;
-    private Exam exam;
+    private Mark mMark;
 
 
-    public ExamCard(FragmentActivity context,Subject subject, Exam exam) {
+    public ExamCard(FragmentActivity context,Subject subject, Mark mark) {
         super(context, R.layout.card_test);
-        this.exam = exam;
+        this.mMark = mark;
         this.subject = subject;
         init(context);
     }
 
-    public Exam getExam() {
-        return exam;
+    public Mark getMark() {
+        return mMark;
     }
 
     private void init(Context context) {
 
         //Create a CardHeader
         CustomCardHeader header = new CustomCardHeader(context, subject.getColor());
-        header.setTitle(exam.getName());
+        header.setTitle(mMark.getName());
         addCardHeader(header);
 
     }
@@ -63,24 +59,24 @@ public class ExamCard extends Card {
         mTypeTextView = (TextView) parent.findViewById(R.id.card_test_type_textView);
 
         if (mMarkTextView != null) {
-            mMarkTextView.setText(exam.getMarkString());
+            mMarkTextView.setText(mMark.getMarkString());
         }
 
         if (mPercentageTextView != null) {
-            mPercentageTextView.setText(exam.getPercentageString());
+            mPercentageTextView.setText(mMark.getPercentageString());
         }
 
         if (mDateTextView != null) {
-            mDateTextView.setText(exam.getDateString(getContext()));
+            mDateTextView.setText(mMark.getDateString(getContext()));
         }
 
         if (mTypeTextView != null) {
-            mTypeTextView.setText(exam.getTypeString(getContext()));
+            mTypeTextView.setText(mMark.getTypeString(getContext()));
         }
 
         if (mMarkProgressBar != null) {
             mMarkProgressBar.setMax(10);
-            mMarkProgressBar.setProgress((int) (exam.getMark()));
+            mMarkProgressBar.setProgress((int) (mMark.getValue()));
 
         }
     }

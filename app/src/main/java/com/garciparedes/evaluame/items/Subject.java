@@ -16,7 +16,7 @@ public class Subject implements Parcelable {
 
     private String name;
     private String description;
-    private ArrayList<Exam> examList;
+    private ArrayList<Mark> mMarkList;
 
 
     private boolean mStarred;
@@ -25,7 +25,7 @@ public class Subject implements Parcelable {
      *
      */
     public Subject() {
-        this.examList = new ArrayList<>();
+        this.mMarkList = new ArrayList<>();
     }
 
 
@@ -37,7 +37,7 @@ public class Subject implements Parcelable {
         this.name = name;
         this.description = description;
         this.mStarred = false;
-        this.examList = new ArrayList<>();
+        this.mMarkList = new ArrayList<>();
         this.mColor = Color.getRandomColor();
     }
 
@@ -45,17 +45,17 @@ public class Subject implements Parcelable {
      * @param name
      * @param description
      */
-    public Subject(String name, String description, ArrayList<Exam> examList, int color) {
+    public Subject(String name, String description, ArrayList<Mark> markList, int color) {
         this.name = name;
         this.description = description;
         this.mStarred = false;
-        this.examList = examList;
+        this.mMarkList = markList;
         this.mColor = color;
     }
 
 
     public Subject copy(){
-        return new Subject(getName(), getDescription(), getExamList(), getColor());
+        return new Subject(getName(), getDescription(), getMarkList(), getColor());
 
     }
 
@@ -65,7 +65,7 @@ public class Subject implements Parcelable {
 
         setName(subject.getName());
         setDescription(subject.getDescription());
-        setExamList(subject.getExamList());
+        setMarkList(subject.getMarkList());
         setColor(subject.getColor());
 
     }
@@ -87,8 +87,8 @@ public class Subject implements Parcelable {
     }
 
 
-    public void setExamList(ArrayList<Exam> examList) {
-        this.examList = examList;
+    public void setMarkList(ArrayList<Mark> mMarkList) {
+        this.mMarkList = mMarkList;
     }
 
     public void setStarred(boolean Starred) {
@@ -122,8 +122,8 @@ public class Subject implements Parcelable {
     /**
      * @return
      */
-    public ArrayList<Exam> getExamList() {
-        return examList;
+    public ArrayList<Mark> getMarkList() {
+        return mMarkList;
     }
 
     public int getColor() {
@@ -141,9 +141,9 @@ public class Subject implements Parcelable {
      * @param i
      * @return
      */
-    public Exam getTestElement(int i) {
+    public Mark getTestElement(int i) {
         try {
-            return getExamList().get(i);
+            return getMarkList().get(i);
         } catch (NullPointerException e) {
             return null;
         }
@@ -151,10 +151,10 @@ public class Subject implements Parcelable {
 
 
     /**
-     * @param exam
+     * @param mark
      */
-    public void addTestElement(Exam exam) {
-        getExamList().add(exam);
+    public void addTestElement(Mark mark) {
+        getMarkList().add(mark);
     }
 
 
@@ -165,11 +165,11 @@ public class Subject implements Parcelable {
 
         float sum = 0;
 
-        for (int i = 0; i < getExamList().size(); i++) {
-            sum += getTestElement(i).getMark();
+        for (int i = 0; i < getMarkList().size(); i++) {
+            sum += getTestElement(i).getValue();
         }
 
-        Float f = sum / getExamList().size();
+        Float f = sum / getMarkList().size();
         if (f.isNaN()) {
             f = (float) 0;
         }
@@ -190,15 +190,15 @@ public class Subject implements Parcelable {
     public float getRatio() {
         int pass = 0;
 
-        if (getExamList().size() > 0) {
+        if (getMarkList().size() > 0) {
 
-            for (int i = 0; i < getExamList().size(); i++) {
-                if (getExamList().get(i).getMark() >= 5) {
+            for (int i = 0; i < getMarkList().size(); i++) {
+                if (getMarkList().get(i).getValue() >= 5) {
                     pass++;
                 }
             }
 
-            return ((float) pass / getExamList().size());
+            return ((float) pass / getMarkList().size());
 
         } else {
 
@@ -222,7 +222,7 @@ public class Subject implements Parcelable {
     public float getTotalPercentage() {
         float sum = 0;
 
-        for (int i = 0; i < getExamList().size(); i++) {
+        for (int i = 0; i < getMarkList().size(); i++) {
             sum += getTestElement(i).getPercentage();
         }
         return sum;
@@ -231,8 +231,8 @@ public class Subject implements Parcelable {
 
     public float getWeightedAverage() {
         float dividend = 0;
-        for (int i = 0; i < getExamList().size(); i++) {
-            dividend += getTestElement(i).getMark() * getTestElement(i).getPercentage();
+        for (int i = 0; i < getMarkList().size(); i++) {
+            dividend += getTestElement(i).getValue() * getTestElement(i).getPercentage();
         }
         return dividend / 100;
     }
@@ -245,10 +245,10 @@ public class Subject implements Parcelable {
     }
 
     /**
-     * @param exam
+     * @param mark
      */
-    public void removeTest(Exam exam) {
-        examList.remove(exam);
+    public void removeTest(Mark mark) {
+        mMarkList.remove(mark);
     }
 
     /**
@@ -275,7 +275,7 @@ public class Subject implements Parcelable {
         dest.writeString(name);
         dest.writeString(description);
         dest.writeByte((byte) (mStarred ? 1 : 0));
-        dest.writeList(examList);
+        dest.writeList(mMarkList);
         dest.writeInt(mColor);
     }
 
@@ -294,7 +294,7 @@ public class Subject implements Parcelable {
         name = in.readString();
         description = in.readString();
         mStarred = in.readByte() != 0;
-        examList = in.readArrayList(Exam.class.getClassLoader());
+        mMarkList = in.readArrayList(Mark.class.getClassLoader());
         mColor = in.readInt();
     }
 }
