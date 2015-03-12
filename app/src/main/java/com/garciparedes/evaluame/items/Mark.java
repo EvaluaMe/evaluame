@@ -14,11 +14,11 @@ import java.util.GregorianCalendar;
 /**
  * Created by garciparedes on 5/12/14.
  */
-public class Exam implements Parcelable, Comparable<Exam> {
+public class Mark implements Parcelable, Comparable<Mark> {
 
 
     private String name;
-    private float mark;
+    private float value;
     private float percentage;
     private ExamType mType;
 
@@ -32,7 +32,7 @@ public class Exam implements Parcelable, Comparable<Exam> {
     /**
      *
      */
-    public Exam() {
+    public Mark() {
         super();
         this.mType = ExamType.EXAM;
     }
@@ -41,35 +41,35 @@ public class Exam implements Parcelable, Comparable<Exam> {
     /**
      * @param name
      * @param date
-     * @param mark
+     * @param value
      * @param percentage
      */
-    public Exam(String name, GregorianCalendar date, float mark, float percentage, ExamType type) {
+    public Mark(String name, GregorianCalendar date, float value, float percentage, ExamType type) {
         this.name = name;
         this.date = date;
-        this.mark = mark;
+        this.value = value;
         this.percentage = percentage;
         this.mType = type;
     }
 
-    public Exam copy(){
-        return new Exam(getName(), getDate(),getMark(),getPercentage(),getType());
+    public Mark copy(){
+        return new Mark(getName(), getDate(), getValue(),getPercentage(),getType());
     }
 
 
-    public void paste(Exam exam){
+    public void paste(Mark mark){
 
-        if(exam.getName().length() <= 0)
+        if(mark.getName().length() <= 0)
             throw new IllegalArgumentException("Introduce el nombre");
 
-        if(exam.getPercentage() <= 0)
+        if(mark.getPercentage() <= 0)
             throw new IllegalArgumentException("Introduce el porcentaje");
 
-        setName(exam.getName());
-        setDate(exam.getDate());
-        setMark(exam.getMark());
-        setPercentage(exam.getPercentage());
-        setType(exam.getType());
+        setName(mark.getName());
+        setDate(mark.getDate());
+        setValue(mark.getValue());
+        setPercentage(mark.getPercentage());
+        setType(mark.getType());
     }
 
     /**
@@ -81,10 +81,10 @@ public class Exam implements Parcelable, Comparable<Exam> {
 
 
     /**
-     * @param mark
+     * @param value
      */
-    public void setMark(float mark) {
-        this.mark = mark;
+    public void setValue(float value) {
+        this.value = value;
     }
 
 
@@ -119,8 +119,8 @@ public class Exam implements Parcelable, Comparable<Exam> {
     /**
      * @return
      */
-    public float getMark() {
-        return mark;
+    public float getValue() {
+        return value;
     }
 
 
@@ -134,7 +134,7 @@ public class Exam implements Parcelable, Comparable<Exam> {
                 return "--";
         } catch (NullPointerException ignored){};
 
-        return Number.toString(getMark());
+        return Number.toString(getValue());
     }
 
     /**
@@ -207,26 +207,26 @@ public class Exam implements Parcelable, Comparable<Exam> {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeFloat(mark);
+        dest.writeFloat(value);
         dest.writeFloat(percentage);
         dest.writeSerializable(date);
         dest.writeInt(mType.ordinal());
     }
 
-    public static final Parcelable.Creator<Exam> CREATOR
-            = new Parcelable.Creator<Exam>() {
-        public Exam createFromParcel(Parcel in) {
-            return new Exam(in);
+    public static final Parcelable.Creator<Mark> CREATOR
+            = new Parcelable.Creator<Mark>() {
+        public Mark createFromParcel(Parcel in) {
+            return new Mark(in);
         }
 
-        public Exam[] newArray(int size) {
-            return new Exam[size];
+        public Mark[] newArray(int size) {
+            return new Mark[size];
         }
     };
 
-    private Exam(Parcel in) {
+    private Mark(Parcel in) {
         name = in.readString();
-        mark = in.readFloat();
+        value = in.readFloat();
         percentage = in.readFloat();
         date = (GregorianCalendar) in.readSerializable();
         mType = ExamType.values()[in.readInt()];
@@ -245,7 +245,7 @@ public class Exam implements Parcelable, Comparable<Exam> {
      *                            comparable to {@code this} instance.
      */
     @Override
-    public int compareTo(Exam another) {
+    public int compareTo(Mark another) {
         if (getDate() == null){
             return -1;
         } else if (another.getDate() == null){

@@ -3,41 +3,41 @@ package com.garciparedes.evaluame.fragments;
 import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.items.Exam;
+import com.garciparedes.evaluame.items.Mark;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  * Created by garciparedes on 10/2/15.
  */
-public class EditTestFragment extends BaseManageTestFragment {
+public class EditMarkFragment extends BaseManageTestFragment {
 
-    public static final String EXAM = "exam";
-    private Exam exam;
+    public static final String EXAM = "mMark";
+    private Mark mMark;
 
-    public static EditTestFragment newInstance(Subject subject, Exam exam) {
-        EditTestFragment f = new EditTestFragment();
+    public static EditMarkFragment newInstance(Subject subject, Mark mark) {
+        EditMarkFragment f = new EditMarkFragment();
         Bundle args = new Bundle();
         args.putParcelable(SUBJECT, subject);
-        args.putParcelable(EXAM, exam);
+        args.putParcelable(EXAM, mark);
         f.setArguments(args);
         return f;
     }
 
     @Override
-    public Exam initTest() {
+    public Mark initTest() {
 
-        exam = getArguments().getParcelable(EXAM);
-        return exam.copy();
+        mMark = getArguments().getParcelable(EXAM);
+        return mMark.copy();
     }
 
     @Override
     public void setOnClickButton() {
 
-        if((mSubject.getTotalPercentage() - exam.getPercentage() + newExam.getPercentage()) > 100)
+        if((mSubject.getTotalPercentage() - mMark.getPercentage() + mNewMark.getPercentage()) > 100)
             throw new IllegalArgumentException("El porcentaje no puede superar el 100%");
 
-        exam.paste(newExam);
+        mMark.paste(mNewMark);
         ListDB.sortExams(mSubject);
         ListDB.saveData(getActivity());
     }
@@ -49,16 +49,16 @@ public class EditTestFragment extends BaseManageTestFragment {
 
     @Override
     public String setTextName() {
-        return exam.getName();
+        return mMark.getName();
     }
 
     @Override
     public String setTextMark() {
-        return exam.getMarkString();
+        return mMark.getMarkString();
     }
 
     @Override
     public String setTextPercentage() {
-        return exam.getPercentageString();
+        return mMark.getPercentageString();
     }
 }
