@@ -1,15 +1,17 @@
 package com.garciparedes.evaluame.activities;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.AddSubjectFragment;
@@ -19,7 +21,6 @@ import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
 import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -74,7 +75,7 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container,mCurrentFragment)
                 .commit();
 
-
+        restoreActionBar();
     }
 
     @Override
@@ -88,31 +89,23 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        //FragmentManager fragmentManager = getFragmentManager();
+        BaseFragment baseFragment;
 
-    switch (position){
-        case -2:
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, AddSubjectFragment.newInstance())
-                    .commit();
-            break;
-        case -1:
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, DefaultFragment.newInstance())
-                    .commit();
-            break;
-        default:
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, SubjectFragment.newInstance(ListDB.get(position)))
-                    .commit();
-            break;
-    }
-
-    }
-
-    public void onSectionAttached(int number) {
-        mTitle = ListDB.get(number).getName();
+        switch (position){
+            case -2:
+                baseFragment = AddSubjectFragment.newInstance();
+                break;
+            case -1:
+                baseFragment = DefaultFragment.newInstance();
+                break;
+            default:
+                baseFragment = SubjectFragment.newInstance(ListDB.get(position));
+                break;
+        }
+        
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, baseFragment)
+                .commit();
 
     }
 
@@ -120,21 +113,32 @@ public class MainActivity extends ActionBarActivity
 
         if (mToolbar == null) {
             mToolbar = (Toolbar) findViewById(R.id.tool_bar);
-            if (mToolbar != null){
-                mToolbar.setBackgroundColor(getResources().getColor(R.color.violet));
-            }
         }
+        if (mToolbar != null){
+            mToolbar.setBackgroundColor(getResources().getColor(R.color.green_app));
 
-
-        //ActionBar actionBar = getActionBar();
-        //actionBar.setDisplayShowTitleEnabled(true);
-        //actionBar.setTitle(mTitle);
+            mToolbar.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+            );
+            mToolbar.setTitle(mTitle);
+            mToolbar.setSubtitle(null);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.green_app_dark));
+        }
     }
 
 
     public void update() {
         mNavigationDrawerFragment.updateListView();
 
+    }
+
+    public Toolbar getToolbar(){
+        return mToolbar;
     }
 
     @Override
@@ -183,6 +187,11 @@ public class MainActivity extends ActionBarActivity
         ArrayList<Subject> mList = gson.fromJson(json, type);
         if (mList == null) {
             mList = new ArrayList<Subject>();
+        }
+        for (int i = 0; i< mList.size(); i++){
+            try {
+                mList.get(i).migrate();
+            }catch (NullPointerException e){}
         }
 
         /*

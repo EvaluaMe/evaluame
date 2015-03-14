@@ -58,21 +58,18 @@ public class MarkFragment extends BaseSubjectFragment{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        
-
-        //getActivity().getActionBar().setTitle(mMark.getName());
 
         if (savedInstanceState != null) {
             mMark = savedInstanceState.getParcelable(MARK_SAVED);
         } else {
             mMark = getArguments().getParcelable(MARK);
         }
+        customizeActionBar(true, mSubject.getColor(), mMark.getName(), mSubject.getName());
 
         mValueTextView.setText(mMark.getPercentageString());
         mTypeTextView.setText(mMark.getTypeString(getActivity()));
         mDateTextView.setText(mMark.getDateString(getActivity()));
         mMarkTextView.setText(mMark.getMarkString());
-
     }
 
     @Override

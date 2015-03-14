@@ -1,12 +1,18 @@
 package com.garciparedes.evaluame.fragments;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.Color;
+import com.garciparedes.evaluame.activities.MainActivity;
 
 /**
  * Created by garciparedes on 20/2/15.
@@ -56,5 +62,38 @@ public abstract class BaseFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mCallbacks = null;
+    }
+
+
+
+    public void customizeActionBar(boolean isBig, int color, String title , String subTitle){
+        Toolbar toolbar = ((MainActivity) getActivity()).getToolbar();
+        toolbar.setBackgroundColor(color);
+
+        if (isBig) {
+            toolbar.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300)
+            );
+        }
+
+        if (title != null) {
+            toolbar.setTitle(title);
+        }
+
+        if (subTitle != null) {
+            toolbar.setSubtitle(subTitle);
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getActivity().getWindow().setStatusBarColor(Color.getDarkness(color));
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((MainActivity) getActivity()).restoreActionBar();
+
     }
 }

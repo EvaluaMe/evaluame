@@ -17,6 +17,7 @@ public class Subject implements Parcelable {
     private String name;
     private String description;
     private ArrayList<Mark> mMarkList;
+    private ArrayList<Exam> examList;
 
 
     private boolean mStarred;
@@ -29,6 +30,13 @@ public class Subject implements Parcelable {
     }
 
 
+    public void migrate(){
+        for (int i = 0; i< examList.size(); i++){
+            Exam exam = examList.get(i);
+            Mark mark = new Mark(exam.getName(), exam.getDate(), exam.getMark(), exam.getPercentage(), exam.getType() );
+            mMarkList.add(mark);
+        }
+    }
     /**
      * @param name
      * @param description

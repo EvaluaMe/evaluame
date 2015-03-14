@@ -20,13 +20,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Constant;
-import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.adapters.NavDrawerAdapter;
 import com.garciparedes.evaluame.provider.ListDB;
 

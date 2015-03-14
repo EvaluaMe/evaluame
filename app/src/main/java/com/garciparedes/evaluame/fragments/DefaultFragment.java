@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.cards.BarChartCard;
 import com.garciparedes.evaluame.cards.GlobalStatsCard;
-import com.garciparedes.evaluame.cards.LineChartCard;
 import com.garciparedes.evaluame.cards.StarredSubjectListCard;
 import com.garciparedes.evaluame.cards.UpcomingExamListCard;
 

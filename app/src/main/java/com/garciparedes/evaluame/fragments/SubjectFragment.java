@@ -21,7 +21,6 @@ import com.garciparedes.evaluame.cards.StatsSubjectCard;
 import com.garciparedes.evaluame.items.Mark;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
-
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;

@@ -1,7 +1,5 @@
 package com.garciparedes.evaluame.items;
 
-import com.garciparedes.evaluame.Util.*;
-
 import java.util.ArrayList;
 
 /**
