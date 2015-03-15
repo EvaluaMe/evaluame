@@ -26,7 +26,6 @@ public class ExamFragment extends BaseSubjectFragment{
     private static final String EXAM = "exam";
     private static final String EXAM_SAVED = "exam_saved";
 
-    private TextView mNameTextView;
     private TextView mValueTextView;
     private TextView mTypeTextView;
     private TextView mDateTextView;
@@ -49,7 +48,6 @@ public class ExamFragment extends BaseSubjectFragment{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_exam, container, false);
-        mNameTextView = (TextView) view.findViewById(R.id.fragment_exam_name_textView);
         mValueTextView = (TextView) view.findViewById(R.id.fragment_exam_value_textView);
         mTypeTextView = (TextView) view.findViewById(R.id.fragment_exam_type_textView);
         mDateTextView = (TextView) view.findViewById(R.id.fragment_exam_date_textView);
@@ -72,7 +70,6 @@ public class ExamFragment extends BaseSubjectFragment{
         customizeActionBar(true, mSubject.getColor(), mExam.getName(), mSubject.getName());
 
 
-        mNameTextView.setText(mExam.getName());
         mValueTextView.setText(mExam.getPercentageString());
         mTypeTextView.setText(mExam.getTypeString(getActivity()));
         mDateTextView.setText(mExam.getDateString(getActivity()));

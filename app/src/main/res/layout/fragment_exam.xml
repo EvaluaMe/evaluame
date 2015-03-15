@@ -10,32 +10,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="10dp">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_action_edit"
-            android:layout_weight="1"
-            />
-        <TextView
-            android:id="@+id/fragment_exam_name_textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:text="Name"/>
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_margin="10dp">
 
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_action_edit"
+            android:src="@drawable/ic_action_weight"
             android:layout_weight="1"/>
 
         <TextView
@@ -58,7 +38,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_action_edit"
+            android:src="@drawable/ic_action_event"
             android:layout_weight="1"/>
 
         <TextView
@@ -94,7 +74,7 @@
 
     <TableRow
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:orientation="vertical"
         android:layout_margin="10dp">
 
@@ -102,7 +82,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_action_edit"
+            android:src="@drawable/ic_action_accept"
             android:layout_weight="1"/>
 
         <TextView
@@ -110,6 +90,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_large"
             android:text="4"/>
 
     </TableRow>
