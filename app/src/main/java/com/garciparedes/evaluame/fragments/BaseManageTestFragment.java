@@ -52,7 +52,17 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        newExam = initTest();
+        if (savedInstanceState != null){
+            newExam = savedInstanceState.getParcelable("save");
+        } else {
+            newExam = initTest();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("save", newExam);
     }
 
     @Override
@@ -78,7 +88,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         customizeActionBar(false, mSubject.getColor(), mSubject.getName(), null);
 
         editTextName.setHint(getString(R.string.set_name));
-        editTextName.setText(setTextName());
+        editTextName.setText(newExam.getName());
 
         numberPickerMark = new NumberPickerBuilder();
         numberPickerMark
@@ -105,11 +115,11 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         datePicker = new DatePickerBuilder();
         datePicker
                 .setFragmentManager(getFragmentManager())
-                .setStyleResId(R.style.BetterPickersDialogFragment)
+                .setStyleResId(R.style.BetterPickersDialogFragment_Light)
                 .setTargetFragment(BaseManageTestFragment.this)
                 .setReference(0);
 
-        textMark.setText(setTextMark());
+        textMark.setText(newExam.getMarkString());
         textMark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +127,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             }
         });
 
-        textValue.setText(setTextPercentage());
+        textValue.setText(newExam.getPercentageString());
         textValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -167,22 +177,16 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     public abstract String setTextButton();
 
-    public abstract String setTextName();
-
-    public abstract String setTextMark();
-
-    public abstract String setTextPercentage();
-
     @Override
     public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
         switch (reference) {
             case 0:
-                textMark.setText(Number.toString((float) fullNumber));
                 newExam.setMark((float) fullNumber);
+                textMark.setText(newExam.getMarkString());
                 break;
             case 1:
-                textValue.setText(Number.toString((float) fullNumber, "%"));
                 newExam.setPercentage((float) (fullNumber));
+                textValue.setText(newExam.getPercentageString());
                 break;
 
             default:
@@ -192,15 +196,8 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     @Override
     public void onDialogDateSet(int reference, int year, int monthOfYear, int dayOfMonth) {
-        textDate.setText(
-                dayOfMonth
-                        + "/"
-                        + Date.intToStringMonth(getActivity(), monthOfYear)
-                        + "/"
-                        + year
-        );
-
         newExam.setDate(new GregorianCalendar(year, monthOfYear, dayOfMonth));
+        textDate.setText(newExam.getDateString(getActivity()));
     }
 
 

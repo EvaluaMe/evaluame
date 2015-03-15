@@ -35,7 +35,7 @@ public class EditTestFragment extends BaseManageTestFragment {
     public void setOnClickButton() {
 
         if((mSubject.getTotalPercentage() - exam.getPercentage() + newExam.getPercentage()) > 100)
-            throw new IllegalArgumentException("El porcentaje no puede superar el 100%");
+            throw new IllegalArgumentException(getString(R.string.fail_max_percent));
 
         exam.paste(newExam);
         ListDB.sortExams(mSubject);
@@ -45,20 +45,5 @@ public class EditTestFragment extends BaseManageTestFragment {
     @Override
     public String setTextButton() {
         return getResources().getString(R.string.edit_test);
-    }
-
-    @Override
-    public String setTextName() {
-        return exam.getName();
-    }
-
-    @Override
-    public String setTextMark() {
-        return exam.getMarkString();
-    }
-
-    @Override
-    public String setTextPercentage() {
-        return exam.getPercentageString();
     }
 }
