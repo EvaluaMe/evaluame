@@ -3,19 +3,19 @@ package com.garciparedes.evaluame.fragments;
 import android.os.Bundle;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.items.Mark;
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  * Created by garciparedes on 10/2/15.
  */
-public class AddMarkFragment extends BaseManageTestFragment {
+public class AddTestFragment extends BaseManageTestFragment {
 
     private final String defaultText = "- - . - -";
 
-    public static AddMarkFragment newInstance(Subject subject) {
-        AddMarkFragment f = new AddMarkFragment();
+    public static AddTestFragment newInstance(Subject subject) {
+        AddTestFragment f = new AddTestFragment();
         Bundle args = new Bundle();
         args.putParcelable(SUBJECT, subject);
         f.setArguments(args);
@@ -24,13 +24,13 @@ public class AddMarkFragment extends BaseManageTestFragment {
 
 
     @Override
-    public Mark initTest() {
-        return new Mark();
+    public Exam initTest() {
+        return new Exam();
     }
 
     @Override
     public void setOnClickButton() {
-        ListDB.addTest(getActivity(), mSubject, mNewMark);
+        ListDB.addTest(getActivity(), mSubject, newExam);
     }
 
     @Override

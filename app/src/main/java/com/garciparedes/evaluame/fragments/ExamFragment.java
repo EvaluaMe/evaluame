@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,33 +13,34 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.activities.MainActivity;
-import com.garciparedes.evaluame.items.Mark;
+
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
  * Created by garciparedes on 24/2/15.
  */
-public class MarkFragment extends BaseSubjectFragment{
+public class ExamFragment extends BaseSubjectFragment{
 
-    private static final String MARK = "exam";
-    private static final String MARK_SAVED = "exam_saved";
+    private static final String EXAM = "exam";
+    private static final String EXAM_SAVED = "exam_saved";
 
+    private TextView mNameTextView;
     private TextView mValueTextView;
     private TextView mTypeTextView;
     private TextView mDateTextView;
     private TextView mMarkTextView;
 
-    private Mark mMark;
+    private Exam mExam;
 
-    public static MarkFragment newInstance(Subject subject, Mark mark) {
-        MarkFragment markFragment = new MarkFragment();
+    public static ExamFragment newInstance(Subject subject, Exam exam) {
+        ExamFragment examFragment = new ExamFragment();
         Bundle args = new Bundle();
         args.putParcelable(SUBJECT, subject);
-        args.putParcelable(MARK, mark);
-        markFragment.setArguments(args);
-        return markFragment;
+        args.putParcelable(EXAM, exam);
+        examFragment.setArguments(args);
+        return examFragment;
     }
 
     @Override
@@ -49,6 +49,7 @@ public class MarkFragment extends BaseSubjectFragment{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_exam, container, false);
+        mNameTextView = (TextView) view.findViewById(R.id.fragment_exam_name_textView);
         mValueTextView = (TextView) view.findViewById(R.id.fragment_exam_value_textView);
         mTypeTextView = (TextView) view.findViewById(R.id.fragment_exam_type_textView);
         mDateTextView = (TextView) view.findViewById(R.id.fragment_exam_date_textView);
@@ -61,21 +62,28 @@ public class MarkFragment extends BaseSubjectFragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mMark = getArguments().getParcelable(MARK);
 
-        customizeActionBar(true, mSubject.getColor(), mMark.getName(), mSubject.getName());
+        if (savedInstanceState != null) {
+            mExam = savedInstanceState.getParcelable(EXAM_SAVED);
+        } else {
+            mExam = getArguments().getParcelable(EXAM);
+        }
+
+        customizeActionBar(true, mSubject.getColor(), mExam.getName(), mSubject.getName());
 
 
-        mValueTextView.setText(mMark.getPercentageString());
-        mTypeTextView.setText(mMark.getTypeString(getActivity()));
-        mDateTextView.setText(mMark.getDateString(getActivity()));
-        mMarkTextView.setText(mMark.getMarkString());
+        mNameTextView.setText(mExam.getName());
+        mValueTextView.setText(mExam.getPercentageString());
+        mTypeTextView.setText(mExam.getTypeString(getActivity()));
+        mDateTextView.setText(mExam.getDateString(getActivity()));
+        mMarkTextView.setText(mExam.getMarkString());
+
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(MARK_SAVED, mMark);
+        outState.putParcelable(EXAM_SAVED, mExam);
 
     }
 
@@ -135,7 +143,7 @@ public class MarkFragment extends BaseSubjectFragment{
                     public void onClick(DialogInterface dialog, int id) {
                         // if this button is clicked, close
                         // current activity
-                        ListDB.removeTest(getActivity(), mSubject, mMark);
+                        ListDB.removeTest(getActivity(), mSubject, mExam);
 
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container, SubjectFragment.newInstance(mSubject))
@@ -162,7 +170,7 @@ public class MarkFragment extends BaseSubjectFragment{
      */
     public void editMark() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, EditMarkFragment.newInstance(mSubject, mMark))
+                .replace(R.id.container, EditTestFragment.newInstance(mSubject, mExam))
                 .commit();
 
     }
