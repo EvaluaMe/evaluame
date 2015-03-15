@@ -22,7 +22,7 @@ import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.enums.ExamType;
 import com.garciparedes.evaluame.interfaces.AddData;
-import com.garciparedes.evaluame.items.Mark;
+import com.garciparedes.evaluame.items.Exam;
 
 import java.util.GregorianCalendar;
 
@@ -46,13 +46,13 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     private DatePickerBuilder datePicker;
 
-    protected Mark mNewMark;
+    protected Exam newExam;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNewMark = initTest();
+        newExam = initTest();
     }
 
     @Override
@@ -125,7 +125,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             }
         });
 
-        textDate.setText(mNewMark.getDateString(getActivity()));
+        textDate.setText(newExam.getDateString(getActivity()));
 
         textDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,15 +138,15 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                         android.R.layout.simple_spinner_dropdown_item,
                         ExamType.values())
         );
-        mSpinnerType.setSelection(mNewMark.getType().ordinal());
+        mSpinnerType.setSelection(newExam.getType().ordinal());
 
         btnCreate.setText(setTextButton());
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                mNewMark.setName(editTextName.getText().toString());
-                mNewMark.setType((ExamType) mSpinnerType.getSelectedItem());
+                newExam.setName(editTextName.getText().toString());
+                newExam.setType((ExamType) mSpinnerType.getSelectedItem());
                 try {
 
                     setOnClickButton();
@@ -161,7 +161,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         });
     }
 
-    public abstract Mark initTest();
+    public abstract Exam initTest();
 
     public abstract void setOnClickButton();
 
@@ -178,11 +178,11 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         switch (reference) {
             case 0:
                 textMark.setText(Number.toString((float) fullNumber));
-                mNewMark.setValue((float) fullNumber);
+                newExam.setMark((float) fullNumber);
                 break;
             case 1:
                 textValue.setText(Number.toString((float) fullNumber, "%"));
-                mNewMark.setPercentage((float) (fullNumber));
+                newExam.setPercentage((float) (fullNumber));
                 break;
 
             default:
@@ -200,7 +200,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                         + year
         );
 
-        mNewMark.setDate(new GregorianCalendar(year, monthOfYear, dayOfMonth));
+        newExam.setDate(new GregorianCalendar(year, monthOfYear, dayOfMonth));
     }
 
 
@@ -221,7 +221,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void replaceFragment() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, MarkFragment.newInstance(mSubject, mNewMark))
+                .replace(R.id.container, ExamFragment.newInstance(mSubject, newExam))
                 .commit();
     }
 

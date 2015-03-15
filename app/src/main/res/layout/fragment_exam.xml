@@ -10,6 +10,26 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="10dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_action_edit"
+            android:layout_weight="1"
+            />
+        <TextView
+            android:id="@+id/fragment_exam_name_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:text="Name"/>
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
 
         <ImageView
@@ -23,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:textSize="@dimen/text_size_medium"
+
             android:text="30%"/>
 
     </TableRow>
@@ -46,7 +66,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:textSize="@dimen/text_size_medium"
             android:text="23/marzo/2015"/>
 
     </TableRow>
@@ -69,9 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:textSize="@dimen/text_size_medium"
-            android:text="Exam"
-            />
+            android:text="Exam"/>
 
     </TableRow>
 
@@ -93,7 +110,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:textSize="@dimen/text_size_medium"
             android:text="4"/>
 
     </TableRow>

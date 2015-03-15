@@ -56,7 +56,7 @@ public class NavDrawerAdapter extends ArrayAdapter<Subject> {
         // 4. Set the text for textView
         //imgView.setImageResource(modelsArrayList.get(position).getIcon());
         titleView.setText(subject.getName());
-//      counterView.setText(modelsArrayList.get(position).getMarkList().size());
+//      counterView.setText(modelsArrayList.get(position).getExamList().size());
 
         return rowView;
     }

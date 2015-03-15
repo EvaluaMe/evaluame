@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.garciparedes.evaluame.items.Mark;
+import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.google.gson.Gson;
 
@@ -88,26 +88,26 @@ public class ListDB {
     /**
      * @param context context
      * @param subject mSubject
-     * @param mark    mark
+     * @param exam    exam
      */
-    public static void addTest(Context context, Subject subject, Mark mark) {
+    public static void addTest(Context context, Subject subject, Exam exam) {
 
-        if(mark.getName().length() <= 0)
+        if(exam.getName().length() <= 0)
             throw new IllegalArgumentException("Introduce el nombre");
 
-        if(mark.getPercentage() <= 0)
+        if(exam.getPercentage() <= 0)
             throw new IllegalArgumentException("Introduce el porcentaje");
 
-        if((subject.getTotalPercentage()+ mark.getPercentage()) > 100)
+        if((subject.getTotalPercentage()+ exam.getPercentage()) > 100)
             throw new IllegalArgumentException("El porcentaje no puede superar el 100%");
 
-        subject.addTestElement(mark);
+        subject.addTestElement(exam);
         sortExams(subject);
         saveData(context);
     }
 
-    public static void removeTest(Context context, Subject subject, Mark mark){
-        subject.removeTest(mark);
+    public static void removeTest(Context context, Subject subject, Exam exam){
+        subject.removeTest(exam);
         sortExams(subject);
         ListDB.saveData(context);
     }
@@ -129,8 +129,8 @@ public class ListDB {
     }
 
     public static void sortExams(Subject subject){
-        Collections.sort(subject.getMarkList());
-        Collections.reverse(subject.getMarkList());
+        Collections.sort(subject.getExamList());
+        Collections.reverse(subject.getExamList());
     }
 
 
