@@ -83,7 +83,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         numberPickerMark = new NumberPickerBuilder();
         numberPickerMark
                 .setFragmentManager(getFragmentManager())
-                .setStyleResId(R.style.BetterPickersDialogFragment)
+                .setStyleResId(R.style.BetterPickersDialogFragment_Light)
                 .setTargetFragment(BaseManageTestFragment.this)
                 .setMaxNumber(10)
                 .setMinNumber(0)
@@ -94,7 +94,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         numberPickerValue = new NumberPickerBuilder();
         numberPickerValue
                 .setFragmentManager(getFragmentManager())
-                .setStyleResId(R.style.BetterPickersDialogFragment)
+                .setStyleResId(R.style.BetterPickersDialogFragment_Light)
                 .setTargetFragment(BaseManageTestFragment.this)
                 .setMaxNumber(100)
                 .setMinNumber(0)
@@ -134,9 +134,9 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             }
         });
 
-        mSpinnerType.setAdapter(new ArrayAdapter<ExamType>(getActivity(),
+        mSpinnerType.setAdapter(new ArrayAdapter<String>(getActivity(),
                         android.R.layout.simple_spinner_dropdown_item,
-                        ExamType.values())
+                        ExamType.values(getActivity()))
         );
         mSpinnerType.setSelection(newExam.getType().ordinal());
 
@@ -146,7 +146,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             public void onClick(View v) {
 
                 newExam.setName(editTextName.getText().toString());
-                newExam.setType((ExamType) mSpinnerType.getSelectedItem());
+                newExam.setType(ExamType.values()[mSpinnerType.getSelectedItemPosition()]);
                 try {
 
                     setOnClickButton();

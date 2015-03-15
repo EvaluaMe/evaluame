@@ -105,12 +105,17 @@ public class UpcomingExamListCard extends CardWithList {
         //Setup the ui elements inside the item
         TextView nameMarkView = (TextView) view.findViewById(R.id.card_test_list_upcoming_inner_name);
         TextView daysTextView = (TextView) view.findViewById(R.id.card_test_list_upcoming_inner_days_left);
+        TextView nameSubjectView = (TextView) view.findViewById(R.id.card_test_list_upcoming_inner_name_subject);
 
         //Retrieve the values from the object
         final TestObject testObject = (TestObject) listObject;
 
         nameMarkView.setText(testObject.mName);
         daysTextView.setText(testObject.mDays);
+
+        nameSubjectView.setTextColor(testObject.color);
+        nameSubjectView.setText(testObject.mSubjectName);
+
 
 
         return view;
@@ -127,11 +132,15 @@ public class UpcomingExamListCard extends CardWithList {
 
         String mName;
         String mDays;
+        String mSubjectName;
+        int color;
 
         public TestObject(Card parentCard, Exam exam, Subject subject) {
             super(parentCard);
             this.mName = exam.getName();
             this.mDays = Date.upcomingDays(getContext(), exam.getDate());
+            this.mSubjectName = subject.getName();
+            this.color = subject.getColor();
             init(exam, subject);
         }
 

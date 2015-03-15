@@ -66,5 +66,8 @@
     <string name="title_upcoming_exams">Upcoming Exams</string>
     <string name="star_subject_suggest">You can star subjets to show here</string>
     <string name="delete_mark_confirmation">Are you sure to delete this exam?</string>
+    <string name="fail_name">Enter name</string>
+    <string name="fail_percent">Enter percent</string>
+    <string name="fail_max_percent">Global percent must be less than 100%</string>
 
 </resources>

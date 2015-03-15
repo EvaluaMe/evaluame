@@ -32,6 +32,17 @@
                 android:layout_height="wrap_content"
                 tools:text="7 days left"
                 android:textSize="15sp"/>
+
+
+         <TextView
+             android:id="@+id/card_test_list_upcoming_inner_name_subject"
+             android:textColor="@color/grey"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             tools:text="History"
+             android:textSize="15sp"
+             android:layout_below="@id/card_test_list_upcoming_inner_name"/>
+
      </RelativeLayout>
 
 </RelativeLayout>
