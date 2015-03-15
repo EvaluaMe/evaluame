@@ -12,27 +12,15 @@
      <RelativeLayout
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_margin="10dp">
+         android:layout_margin="12dp">
 
-            <TextView
-                android:id="@+id/card_test_list_upcoming_inner_name"
-                android:textColor="@color/grey"
-                android:textSize="20sp"
-                tools:text="Exam"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-
-            <TextView
-                android:layout_below="@id/card_test_list_upcoming_inner_name"
-                android:layout_alignParentRight="true"
-                android:id="@+id/card_test_list_upcoming_inner_days_left"
-                android:textColor="@color/grey"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="7 days left"
-                android:textSize="15sp"/>
-
+        <TextView
+            android:id="@+id/card_test_list_upcoming_inner_name"
+            android:textColor="@color/grey"
+            android:textSize="20sp"
+            tools:text="Exam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
          <TextView
              android:id="@+id/card_test_list_upcoming_inner_name_subject"
@@ -42,6 +30,19 @@
              tools:text="History"
              android:textSize="15sp"
              android:layout_below="@id/card_test_list_upcoming_inner_name"/>
+
+        <TextView
+            android:layout_below="@id/card_test_list_upcoming_inner_name_subject"
+            android:layout_alignParentRight="true"
+            android:id="@+id/card_test_list_upcoming_inner_days_left"
+            android:textColor="@color/grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="7 days left"
+            android:textSize="15sp"/>
+
+
+
 
      </RelativeLayout>
 

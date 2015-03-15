@@ -46,4 +46,13 @@ public class EditTestFragment extends BaseManageTestFragment {
     public String setTextButton() {
         return getResources().getString(R.string.edit_test);
     }
+
+
+
+    @Override
+    public void onBackPressed() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, ExamFragment.newInstance(mSubject,exam))
+                .commit();
+    }
 }

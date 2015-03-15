@@ -221,9 +221,4 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                 .replace(R.id.container, ExamFragment.newInstance(mSubject, newExam))
                 .commit();
     }
-
-    @Override
-    public void onBackPressed() {
-        replaceFragment();
-    }
 }
