@@ -2,6 +2,7 @@ package com.garciparedes.evaluame.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.garciparedes.evaluame.items.Subject;
 
@@ -10,8 +11,7 @@ import com.garciparedes.evaluame.items.Subject;
  */
 public abstract class BaseSubjectFragment extends BaseFragment {
 
-    public static final String SUBJECT = "mSubject";
-    public static final String SUBJECT_SAVED = "subject_saved";
+    public static final String SUBJECT = "subject";
 
     protected Subject mSubject;
 
@@ -27,20 +27,6 @@ public abstract class BaseSubjectFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            mSubject = savedInstanceState.getParcelable(SUBJECT_SAVED);
-        } else {
-            mSubject = getArguments().getParcelable(SUBJECT);
-        }
-
+        mSubject = getArguments().getParcelable(SUBJECT);
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(SUBJECT_SAVED, mSubject);
-
-    }
-
 }

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.items.Mark;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -35,7 +37,7 @@ public class MarkFragment extends BaseSubjectFragment{
     public static MarkFragment newInstance(Subject subject, Mark mark) {
         MarkFragment markFragment = new MarkFragment();
         Bundle args = new Bundle();
-        args.putParcelable("mSubject", subject);
+        args.putParcelable(SUBJECT, subject);
         args.putParcelable(MARK, mark);
         markFragment.setArguments(args);
         return markFragment;
@@ -59,12 +61,10 @@ public class MarkFragment extends BaseSubjectFragment{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if (savedInstanceState != null) {
-            mMark = savedInstanceState.getParcelable(MARK_SAVED);
-        } else {
-            mMark = getArguments().getParcelable(MARK);
-        }
+        mMark = getArguments().getParcelable(MARK);
+
         customizeActionBar(true, mSubject.getColor(), mMark.getName(), mSubject.getName());
+
 
         mValueTextView.setText(mMark.getPercentageString());
         mTypeTextView.setText(mMark.getTypeString(getActivity()));

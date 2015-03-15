@@ -24,6 +24,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.adapters.NavDrawerAdapter;
 import com.garciparedes.evaluame.provider.ListDB;
 
@@ -137,7 +138,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
-                (Toolbar) getView().findViewById(R.id.tool_bar),             /* nav drawer image to replace 'Up' caret */
+                ((MainActivity)getActivity()).getToolbar(),             /* nav drawer image to replace 'Up' caret */
                 R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
                 R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
         ) {

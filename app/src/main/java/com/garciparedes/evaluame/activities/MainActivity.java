@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, BaseFragment.FragmentCallbacks {
 
+    private static final String SAVED_FRAGMENT = "saved_fragment";
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -47,7 +49,10 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getData();
+
+        if (ListDB.getMasterList() == null) {
+            getData();
+        }
         setContentView(R.layout.activity_main);
 
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
@@ -66,7 +71,7 @@ public class MainActivity extends ActionBarActivity
         if (savedInstanceState != null) {
             //Restore the fragment's instance
             mCurrentFragment = (BaseFragment) getSupportFragmentManager().getFragment(
-                    savedInstanceState, "mContent");
+                    savedInstanceState, SAVED_FRAGMENT);
         } else {
             mCurrentFragment = DefaultFragment.newInstance();
         }
@@ -74,14 +79,13 @@ public class MainActivity extends ActionBarActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container,mCurrentFragment)
                 .commit();
-
-        restoreActionBar();
+        //restoreActionBar();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        getSupportFragmentManager().putFragment(outState, "mContent", mCurrentFragment);
+        getSupportFragmentManager().putFragment(outState, SAVED_FRAGMENT, mCurrentFragment);
     }
 
 
@@ -134,10 +138,12 @@ public class MainActivity extends ActionBarActivity
 
     public void update() {
         mNavigationDrawerFragment.updateListView();
-
     }
 
     public Toolbar getToolbar(){
+        if (mToolbar == null){
+            mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        }
         return mToolbar;
     }
 
@@ -188,30 +194,14 @@ public class MainActivity extends ActionBarActivity
         if (mList == null) {
             mList = new ArrayList<Subject>();
         }
-        for (int i = 0; i< mList.size(); i++){
-            try {
-                mList.get(i).migrate();
-            }catch (NullPointerException e){}
-        }
-
-        /*
-        new ShowcaseView.Builder(this)
-                .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
-                .setContentTitle("ShowcaseView")
-                .setContentText("This is highlighting the Home button")
-                .hideOnTouchOutside()
-                .build();
-        */
 
         ListDB.setMasterList(mList);
     }
 
     @Override
     public void onBackPressed() {
-        FragmentManager fm = getSupportFragmentManager();
         if (mNavigationDrawerFragment.isDrawerOpen()) {
             mNavigationDrawerFragment.closeDrawer();
-
         } else {
             mCurrentFragment.onBackPressed();
         }

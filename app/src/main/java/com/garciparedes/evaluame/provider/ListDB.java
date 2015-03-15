@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.provider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.garciparedes.evaluame.items.Mark;
 import com.garciparedes.evaluame.items.Subject;
@@ -26,6 +27,15 @@ public class ListDB {
         masterList = mList;
     }
 
+    public static ArrayList<Subject> getStarredSubjects(){
+        ArrayList<Subject> starreds = new ArrayList<>();
+        for(int i = 0 ; i < size(); i++){
+            if (get(i).isStarred()){
+                starreds.add(get(i));
+            }
+        }
+        return starreds;
+    }
 
     /**
      * @return masterLsit
