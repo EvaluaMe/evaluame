@@ -21,11 +21,6 @@ public class Exam implements Parcelable, Comparable<Exam> {
     private float mark;
     private float percentage;
     private ExamType mType;
-
-
-    /**
-     *
-     */
     private GregorianCalendar date;
 
 
@@ -58,13 +53,6 @@ public class Exam implements Parcelable, Comparable<Exam> {
 
 
     public void paste(Exam exam){
-
-        if(exam.getName().length() <= 0)
-            throw new IllegalArgumentException("Introduce el nombre");
-
-        if(exam.getPercentage() <= 0)
-            throw new IllegalArgumentException("Introduce el porcentaje");
-
         setName(exam.getName());
         setDate(exam.getDate());
         setMark(exam.getMark());
@@ -131,7 +119,8 @@ public class Exam implements Parcelable, Comparable<Exam> {
 
         try {
             if (getDate().after(Calendar.getInstance()))
-                return "--";
+                return Number.NAN_STRING;
+
         } catch (NullPointerException ignored){};
 
         return Number.toString(getMark());
@@ -163,6 +152,11 @@ public class Exam implements Parcelable, Comparable<Exam> {
      * @return
      */
     public String getPercentageString() {
+
+        if (getPercentage() == 0){
+            return Number.NAN_STRING + "%";
+        }
+
         return (Number.toString(getPercentage(), "%"));
     }
 

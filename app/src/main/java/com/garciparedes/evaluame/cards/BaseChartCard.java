@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import com.garciparedes.evaluame.R;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
  * Created by garciparedes on 13/2/15.

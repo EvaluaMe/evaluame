@@ -12,13 +12,14 @@ import com.garciparedes.evaluame.provider.ListDB;
  */
 public class EditTestFragment extends BaseManageTestFragment {
 
+    public static final String EXAM = "exam";
     private Exam exam;
 
     public static EditTestFragment newInstance(Subject subject, Exam exam) {
         EditTestFragment f = new EditTestFragment();
         Bundle args = new Bundle();
-        args.putParcelable("subject", subject);
-        args.putParcelable("exam", exam);
+        args.putParcelable(SUBJECT, subject);
+        args.putParcelable(EXAM, exam);
         f.setArguments(args);
         return f;
     }
@@ -26,18 +27,18 @@ public class EditTestFragment extends BaseManageTestFragment {
     @Override
     public Exam initTest() {
 
-        exam = getArguments().getParcelable("exam");
+        exam = getArguments().getParcelable(EXAM);
         return exam.copy();
     }
 
     @Override
     public void setOnClickButton() {
 
-        if((subject.getTotalPercentage() - exam.getPercentage() + newExam.getPercentage()) > 100)
-            throw new IllegalArgumentException("El porcentaje no puede superar el 100%");
+        if((mSubject.getTotalPercentage() - exam.getPercentage() + newExam.getPercentage()) > 100)
+            throw new IllegalArgumentException(getString(R.string.fail_max_percent));
 
         exam.paste(newExam);
-        ListDB.sortExams(subject);
+        ListDB.sortExams(mSubject);
         ListDB.saveData(getActivity());
     }
 
@@ -46,18 +47,12 @@ public class EditTestFragment extends BaseManageTestFragment {
         return getResources().getString(R.string.edit_test);
     }
 
-    @Override
-    public String setTextName() {
-        return exam.getName();
-    }
+
 
     @Override
-    public String setTextMark() {
-        return exam.getMarkString();
-    }
-
-    @Override
-    public String setTextPercentage() {
-        return exam.getPercentageString();
+    public void onBackPressed() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, ExamFragment.newInstance(mSubject,exam))
+                .commit();
     }
 }

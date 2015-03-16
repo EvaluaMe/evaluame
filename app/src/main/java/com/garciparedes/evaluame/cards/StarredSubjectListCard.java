@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,7 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
  */
 public class StarredSubjectListCard extends CardWithList {
 
-
+    private BarChart mBarChart;
     private FragmentManager fragmentManager;
 
     public StarredSubjectListCard(Context context, FragmentManager fragmentManager) {
@@ -50,14 +53,13 @@ public class StarredSubjectListCard extends CardWithList {
     @Override
     protected void initCard() {
         setEmptyViewViewStubLayoutId(R.layout.card_extras_empty_starred_subjects);
-
+        setInnerLayout(R.layout.card_starred_subjects);
 
     }
 
 
     @Override
     protected List<ListObject> initChildren() {
-
 
         List<ListObject> mObjects = new ArrayList<ListObject>();
 
@@ -67,11 +69,24 @@ public class StarredSubjectListCard extends CardWithList {
             }
         }
 
-
-
         return mObjects;
     }
 
+    @Override
+    public void setupInnerViewElements(ViewGroup parent, View view) {
+        super.setupInnerViewElements(parent, view);
+
+        //Retrieve elements
+        mBarChart = (BarChart) parent.findViewById(R.id.card_chart_bar);
+
+        if (mBarChart != null) {
+            mBarChart.setTouchEnabled(false);
+            mBarChart.setDescription("");
+            mBarChart.setDrawLegend(false);
+            mBarChart.setDrawXLabels(false);
+            setValues();
+        }
+    }
 
     @Override
     public View setupChildView(int i, ListObject listObject, View view, ViewGroup viewGroup) {
@@ -126,5 +141,35 @@ public class StarredSubjectListCard extends CardWithList {
             });
 
         }
+    }
+
+    /**
+     *
+     */
+    public void setValues() {
+
+        ArrayList<BarEntry> valsComp1 = new ArrayList<BarEntry>();
+        ArrayList<String> xVals = new ArrayList<String>();
+        ArrayList<Integer> colors = new ArrayList<>();
+        ArrayList<Subject> starredSubjects = ListDB.getStarredSubjects();
+
+        for (int i = 0; i < starredSubjects.size(); i++) {
+            colors.add(starredSubjects.get(i).getColor());
+            BarEntry subject = new BarEntry(starredSubjects.get(i).getWeightedAverage(), i);
+            valsComp1.add(subject);
+            xVals.add(starredSubjects.get(i).getName());
+        }
+
+        BarDataSet setComp1 = new BarDataSet(valsComp1, "Company 1");
+        setComp1.setColors(colors);
+        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
+        dataSets.add(setComp1);
+
+
+        BarData data = new BarData(xVals, dataSets);
+        mBarChart.setData(data);
+
+        mBarChart.animateY(1000);
+
     }
 }

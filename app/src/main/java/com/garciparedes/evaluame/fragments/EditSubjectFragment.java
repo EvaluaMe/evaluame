@@ -1,7 +1,6 @@
 package com.garciparedes.evaluame.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Subject;
@@ -20,7 +19,7 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
     public static EditSubjectFragment newInstance(Subject subject) {
         EditSubjectFragment f = new EditSubjectFragment();
         Bundle args = new Bundle();
-        args.putParcelable("subject", subject);
+        args.putParcelable(SUBJECT, subject);
         f.setArguments(args);
         return f;
     }
@@ -30,7 +29,7 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
      */
     @Override
     public Subject initNewSubject() {
-        return subject.copy();
+        return mSubject.copy();
     }
 
     /**
@@ -39,7 +38,7 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
     @Override
     public void setOnClickButton() {
 
-        subject.paste(newSubject);
+        mSubject.paste(newSubject);
 
         ListDB.saveData(getActivity());
     }
@@ -55,7 +54,7 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
     @Override
     public void onBackPressed() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(subject))
+                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
                 .commit();
     }
 }

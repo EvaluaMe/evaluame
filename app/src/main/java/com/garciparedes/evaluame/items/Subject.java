@@ -28,7 +28,6 @@ public class Subject implements Parcelable {
         this.examList = new ArrayList<>();
     }
 
-
     /**
      * @param name
      * @param description

@@ -3,12 +3,9 @@ package com.garciparedes.evaluame.cards;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Color;
 
 import it.gmariotti.cardslib.library.internal.CardHeader;
 

@@ -22,6 +22,13 @@ public enum ExamType {
     }
 
 
+    public static String[] values(Context context){
+        String result[] = new String[values().length];
+        for (int i = 0; i < values().length; i++){
+            result[i] = values()[i].toString(context);
+        }
+        return result;
+    }
     public String toString(Context context){
         return context.getResources().getStringArray(R.array.exam_type)[friendlyName];
     }

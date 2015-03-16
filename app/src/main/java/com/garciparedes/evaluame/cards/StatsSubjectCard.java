@@ -9,7 +9,6 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Subject;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
  * Created by garciparedes on 7/2/15.

@@ -12,12 +12,11 @@ import com.garciparedes.evaluame.provider.ListDB;
  */
 public class AddTestFragment extends BaseManageTestFragment {
 
-    private final String defaultText = "- - . - -";
 
     public static AddTestFragment newInstance(Subject subject) {
         AddTestFragment f = new AddTestFragment();
         Bundle args = new Bundle();
-        args.putParcelable("subject", subject);
+        args.putParcelable(SUBJECT, subject);
         f.setArguments(args);
         return f;
     }
@@ -30,7 +29,7 @@ public class AddTestFragment extends BaseManageTestFragment {
 
     @Override
     public void setOnClickButton() {
-        ListDB.addTest(getActivity(), subject, newExam);
+        ListDB.addTest(getActivity(), mSubject, newExam);
     }
 
     @Override
@@ -39,17 +38,9 @@ public class AddTestFragment extends BaseManageTestFragment {
     }
 
     @Override
-    public String setTextName() {
-        return null;
-    }
-
-    @Override
-    public String setTextMark() {
-        return defaultText;
-    }
-
-    @Override
-    public String setTextPercentage() {
-        return defaultText;
+    public void onBackPressed() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
+                .commit();
     }
 }
