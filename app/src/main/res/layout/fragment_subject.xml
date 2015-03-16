@@ -24,7 +24,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         app:fab_type="normal"
         app:fab_colorNormal="@color/green_app"
-        app:fab_colorPressed="@color/green_app_pressed"
+        app:fab_colorPressed="@color/green_app_dark"
         android:src="@drawable/ic_action_new"/>
 
 </FrameLayout>

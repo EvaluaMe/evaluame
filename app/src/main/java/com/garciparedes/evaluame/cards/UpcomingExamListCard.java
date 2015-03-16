@@ -32,7 +32,6 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
 public class UpcomingExamListCard extends CardWithList {
 
 
-    private ArrayList<Exam> upcomingExams;
     private FragmentManager fragmentManager;
 
 
