@@ -1,6 +1,7 @@
 package com.garciparedes.evaluame.cards;
 
 import android.content.Context;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -8,6 +9,8 @@ import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
+import com.garciparedes.evaluame.fragments.ExamFragment;
+import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -29,11 +32,13 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
 public class UpcomingExamListCard extends CardWithList {
 
 
-    private ArrayList<Exam> upcomingExams;
+    private FragmentManager fragmentManager;
 
 
-    public UpcomingExamListCard(Context context) {
+    public UpcomingExamListCard(Context context,  FragmentManager fragmentManager) {
         super(context);
+        this.fragmentManager = fragmentManager;
+
         init();
     }
 
@@ -67,22 +72,22 @@ public class UpcomingExamListCard extends CardWithList {
         List<ListObject> mObjects = new ArrayList<ListObject>();
 
         for(int i = 0; i < ListDB.getMasterList().size(); i++){
-            Subject subject = ListDB.get(i);
+            final Subject subject = ListDB.get(i);
 
             for (int j = 0; j < subject.getExamList().size(); j++) {
 
-                Exam exam = subject.getTestElement(j);
+                final Exam exam = subject.getTestElement(j);
                 try {
 
 
                     if (exam.getDate().before(twoWeeks) && exam.getDate().after(now)) {
                         System.out.print(exam.getName());
-                        mObjects.add(new TestObject(this, exam));
+                        mObjects.add(new TestObject(this, exam, subject));
                     }
                 }catch (NullPointerException ignored){};
 
-                //TestObject testObject = new TestObject(this, subject.getTestElement(i));
-                //testObject.setObjectId(subject.getTestElement(i).getName());
+                //TestObject testObject = new TestObject(this, mSubject.getTestElement(i));
+                //testObject.setObjectId(mSubject.getTestElement(i).getName());
                 //testObject.setSwipeable(true);
                 //mObjects.add(testObject);
             }
@@ -99,12 +104,17 @@ public class UpcomingExamListCard extends CardWithList {
         //Setup the ui elements inside the item
         TextView nameMarkView = (TextView) view.findViewById(R.id.card_test_list_upcoming_inner_name);
         TextView daysTextView = (TextView) view.findViewById(R.id.card_test_list_upcoming_inner_days_left);
+        TextView nameSubjectView = (TextView) view.findViewById(R.id.card_test_list_upcoming_inner_name_subject);
 
         //Retrieve the values from the object
         final TestObject testObject = (TestObject) listObject;
 
         nameMarkView.setText(testObject.mName);
         daysTextView.setText(testObject.mDays);
+
+        nameSubjectView.setTextColor(testObject.color);
+        nameSubjectView.setText(testObject.mSubjectName);
+
 
 
         return view;
@@ -121,24 +131,30 @@ public class UpcomingExamListCard extends CardWithList {
 
         String mName;
         String mDays;
+        String mSubjectName;
+        int color;
 
-        public TestObject(Card parentCard, Exam exam) {
+        public TestObject(Card parentCard, Exam exam, Subject subject) {
             super(parentCard);
             this.mName = exam.getName();
             this.mDays = Date.upcomingDays(getContext(), exam.getDate());
-            init();
+            this.mSubjectName = subject.getName();
+            this.color = subject.getColor();
+            init(exam, subject);
         }
 
-        private void init() {
-            /*
+        private void init(final Exam exam, final Subject subject) {
+
             //OnClick Listener
             setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
-                    Toast.makeText(getContext(), "Click on " + getObjectId(), Toast.LENGTH_SHORT).show();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.container, ExamFragment.newInstance(subject, exam))
+                            .commit();
                 }
             });
-            */
+
         }
     }
 }

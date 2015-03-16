@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Color {
 
-    private static final int COLOR_RANGE = 0x121212;
+    private static final int COLOR_RANGE = 0x101010;
     private static final int COLOR_MAX = 0xFFFFFF;
 
     private static ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
@@ -19,7 +19,7 @@ public class Color {
     }
 
     public static int getDarkness(int color){
-        return (color + COLOR_RANGE);
+        return (color - COLOR_RANGE);
     }
 
     public static ArrayList<Integer> getColorPalette(int color){

@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.google.gson.Gson;
@@ -27,6 +29,15 @@ public class ListDB {
         masterList = mList;
     }
 
+    public static ArrayList<Subject> getStarredSubjects(){
+        ArrayList<Subject> starreds = new ArrayList<>();
+        for(int i = 0 ; i < size(); i++){
+            if (get(i).isStarred()){
+                starreds.add(get(i));
+            }
+        }
+        return starreds;
+    }
 
     /**
      * @return masterLsit
@@ -60,7 +71,7 @@ public class ListDB {
      */
     public static void addSubject(Context context, Subject subject) {
         if (subject.getName().length() <= 0)
-            throw new IllegalArgumentException("Introduce el nombre");
+            throw new IllegalArgumentException(context.getString(R.string.fail_name));
 
         masterList.add(subject);
         saveData(context);
@@ -78,19 +89,19 @@ public class ListDB {
 
     /**
      * @param context context
-     * @param subject subject
+     * @param subject mSubject
      * @param exam    exam
      */
     public static void addTest(Context context, Subject subject, Exam exam) {
 
         if(exam.getName().length() <= 0)
-            throw new IllegalArgumentException("Introduce el nombre");
+            throw new IllegalArgumentException(context.getString(R.string.fail_name));
 
         if(exam.getPercentage() <= 0)
-            throw new IllegalArgumentException("Introduce el porcentaje");
+            throw new IllegalArgumentException(context.getString(R.string.fail_percent));
 
         if((subject.getTotalPercentage()+ exam.getPercentage()) > 100)
-            throw new IllegalArgumentException("El porcentaje no puede superar el 100%");
+            throw new IllegalArgumentException(context.getString(R.string.fail_max_percent));
 
         subject.addTestElement(exam);
         sortExams(subject);

@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Subject;
@@ -54,6 +53,8 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         newSubject = initNewSubject();
+
+        customizeActionBar(false, newSubject.getColor(), null, null);
 
         editTextName.setHint(getString(R.string.set_name));
         editTextName.setText(newSubject.getName());

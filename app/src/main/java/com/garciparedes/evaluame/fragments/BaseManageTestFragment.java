@@ -2,7 +2,6 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.enums.ExamType;
@@ -54,7 +52,17 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        newExam = initTest();
+        if (savedInstanceState != null){
+            newExam = savedInstanceState.getParcelable("save");
+        } else {
+            newExam = initTest();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("save", newExam);
     }
 
     @Override
@@ -77,14 +85,15 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
+        customizeActionBar(false, mSubject.getColor(), mSubject.getName(), null);
 
         editTextName.setHint(getString(R.string.set_name));
-        editTextName.setText(setTextName());
+        editTextName.setText(newExam.getName());
 
         numberPickerMark = new NumberPickerBuilder();
         numberPickerMark
                 .setFragmentManager(getFragmentManager())
-                .setStyleResId(R.style.BetterPickersDialogFragment)
+                .setStyleResId(R.style.BetterPickersDialogFragment_Light)
                 .setTargetFragment(BaseManageTestFragment.this)
                 .setMaxNumber(10)
                 .setMinNumber(0)
@@ -95,7 +104,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         numberPickerValue = new NumberPickerBuilder();
         numberPickerValue
                 .setFragmentManager(getFragmentManager())
-                .setStyleResId(R.style.BetterPickersDialogFragment)
+                .setStyleResId(R.style.BetterPickersDialogFragment_Light)
                 .setTargetFragment(BaseManageTestFragment.this)
                 .setMaxNumber(100)
                 .setMinNumber(0)
@@ -106,11 +115,11 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         datePicker = new DatePickerBuilder();
         datePicker
                 .setFragmentManager(getFragmentManager())
-                .setStyleResId(R.style.BetterPickersDialogFragment)
+                .setStyleResId(R.style.BetterPickersDialogFragment_Light)
                 .setTargetFragment(BaseManageTestFragment.this)
                 .setReference(0);
 
-        textMark.setText(setTextMark());
+        textMark.setText(newExam.getMarkString());
         textMark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +127,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             }
         });
 
-        textValue.setText(setTextPercentage());
+        textValue.setText(newExam.getPercentageString());
         textValue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,9 +144,9 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             }
         });
 
-        mSpinnerType.setAdapter(new ArrayAdapter<ExamType>(getActivity(),
+        mSpinnerType.setAdapter(new ArrayAdapter<String>(getActivity(),
                         android.R.layout.simple_spinner_dropdown_item,
-                        ExamType.values())
+                        ExamType.values(getActivity()))
         );
         mSpinnerType.setSelection(newExam.getType().ordinal());
 
@@ -147,7 +156,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
             public void onClick(View v) {
 
                 newExam.setName(editTextName.getText().toString());
-                newExam.setType((ExamType) mSpinnerType.getSelectedItem());
+                newExam.setType(ExamType.values()[mSpinnerType.getSelectedItemPosition()]);
                 try {
 
                     setOnClickButton();
@@ -168,22 +177,16 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     public abstract String setTextButton();
 
-    public abstract String setTextName();
-
-    public abstract String setTextMark();
-
-    public abstract String setTextPercentage();
-
     @Override
     public void onDialogNumberSet(int reference, int number, double decimal, boolean isNegative, double fullNumber) {
         switch (reference) {
             case 0:
-                textMark.setText(Number.toString((float) fullNumber));
                 newExam.setMark((float) fullNumber);
+                textMark.setText(newExam.getMarkString());
                 break;
             case 1:
-                textValue.setText(Number.toString((float) fullNumber, "%"));
                 newExam.setPercentage((float) (fullNumber));
+                textValue.setText(newExam.getPercentageString());
                 break;
 
             default:
@@ -193,15 +196,8 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     @Override
     public void onDialogDateSet(int reference, int year, int monthOfYear, int dayOfMonth) {
-        textDate.setText(
-                dayOfMonth
-                        + "/"
-                        + Date.intToStringMonth(getActivity(), monthOfYear)
-                        + "/"
-                        + year
-        );
-
         newExam.setDate(new GregorianCalendar(year, monthOfYear, dayOfMonth));
+        textDate.setText(newExam.getDateString(getActivity()));
     }
 
 
@@ -222,12 +218,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void replaceFragment() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(subject))
+                .replace(R.id.container, ExamFragment.newInstance(mSubject, newExam))
                 .commit();
-    }
-
-    @Override
-    public void onBackPressed() {
-        replaceFragment();
     }
 }

@@ -1,23 +1,20 @@
 package com.garciparedes.evaluame.activities;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Constant;
 import com.garciparedes.evaluame.fragments.AddSubjectFragment;
 import com.garciparedes.evaluame.fragments.BaseFragment;
 import com.garciparedes.evaluame.fragments.DefaultFragment;
@@ -32,9 +29,10 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
-public class MainActivity extends FragmentActivity
+public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, BaseFragment.FragmentCallbacks {
 
+    private static final String SAVED_FRAGMENT = "saved_fragment";
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -46,13 +44,19 @@ public class MainActivity extends FragmentActivity
      */
     private CharSequence mTitle;
 
+    private Toolbar mToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getData();
-
+        if (ListDB.getMasterList() == null) {
+            getData();
+        }
         setContentView(R.layout.activity_main);
+
+        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(mToolbar);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -67,7 +71,7 @@ public class MainActivity extends FragmentActivity
         if (savedInstanceState != null) {
             //Restore the fragment's instance
             mCurrentFragment = (BaseFragment) getSupportFragmentManager().getFragment(
-                    savedInstanceState, "mContent");
+                    savedInstanceState, SAVED_FRAGMENT);
         } else {
             mCurrentFragment = DefaultFragment.newInstance();
         }
@@ -75,14 +79,13 @@ public class MainActivity extends FragmentActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container,mCurrentFragment)
                 .commit();
-
-
+        //restoreActionBar();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        getSupportFragmentManager().putFragment(outState, "mContent", mCurrentFragment);
+        getSupportFragmentManager().putFragment(outState, SAVED_FRAGMENT, mCurrentFragment);
     }
 
 
@@ -90,44 +93,58 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        //FragmentManager fragmentManager = getFragmentManager();
+        BaseFragment baseFragment;
 
-    switch (position){
-        case -2:
-
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, AddSubjectFragment.newInstance())
-                    .commit();
-            break;
-        case -1:
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, DefaultFragment.newInstance())
-                    .commit();
-            break;
-        default:
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.container, SubjectFragment.newInstance(ListDB.get(position)))
-                    .commit();
-            break;
-    }
-
-    }
-
-    public void onSectionAttached(int number) {
-        mTitle = ListDB.get(number).getName();
+        switch (position){
+            case -2:
+                baseFragment = AddSubjectFragment.newInstance();
+                break;
+            case -1:
+                baseFragment = DefaultFragment.newInstance();
+                break;
+            default:
+                baseFragment = SubjectFragment.newInstance(ListDB.get(position));
+                break;
+        }
+        
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, baseFragment)
+                .commit();
 
     }
 
     public void restoreActionBar() {
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
+
+        if (mToolbar == null) {
+            mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        }
+        if (mToolbar != null){
+            mToolbar.setBackgroundColor(getResources().getColor(R.color.green_app));
+
+            mToolbar.setLayoutParams(
+                    new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT
+                    )
+            );
+            mToolbar.setTitle(mTitle);
+            mToolbar.setSubtitle(null);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getWindow().setStatusBarColor(getResources().getColor(R.color.green_app_dark));
+        }
     }
 
 
     public void update() {
         mNavigationDrawerFragment.updateListView();
+    }
 
+    public Toolbar getToolbar(){
+        if (mToolbar == null){
+            mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        }
+        return mToolbar;
     }
 
     @Override
@@ -137,7 +154,7 @@ public class MainActivity extends FragmentActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             //getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
+            //restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -178,24 +195,13 @@ public class MainActivity extends FragmentActivity
             mList = new ArrayList<Subject>();
         }
 
-        /*
-        new ShowcaseView.Builder(this)
-                .setTarget(new ActionViewTarget(this, ActionViewTarget.Type.HOME))
-                .setContentTitle("ShowcaseView")
-                .setContentText("This is highlighting the Home button")
-                .hideOnTouchOutside()
-                .build();
-        */
-
         ListDB.setMasterList(mList);
     }
 
     @Override
     public void onBackPressed() {
-        FragmentManager fm = getSupportFragmentManager();
         if (mNavigationDrawerFragment.isDrawerOpen()) {
             mNavigationDrawerFragment.closeDrawer();
-
         } else {
             mCurrentFragment.onBackPressed();
         }

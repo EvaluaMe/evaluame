@@ -7,8 +7,8 @@ android {
         applicationId 'com.garciparedes.evaluame'
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 4
-        versionName '1.1.2'
+        versionCode 5
+        versionName '1.2.0'
     }
     buildTypes {
         release {
@@ -40,4 +40,5 @@ dependencies {
 
     compile 'com.amulyakhare:com.amulyakhare.textdrawable:1.0.1'
 
+    compile "com.android.support:appcompat-v7:21.0.+"
 }
