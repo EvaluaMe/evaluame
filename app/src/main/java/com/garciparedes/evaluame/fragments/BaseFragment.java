@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,7 +68,9 @@ public abstract class BaseFragment extends Fragment {
 
 
     public void customizeActionBar(boolean isBig, int color, String title , String subTitle){
+        ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         Toolbar toolbar = ((MainActivity) getActivity()).getToolbar();
+
         toolbar.setBackgroundColor(color);
 
         if (isBig) {
@@ -77,7 +80,8 @@ public abstract class BaseFragment extends Fragment {
         }
 
         if (title != null) {
-            toolbar.setTitle(title);
+            //toolbar.setTitle(title);
+            actionBar.setTitle(title);
         }
 
         if (subTitle != null) {
@@ -86,7 +90,6 @@ public abstract class BaseFragment extends Fragment {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             getActivity().getWindow().setStatusBarColor(Color.getDarkness(color));
-
         }
     }
 
