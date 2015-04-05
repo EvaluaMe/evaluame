@@ -49,7 +49,11 @@ public class DefaultFragment extends BaseFragment {
 
         cards.add(new StarredSubjectListCard(getActivity(), getFragmentManager()));
         //cards.add(new BarChartCard(getActivity()));
+
         cards.add(new UpcomingExamListCard(getActivity(), getFragmentManager()));
+        if (((UpcomingExamListCard) cards.get(1)).isEmpty()){
+            cards.remove(1);
+        }
 
         //mCards.add(new LineChartCard(getActivity()));
         cards.add(new GlobalStatsCard(getActivity()));

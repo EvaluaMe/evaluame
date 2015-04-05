@@ -130,7 +130,7 @@ public class ExamFragment extends BaseSubjectFragment{
                 getActivity());
 
         // set title
-        alertDialogBuilder.setTitle(getString(R.string.delete_subject));
+        alertDialogBuilder.setTitle(getString(R.string.delete_mark));
 
         // set dialog message
         alertDialogBuilder

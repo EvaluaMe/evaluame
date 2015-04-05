@@ -98,6 +98,10 @@ public class UpcomingExamListCard extends CardWithList {
         return mObjects;
     }
 
+    public boolean isEmpty(){
+        return initChildren().isEmpty();
+    }
+
 
     @Override
     public View setupChildView(int i, ListObject listObject, View view, ViewGroup viewGroup) {

@@ -10,15 +10,15 @@
     <string name="new_subject">Add Subject</string>
     <string name="set_name">Name</string>
     <string name="set_description">Description</string>
-    <string name="create_subject">Create subject</string>
-    <string name="delete_subject">Delete subject</string>
+    <string name="create_subject">Create Subject</string>
+    <string name="delete_subject">Delete Subject</string>
     <string name="delete_subject_confirmation">Are you sure to delete this subject?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="new_score">New score</string>
+    <string name="new_score">New Score</string>
     <string name="set_score">Score</string>
     <string name="set_value">Value</string>
-    <string name="create_test">Create exam</string>
+    <string name="create_test">Create Mark</string>
     <string name="title_stats">Stats</string>
     <string name="error_max_score">The score must be less than 10</string>
     <string name="title_exams">Exams</string>
@@ -51,7 +51,7 @@
     </array>
 
     <string name="error_name">Error on name</string>
-    <string name="edit_test">Edit Test</string>
+    <string name="edit_test">Edit Mark</string>
     <string name="title_weighted_average">Weighted Average</string>
     <string name="action_edit">Edit</string>
     <string name="edit_subject">Edit Subject</string>
@@ -63,11 +63,13 @@
     <string name="days_left">days left</string>
     <string name="action_starred">Starred</string>
     <string name="starred_subjects">Starred Subjects</string>
-    <string name="title_upcoming_exams">Upcoming Exams</string>
-    <string name="star_subject_suggest">You can star subjets to show here</string>
-    <string name="delete_mark_confirmation">Are you sure to delete this exam?</string>
-    <string name="fail_name">Enter name</string>
-    <string name="fail_percent">Enter percent</string>
+    <string name="title_upcoming_exams">Upcoming Marks</string>
+    <string name="star_subject_suggest">You can star subjets to show here.</string>
+    <string name="delete_mark_confirmation">Are you sure to delete this mark?</string>
+    <string name="fail_name">Enter Name</string>
+    <string name="fail_percent">Enter Percent</string>
     <string name="fail_max_percent">Global percent must be less than 100%</string>
+    <string name="delete_mark">Delete Mark</string>
+    <string name="title_home">Home</string>
 
 </resources>
