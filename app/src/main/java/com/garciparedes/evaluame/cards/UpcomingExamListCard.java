@@ -5,12 +5,10 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.fragments.ExamFragment;
-import com.garciparedes.evaluame.fragments.SubjectFragment;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -66,8 +64,7 @@ public class UpcomingExamListCard extends CardWithList {
         Calendar twoWeeks = Calendar.getInstance();
         twoWeeks.add(Calendar.DAY_OF_MONTH, 21);
 
-        Calendar now = Calendar.getInstance();
-        now.add(Calendar.DAY_OF_MONTH, -1);
+        GregorianCalendar now = (GregorianCalendar) GregorianCalendar.getInstance();
         //Init the list
         List<ListObject> mObjects = new ArrayList<ListObject>();
 
@@ -77,11 +74,10 @@ public class UpcomingExamListCard extends CardWithList {
             for (int j = 0; j < subject.getExamList().size(); j++) {
 
                 final Exam exam = subject.getTestElement(j);
+
                 try {
 
-
                     if (exam.getDate().before(twoWeeks) && exam.getDate().after(now)) {
-                        System.out.print(exam.getName());
                         mObjects.add(new TestObject(this, exam, subject));
                     }
                 }catch (NullPointerException ignored){};
@@ -114,7 +110,7 @@ public class UpcomingExamListCard extends CardWithList {
         final TestObject testObject = (TestObject) listObject;
 
         nameMarkView.setText(testObject.mName);
-        daysTextView.setText(testObject.mDays);
+        daysTextView.setText(testObject.mTime);
 
         nameSubjectView.setTextColor(testObject.color);
         nameSubjectView.setText(testObject.mSubjectName);
@@ -134,14 +130,14 @@ public class UpcomingExamListCard extends CardWithList {
     private class TestObject extends DefaultListObject {
 
         String mName;
-        String mDays;
+        String mTime;
         String mSubjectName;
         int color;
 
         public TestObject(Card parentCard, Exam exam, Subject subject) {
             super(parentCard);
             this.mName = exam.getName();
-            this.mDays = Date.upcomingDays(getContext(), exam.getDate());
+            this.mTime = Date.upcomingDays(getContext(), exam.getDate());
             this.mSubjectName = subject.getName();
             this.color = subject.getColor();
             init(exam, subject);

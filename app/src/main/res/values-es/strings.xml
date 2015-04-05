@@ -70,5 +70,8 @@
     <string name="fail_max_percent">El porcentaje global no puede superar el 100%</string>
     <string name="delete_mark">Eliminar Calificación</string>
     <string name="title_home">Home</string>
+    <string name="set_time">Hora</string>
+    <string name="hours_left">horas restantes</string>
+    <string name="minutes_left">minutos restantes</string>
 
 </resources>

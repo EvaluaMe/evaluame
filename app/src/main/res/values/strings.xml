@@ -71,5 +71,8 @@
     <string name="fail_max_percent">Global percent must be less than 100%</string>
     <string name="delete_mark">Delete Mark</string>
     <string name="title_home">Home</string>
+    <string name="set_time">Time</string>
+    <string name="hours_left">hours left</string>
+    <string name="minutes_left">minutes left</string>
 
 </resources>
