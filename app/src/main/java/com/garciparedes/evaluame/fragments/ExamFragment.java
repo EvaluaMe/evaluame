@@ -29,6 +29,7 @@ public class ExamFragment extends BaseSubjectFragment{
     private TextView mValueTextView;
     private TextView mTypeTextView;
     private TextView mDateTextView;
+    private TextView mTimeTextView;
     private TextView mMarkTextView;
 
     private Exam mExam;
@@ -51,6 +52,7 @@ public class ExamFragment extends BaseSubjectFragment{
         mValueTextView = (TextView) view.findViewById(R.id.fragment_exam_value_textView);
         mTypeTextView = (TextView) view.findViewById(R.id.fragment_exam_type_textView);
         mDateTextView = (TextView) view.findViewById(R.id.fragment_exam_date_textView);
+        mTimeTextView = (TextView) view.findViewById(R.id.fragment_exam_time_textView);
         mMarkTextView = (TextView) view.findViewById(R.id.fragment_exam_mark_textView);
 
         return view;
@@ -73,6 +75,7 @@ public class ExamFragment extends BaseSubjectFragment{
         mValueTextView.setText(mExam.getPercentageString());
         mTypeTextView.setText(mExam.getTypeString(getActivity()));
         mDateTextView.setText(mExam.getDateString(getActivity()));
+        mTimeTextView.setText(mExam.getTimeString(getActivity()));
         mMarkTextView.setText(mExam.getMarkString());
 
     }
@@ -130,7 +133,7 @@ public class ExamFragment extends BaseSubjectFragment{
                 getActivity());
 
         // set title
-        alertDialogBuilder.setTitle(getString(R.string.delete_subject));
+        alertDialogBuilder.setTitle(getString(R.string.delete_mark));
 
         // set dialog message
         alertDialogBuilder

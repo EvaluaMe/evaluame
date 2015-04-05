@@ -189,7 +189,7 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
         mDefaultFragmentButton = (Button) getActivity().findViewById(R.id.button_default_fragment);
-        mDefaultFragmentButton.setText(getString(R.string.title_stats));
+        mDefaultFragmentButton.setText(getString(R.string.title_home));
         mDefaultFragmentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

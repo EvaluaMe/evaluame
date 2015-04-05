@@ -25,6 +25,20 @@ public class Date {
             result.append("/");
             result.append(gregorianCalendar.get(Calendar.YEAR));
         } catch (NullPointerException e) {
+            result = nullTimeToString();
+        }
+
+        return result.toString();
+    }
+
+    public static String timeToString(Context context, GregorianCalendar gregorianCalendar) {
+        StringBuilder result = new StringBuilder();
+        try {
+
+            result.append(gregorianCalendar.get(Calendar.HOUR_OF_DAY));
+            result.append(":");
+            result.append(gregorianCalendar.get(Calendar.MINUTE));
+        } catch (NullPointerException e) {
             result = nullDateToString();
         }
 
@@ -43,13 +57,28 @@ public class Date {
     }
 
     public static String upcomingDays(Context context, GregorianCalendar gregorianCalendar){
-        long millis = (gregorianCalendar.getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
-        long days = 1 + (millis /(1000*60*60*24));
         StringBuilder result = new StringBuilder();
-        result.append(days);
-        result.append(" ");
-        result.append(context.getResources().getString(R.string.days_left));
+        long millis = (gregorianCalendar.getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
+        int days = (int) (millis /(1000*60*60*24));
+        int hours = (int) (millis /(1000*60*60));
+        int minutes = (int) (millis /(1000*60));
 
+        if (days > 0) {
+            result.append(days);
+            result.append(" ");
+            result.append(context.getResources().getString(R.string.days_left));
+
+        } else if (hours > 0){
+            result.append(hours);
+            result.append(" ");
+            result.append(context.getResources().getString(R.string.hours_left));
+
+        } else if (minutes > 0){
+            result.append(minutes);
+            result.append(" ");
+            result.append(context.getResources().getString(R.string.minutes_left));
+
+        }
         return result.toString();
     }
 
@@ -60,6 +89,16 @@ public class Date {
         result.append("--");
         result.append("/");
         result.append("----");
+        return result;
+    }
+
+
+
+    private static StringBuilder nullTimeToString() {
+        StringBuilder result = new StringBuilder();
+        result.append("--");
+        result.append(":");
+        result.append("--");
         return result;
     }
 }
