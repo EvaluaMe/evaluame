@@ -24,6 +24,7 @@
              android:id="@+id/card_test_list_upcoming_inner_name_subject"
              android:textColor="@color/grey"
              android:layout_width="wrap_content"
+             android:layout_alignParentRight="true"
              android:layout_height="wrap_content"
              tools:text="History"
              android:textSize="15sp"

@@ -219,9 +219,9 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void onTimeSet(RadialTimePickerDialog dialog, int hourOfDay, int minute) {
         newExam.getDate().set(Calendar.HOUR_OF_DAY, hourOfDay);
-        newExam.getDate().set(Calendar.MINUTE, hourOfDay);
+        newExam.getDate().set(Calendar.MINUTE, minute);
 
-        textTime.setText( hourOfDay + ":" + minute);
+        textTime.setText( newExam.getTimeString(getActivity()));
     }
 
 
