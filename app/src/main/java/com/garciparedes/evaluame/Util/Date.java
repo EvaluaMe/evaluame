@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.garciparedes.evaluame.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -25,7 +26,7 @@ public class Date {
             result.append("/");
             result.append(gregorianCalendar.get(Calendar.YEAR));
         } catch (NullPointerException e) {
-            result = nullTimeToString();
+            result = nullDateToString();
         }
 
         return result.toString();
@@ -33,13 +34,12 @@ public class Date {
 
     public static String timeToString(Context context, GregorianCalendar gregorianCalendar) {
         StringBuilder result = new StringBuilder();
-        try {
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
-            result.append(gregorianCalendar.get(Calendar.HOUR_OF_DAY));
-            result.append(":");
-            result.append(gregorianCalendar.get(Calendar.MINUTE));
+        try {
+            result.append(timeFormat.format(gregorianCalendar.getTime()));
         } catch (NullPointerException e) {
-            result = nullDateToString();
+            result = nullTimeToString();
         }
 
         return result.toString();
