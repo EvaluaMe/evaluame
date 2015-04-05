@@ -212,7 +212,10 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
 
     @Override
     public void onDateSet( CalendarDatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
-        newExam.setDate(new GregorianCalendar(year, monthOfYear, dayOfMonth));
+        newExam.getDate().set(Calendar.YEAR, year);
+        newExam.getDate().set(Calendar.MONTH, monthOfYear);
+        newExam.getDate().set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
         textDate.setText(newExam.getDateString(getActivity()));
     }
 
@@ -221,7 +224,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         newExam.getDate().set(Calendar.HOUR_OF_DAY, hourOfDay);
         newExam.getDate().set(Calendar.MINUTE, minute);
 
-        textTime.setText( newExam.getTimeString(getActivity()));
+        textTime.setText(newExam.getTimeString(getActivity()));
     }
 
 
