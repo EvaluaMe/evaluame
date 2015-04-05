@@ -166,18 +166,13 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         switch (item.getItemId()) {
             case R.id.action_edit:
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, EditTestFragment.newInstance(mSubject,  clickedExam))
-                        .commit();
-
+                editMark();
                 return true;
+
             case R.id.action_delete:
-                ListDB.removeTest(getActivity(), mSubject, clickedExam);
-
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, newInstance(mSubject))
-                        .commit();
+                deleteMark();
                 return true;
+
             default:
                 return super.onContextItemSelected(item);
 
@@ -246,6 +241,53 @@ public class SubjectFragment extends BaseSubjectFragment {
             ListDB.saveData(getActivity());
 
         }
+    }
+
+
+    public void editMark() {
+        getFragmentManager().beginTransaction()
+                .replace(R.id.container, EditTestFragment.newInstance(mSubject, clickedExam))
+                .commit();
+
+    }
+
+    public void deleteMark(){
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        // set title
+        alertDialogBuilder.setTitle(getString(R.string.delete_mark));
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(getString(R.string.delete_mark_confirmation))
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        ListDB.removeTest(getActivity(), mSubject, clickedExam);
+
+                        getFragmentManager().beginTransaction()
+                                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
+                                .commit();
+
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
     }
 
     /**

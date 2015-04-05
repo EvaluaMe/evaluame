@@ -2,6 +2,7 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +14,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.doomonafireball.betterpickers.datepicker.DatePickerBuilder;
-import com.doomonafireball.betterpickers.datepicker.DatePickerDialogFragment;
+
+import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
+import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Date;
-import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.enums.ExamType;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Exam;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
@@ -31,20 +32,24 @@ import java.util.GregorianCalendar;
  */
 public abstract class BaseManageTestFragment extends BaseSubjectFragment
         implements NumberPickerDialogFragment.NumberPickerDialogHandler, AddData,
-        DatePickerDialogFragment.DatePickerDialogHandler {
+        CalendarDatePickerDialog.OnDateSetListener,
+        RadialTimePickerDialog.OnTimeSetListener{
 
     private Button btnCreate;
     private EditText editTextName;
     private TextView textMark;
     private TextView textValue;
     private TextView textDate;
+    private TextView textTime;
+
 
     private NumberPickerBuilder numberPickerMark;
     private NumberPickerBuilder numberPickerValue;
 
     private Spinner mSpinnerType;
 
-    private DatePickerBuilder datePicker;
+    private CalendarDatePickerDialog datePicker;
+    private RadialTimePickerDialog timePicker;
 
     protected Exam newExam;
 
@@ -75,6 +80,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         textMark = (TextView) view.findViewById(R.id.textView_set_mark);
         textValue = (TextView) view.findViewById(R.id.textView_set_value);
         textDate = (TextView) view.findViewById(R.id.textView_set_date);
+        textTime = (TextView) view.findViewById(R.id.textView_set_time);
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog);
         mSpinnerType = (Spinner) view.findViewById(R.id.spinner_set_type);
         btnCreate = (Button) view.findViewById(R.id.button_dialog);
@@ -112,12 +118,15 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
                 .setLabelText("%")
                 .setReference(1);
 
-        datePicker = new DatePickerBuilder();
-        datePicker
-                .setFragmentManager(getFragmentManager())
-                .setStyleResId(R.style.BetterPickersDialogFragment_Light)
-                .setTargetFragment(BaseManageTestFragment.this)
-                .setReference(0);
+        GregorianCalendar now = newExam.getDate();
+
+        datePicker  = CalendarDatePickerDialog
+                .newInstance(this, now.get(Calendar.YEAR), now.get(Calendar.MONTH),
+                        now.get(Calendar.DAY_OF_MONTH));
+
+        timePicker = RadialTimePickerDialog
+                .newInstance(this, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE),
+                        DateFormat.is24HourFormat(getActivity()));
 
         textMark.setText(newExam.getMarkString());
         textMark.setOnClickListener(new View.OnClickListener() {
@@ -136,11 +145,18 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         });
 
         textDate.setText(newExam.getDateString(getActivity()));
-
         textDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePicker.show();
+                datePicker.show(getFragmentManager(), "hola");
+            }
+        });
+
+        textTime.setText(newExam.getTimeString(getActivity()));
+        textTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                timePicker.show(getFragmentManager(), "adios");
             }
         });
 
@@ -195,9 +211,20 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     }
 
     @Override
-    public void onDialogDateSet(int reference, int year, int monthOfYear, int dayOfMonth) {
-        newExam.setDate(new GregorianCalendar(year, monthOfYear, dayOfMonth));
+    public void onDateSet( CalendarDatePickerDialog dialog, int year, int monthOfYear, int dayOfMonth) {
+        newExam.getDate().set(Calendar.YEAR, year);
+        newExam.getDate().set(Calendar.MONTH, monthOfYear);
+        newExam.getDate().set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
         textDate.setText(newExam.getDateString(getActivity()));
+    }
+
+    @Override
+    public void onTimeSet(RadialTimePickerDialog dialog, int hourOfDay, int minute) {
+        newExam.getDate().set(Calendar.HOUR_OF_DAY, hourOfDay);
+        newExam.getDate().set(Calendar.MINUTE, minute);
+
+        textTime.setText(newExam.getTimeString(getActivity()));
     }
 
 

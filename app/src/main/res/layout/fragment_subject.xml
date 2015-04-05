@@ -25,6 +25,7 @@
         app:fab_type="normal"
         app:fab_colorNormal="@color/green_app"
         app:fab_colorPressed="@color/green_app_dark"
-        android:src="@drawable/ic_action_new"/>
+        android:src="@drawable/ic_action_new"
+        android:elevation="5dp"/>
 
 </FrameLayout>

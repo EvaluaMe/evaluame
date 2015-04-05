@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.items;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.v4.app.FragmentActivity;
 
 import com.garciparedes.evaluame.Util.Date;
 import com.garciparedes.evaluame.Util.Number;
@@ -29,6 +30,7 @@ public class Exam implements Parcelable, Comparable<Exam> {
      */
     public Exam() {
         super();
+        this.date = (GregorianCalendar) GregorianCalendar.getInstance();
         this.mType = ExamType.EXAM;
     }
 
@@ -247,5 +249,10 @@ public class Exam implements Parcelable, Comparable<Exam> {
         } else {
             return getDate().compareTo(another.getDate());
         }
+    }
+
+    public String getTimeString(Context context) {
+        return Date.timeToString(context, getDate());
+
     }
 }
