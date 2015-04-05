@@ -13,6 +13,8 @@ import com.garciparedes.evaluame.provider.ListDB;
 public class EditTestFragment extends BaseManageTestFragment {
 
     public static final String EXAM = "exam";
+    public static final String SAVED_EXAM = "saved_exam";
+
     private Exam exam;
 
     public static EditTestFragment newInstance(Subject subject, Exam exam) {
@@ -23,6 +25,21 @@ public class EditTestFragment extends BaseManageTestFragment {
         f.setArguments(args);
         return f;
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+            exam = savedInstanceState.getParcelable(SAVED_EXAM);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(SAVED_EXAM, exam);
+    }
+
 
     @Override
     public Exam initTest() {

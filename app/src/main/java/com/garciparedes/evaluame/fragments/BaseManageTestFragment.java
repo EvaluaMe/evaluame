@@ -52,13 +52,14 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     private RadialTimePickerDialog timePicker;
 
     protected Exam newExam;
+    private static final String SAVED_NEW_EXAM = "saved_new_exam";
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null){
-            newExam = savedInstanceState.getParcelable("save");
+            newExam = savedInstanceState.getParcelable(SAVED_NEW_EXAM);
         } else {
             newExam = initTest();
         }
@@ -67,7 +68,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("save", newExam);
+        outState.putParcelable(SAVED_NEW_EXAM, newExam);
     }
 
     @Override
