@@ -100,8 +100,10 @@ public class ListDB {
         if(exam.getPercentage() <= 0)
             throw new IllegalArgumentException(context.getString(R.string.fail_percent));
 
+        /*
         if((subject.getTotalPercentage()+ exam.getPercentage()) > 100)
             throw new IllegalArgumentException(context.getString(R.string.fail_max_percent));
+        */
 
         subject.addTestElement(exam);
         sortExams(subject);

@@ -51,8 +51,10 @@ public class EditTestFragment extends BaseManageTestFragment {
     @Override
     public void setOnClickButton() {
 
+        /*
         if((mSubject.getTotalPercentage() - exam.getPercentage() + newExam.getPercentage()) > 100)
             throw new IllegalArgumentException(getString(R.string.fail_max_percent));
+        */
 
         exam.paste(newExam);
         ListDB.sortExams(mSubject);
