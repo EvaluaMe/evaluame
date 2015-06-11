@@ -82,8 +82,8 @@ public class StarredSubjectListCard extends CardWithList {
         if (mBarChart != null) {
             mBarChart.setTouchEnabled(false);
             mBarChart.setDescription("");
-            mBarChart.setDrawLegend(false);
-            mBarChart.setDrawXLabels(false);
+            //mBarChart.setDrawLegend(false);
+            //mBarChart.setDrawXLabels(false);
             setValues();
         }
     }

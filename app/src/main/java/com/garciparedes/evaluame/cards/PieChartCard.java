@@ -59,9 +59,9 @@ public class PieChartCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view) {
         mChart = (PieChart) parent.findViewById(R.id.card_chart_pie);
         mChart.setTouchEnabled(false);
-        mChart.setDrawLegend(false);
+        //mChart.setDrawLegend(false);
 
-        mChart.setDrawYValues(false);
+        //mChart.setDrawYValues(false);
         mChart.setDescription("");
 
         // radius of the center hole in percent of maximum radius

@@ -68,16 +68,19 @@ public abstract class BaseFragment extends Fragment {
 
 
     public void customizeActionBar(boolean isBig, int color, String title , String subTitle){
+        /*
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         Toolbar toolbar = ((MainActivity) getActivity()).getToolbar();
 
         toolbar.setBackgroundColor(color);
+
 
         if (isBig) {
             toolbar.setLayoutParams(
                     new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300)
             );
         }
+
 
         if (title != null) {
             //toolbar.setTitle(title);
@@ -91,6 +94,7 @@ public abstract class BaseFragment extends Fragment {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             getActivity().getWindow().setStatusBarColor(Color.getDarkness(color));
         }
+        */
     }
 
     @Override

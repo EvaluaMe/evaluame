@@ -7,13 +7,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card="http://schemas.android.com/tools">
 
-    <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/subject_card_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        card:list_card_layout_resourceID="@layout/list_card_layout"/>
+        card:list_card_layout_resourceID="@layout/list_card_layout" />
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/floating_button"
@@ -26,6 +25,6 @@
         app:fab_colorNormal="@color/green_app"
         app:fab_colorPressed="@color/green_app_dark"
         android:src="@drawable/ic_action_new"
-        android:elevation="5dp"/>
+        android:elevation="5dp" />
 
 </FrameLayout>

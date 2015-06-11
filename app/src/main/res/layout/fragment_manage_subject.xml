@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_vertical_margin"
@@ -22,8 +22,7 @@
             android:lines="1"
             android:maxLines="1"
             android:imeOptions="actionGo"
-            android:inputType="textCapSentences"
-            />
+            android:inputType="textCapSentences" />
 
         <EditText
             android:id="@+id/edit_text_dialog_description_subject"
@@ -31,8 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/edit_text_dialog_name_subject"
             android:imeOptions="actionGo"
-            android:inputType="textCapSentences|textMultiLine"
-            />
+            android:inputType="textCapSentences|textMultiLine" />
 
 
         <Button
@@ -40,6 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="?android:attr/buttonBarButtonStyle"
-            android:layout_below="@id/edit_text_dialog_description_subject"/>
+            android:layout_below="@id/edit_text_dialog_description_subject" />
     </RelativeLayout>
 </ScrollView>

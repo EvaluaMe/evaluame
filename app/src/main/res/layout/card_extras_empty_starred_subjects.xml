@@ -13,14 +13,13 @@
         android:textSize="@dimen/text_size_medium"
         android:text="@string/star_subject_suggest"
         android:gravity="center"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_centerHorizontal="true" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_action_important_light"
         android:layout_below="@id/card_empty_subject_textView"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

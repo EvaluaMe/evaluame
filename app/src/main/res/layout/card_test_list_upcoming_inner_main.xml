@@ -7,10 +7,10 @@
     android:layout_height="wrap_content">
 
 
-     <RelativeLayout
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_margin="12dp">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp">
 
         <TextView
             android:id="@+id/card_test_list_upcoming_inner_name"
@@ -18,17 +18,17 @@
             android:textSize="20sp"
             tools:text="Exam"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
-         <TextView
-             android:id="@+id/card_test_list_upcoming_inner_name_subject"
-             android:textColor="@color/grey"
-             android:layout_width="wrap_content"
-             android:layout_alignParentRight="true"
-             android:layout_height="wrap_content"
-             tools:text="History"
-             android:textSize="15sp"
-             android:layout_below="@id/card_test_list_upcoming_inner_name"/>
+        <TextView
+            android:id="@+id/card_test_list_upcoming_inner_name_subject"
+            android:textColor="@color/grey"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            tools:text="History"
+            android:textSize="15sp"
+            android:layout_below="@id/card_test_list_upcoming_inner_name" />
 
         <TextView
             android:layout_below="@id/card_test_list_upcoming_inner_name_subject"
@@ -38,11 +38,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="7 days left"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
 
-
-
-     </RelativeLayout>
+    </RelativeLayout>
 
 </LinearLayout>

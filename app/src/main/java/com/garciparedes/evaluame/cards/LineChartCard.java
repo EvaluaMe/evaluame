@@ -33,18 +33,18 @@ public class LineChartCard extends BaseChartCard {
         mChart = (LineChart) view.findViewById(R.id.card_chart_line);
 
         // if enabled, the chart will always start at zero on the y-axis
-        mChart.setStartAtZero(true);
+        //mChart.setStartAtZero(true);
 
         // disable the drawing of values into the chart
-        mChart.setDrawYValues(false);
+        //mChart.setDrawYValues(false);
 
-        mChart.setDrawBorder(false);
+        //mChart.setDrawBorder(false);
 
-        mChart.setDrawLegend(false);
+        //mChart.setDrawLegend(false);
 
         // no description text
         mChart.setDescription("");
-        mChart.setUnit(" $");
+        //mChart.setUnit(" $");
 
         // enable value highlighting
         mChart.setHighlightEnabled(true);
@@ -60,8 +60,8 @@ public class LineChartCard extends BaseChartCard {
         mChart.setPinchZoom(false);
 
         mChart.setDrawGridBackground(false);
-        mChart.setDrawVerticalGrid(false);
-        mChart.setDrawXLabels(false);
+        //mChart.setDrawVerticalGrid(false);
+        //mChart.setDrawXLabels(false);
 
         // add data
         setValues();

@@ -99,7 +99,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         if (mFAButton != null) {
-            mFAButton.attachToRecyclerView(mRecyclerView);
+            //mFAButton.attachToRecyclerView(mRecyclerView);
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_action_weight"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/fragment_exam_value_textView"
@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_weight="5"
 
-            android:text="30%"/>
+            android:text="30%" />
 
     </TableRow>
 
@@ -39,14 +39,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_action_event"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/fragment_exam_date_textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:text="23/marzo/2015"/>
+            android:text="23/marzo/2015" />
 
     </TableRow>
 
@@ -61,14 +61,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_action_time"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/fragment_exam_time_textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:text="11:00"/>
+            android:text="11:00" />
 
     </TableRow>
 
@@ -83,14 +83,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_action_edit"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/fragment_exam_type_textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:text="Exam"/>
+            android:text="Exam" />
 
     </TableRow>
 
@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/ic_action_accept"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/fragment_exam_mark_textView"
@@ -114,7 +114,7 @@
             android:layout_weight="5"
             android:textStyle="bold"
             android:textSize="@dimen/text_size_large"
-            android:text="4"/>
+            android:text="4" />
 
     </TableRow>
 

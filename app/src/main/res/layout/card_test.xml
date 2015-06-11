@@ -13,8 +13,7 @@
         android:layout_height="5dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:progressDrawable="@drawable/my_progress_background"
-        />
+        android:progressDrawable="@drawable/my_progress_background" />
 
     <RelativeLayout
         android:layout_below="@id/card_test_mark_progressBar"
@@ -22,13 +21,14 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp">
+
         <TextView
             android:id="@+id/card_test_mark_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="48dp"
             android:layout_centerVertical="true"
-            android:text="Nota"/>
+            android:text="Nota" />
 
         <TextView
             android:id="@+id/card_test_percentage_textView"
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:textSize="18dp"
             android:text="Valor"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true" />
 
         <TextView
             android:id="@+id/card_test_date_textView"
@@ -45,7 +45,8 @@
             android:layout_height="wrap_content"
             android:textSize="18dp"
             android:text="Fecha"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true" />
+
         <TextView
             android:id="@+id/card_test_type_textView"
             android:layout_below="@id/card_test_date_textView"
@@ -53,8 +54,8 @@
             android:layout_height="wrap_content"
             android:textSize="18dp"
             android:text="Tipo"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true" />
 
-        </RelativeLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -7,7 +7,7 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_horizontal_margin">
 
@@ -15,7 +15,7 @@
             android:id="@+id/edit_text_dialog"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapSentences"/>
+            android:inputType="textCapSentences" />
 
 
         <TableLayout
@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/set_value"
                     android:textSize="@dimen/text_size_medium"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/textView_set_value"
@@ -49,8 +49,7 @@
                     android:text="- - . - - %"
                     android:textStyle="bold"
                     android:textSize="@dimen/text_size_large"
-                    android:layout_weight="2"
-                    />
+                    android:layout_weight="2" />
 
             </TableRow>
 
@@ -68,7 +67,7 @@
                     android:text="@string/set_type"
                     android:textSize="@dimen/text_size_medium"
                     android:layout_alignParentLeft="true"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <Spinner
                     android:id="@+id/spinner_set_type"
@@ -76,7 +75,7 @@
                     android:layout_height="30dp"
                     android:spinnerMode="dropdown"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_weight="2"/>
+                    android:layout_weight="2" />
             </TableRow>
 
             <TableRow
@@ -91,7 +90,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/set_date"
                     android:textSize="@dimen/text_size_medium"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/textView_set_date"
@@ -101,8 +100,7 @@
                     android:text="xx-xx-xxxx"
                     android:textStyle="bold"
                     android:textSize="@dimen/text_size_large"
-                    android:layout_weight="2"
-                    />
+                    android:layout_weight="2" />
 
             </TableRow>
 
@@ -119,7 +117,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/set_time"
                     android:textSize="@dimen/text_size_medium"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/textView_set_time"
@@ -129,8 +127,7 @@
                     android:text="xx:xx"
                     android:textStyle="bold"
                     android:textSize="@dimen/text_size_large"
-                    android:layout_weight="2"
-                    />
+                    android:layout_weight="2" />
 
             </TableRow>
 
@@ -146,7 +143,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/set_score"
                     android:textSize="@dimen/text_size_medium"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/textView_set_mark"
@@ -156,8 +153,7 @@
                     android:text="- - . - -"
                     android:textStyle="bold"
                     android:textSize="@dimen/text_size_large"
-                    android:layout_weight="2"
-                    />
+                    android:layout_weight="2" />
 
             </TableRow>
         </TableLayout>
@@ -170,7 +166,7 @@
             android:layout_gravity="bottom"
             android:text="@string/create_test"
             android:layout_margin="20dp"
-            style="?android:attr/buttonBarButtonStyle"/>
+            style="?android:attr/buttonBarButtonStyle" />
 
     </RelativeLayout>
 </ScrollView>

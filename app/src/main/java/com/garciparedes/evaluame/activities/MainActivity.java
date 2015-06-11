@@ -4,6 +4,9 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -11,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -36,13 +40,14 @@ public class MainActivity extends ActionBarActivity
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    //private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private BaseFragment mCurrentFragment;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
-    private CharSequence mTitle;
+
+    private DrawerLayout mDrawerLayout;
 
     private Toolbar mToolbar;
 
@@ -55,17 +60,24 @@ public class MainActivity extends ActionBarActivity
         }
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            setupDrawerContent(navigationView);
+        }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
 
         if (savedInstanceState != null) {
@@ -88,6 +100,17 @@ public class MainActivity extends ActionBarActivity
         getSupportFragmentManager().putFragment(outState, SAVED_FRAGMENT, mCurrentFragment);
     }
 
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+        new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                menuItem.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                return true;
+            }
+        });
+    }
 
 
     @Override
@@ -115,6 +138,7 @@ public class MainActivity extends ActionBarActivity
 
     public void restoreActionBar() {
 
+        /*
         if (mToolbar == null) {
             mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         }
@@ -133,30 +157,24 @@ public class MainActivity extends ActionBarActivity
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             getWindow().setStatusBarColor(getResources().getColor(R.color.green_app_dark));
         }
+        */
     }
 
 
     public void update() {
-        mNavigationDrawerFragment.updateListView();
+
     }
 
     public Toolbar getToolbar(){
         if (mToolbar == null){
-            mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+            mToolbar = (Toolbar) findViewById(R.id.toolbar);
         }
         return mToolbar;
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            //getMenuInflater().inflate(R.menu.main, menu);
-            //restoreActionBar();
-            return true;
-        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -200,10 +218,8 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onBackPressed() {
-        if (mNavigationDrawerFragment.isDrawerOpen()) {
-            mNavigationDrawerFragment.closeDrawer();
-        } else {
+
             mCurrentFragment.onBackPressed();
-        }
+
     }
 }

@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    >
+    android:layout_margin="10dp">
 
     <!-- icon -->
-    <ImageView android:layout_width="48dp"
+    <ImageView
+        android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="5dp"
-        android:id="@+id/item_image_view"/>
+        android:id="@+id/item_image_view" />
 
     <!-- title -->
     <TextView
@@ -19,8 +19,7 @@
         android:layout_toRightOf="@+id/item_image_view"
         android:textSize="@dimen/text_size_medium"
         android:text="Prueba"
-        android:layout_centerVertical="true"
-        />
+        android:layout_centerVertical="true" />
 
     <!-- counter
 
