@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,20 +18,5 @@
             android:id="@+id/circleView" />
 
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/button_default_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
-        android:textSize="30dp"
-        style="?android:attr/buttonBarButtonStyle" />
-
-    <Button
-        android:id="@+id/button_add_subject"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left|center_vertical"
-        style="?android:attr/buttonBarButtonStyle" />
 
 </LinearLayout>

@@ -21,6 +21,9 @@
             android:id="@+id/nav_home"
             android:title="Home" />
         <item
+            android:id="@+id/nav_add_subject"
+            android:title="Add Subject" />
+        <item
             android:id="@+id/nav_messages"
             android:title="Messages" />
         <item
