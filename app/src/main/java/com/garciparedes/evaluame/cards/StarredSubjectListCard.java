@@ -160,16 +160,17 @@ public class StarredSubjectListCard extends CardWithList {
             xVals.add(starredSubjects.get(i).getName());
         }
 
-        BarDataSet setComp1 = new BarDataSet(valsComp1, "Company 1");
-        setComp1.setColors(colors);
-        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
-        dataSets.add(setComp1);
+        if (starredSubjects.size() > 0) {
+            BarDataSet setComp1 = new BarDataSet(valsComp1, "Company 1");
+            setComp1.setColors(colors);
+            ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
+            dataSets.add(setComp1);
 
 
-        BarData data = new BarData(xVals, dataSets);
-        mBarChart.setData(data);
+            BarData data = new BarData(xVals, dataSets);
+            mBarChart.setData(data);
 
-        mBarChart.animateY(1000);
-
+            mBarChart.animateY(1000);
+        }
     }
 }

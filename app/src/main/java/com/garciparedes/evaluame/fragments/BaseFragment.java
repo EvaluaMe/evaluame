@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.fragments;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,8 @@ import com.garciparedes.evaluame.activities.MainActivity;
 public abstract class BaseFragment extends Fragment {
 
     private FragmentCallbacks mCallbacks;
+    public Toolbar toolbar;
+    public CollapsingToolbarLayout collapsingToolbar;
 
     /**
      * @param savedInstanceState
@@ -68,39 +71,41 @@ public abstract class BaseFragment extends Fragment {
 
 
     public void customizeActionBar(boolean isBig, int color, String title , String subTitle){
-        /*
+
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
-        Toolbar toolbar = ((MainActivity) getActivity()).getToolbar();
 
-        toolbar.setBackgroundColor(color);
+        if (toolbar != null) {
+            toolbar.setBackgroundColor(color);
 
 
-        if (isBig) {
-            toolbar.setLayoutParams(
-                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300)
-            );
+            if (title != null) {
+                //toolbar.setTitle(title);
+                actionBar.setTitle(title);
+            }
+
+            if (subTitle != null) {
+                toolbar.setSubtitle(subTitle);
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getActivity().getWindow().setStatusBarColor(Color.getDarkness(color));
+            }
         }
 
+        if(collapsingToolbar != null){
+            collapsingToolbar.setBackgroundColor(color);
+            collapsingToolbar.setDrawingCacheBackgroundColor(color);
+            collapsingToolbar.setTitle(title);
+            collapsingToolbar.setStatusBarScrimColor(color);
+            collapsingToolbar.setContentScrimColor(color);
 
-        if (title != null) {
-            //toolbar.setTitle(title);
-            actionBar.setTitle(title);
         }
 
-        if (subTitle != null) {
-            toolbar.setSubtitle(subTitle);
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            getActivity().getWindow().setStatusBarColor(Color.getDarkness(color));
-        }
-        */
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         ((MainActivity) getActivity()).restoreActionBar();
-
     }
 }

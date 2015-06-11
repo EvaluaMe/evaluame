@@ -3,7 +3,10 @@ package com.garciparedes.evaluame.fragments;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +24,6 @@ import com.garciparedes.evaluame.cards.StatsSubjectCard;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -61,7 +63,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
         mRecyclerView = (CardRecyclerView) view.findViewById(R.id.subject_card_list);
-        mFAButton = (FloatingActionButton) view.findViewById(R.id.floating_button);
+        mFAButton = (FloatingActionButton) view.findViewById(R.id.fab);
 
         mCards = new ArrayList<Card>();
 
@@ -69,6 +71,19 @@ public class SubjectFragment extends BaseSubjectFragment {
         mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), mCards);
 
         mLayoutManager = new LinearLayoutManager(getActivity());
+
+
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
+        collapsingToolbar =
+                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+
+        //loadBackdrop();
         return view;
     }
 
@@ -77,9 +92,10 @@ public class SubjectFragment extends BaseSubjectFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        customizeActionBar(true, mSubject.getColor(), mSubject.getName(), mSubject.getName());
 
 
-        mCards.add(new DescriptionCard(getActivity(), mSubject));
+        //mCards.add(new DescriptionCard(getActivity(), mSubject));
         if (mSubject.getWeightedAverage() > 0) {
             mCards.add(new PieChartCard(getActivity(), mSubject));
         }

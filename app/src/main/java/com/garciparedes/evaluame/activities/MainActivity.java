@@ -52,9 +52,8 @@ public class MainActivity extends ActionBarActivity
 
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private DrawerLayout mDrawerLayout;
-
-    private Toolbar mToolbar;
+    //private DrawerLayout mDrawerLayout;
+    //private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,29 +64,12 @@ public class MainActivity extends ActionBarActivity
         }
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        setupDrawer();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
 
 
@@ -103,6 +85,16 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container,mCurrentFragment)
                 .commit();
         //restoreActionBar();
+
+        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(mToolbar);
+
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setHomeButtonEnabled(true);
+
+        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        //setupDrawer();
     }
 
     @Override
@@ -117,48 +109,13 @@ public class MainActivity extends ActionBarActivity
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
+                        //mDrawerLayout.closeDrawers();
                         return true;
-            }
-        });
+                    }
+                });
     }
 
     private void setupDrawer() {
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the navigation drawer and the action bar app icon.
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                    /* host Activity */
-                mDrawerLayout,                    /* DrawerLayout object */
-                mToolbar,             /* nav drawer image to replace 'Up' caret */
-                R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
-                R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-                super.onDrawerStateChanged(newState);
-            }
-        };
-        mDrawerToggle.setDrawerIndicatorEnabled(true);
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        // Defer code dependent on restoration of previous instance state.
-        mDrawerLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                mDrawerToggle.syncState();
-            }
-        });
 
     }
 
@@ -215,10 +172,13 @@ public class MainActivity extends ActionBarActivity
     }
 
     public Toolbar getToolbar(){
+        /*
         if (mToolbar == null){
             mToolbar = (Toolbar) findViewById(R.id.toolbar);
         }
-        return mToolbar;
+        */
+        return new Toolbar(getBaseContext());
+        //return mToolbar;
     }
 
     @Override
