@@ -32,11 +32,6 @@ public class AddSubjectFragment extends BaseManageSubjectFragment {
     }
 
     @Override
-    public String setTextButton() {
-        return getString(R.string.create_subject);
-    }
-
-    @Override
     public Subject initNewSubject() {
         return new Subject();
     }

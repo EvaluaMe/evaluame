@@ -48,7 +48,7 @@ public class PieChartCard extends Card {
      */
     private void init(Context context) {
         CustomCardHeader cardHeader = new CustomCardHeader(context,subject.getColor());
-        cardHeader.setTitle(getContext().getString(R.string.title_chart));
+        cardHeader.setTitle(getContext().getString(R.string.chart));
         addCardHeader(cardHeader);
     }
 

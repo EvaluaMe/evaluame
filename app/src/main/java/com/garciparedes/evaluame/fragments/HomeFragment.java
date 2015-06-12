@@ -65,6 +65,7 @@ public class HomeFragment extends BaseFragment {
         super.onActivityCreated(state);
 
 
+        customizeActionBar(getResources().getColor(R.color.green_app),getResources().getString(R.string.home),null);
         mCards.add(new StarredSubjectListCard(getActivity(), getFragmentManager()));
         //mCards.add(new BarChartCard(getActivity()));
 

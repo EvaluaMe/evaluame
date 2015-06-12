@@ -69,7 +69,7 @@ public class ExamFragment extends BaseSubjectFragment{
             mExam = getArguments().getParcelable(EXAM);
         }
 
-        customizeActionBar(true, mSubject.getColor(), mExam.getName(), mSubject.getName());
+        customizeActionBar(mSubject.getColor(), mExam.getName(), mSubject.getName());
 
 
         mValueTextView.setText(mExam.getPercentageString());

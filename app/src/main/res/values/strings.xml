@@ -8,23 +8,23 @@
     <string name="action_settings">Settings</string>
     <string name="action_delete">Delete</string>
     <string name="new_subject">Add Subject</string>
-    <string name="set_name">Name</string>
-    <string name="set_description">Description</string>
+    <string name="name">Name</string>
+    <string name="description">Description</string>
     <string name="create_subject">Create Subject</string>
     <string name="delete_subject">Delete Subject</string>
     <string name="delete_subject_confirmation">Are you sure to delete this subject?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="new_score">New Score</string>
-    <string name="set_score">Score</string>
-    <string name="set_value">Value</string>
+    <string name="score">Score</string>
+    <string name="value">Value</string>
     <string name="create_test">Create Mark</string>
-    <string name="title_stats">Stats</string>
+    <string name="stats">Stats</string>
     <string name="error_max_score">The score must be less than 10</string>
-    <string name="title_exams">Exams</string>
-    <string name="title_average">Average</string>
-    <string name="title_ratio">Ratio</string>
-    <string name="set_date">Date</string>
+    <string name="exams">Exams</string>
+    <string name="average">Average</string>
+    <string name="ratio">Ratio</string>
+    <string name="date">Date</string>
 
     <array name="month">
         <item>January</item>
@@ -52,27 +52,30 @@
 
     <string name="error_name">Error on name</string>
     <string name="edit_test">Edit Mark</string>
-    <string name="title_weighted_average">Weighted Average</string>
+    <string name="weighted_average">Weighted Average</string>
     <string name="action_edit">Edit</string>
     <string name="edit_subject">Edit Subject</string>
-    <string name="title_chart">Chart</string>
+    <string name="chart">Chart</string>
     <string name="over_ten">Over 10</string>
     <string name="error_empty_field">Complete all fields</string>
-    <string name="set_type">Type</string>
+    <string name="type">Type</string>
     <string name="card_empty_cardwithlist_text">No upcoming exams</string>
     <string name="days_left">days left</string>
     <string name="action_starred">Starred</string>
     <string name="starred_subjects">Starred Subjects</string>
-    <string name="title_upcoming_exams">Upcoming Marks</string>
+    <string name="upcoming_exams">Upcoming Marks</string>
     <string name="star_subject_suggest">You can star subjets to show here.</string>
     <string name="delete_mark_confirmation">Are you sure to delete this mark?</string>
     <string name="fail_name">Enter Name</string>
     <string name="fail_percent">Enter Percent</string>
     <string name="fail_max_percent">Global percent must be less than 100%</string>
     <string name="delete_mark">Delete Mark</string>
-    <string name="title_home">Home</string>
-    <string name="set_time">Time</string>
+    <string name="home">Home</string>
+    <string name="time">Time</string>
     <string name="hours_left">hours left</string>
     <string name="minutes_left">minutes left</string>
+    <string name="profile">Profile</string>
+    <string name="subjects">Subjects</string>
+    <string name="about">About</string>
 
 </resources>

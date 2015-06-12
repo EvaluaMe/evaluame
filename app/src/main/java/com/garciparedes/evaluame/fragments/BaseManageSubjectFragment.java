@@ -2,15 +2,17 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Subject;
@@ -22,7 +24,8 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
 
     private EditText editTextName;
     private EditText editTextDescription;
-    private Button btnCreate;
+    private FloatingActionButton mFAButtonBar;
+
 
     protected Subject newSubject;
 
@@ -38,9 +41,19 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_manage_subject, container, false);
 
+
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog_name_subject);
         editTextDescription = (EditText) view.findViewById(R.id.edit_text_dialog_description_subject);
-        btnCreate = (Button) view.findViewById(R.id.button_dialog_subject);
+        mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
+
+
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
 
         return view;
 
@@ -54,36 +67,38 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
         super.onActivityCreated(state);
         newSubject = initNewSubject();
 
-        customizeActionBar(false, newSubject.getColor(), null, null);
+        customizeActionBar( newSubject.getColor(), newSubject.getName(), newSubject.getName());
 
-        editTextName.setHint(getString(R.string.set_name));
         editTextName.setText(newSubject.getName());
 
-        editTextDescription.setHint(getString(R.string.set_description));
         editTextDescription.setText(newSubject.getDescription());
 
-        btnCreate.setText(setTextButton());
-        btnCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                newSubject.setName(editTextName.getText().toString());
-                newSubject.setDescription(editTextDescription.getText().toString());
+        if (mFAButtonBar != null) {
+            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(newSubject.getColor()));
+            mFAButtonBar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    newSubject.setName(editTextName.getText().toString());
+                    newSubject.setDescription(editTextDescription.getText().toString());
 
-                try {
-                    setOnClickButton();
+                    try {
+                        setOnClickButton();
 
 
-                    hideKeyboard();
+                        hideKeyboard();
 
-                    ((MainActivity) getActivity()).update();
-                    replaceFragment();
-                } catch (IllegalArgumentException e){
-                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT)
-                            .show();
+                        ((MainActivity) getActivity()).update();
+                        replaceFragment();
+                    } catch (IllegalArgumentException e){
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT)
+                                .show();
+                    }
+
                 }
-            }
-        });
+            });
+        }
+
     }
 
     /**
@@ -95,11 +110,6 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
      *
      */
     public abstract void setOnClickButton();
-
-    /**
-     * @return
-     */
-    public abstract String setTextButton();
 
     /**
      *

@@ -79,7 +79,7 @@ public abstract class BaseFragment extends Fragment {
 
 
 
-    public void customizeActionBar(boolean isBig, int color, String title , String subTitle){
+    public void customizeActionBar(int color, String title , String subTitle){
 
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
 

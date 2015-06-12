@@ -27,7 +27,7 @@ public abstract class BaseChartCard extends Card {
      */
     private void init(Context context) {
         CustomCardHeader cardHeader = new CustomCardHeader(context);
-        cardHeader.setTitle(getContext().getString(R.string.title_chart));
+        cardHeader.setTitle(getContext().getString(R.string.chart));
         addCardHeader(cardHeader);
     }
 

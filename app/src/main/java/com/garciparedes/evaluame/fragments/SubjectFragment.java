@@ -98,7 +98,7 @@ public class SubjectFragment extends BaseSubjectFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        customizeActionBar(true, mSubject.getColor(), mSubject.getName(), mSubject.getName());
+        customizeActionBar( mSubject.getColor(), mSubject.getName(), mSubject.getName());
 
 
         //mCards.add(new DescriptionCard(getActivity(), mSubject));

@@ -19,29 +19,29 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:title="Home" />
+            android:title="@string/home" />
 
         <item
             android:id="@+id/nav_profile"
             android:icon="@drawable/ic_action_person"
-            android:title="Profile" />
+            android:title="@string/profile" />
 
         <item
             android:id="@+id/nav_add_subject"
-            android:title="Add Subject" />
+            android:title="@string/new_subject" />
 
         <item
             android:id="@+id/nav_subjects"
-            android:title="Subjects" />
+            android:title="@string/subjects" />
 
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_action_settings"
-            android:title="Settings" />
+            android:title="@string/action_settings" />
 
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_action_about"
-            android:title="About" />
+            android:title="@string/about" />
     </group>
 </menu>

@@ -43,14 +43,6 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
         ListDB.saveData(getActivity());
     }
 
-    /**
-     * @return
-     */
-    @Override
-    public String setTextButton() {
-        return getResources().getString(R.string.edit_subject);
-    }
-
     @Override
     public void onBackPressed() {
         getFragmentManager().beginTransaction()

@@ -92,9 +92,9 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
-        customizeActionBar(false, mSubject.getColor(), mSubject.getName(), null);
+        customizeActionBar( mSubject.getColor(), mSubject.getName(), null);
 
-        editTextName.setHint(getString(R.string.set_name));
+        editTextName.setHint(getString(R.string.name));
         editTextName.setText(newExam.getName());
 
         numberPickerMark = new NumberPickerBuilder();
