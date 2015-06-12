@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -26,7 +27,7 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, BaseFragment.FragmentCallbacks {
+        implements BaseFragment.FragmentCallbacks {
 
     private static final String SAVED_FRAGMENT = "saved_fragment";
     /**
@@ -41,7 +42,7 @@ public class MainActivity extends ActionBarActivity
 
     private ActionBarDrawerToggle mDrawerToggle;
 
-    //private DrawerLayout mDrawerLayout;
+    private DrawerLayout mDrawerLayout;
     //private Toolbar mToolbar;
 
     @Override
@@ -81,9 +82,9 @@ public class MainActivity extends ActionBarActivity
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setHomeButtonEnabled(true);
 
-        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        //setupDrawer();
+        setupDrawer();
     }
 
     @Override
@@ -98,7 +99,8 @@ public class MainActivity extends ActionBarActivity
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
-                        //mDrawerLayout.closeDrawers();
+                        onNavigationDrawerItemSelected(menuItem);
+                        mDrawerLayout.closeDrawers();
                         return true;
                     }
                 });
@@ -108,20 +110,19 @@ public class MainActivity extends ActionBarActivity
 
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
+    public void onNavigationDrawerItemSelected(MenuItem menuItem) {
         // update the main content by replacing fragments
         BaseFragment baseFragment;
 
-        switch (position){
-            case -2:
-                baseFragment = AddSubjectFragment.newInstance();
-                break;
-            case -1:
+        switch (menuItem.getItemId()){
+            case R.id.nav_home:
                 baseFragment = DefaultFragment.newInstance();
                 break;
+            case R.id.nav_add_subject:
+                baseFragment = AddSubjectFragment.newInstance();
+                break;
             default:
-                baseFragment = SubjectFragment.newInstance(ListDB.get(position));
+                baseFragment = mCurrentFragment;
                 break;
         }
         
