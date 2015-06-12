@@ -20,27 +20,39 @@
         <item
             android:id="@+id/nav_home"
             android:title="Home" />
+
         <item
-            android:id="@+id/nav_add_subject"
-            android:title="Add Subject" />
-        <item
-            android:id="@+id/nav_messages"
-            android:title="Messages" />
-        <item
-            android:id="@+id/nav_friends"
-            android:title="Friends" />
-        <item
-            android:id="@+id/nav_discussion"
-            android:title="Discussion" />
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_action_person"
+            android:title="Profile" />
+
+        <item android:title="">
+            <menu>
+                <item
+                    android:id="@+id/nav_add_subject"
+                    android:title="Add Subject" />
+                <item
+                    android:id="@+id/nav_subjects"
+                    android:title="Subjects" />
+            </menu>
+        </item>
+
+        <item android:title="">
+            <menu>
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_action_settings"
+
+                    android:title="Settings" />
+                <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_action_about"
+                    android:title="About" />
+            </menu>
+        </item>
+
     </group>
 
-    <item android:title="Sub items">
-        <menu>
-            <item
-                android:title="Sub item 1" />
-            <item
-                android:title="Sub item 2" />
-        </menu>
-    </item>
+
 
 </menu>
