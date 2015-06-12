@@ -12,7 +12,7 @@
     <item
         android:id="@+id/action_edit"
         android:title="@string/action_edit"
-        android:icon="@drawable/ic_action_edit"
+        android:icon="@drawable/ic_action_edit_dark"
         android:orderInCategory="98"
         app:showAsAction="never" />
 

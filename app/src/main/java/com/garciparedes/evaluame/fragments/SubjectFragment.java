@@ -16,8 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
-import com.garciparedes.evaluame.cards.DescriptionCard;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;
 import com.garciparedes.evaluame.cards.StatsSubjectCard;
@@ -40,6 +40,8 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
     private FloatingActionButton mFAButton;
+    private FloatingActionButton mFAButtonBar;
+
     private CardArrayRecyclerViewAdapter mCardArrayAdapter;
     private CardRecyclerView mRecyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -64,6 +66,7 @@ public class SubjectFragment extends BaseSubjectFragment {
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
         mRecyclerView = (CardRecyclerView) view.findViewById(R.id.subject_card_list);
         mFAButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
         mCards = new ArrayList<Card>();
 
@@ -79,6 +82,9 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
+
+
 
         collapsingToolbar =
                 (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
@@ -115,6 +121,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         if (mFAButton != null) {
+            mFAButton.setRippleColor(ColorUtil.getComplimentColor(mSubject.getColor()));
             //mFAButton.attachToRecyclerView(mRecyclerView);
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,6 +129,21 @@ public class SubjectFragment extends BaseSubjectFragment {
 
                     getFragmentManager().beginTransaction()
                             .replace(R.id.container, AddTestFragment.newInstance(mSubject))
+                            .commit();
+
+                }
+            });
+        }
+
+        if (mFAButtonBar != null) {
+            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(mSubject.getColor()));
+            //mFAButton.attachToRecyclerView(mRecyclerView);
+            mFAButtonBar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, EditSubjectFragment.newInstance(mSubject))
                             .commit();
 
                 }

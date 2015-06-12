@@ -19,4 +19,12 @@
     <style name="subject_name_font" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">30sp</item>
     </style>
+
+    <style name="ToolbarExpandedTitle">
+        <item name="android:textSize">48sp</item>
+        <item name="android:shadowColor">#ffffff</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
+    </style>
 </resources>

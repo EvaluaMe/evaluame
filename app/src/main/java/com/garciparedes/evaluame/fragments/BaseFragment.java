@@ -9,11 +9,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.view.View;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Color;
+import com.garciparedes.evaluame.Util.*;
 import com.garciparedes.evaluame.activities.MainActivity;
 
 /**
@@ -68,6 +67,16 @@ public abstract class BaseFragment extends Fragment {
         mCallbacks = null;
     }
 
+    private void setupToolbar(View view){
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
+    }
+
 
 
     public void customizeActionBar(boolean isBig, int color, String title , String subTitle){
@@ -88,7 +97,7 @@ public abstract class BaseFragment extends Fragment {
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getActivity().getWindow().setStatusBarColor(Color.getDarkness(color));
+                getActivity().getWindow().setStatusBarColor(ColorUtil.getDarkness(color));
             }
         }
 
@@ -96,7 +105,8 @@ public abstract class BaseFragment extends Fragment {
             collapsingToolbar.setBackgroundColor(color);
             collapsingToolbar.setDrawingCacheBackgroundColor(color);
             collapsingToolbar.setTitle(title);
-            collapsingToolbar.setStatusBarScrimColor(color);
+            collapsingToolbar.setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
+            //collapsingToolbar.setStatusBarScrimColor(color);
             collapsingToolbar.setContentScrimColor(color);
 
         }

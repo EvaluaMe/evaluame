@@ -23,8 +23,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleMarginStart="48dp"
-            app:expandedTitleMarginEnd="64dp">
+            android:elevation="4dp">
 
             <ImageView
                 android:id="@+id/backdrop"
@@ -58,16 +57,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin" />
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_action_new"
+        android:elevation="6dp"/>
 
 
     <android.support.design.widget.FloatingActionButton
         android:layout_height="wrap_content"
+        android:id="@+id/fab_bar"
         android:layout_width="wrap_content"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="bottom|right|end"
-        android:src="@drawable/ic_action_edit"
+        android:src="@drawable/ic_action_edit_light"
         android:layout_margin="@dimen/fab_margin"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:elevation="6dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -1,6 +1,8 @@
 package com.garciparedes.evaluame.Util;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by garciparedes on 10/2/15.
@@ -49,5 +51,16 @@ public class Number {
         bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
         bd = bd.stripTrailingZeros();
         return bd;
+    }
+
+    public static int[] convertIntegers(List<Integer> integers)
+    {
+        int[] ret = new int[integers.size()];
+        Iterator<Integer> iterator = integers.iterator();
+        for (int i = 0; i < ret.length; i++)
+        {
+            ret[i] = iterator.next().intValue();
+        }
+        return ret;
     }
 }
