@@ -14,9 +14,7 @@ import android.view.MenuItem;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.AddSubjectFragment;
 import com.garciparedes.evaluame.fragments.BaseFragment;
-import com.garciparedes.evaluame.fragments.DefaultFragment;
-import com.garciparedes.evaluame.fragments.NavigationDrawerFragment;
-import com.garciparedes.evaluame.fragments.SubjectFragment;
+import com.garciparedes.evaluame.fragments.HomeFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.google.gson.Gson;
@@ -68,7 +66,7 @@ public class MainActivity extends ActionBarActivity
             mCurrentFragment = (BaseFragment) getSupportFragmentManager().getFragment(
                     savedInstanceState, SAVED_FRAGMENT);
         } else {
-            mCurrentFragment = DefaultFragment.newInstance();
+            mCurrentFragment = HomeFragment.newInstance();
         }
 
         getSupportFragmentManager().beginTransaction()
@@ -116,7 +114,7 @@ public class MainActivity extends ActionBarActivity
 
         switch (menuItem.getItemId()){
             case R.id.nav_home:
-                baseFragment = DefaultFragment.newInstance();
+                baseFragment = HomeFragment.newInstance();
                 break;
             case R.id.nav_add_subject:
                 baseFragment = AddSubjectFragment.newInstance();

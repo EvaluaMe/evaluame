@@ -352,7 +352,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                         ((MainActivity) getActivity()).update();
 
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.container, DefaultFragment.newInstance())
+                                .replace(R.id.container, HomeFragment.newInstance())
                                 .commit();
 
 
@@ -386,7 +386,7 @@ public class SubjectFragment extends BaseSubjectFragment {
     @Override
     public void onBackPressed() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, DefaultFragment.newInstance())
+                .replace(R.id.container, HomeFragment.newInstance())
                 .commit();
     }
 }
