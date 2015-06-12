@@ -12,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -105,7 +104,7 @@ public class NavigationDrawerFragment extends Fragment {
         });
 
         mDrawerListView.addHeaderView(View.inflate(
-                getActivity(), R.layout.view_head_navigation_drawer, null));
+                getActivity(), R.layout.nav_drawer_header, null));
 
         mDrawerListView.setAdapter(new NavDrawerAdapter(getActivity(), ListDB.getMasterList()));
 

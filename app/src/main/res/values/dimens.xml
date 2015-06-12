@@ -21,5 +21,6 @@
 
     <dimen name="detail_backdrop_height">256dp</dimen>
 
+    <dimen name="nav_header_height">192dp</dimen>
 
 </resources>
