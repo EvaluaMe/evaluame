@@ -15,6 +15,7 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.AddSubjectFragment;
 import com.garciparedes.evaluame.fragments.BaseFragment;
 import com.garciparedes.evaluame.fragments.HomeFragment;
+import com.garciparedes.evaluame.fragments.SubjectListFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.google.gson.Gson;
@@ -113,12 +114,19 @@ public class MainActivity extends ActionBarActivity
         BaseFragment baseFragment;
 
         switch (menuItem.getItemId()){
+
             case R.id.nav_home:
                 baseFragment = HomeFragment.newInstance();
                 break;
+
             case R.id.nav_add_subject:
                 baseFragment = AddSubjectFragment.newInstance();
                 break;
+
+            case R.id.nav_subjects:
+                baseFragment = SubjectListFragment.newInstance();
+                break;
+
             default:
                 baseFragment = mCurrentFragment;
                 break;

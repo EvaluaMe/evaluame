@@ -24,7 +24,7 @@ public class NavDrawerAdapter extends ArrayAdapter<Subject> {
 
     public NavDrawerAdapter(Context context, ArrayList<Subject> modelsArrayList) {
 
-        super(context, R.layout.target_item_nav_drawer, modelsArrayList);
+        super(context, R.layout.list_item_subject, modelsArrayList);
 
         this.context = context;
         this.modelsArrayList = modelsArrayList;
@@ -40,7 +40,7 @@ public class NavDrawerAdapter extends ArrayAdapter<Subject> {
 
         // 2. Get rowView from inflater
 
-        View rowView = inflater.inflate(R.layout.target_item_nav_drawer, parent, false);
+        View rowView = inflater.inflate(R.layout.list_item_subject, parent, false);
 
         // 3. Get icon,title & counter views from the rowView
         ImageView imgView = (ImageView) rowView.findViewById(R.id.item_image_view);

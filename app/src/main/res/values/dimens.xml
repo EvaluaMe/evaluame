@@ -23,4 +23,10 @@
 
     <dimen name="nav_header_height">192dp</dimen>
 
+    <dimen name="list_item_avatar_size">40dp</dimen>
+
+    <dimen name="list_item_vertical_margin">8dp</dimen>
+    <dimen name="list_item_horizontal_margin">16dp</dimen>
+
+
 </resources>
