@@ -3,10 +3,9 @@ package com.garciparedes.evaluame.items;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.app.FragmentActivity;
 
-import com.garciparedes.evaluame.Util.Date;
-import com.garciparedes.evaluame.Util.Number;
+import com.garciparedes.evaluame.utils.Date;
+import com.garciparedes.evaluame.utils.Number;
 import com.garciparedes.evaluame.enums.ExamType;
 
 import java.util.Calendar;

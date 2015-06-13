@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame.fragments;
+package com.garciparedes.evaluame.fragments.test;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,7 +22,8 @@ import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.ColorUtil;
+import com.garciparedes.evaluame.fragments.subject.BaseSubjectFragment;
+import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.enums.ExamType;
 import com.garciparedes.evaluame.interfaces.AddData;

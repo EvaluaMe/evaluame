@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame.fragments;
+package com.garciparedes.evaluame.fragments.test;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,7 +17,9 @@ import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
 
-import com.garciparedes.evaluame.Util.ColorUtil;
+import com.garciparedes.evaluame.fragments.subject.BaseSubjectFragment;
+import com.garciparedes.evaluame.fragments.subject.SubjectFragment;
+import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
@@ -26,7 +28,7 @@ import com.garciparedes.evaluame.provider.ListDB;
 /**
  * Created by garciparedes on 24/2/15.
  */
-public class TestFragment extends BaseSubjectFragment{
+public class TestFragment extends BaseSubjectFragment {
 
     private static final String EXAM = "exam";
     private static final String EXAM_SAVED = "exam_saved";

@@ -1,8 +1,7 @@
-package com.garciparedes.evaluame.fragments;
+package com.garciparedes.evaluame.fragments.subject;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.ColorUtil;
+import com.garciparedes.evaluame.fragments.BaseFragment;
+import com.garciparedes.evaluame.fragments.HomeFragment;
+import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.adapters.RecyclerSubjectAdapter;
-import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**

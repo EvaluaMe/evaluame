@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Number;
+import com.garciparedes.evaluame.utils.Number;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -101,7 +101,7 @@ public class GlobalStatsCard extends Card {
             );
 
         if (averageValueTextView != null)
-            averageValueTextView.setText(com.garciparedes.evaluame.Util.Number.toString(average));
+            averageValueTextView.setText(com.garciparedes.evaluame.utils.Number.toString(average));
 
 
         if (ratioTitleTextView != null)

@@ -12,10 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.fragments.AddSubjectFragment;
 import com.garciparedes.evaluame.fragments.BaseFragment;
 import com.garciparedes.evaluame.fragments.HomeFragment;
-import com.garciparedes.evaluame.fragments.SubjectListFragment;
+import com.garciparedes.evaluame.fragments.SettingsFragment;
+import com.garciparedes.evaluame.fragments.subject.SubjectListFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.google.gson.Gson;
@@ -121,6 +121,10 @@ public class MainActivity extends ActionBarActivity
 
             case R.id.nav_subjects:
                 baseFragment = SubjectListFragment.newInstance();
+                break;
+
+            case R.id.nav_settings:
+                baseFragment = SettingsFragment.newInstance();
                 break;
 
             default:

@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame.fragments;
+package com.garciparedes.evaluame.fragments.subject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,7 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.ColorUtil;
+import com.garciparedes.evaluame.fragments.test.AddTestFragment;
+import com.garciparedes.evaluame.fragments.test.EditTestFragment;
+import com.garciparedes.evaluame.fragments.HomeFragment;
+import com.garciparedes.evaluame.fragments.test.TestFragment;
+import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.cards.ExamCard;
 import com.garciparedes.evaluame.cards.PieChartCard;

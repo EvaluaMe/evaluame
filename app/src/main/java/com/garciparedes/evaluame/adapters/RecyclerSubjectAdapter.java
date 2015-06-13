@@ -10,8 +10,7 @@ import android.widget.TextView;
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
-import com.garciparedes.evaluame.fragments.HomeFragment;
-import com.garciparedes.evaluame.fragments.SubjectFragment;
+import com.garciparedes.evaluame.fragments.subject.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
 
 import java.util.ArrayList;

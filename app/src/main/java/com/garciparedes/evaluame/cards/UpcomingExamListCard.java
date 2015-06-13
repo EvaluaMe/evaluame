@@ -7,8 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Date;
-import com.garciparedes.evaluame.fragments.TestFragment;
+import com.garciparedes.evaluame.utils.Date;
+import com.garciparedes.evaluame.fragments.test.TestFragment;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;

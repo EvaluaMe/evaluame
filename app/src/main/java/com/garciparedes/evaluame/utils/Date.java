@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame.Util;
+package com.garciparedes.evaluame.utils;
 
 import android.content.Context;
 

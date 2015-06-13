@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame.fragments;
+package com.garciparedes.evaluame.fragments.subject;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.ColorUtil;
+import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Subject;

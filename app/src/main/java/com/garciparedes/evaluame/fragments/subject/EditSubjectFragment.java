@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame.fragments;
+package com.garciparedes.evaluame.fragments.subject;
 
 import android.os.Bundle;
 

@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.ColorUtil;
+import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.github.mikephil.charting.charts.PieChart;

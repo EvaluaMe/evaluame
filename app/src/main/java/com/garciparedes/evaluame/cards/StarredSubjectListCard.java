@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.fragments.SubjectFragment;
+import com.garciparedes.evaluame.fragments.subject.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.github.mikephil.charting.charts.BarChart;

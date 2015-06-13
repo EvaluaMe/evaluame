@@ -1,4 +1,4 @@
-package com.garciparedes.evaluame.Util;
+package com.garciparedes.evaluame.utils;
 
 /**
  * Created by garciparedes on 18/2/15.

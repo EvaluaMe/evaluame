@@ -3,8 +3,8 @@ package com.garciparedes.evaluame.items;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.garciparedes.evaluame.Util.ColorUtil;
-import com.garciparedes.evaluame.Util.Number;
+import com.garciparedes.evaluame.utils.ColorUtil;
+import com.garciparedes.evaluame.utils.Number;
 
 import java.util.ArrayList;
 
