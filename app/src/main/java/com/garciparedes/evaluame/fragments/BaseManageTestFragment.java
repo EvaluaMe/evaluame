@@ -263,7 +263,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void replaceFragment() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, ExamFragment.newInstance(mSubject, newExam))
+                .replace(R.id.container, TestFragment.newInstance(mSubject, newExam))
                 .commit();
     }
 }

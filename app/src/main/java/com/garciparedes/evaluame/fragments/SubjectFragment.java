@@ -173,7 +173,7 @@ public class SubjectFragment extends BaseSubjectFragment {
             @Override
             public void onClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, ExamFragment.newInstance(mSubject, exam))
+                        .replace(R.id.container, TestFragment.newInstance(mSubject, exam))
                         .commit();
             }
         });

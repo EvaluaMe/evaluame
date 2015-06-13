@@ -71,7 +71,7 @@ public class EditTestFragment extends BaseManageTestFragment {
     @Override
     public void onBackPressed() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, ExamFragment.newInstance(mSubject,exam))
+                .replace(R.id.container, TestFragment.newInstance(mSubject, exam))
                 .commit();
     }
 }

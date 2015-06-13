@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.Util.Date;
-import com.garciparedes.evaluame.fragments.ExamFragment;
+import com.garciparedes.evaluame.fragments.TestFragment;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -150,7 +150,7 @@ public class UpcomingExamListCard extends CardWithList {
                 @Override
                 public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
                     fragmentManager.beginTransaction()
-                            .replace(R.id.container, ExamFragment.newInstance(subject, exam))
+                            .replace(R.id.container, TestFragment.newInstance(subject, exam))
                             .commit();
                 }
             });
