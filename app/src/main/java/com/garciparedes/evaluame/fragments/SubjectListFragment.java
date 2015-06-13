@@ -2,6 +2,8 @@ package com.garciparedes.evaluame.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.adapters.RecyclerSubjectAdapter;
 import com.garciparedes.evaluame.items.Subject;
@@ -24,6 +27,8 @@ public class SubjectListFragment extends BaseFragment {
     private RecyclerView recyclerSubjetList;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private FloatingActionButton mFAButton;
 
 
     public static SubjectListFragment newInstance() {
@@ -43,6 +48,7 @@ public class SubjectListFragment extends BaseFragment {
         // specify an adapter (see also next example)
         mAdapter = new RecyclerSubjectAdapter(ListDB.getMasterList());
 
+        mFAButton = (FloatingActionButton) view.findViewById(R.id.fab);
 
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
@@ -66,6 +72,20 @@ public class SubjectListFragment extends BaseFragment {
         recyclerSubjetList.setHasFixedSize(true);
         recyclerSubjetList.setLayoutManager(mLayoutManager);
         recyclerSubjetList.setAdapter(mAdapter);
+
+        if (mFAButton != null) {
+            mFAButton.setRippleColor(ColorUtil.getComplimentColor(getResources().getColor(R.color.green_app)));
+            mFAButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.container, AddSubjectFragment.newInstance())
+                            .commit();
+
+                }
+            });
+        }
 
     }
 

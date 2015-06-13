@@ -27,10 +27,6 @@
             android:title="@string/profile" />
 
         <item
-            android:id="@+id/nav_add_subject"
-            android:title="@string/new_subject" />
-
-        <item
             android:id="@+id/nav_subjects"
             android:title="@string/subjects" />
 

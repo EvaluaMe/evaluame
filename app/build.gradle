@@ -26,7 +26,6 @@ dependencies {
     compile 'com.android.support:cardview-v7:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
 
-    compile 'com.melnykov:floatingactionbutton:1.3.0'
     compile 'com.doomonafireball.betterpickers:library:1.6.0'
     //Core
     compile 'com.github.gabrielemariotti.cards:cardslib-core:2.1.0'

@@ -119,10 +119,6 @@ public class MainActivity extends ActionBarActivity
                 baseFragment = HomeFragment.newInstance();
                 break;
 
-            case R.id.nav_add_subject:
-                baseFragment = AddSubjectFragment.newInstance();
-                break;
-
             case R.id.nav_subjects:
                 baseFragment = SubjectListFragment.newInstance();
                 break;

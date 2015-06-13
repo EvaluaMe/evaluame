@@ -2,13 +2,15 @@ package com.garciparedes.evaluame.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +22,8 @@ import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
 import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.Util.ColorUtil;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.enums.ExamType;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Exam;
@@ -35,7 +39,8 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         CalendarDatePickerDialog.OnDateSetListener,
         RadialTimePickerDialog.OnTimeSetListener{
 
-    private Button btnCreate;
+    private FloatingActionButton mFAButtonBar;
+
     private EditText editTextName;
     private TextView textMark;
     private TextView textValue;
@@ -84,7 +89,17 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         textTime = (TextView) view.findViewById(R.id.textView_set_time);
         editTextName = (EditText) view.findViewById(R.id.edit_text_dialog);
         mSpinnerType = (Spinner) view.findViewById(R.id.spinner_set_type);
-        btnCreate = (Button) view.findViewById(R.id.button_dialog);
+        mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
+
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
+        collapsingToolbar =
+                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
 
         return view;
     }
@@ -167,25 +182,27 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         );
         mSpinnerType.setSelection(newExam.getType().ordinal());
 
-        btnCreate.setText(setTextButton());
-        btnCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if (mFAButtonBar != null) {
+            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(mSubject.getColor()));
+            mFAButtonBar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                newExam.setName(editTextName.getText().toString());
-                newExam.setType(ExamType.values()[mSpinnerType.getSelectedItemPosition()]);
-                try {
+                    newExam.setName(editTextName.getText().toString());
+                    newExam.setType(ExamType.values()[mSpinnerType.getSelectedItemPosition()]);
+                    try {
 
-                    setOnClickButton();
-                    hideKeyboard();
-                    replaceFragment();
+                        setOnClickButton();
+                        hideKeyboard();
+                        replaceFragment();
 
-                } catch (IllegalArgumentException e){
-                    Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT)
-                            .show();
+                    } catch (IllegalArgumentException e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT)
+                                .show();
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     public abstract Exam initTest();

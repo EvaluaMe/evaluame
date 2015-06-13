@@ -28,5 +28,8 @@
     <dimen name="list_item_vertical_margin">8dp</dimen>
     <dimen name="list_item_horizontal_margin">16dp</dimen>
 
+    <dimen name="card_margin">16dp</dimen>
+
+
 
 </resources>
