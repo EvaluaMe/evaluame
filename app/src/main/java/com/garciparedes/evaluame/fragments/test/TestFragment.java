@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -13,10 +16,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
 
+import com.garciparedes.evaluame.adapters.RecyclerAtribImageTextAdapter;
 import com.garciparedes.evaluame.fragments.subject.BaseSubjectFragment;
 import com.garciparedes.evaluame.fragments.subject.SubjectFragment;
 import com.garciparedes.evaluame.utils.ColorUtil;
@@ -24,6 +27,7 @@ import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
+import com.garciparedes.evaluame.utils.ListAtrib;
 
 /**
  * Created by garciparedes on 24/2/15.
@@ -33,11 +37,10 @@ public class TestFragment extends BaseSubjectFragment {
     private static final String EXAM = "exam";
     private static final String EXAM_SAVED = "exam_saved";
 
-    private TextView mValueTextView;
-    private TextView mTypeTextView;
-    private TextView mDateTextView;
-    private TextView mTimeTextView;
-    private TextView mMarkTextView;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private RecyclerView.Adapter mAdapter;
+
 
     private FloatingActionButton mFAButtonBar;
 
@@ -58,11 +61,9 @@ public class TestFragment extends BaseSubjectFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_test, container, false);
-        mValueTextView = (TextView) view.findViewById(R.id.fragment_exam_value_textView);
-        mTypeTextView = (TextView) view.findViewById(R.id.fragment_exam_type_textView);
-        mDateTextView = (TextView) view.findViewById(R.id.fragment_exam_date_textView);
-        mTimeTextView = (TextView) view.findViewById(R.id.fragment_exam_time_textView);
-        mMarkTextView = (TextView) view.findViewById(R.id.fragment_exam_mark_textView);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_atrib_list);
+        mLayoutManager = new LinearLayoutManager(getActivity());
 
         mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
@@ -87,20 +88,24 @@ public class TestFragment extends BaseSubjectFragment {
         super.onActivityCreated(savedInstanceState);
 
 
+
+
+
         if (savedInstanceState != null) {
             mExam = savedInstanceState.getParcelable(EXAM_SAVED);
         } else {
             mExam = getArguments().getParcelable(EXAM);
         }
 
+        mAdapter = new RecyclerAtribImageTextAdapter(ListAtrib.generate(getActivity(), mExam));
+
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+
         customizeActionBar(mSubject.getColor(), mExam.getName(), mSubject.getName());
 
-
-        mValueTextView.setText(mExam.getPercentageString());
-        mTypeTextView.setText(mExam.getTypeString(getActivity()));
-        mDateTextView.setText(mExam.getDateString(getActivity()));
-        mTimeTextView.setText(mExam.getTimeString(getActivity()));
-        mMarkTextView.setText(mExam.getMarkString());
 
         if (mFAButtonBar != null) {
             mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(mSubject.getColor()));

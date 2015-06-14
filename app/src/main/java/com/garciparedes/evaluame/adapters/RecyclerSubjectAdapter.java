@@ -63,7 +63,7 @@ public class RecyclerSubjectAdapter extends RecyclerView.Adapter<RecyclerSubject
         );
 
         holder.imgView.setImageDrawable(drawable);
-        holder.mTextView.setText(mDataset.get(i).getName());
+        holder.mTextView.setText(subject.getName());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
