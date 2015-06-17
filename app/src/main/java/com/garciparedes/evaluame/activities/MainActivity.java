@@ -163,9 +163,7 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    public void update() {
 
-    }
 
     public Toolbar getToolbar(){
         /*

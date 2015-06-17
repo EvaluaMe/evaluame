@@ -15,7 +15,12 @@
     <dimen name="text_size_large">22sp</dimen>
 
     <dimen name="text_vertical_margin">15dp</dimen>
+
     <dimen name="card_shadow_elevation">4dp</dimen>
+    <dimen name="toolbar_shadow_elevation">6dp</dimen>
+    <dimen name="fab_shadow_elevation">6dp</dimen>
+    <dimen name="fab_bar_shadow_elevation">7dp</dimen>
+
 
     <dimen name="fab_margin">16dp</dimen>
 
@@ -28,7 +33,8 @@
     <dimen name="list_item_vertical_margin">8dp</dimen>
     <dimen name="list_item_horizontal_margin">16dp</dimen>
 
-    <dimen name="card_margin">12dp</dimen>
+    <dimen name="card_margin_horizontal">12dp</dimen>
+    <dimen name="card_margin_vertical">6dp</dimen>
 
 
 

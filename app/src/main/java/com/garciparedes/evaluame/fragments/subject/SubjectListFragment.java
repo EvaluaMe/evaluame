@@ -15,7 +15,7 @@ import com.garciparedes.evaluame.fragments.BaseFragment;
 import com.garciparedes.evaluame.fragments.HomeFragment;
 import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
-import com.garciparedes.evaluame.adapters.RecyclerSubjectAdapter;
+import com.garciparedes.evaluame.adapters.RecyclerSubjectListAdapter;
 import com.garciparedes.evaluame.provider.ListDB;
 
 /**
@@ -46,7 +46,7 @@ public class SubjectListFragment extends BaseFragment {
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getActivity());
         // specify an adapter (see also next example)
-        mAdapter = new RecyclerSubjectAdapter(ListDB.getMasterList());
+        mAdapter = new RecyclerSubjectListAdapter(ListDB.getMasterList());
 
         mFAButton = (FloatingActionButton) view.findViewById(R.id.fab);
 

@@ -352,8 +352,6 @@ public class SubjectFragment extends BaseSubjectFragment {
                         // current activity
 
                         ListDB.removeSubject(getActivity(), mSubject);
-                        //updateListView();
-                        ((MainActivity) getActivity()).update();
 
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container, HomeFragment.newInstance())

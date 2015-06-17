@@ -21,7 +21,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary"
             android:fitsSystemWindows="true"
-            android:elevation="4dp">
+            android:elevation="@dimen/toolbar_shadow_elevation">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -43,7 +43,7 @@
         android:src="@drawable/ic_action_edit_light"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
-        android:elevation="6dp"/>
+        android:elevation="@dimen/fab_bar_shadow_elevation"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_atrib_list"
@@ -52,14 +52,4 @@
         android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-    <!--
-    <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include layout="@layout/container_test"/>
-
-    </android.support.v4.widget.NestedScrollView>
-    -->
 </android.support.design.widget.CoordinatorLayout>

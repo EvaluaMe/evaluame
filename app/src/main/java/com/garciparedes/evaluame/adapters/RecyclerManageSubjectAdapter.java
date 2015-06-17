@@ -1,28 +1,29 @@
 package com.garciparedes.evaluame.adapters;
 
+import android.content.Context;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.utils.ListAtrib;
-
-import java.util.ArrayList;
+import com.garciparedes.evaluame.items.Subject;
 
 /**
- * Created by garciparedes on 14/6/15.
+ * Created by garciparedes on 17/6/15.
  */
-public class RecyclerAtribImageTextAdapter extends RecyclerView.Adapter<RecyclerAtribImageTextAdapter.ViewHolder>{
+public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<RecyclerManageSubjectAdapter.ViewHolder>{
 
 
-    private ArrayList<ListAtrib> mData;
+    private Subject mSubject;
 
-    public RecyclerAtribImageTextAdapter (ArrayList<ListAtrib> data){
-        mData = data;
+    public RecyclerManageSubjectAdapter (Subject subject){
+        this.mSubject = subject;
     }
 
     // Provide a reference to the views for each data item
@@ -33,15 +34,17 @@ public class RecyclerAtribImageTextAdapter extends RecyclerView.Adapter<Recycler
         public View view;
         //public TextView mTextViewTitle;
         public ImageView mImgView;
-        public TextView mTextView;
-
+        public EditText mEditText;
+        public TextInputLayout textInputLayout;
 
         public ViewHolder(View v) {
             super(v);
             view = v;
+
             //mTextViewTitle = (TextView) v.findViewById(R.id.card_view_atrib_title);
-            mImgView = (ImageView) v.findViewById(R.id.card_view_atrib_image_view);;
-            mTextView = (TextView) v.findViewById(R.id.card_view_atrib_text_view);
+            //mImgView = (ImageView) v.findViewById(R.id.card_view_atrib_image_view);
+            mEditText = (EditText) v.findViewById(R.id.card_edit_text_subject);
+            textInputLayout = (TextInputLayout) v.findViewById(R.id.card_view_text_input_layout);
         }
     }
 
@@ -68,8 +71,8 @@ public class RecyclerAtribImageTextAdapter extends RecyclerView.Adapter<Recycler
      * @see #onBindViewHolder(ViewHolder, int)
      */
     @Override
-    public RecyclerAtribImageTextAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_atrib_image_text, parent, false);
+    public RecyclerManageSubjectAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_edit_text, parent, false);
         ViewHolder pvh = new ViewHolder(v);
         return pvh;
     }
@@ -92,12 +95,35 @@ public class RecyclerAtribImageTextAdapter extends RecyclerView.Adapter<Recycler
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(RecyclerAtribImageTextAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerManageSubjectAdapter.ViewHolder holder, int position) {
 
-        ListAtrib listAtrib = mData.get(position);
 
-        holder.mImgView.setImageDrawable(listAtrib.getImage());
-        holder.mTextView.setText(listAtrib.getString());
+        switch (position){
+            case 0:
+                holder.textInputLayout.setHint(holder.view.getContext().getResources().getString(R.string.name));
+                holder.textInputLayout.setError(holder.view.getContext().getResources().getString(R.string.fail_name));
+
+                holder.mEditText.setText(mSubject.getName());
+                holder.mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean b) {
+                        mSubject.setName(holder.mEditText.getText().toString());
+                    }
+                });
+                break;
+            case 1:
+                holder.textInputLayout.setHint(holder.view.getContext().getResources().getString(R.string.description));
+                holder.mEditText.setText(mSubject.getDescription());
+                holder.mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean b) {
+                        mSubject.setDescription(holder.mEditText.getText().toString());
+                    }
+                });
+                break;
+            default:
+                break;
+        }
 
     }
 
@@ -108,7 +134,7 @@ public class RecyclerAtribImageTextAdapter extends RecyclerView.Adapter<Recycler
      */
     @Override
     public int getItemCount() {
-        return mData.size();
+        return 2;
     }
 
     @Override

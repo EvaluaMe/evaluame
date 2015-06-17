@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by garciparedes on 12/6/15.
 */
-public class RecyclerSubjectAdapter extends RecyclerView.Adapter<RecyclerSubjectAdapter.ViewHolder> {
+public class RecyclerSubjectListAdapter extends RecyclerView.Adapter<RecyclerSubjectListAdapter.ViewHolder> {
 
     private ArrayList<Subject> mDataset;
 
@@ -41,7 +41,7 @@ public class RecyclerSubjectAdapter extends RecyclerView.Adapter<RecyclerSubject
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public RecyclerSubjectAdapter(ArrayList<Subject> myDataset) {
+    public RecyclerSubjectListAdapter(ArrayList<Subject> myDataset) {
         mDataset = myDataset;
     }
 
