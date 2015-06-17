@@ -1,23 +1,24 @@
 package com.garciparedes.evaluame.adapters;
 
-import android.content.Context;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.viewholders.cards.CardViewHolderEditText;
 
 /**
  * Created by garciparedes on 17/6/15.
  */
-public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<RecyclerManageSubjectAdapter.ViewHolder>{
+public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewHolderEditText>{
+
+    private static final int TYPE_IMPUT_NAME = 0;
+    private static final int TYPE_IMPUT_DESCRIPTION = 1;
 
 
     private Subject mSubject;
@@ -48,6 +49,10 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<RecyclerM
         }
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
 
     /**
@@ -59,7 +64,7 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<RecyclerM
      * layout file.
      * <p/>
      * The new ViewHolder will be used to display items of the adapter using
-     * {@link #onBindViewHolder(ViewHolder, int)}. Since it will be re-used to display different
+     * {@link #onBindViewHolder(CardViewHolderEditText, int)}. Since it will be re-used to display different
      * items in the data set, it is a good idea to cache references to sub views of the View to
      * avoid unnecessary {@link View#findViewById(int)} calls.
      *
@@ -68,12 +73,11 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<RecyclerM
      * @param viewType The view type of the new View.
      * @return A new ViewHolder that holds a View of the given view type.
      * @see #getItemViewType(int)
-     * @see #onBindViewHolder(ViewHolder, int)
+     * @see #onBindViewHolder(CardViewHolderEditText, int)
      */
     @Override
-    public RecyclerManageSubjectAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_edit_text, parent, false);
-        ViewHolder pvh = new ViewHolder(v);
+    public CardViewHolderEditText onCreateViewHolder(ViewGroup parent, int viewType) {
+        CardViewHolderEditText pvh = new CardViewHolderEditText(parent);
         return pvh;
     }
 
@@ -95,29 +99,29 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<RecyclerM
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(final RecyclerManageSubjectAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final CardViewHolderEditText holder, int position) {
 
+        switch (holder.getItemViewType()){
+            case TYPE_IMPUT_NAME:
 
-        switch (position){
-            case 0:
-                holder.textInputLayout.setHint(holder.view.getContext().getResources().getString(R.string.name));
-                holder.textInputLayout.setError(holder.view.getContext().getResources().getString(R.string.fail_name));
+                holder.setHint(R.string.name);
+                holder.setError(R.string.fail_name);
 
-                holder.mEditText.setText(mSubject.getName());
-                holder.mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                holder.setText(mSubject.getName());
+                holder.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View view, boolean b) {
-                        mSubject.setName(holder.mEditText.getText().toString());
+                        mSubject.setName(holder.getText());
                     }
                 });
                 break;
-            case 1:
-                holder.textInputLayout.setHint(holder.view.getContext().getResources().getString(R.string.description));
-                holder.mEditText.setText(mSubject.getDescription());
-                holder.mEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            case TYPE_IMPUT_DESCRIPTION:
+                holder.setHint(R.string.description);
+                holder.setText(mSubject.getDescription());
+                holder.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
                     public void onFocusChange(View view, boolean b) {
-                        mSubject.setDescription(holder.mEditText.getText().toString());
+                        mSubject.setDescription(holder.getText());
                     }
                 });
                 break;
