@@ -33,10 +33,6 @@ public class AddTestFragment extends BaseManageTestFragment {
         ListDB.addTest(getActivity(), mSubject, newExam);
     }
 
-    @Override
-    public String setTextButton() {
-        return getString(R.string.create_test);
-    }
 
     @Override
     public void onBackPressed() {

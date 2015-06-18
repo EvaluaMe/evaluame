@@ -61,12 +61,6 @@ public class EditTestFragment extends BaseManageTestFragment {
         ListDB.saveData(getActivity());
     }
 
-    @Override
-    public String setTextButton() {
-        return getResources().getString(R.string.edit_test);
-    }
-
-
 
     @Override
     public void onBackPressed() {

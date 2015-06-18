@@ -28,7 +28,7 @@ public class CardViewHolderEditText extends BaseCardViewHolder {
         super(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_edit_text, parent, false));
 
         //mTextViewTitle = (TextView) v.findViewById(R.id.card_view_atrib_title);
-        //mImgView = (ImageView) v.findViewById(R.id.card_view_atrib_image_view);
+        mImgView = (ImageView) itemView.findViewById(R.id.card_view_image_view);
         mEditText = (EditText) itemView.findViewById(R.id.card_edit_text_subject);
         mTextInputLayout = (TextInputLayout) itemView.findViewById(R.id.card_view_text_input_layout);
     }
@@ -50,6 +50,10 @@ public class CardViewHolderEditText extends BaseCardViewHolder {
         mTextInputLayout.setHint(string);
     }
 
+
+    public void setImage(int name){
+        setImage(getDrawableResource(name));
+    }
 
     public void setImage(Drawable drawable){
         mImgView.setImageDrawable(drawable);

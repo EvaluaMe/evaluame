@@ -27,27 +27,7 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
         this.mSubject = subject;
     }
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public View view;
-        //public TextView mTextViewTitle;
-        public ImageView mImgView;
-        public EditText mEditText;
-        public TextInputLayout textInputLayout;
 
-        public ViewHolder(View v) {
-            super(v);
-            view = v;
-
-            //mTextViewTitle = (TextView) v.findViewById(R.id.card_view_atrib_title);
-            //mImgView = (ImageView) v.findViewById(R.id.card_view_atrib_image_view);
-            mEditText = (EditText) v.findViewById(R.id.card_edit_text_subject);
-            textInputLayout = (TextInputLayout) v.findViewById(R.id.card_view_text_input_layout);
-        }
-    }
 
     @Override
     public int getItemViewType(int position) {
@@ -56,7 +36,7 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
 
 
     /**
-     * Called when RecyclerView needs a new {@link ViewHolder} of the given type to represent
+     * Called when RecyclerView needs a new {@link CardViewHolderEditText} of the given type to represent
      * an item.
      * <p/>
      * This new ViewHolder should be constructed with a new View that can represent the items
@@ -83,7 +63,7 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
 
     /**
      * Called by RecyclerView to display the data at the specified position. This method
-     * should update the contents of the {@link ViewHolder#itemView} to reflect the item at
+     * should update the contents of the {@link CardViewHolderEditText#itemView} to reflect the item at
      * the given position.
      * <p/>
      * Note that unlike {@link ListView}, RecyclerView will not call this
@@ -91,7 +71,7 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
      * is invalidated or the new position cannot be determined. For this reason, you should only
      * use the <code>position</code> parameter while acquiring the related data item inside this
      * method and should not keep a copy of it. If you need the position of an item later on
-     * (e.g. in a click listener), use {@link ViewHolder#getAdapterPosition()} which will have
+     * (e.g. in a click listener), use {@link CardViewHolderEditText#getAdapterPosition()} which will have
      * the updated adapter position.
      *
      * @param holder   The ViewHolder which should be updated to represent the contents of the
@@ -104,9 +84,9 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
         switch (holder.getItemViewType()){
             case TYPE_IMPUT_NAME:
 
+                holder.setImage(R.drawable.ic_action_about);
                 holder.setHint(R.string.name);
                 holder.setError(R.string.fail_name);
-
                 holder.setText(mSubject.getName());
                 holder.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
