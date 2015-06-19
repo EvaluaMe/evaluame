@@ -1,5 +1,6 @@
 package com.garciparedes.evaluame.viewholders.cards;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
@@ -15,10 +16,14 @@ public abstract class BaseCardViewHolder extends RecyclerView.ViewHolder {
     }
 
     public String getStringResource(int name){
-        return itemView.getContext().getResources().getString(name);
+        return getContext().getResources().getString(name);
     }
 
     public Drawable getDrawableResource(int name){
-        return itemView.getContext().getResources().getDrawable(name);
+        return getContext().getResources().getDrawable(name);
+    }
+
+    public Context getContext() {
+        return itemView.getContext();
     }
 }

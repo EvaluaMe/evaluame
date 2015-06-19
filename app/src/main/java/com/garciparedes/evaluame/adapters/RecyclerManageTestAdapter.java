@@ -172,32 +172,27 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
     }
 
     private void setupValue(CardViewHolderPicker holder) {
-        holder.setImage(R.drawable.ic_action_about);
-        holder.setTextLabel(R.string.value);
+        holder.setImage(R.drawable.ic_action_weight);
+        holder.setHint(R.string.value);
         holder.setText(mExam.getPercentageString());
-        holder.getLinearLayout().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
     }
 
     private void setupDate(CardViewHolderPicker holder) {
-        holder.setImage(R.drawable.ic_action_about);
-        holder.setTextLabel(R.string.value);
-        holder.setText(mExam.getDateString(holder.getLinearLayout().getContext()));
+        holder.setImage(R.drawable.ic_action_event);
+        holder.setHint(R.string.date);
+        holder.setText(mExam.getDateString(holder.getContext()));
     }
 
     private void setupTime(CardViewHolderPicker holder) {
-        holder.setImage(R.drawable.ic_action_about);
-        holder.setTextLabel(R.string.time);
-        holder.setText(mExam.getTimeString(holder.getLinearLayout().getContext()));
+        holder.setImage(R.drawable.ic_action_time);
+        holder.setHint(R.string.time);
+        holder.setText(mExam.getTimeString(holder.getContext()));
     }
 
     private void setupScore(CardViewHolderPicker holder) {
-        holder.setImage(R.drawable.ic_action_about);
-        holder.setTextLabel(R.string.score);
+        holder.setImage(R.drawable.ic_action_accept_dark);
+        holder.setHint(R.string.score);
         holder.setText(mExam.getMarkString());
     }
 }
