@@ -31,6 +31,14 @@ public class CardViewHolderEditText extends BaseCardViewHolder {
         mImgView = (ImageView) itemView.findViewById(R.id.card_view_image_view);
         mEditText = (EditText) itemView.findViewById(R.id.card_edit_text_subject);
         mTextInputLayout = (TextInputLayout) itemView.findViewById(R.id.card_view_text_input_layout);
+
+    }
+
+    public void setup(String text, int hint, int error, int image) {
+        setText(text);
+        setHint(hint);
+        setError(error);
+        setImage(image);
     }
 
     public void setError(int name) {

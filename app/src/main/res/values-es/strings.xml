@@ -76,5 +76,9 @@
     <string name="profile">Perfil</string>
     <string name="subjects">Asignaturas</string>
     <string name="about">About</string>
+    <string name="date_error">DD/MM/YYYY</string>
+    <string name="time_error">HH/MM</string>
+    <string name="value_error">## %</string>
+    <string name="score_error">## %</string>
 
 </resources>

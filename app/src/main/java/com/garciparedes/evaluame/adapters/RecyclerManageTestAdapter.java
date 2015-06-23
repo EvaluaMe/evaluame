@@ -9,8 +9,10 @@ import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.viewholders.cards.BaseCardViewHolder;
+import com.garciparedes.evaluame.viewholders.cards.CardViewHolderDatePicker;
 import com.garciparedes.evaluame.viewholders.cards.CardViewHolderEditText;
-import com.garciparedes.evaluame.viewholders.cards.CardViewHolderPicker;
+import com.garciparedes.evaluame.viewholders.cards.CardViewHolderNumberPicker;
+import com.garciparedes.evaluame.viewholders.cards.CardViewHolderTimePicker;
 
 
 /**
@@ -69,19 +71,19 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
                 return new CardViewHolderEditText(parent);
 
             case TYPE_IMPUT_VALUE:
-                return new CardViewHolderPicker(parent);
+                return new CardViewHolderNumberPicker(parent);
 
             case TYPE_IMPUT_TYPE:
                 return new CardViewHolderEditText(parent);
 
             case TYPE_IMPUT_DATE:
-                return new CardViewHolderPicker(parent);
+                return new CardViewHolderDatePicker(parent);
 
             case TYPE_IMPUT_TIME:
-                return new CardViewHolderPicker(parent);
+                return new CardViewHolderTimePicker(parent);
 
             case TYPE_IMPUT_SCORE:
-                return new CardViewHolderPicker(parent);
+                return new CardViewHolderNumberPicker(parent);
 
             default:
                 return null;
@@ -114,7 +116,7 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
                 break;
 
             case TYPE_IMPUT_VALUE:
-                setupValue((CardViewHolderPicker) holder);
+                setupValue((CardViewHolderNumberPicker) holder);
                 break;
 
             case TYPE_IMPUT_TYPE:
@@ -122,15 +124,15 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
                 break;
 
             case TYPE_IMPUT_DATE:
-                setupDate((CardViewHolderPicker) holder);
+                setupDate((CardViewHolderDatePicker) holder);
                 break;
 
             case TYPE_IMPUT_TIME:
-                setupTime((CardViewHolderPicker) holder);
+                setupTime((CardViewHolderTimePicker) holder);
                 break;
 
             case TYPE_IMPUT_SCORE:
-                setupScore((CardViewHolderPicker) holder);
+                setupScore((CardViewHolderNumberPicker) holder);
                 break;
 
             default:
@@ -171,28 +173,32 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
         });
     }
 
-    private void setupValue(CardViewHolderPicker holder) {
-        holder.setImage(R.drawable.ic_action_weight);
-        holder.setHint(R.string.value);
-        holder.setText(mExam.getPercentageString());
+    private void setupValue(CardViewHolderNumberPicker holder) {
 
+        holder.setup(mExam.getPercentageString()
+                , R.string.value, R.string.value_error
+                , R.drawable.ic_action_weight
+        );
     }
 
-    private void setupDate(CardViewHolderPicker holder) {
-        holder.setImage(R.drawable.ic_action_event);
-        holder.setHint(R.string.date);
-        holder.setText(mExam.getDateString(holder.getContext()));
+    private void setupDate(CardViewHolderDatePicker holder) {
+        holder.setup(mExam.getDateString(holder.getContext())
+                ,R.string.date,R.string.date_error
+                ,R.drawable.ic_action_event
+        );
     }
 
-    private void setupTime(CardViewHolderPicker holder) {
-        holder.setImage(R.drawable.ic_action_time);
-        holder.setHint(R.string.time);
-        holder.setText(mExam.getTimeString(holder.getContext()));
+    private void setupTime(CardViewHolderTimePicker holder) {
+        holder.setup(mExam.getTimeString(holder.getContext())
+                ,R.string.time,R.string.time_error
+                ,R.drawable.ic_action_time
+        );
     }
 
-    private void setupScore(CardViewHolderPicker holder) {
-        holder.setImage(R.drawable.ic_action_accept_dark);
-        holder.setHint(R.string.score);
-        holder.setText(mExam.getMarkString());
+    private void setupScore(CardViewHolderNumberPicker holder) {
+        holder.setup(mExam.getMarkString()
+                , R.string.score, R.string.score_error
+                , R.drawable.ic_action_accept_dark
+        );
     }
 }
