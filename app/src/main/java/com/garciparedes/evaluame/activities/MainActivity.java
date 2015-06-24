@@ -1,13 +1,14 @@
 package com.garciparedes.evaluame.activities;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +16,6 @@ import android.view.MenuItem;
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.BaseFragment;
 import com.garciparedes.evaluame.fragments.HomeFragment;
-import com.garciparedes.evaluame.fragments.SettingsFragment;
 import com.garciparedes.evaluame.fragments.subject.SubjectListFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -26,7 +26,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity
+public class MainActivity extends AppCompatActivity
         implements BaseFragment.FragmentCallbacks {
 
     private static final String SAVED_FRAGMENT = "saved_fragment";
@@ -112,7 +112,7 @@ public class MainActivity extends ActionBarActivity
 
     public void onNavigationDrawerItemSelected(MenuItem menuItem) {
         // update the main content by replacing fragments
-        BaseFragment baseFragment;
+        BaseFragment baseFragment = mCurrentFragment;
 
         switch (menuItem.getItemId()){
 
@@ -125,7 +125,7 @@ public class MainActivity extends ActionBarActivity
                 break;
 
             case R.id.nav_settings:
-                baseFragment = SettingsFragment.newInstance();
+                startActivity(new Intent(this, SettingsActivity.class));
                 break;
 
             default:

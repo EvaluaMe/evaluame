@@ -1,6 +1,8 @@
 package com.garciparedes.evaluame.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -165,10 +167,20 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
         holder.setHint(R.string.name);
         holder.setError(R.string.fail_name);
         holder.setText(mExam.getName());
-        holder.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        holder.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
-            public void onFocusChange(View view, boolean b) {
-                mSubject.setName(holder.getText());
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                mExam.setName(holder.getText());
             }
         });
     }

@@ -24,31 +24,7 @@
     <string name="exams">Exams</string>
     <string name="average">Average</string>
     <string name="ratio">Ratio</string>
-    <string name="date">Date</string>
-
-    <array name="month">
-        <item>January</item>
-        <item>February</item>
-        <item>March</item>
-        <item>April</item>
-        <item>May</item>
-        <item>June</item>
-        <item>July</item>
-        <item>August</item>
-        <item>September</item>
-        <item>October</item>
-        <item>November</item>
-        <item>December</item>
-    </array>
-
-
-    <array name="exam_type">
-        <item>Delivery</item>
-        <item>Continue Work</item>
-        <item>Homework</item>
-        <item>Practice</item>
-        <item>Exam</item>
-    </array>
+    <string name="date">Date</string>>
 
     <string name="error_name">Error on name</string>
     <string name="edit_test">Edit Mark</string>
