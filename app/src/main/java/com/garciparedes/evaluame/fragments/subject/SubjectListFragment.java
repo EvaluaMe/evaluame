@@ -48,7 +48,7 @@ public class SubjectListFragment extends BaseFragment {
         // specify an adapter (see also next example)
         mAdapter = new RecyclerSubjectListAdapter(ListDB.getMasterList());
 
-        mFAButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        mFAButton = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 

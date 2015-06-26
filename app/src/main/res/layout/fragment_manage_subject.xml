@@ -43,6 +43,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_manage_subject"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
     <android.support.design.widget.FloatingActionButton
         android:layout_height="wrap_content"
         android:id="@+id/fab_bar"
@@ -53,15 +59,5 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:elevation="@dimen/fab_bar_shadow_elevation"/>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_manage_subject"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-    <!--
-    <include layout="@layout/container_manage_subject"/>
-    -->
 
 </android.support.design.widget.CoordinatorLayout>
