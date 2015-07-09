@@ -1,8 +1,6 @@
 package com.garciparedes.evaluame.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -28,12 +26,12 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
         , CardViewHolderEditText.OnEditTextCallbacks
         , CardViewHolderTimePicker.OnTimeCallbacks{
 
-    private static final int TYPE_IMPUT_NAME = 0;
-    private static final int TYPE_IMPUT_VALUE = 1;
-    private static final int TYPE_IMPUT_TYPE = 2;
-    private static final int TYPE_IMPUT_DATE = 3;
-    private static final int TYPE_IMPUT_TIME = 4;
-    private static final int TYPE_IMPUT_SCORE = 5;
+    private static final int TYPE_INPUT_NAME = 0;
+    private static final int TYPE_INPUT_VALUE = 1;
+    private static final int TYPE_INPUT_TYPE = 2;
+    private static final int TYPE_INPUT_DATE = 3;
+    private static final int TYPE_INPUT_TIME = 4;
+    private static final int TYPE_INPUT_SCORE = 5;
 
 
     private Exam mExam;
@@ -75,23 +73,23 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
     public BaseCardViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         switch (viewType){
-            case TYPE_IMPUT_NAME:
-                return new CardViewHolderEditText(parent, TYPE_IMPUT_NAME, this);
+            case TYPE_INPUT_NAME:
+                return new CardViewHolderEditText(parent, TYPE_INPUT_NAME, this);
 
-            case TYPE_IMPUT_VALUE:
-                return new CardViewHolderNumberPicker(parent, TYPE_IMPUT_VALUE, this);
+            case TYPE_INPUT_VALUE:
+                return new CardViewHolderNumberPicker(parent, TYPE_INPUT_VALUE, this);
 
-            case TYPE_IMPUT_TYPE:
-                return new CardViewHolderEditText(parent, TYPE_IMPUT_TYPE, this);
+            case TYPE_INPUT_TYPE:
+                return new CardViewHolderEditText(parent, TYPE_INPUT_TYPE, this);
 
-            case TYPE_IMPUT_DATE:
-                return new CardViewHolderDatePicker(parent, TYPE_IMPUT_DATE, this);
+            case TYPE_INPUT_DATE:
+                return new CardViewHolderDatePicker(parent, TYPE_INPUT_DATE, this);
 
-            case TYPE_IMPUT_TIME:
-                return new CardViewHolderTimePicker(parent, TYPE_IMPUT_TIME, this);
+            case TYPE_INPUT_TIME:
+                return new CardViewHolderTimePicker(parent, TYPE_INPUT_TIME, this);
 
-            case TYPE_IMPUT_SCORE:
-                return new CardViewHolderNumberPicker(parent, TYPE_IMPUT_SCORE, this);
+            case TYPE_INPUT_SCORE:
+                return new CardViewHolderNumberPicker(parent, TYPE_INPUT_SCORE, this);
 
             default:
                 return null;
@@ -119,27 +117,27 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
     public void onBindViewHolder(BaseCardViewHolder holder, int position) {
 
         switch (holder.getItemViewType()){
-            case TYPE_IMPUT_NAME:
+            case TYPE_INPUT_NAME:
                 setupName((CardViewHolderEditText) holder);
                 break;
 
-            case TYPE_IMPUT_VALUE:
+            case TYPE_INPUT_VALUE:
                 setupValue((CardViewHolderNumberPicker) holder);
                 break;
 
-            case TYPE_IMPUT_TYPE:
+            case TYPE_INPUT_TYPE:
                 //setupType((CardViewHolderSpinner) holder);
                 break;
 
-            case TYPE_IMPUT_DATE:
+            case TYPE_INPUT_DATE:
                 setupDate((CardViewHolderDatePicker) holder);
                 break;
 
-            case TYPE_IMPUT_TIME:
+            case TYPE_INPUT_TIME:
                 setupTime((CardViewHolderTimePicker) holder);
                 break;
 
-            case TYPE_IMPUT_SCORE:
+            case TYPE_INPUT_SCORE:
                 setupScore((CardViewHolderNumberPicker) holder);
                 break;
 
@@ -210,7 +208,7 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
      */
     @Override
     public void onDateChanged(int id, int year, int month, int day) {
-        if (id == TYPE_IMPUT_DATE) {
+        if (id == TYPE_INPUT_DATE) {
             mExam.getDate().set(Calendar.YEAR, year);
             mExam.getDate().set(Calendar.MONTH, month);
             mExam.getDate().set(Calendar.DAY_OF_MONTH, day);
@@ -224,9 +222,10 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
      */
     @Override
     public void onNumberChanged(int id, double number) {
-        System.out.println("HOLA");
-        if(id == TYPE_IMPUT_VALUE){
+        if(id == TYPE_INPUT_VALUE){
             mExam.setPercentage((float) number);
+        } else if(id == TYPE_INPUT_SCORE){
+            mExam.setMark((float) number);
         }
     }
 
@@ -238,7 +237,7 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
      */
     @Override
     public void onTextChanged(int id, String text) {
-        if(id == TYPE_IMPUT_NAME){
+        if(id == TYPE_INPUT_NAME){
             mExam.setName(text);
         }
     }
@@ -252,7 +251,7 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
      */
     @Override
     public void onTimeChanged(int id, int hour, int minute) {
-        if (id == TYPE_IMPUT_TIME){
+        if (id == TYPE_INPUT_TIME){
             mExam.getDate().set(Calendar.HOUR, hour);
             mExam.getDate().set(Calendar.MINUTE, minute);
         }

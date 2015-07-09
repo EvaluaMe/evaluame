@@ -3,7 +3,6 @@ package com.garciparedes.evaluame.viewholders.cards;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.View;
 
 /**

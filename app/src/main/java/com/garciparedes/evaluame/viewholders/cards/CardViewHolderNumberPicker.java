@@ -3,14 +3,7 @@ package com.garciparedes.evaluame.viewholders.cards;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import com.doomonafireball.betterpickers.numberpicker.NumberPickerBuilder;
-import com.doomonafireball.betterpickers.numberpicker.NumberPickerDialogFragment;
-import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.activities.MainActivity;
 
 /**
  * Created by garciparedes on 23/6/15.
@@ -49,7 +42,15 @@ public class CardViewHolderNumberPicker extends CardViewHolderEditText {
 
             @Override
             public void afterTextChanged(Editable editable) {
-                onNumberCallbacks.onNumberChanged(getId(), Double.valueOf(getText()));
+                double value = 0.0;
+
+                try{
+                    value =Double.valueOf(getText());
+                }catch (NumberFormatException e){
+                    setText(0);
+                }
+
+                onNumberCallbacks.onNumberChanged(getId(), value);
             }
         });
     }

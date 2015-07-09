@@ -1,8 +1,6 @@
 package com.garciparedes.evaluame.viewholders.cards;
 
 import android.app.TimePickerDialog;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;

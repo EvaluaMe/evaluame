@@ -4,9 +4,9 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.garciparedes.evaluame.enums.ExamType;
 import com.garciparedes.evaluame.utils.Date;
 import com.garciparedes.evaluame.utils.Number;
-import com.garciparedes.evaluame.enums.ExamType;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

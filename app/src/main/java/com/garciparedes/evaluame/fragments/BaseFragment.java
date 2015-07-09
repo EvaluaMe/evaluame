@@ -12,8 +12,8 @@ import android.view.MenuInflater;
 import android.view.View;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.utils.*;
 import com.garciparedes.evaluame.activities.MainActivity;
+import com.garciparedes.evaluame.utils.ColorUtil;
 
 /**
  * Created by garciparedes on 20/2/15.

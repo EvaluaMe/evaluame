@@ -1,11 +1,8 @@
 package com.garciparedes.evaluame.adapters;
 
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;

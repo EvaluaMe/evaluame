@@ -12,15 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.adapters.RecyclerManageSubjectAdapter;
-import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
+import com.garciparedes.evaluame.adapters.RecyclerManageSubjectAdapter;
 import com.garciparedes.evaluame.interfaces.AddData;
 import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.utils.ColorUtil;
 
 /**
  * Created by garciparedes on 10/2/15.

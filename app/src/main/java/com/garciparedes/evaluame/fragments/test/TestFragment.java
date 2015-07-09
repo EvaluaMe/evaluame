@@ -18,15 +18,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
-
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.adapters.RecyclerAtribImageTextAdapter;
 import com.garciparedes.evaluame.fragments.subject.BaseSubjectFragment;
 import com.garciparedes.evaluame.fragments.subject.SubjectFragment;
-import com.garciparedes.evaluame.utils.ColorUtil;
-import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
+import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.utils.ListAtrib;
 
 /**

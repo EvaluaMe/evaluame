@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.fragments.BaseFragment;
-import com.garciparedes.evaluame.fragments.HomeFragment;
-import com.garciparedes.evaluame.utils.ColorUtil;
 import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.adapters.RecyclerSubjectListAdapter;
+import com.garciparedes.evaluame.fragments.BaseFragment;
+import com.garciparedes.evaluame.fragments.HomeFragment;
 import com.garciparedes.evaluame.provider.ListDB;
+import com.garciparedes.evaluame.utils.ColorUtil;
 
 /**
  * Created by garciparedes on 12/6/15.

@@ -2,7 +2,6 @@ package com.garciparedes.evaluame.fragments.subject;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.garciparedes.evaluame.fragments.BaseFragment;
 import com.garciparedes.evaluame.items.Subject;
