@@ -2,16 +2,11 @@ package com.garciparedes.evaluame.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,7 +19,6 @@ import com.garciparedes.evaluame.fragments.HomeFragment;
 import com.garciparedes.evaluame.fragments.subject.SubjectListFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
-import com.garciparedes.evaluame.utils.ColorUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -49,11 +43,7 @@ public class MainActivity extends AppCompatActivity
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
-
-    private Toolbar toolbar;
-    public CollapsingToolbarLayout collapsingToolbar;
-    private AppBarLayout appBarLayout;
-
+    //private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,23 +71,14 @@ public class MainActivity extends AppCompatActivity
             mCurrentFragment = HomeFragment.newInstance();
         }
 
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container,mCurrentFragment)
                 .commit();
         //restoreActionBar();
 
+        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(mToolbar);
 
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        setSupportActionBar(toolbar);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        collapsingToolbar =
-                (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -180,48 +161,6 @@ public class MainActivity extends AppCompatActivity
             getWindow().setStatusBarColor(getResources().getColor(R.color.green_app_dark));
         }
         */
-    }
-
-
-    public void customizeActionBar( int color, String title , String subTitle){
-
-        ActionBar actionBar = getSupportActionBar();
-
-        if (toolbar != null) {
-            toolbar.setBackgroundColor(color);
-
-
-            if (title != null) {
-                //toolbar.setTitle(title);
-                actionBar.setTitle(title);
-            }
-
-            if (subTitle != null) {
-                toolbar.setSubtitle(subTitle);
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                //getWindow().setStatusBarColor(ColorUtil.getDarkness(color));
-                //getWindow().setNavigationBarColor(Color.TRANSPARENT);
-                //getWindow().setStatusBarColor(Color.TRANSPARENT);
-
-            }
-        }
-
-        if (appBarLayout != null){
-            //appBarLayout.setMinimumHeight(size);
-        }
-
-        if(collapsingToolbar != null){
-            collapsingToolbar.setBackgroundColor(color);
-            collapsingToolbar.setDrawingCacheBackgroundColor(color);
-            collapsingToolbar.setTitle(title);
-            collapsingToolbar.setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
-            //collapsingToolbar.setStatusBarScrimColor(color);
-            collapsingToolbar.setContentScrimColor(color);
-
-        }
-
     }
 
 

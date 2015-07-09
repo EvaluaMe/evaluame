@@ -52,6 +52,18 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_manage_subject);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
+
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
+
+        collapsingToolbar =
+                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+
+
         return view;
 
     }
