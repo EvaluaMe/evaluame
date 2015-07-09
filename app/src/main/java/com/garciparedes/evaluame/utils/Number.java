@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Number {
 
-    public static final String NAN_STRING = "--";
+    public static final String NAN_STRING = "";
 
 
     public static boolean isExact(float f) {

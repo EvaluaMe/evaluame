@@ -155,10 +155,10 @@ public class Exam implements Parcelable, Comparable<Exam> {
     public String getPercentageString() {
 
         if (getPercentage() == 0){
-            return Number.NAN_STRING + "%";
+            return Number.NAN_STRING;
         }
 
-        return (Number.toString(getPercentage(), "%"));
+        return (Number.toString(getPercentage(), ""));
     }
 
 

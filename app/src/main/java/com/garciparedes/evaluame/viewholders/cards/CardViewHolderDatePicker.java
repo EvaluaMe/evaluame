@@ -16,18 +16,21 @@ public class CardViewHolderDatePicker extends CardViewHolderEditText {
 
     private Calendar myCalendar;
 
-    DatePickerDialog.OnDateSetListener date;
-    DatePickerDialog pickerDialog;
+    private ViewHolderDateCallbacks viewHolderDateCallbacks;
 
-    public CardViewHolderDatePicker(ViewGroup parent) {
-        super(parent);
+    private DatePickerDialog.OnDateSetListener date;
+    private DatePickerDialog pickerDialog;
+
+    public CardViewHolderDatePicker(ViewGroup parent, int id, ViewHolderDateCallbacks viewHolderDateCallbacks) {
+        super(parent, id);
         this.myCalendar = Calendar.getInstance();
-
+        this.viewHolderDateCallbacks = viewHolderDateCallbacks;
     }
 
     private Calendar getCalendar(){
         return myCalendar;
     }
+
     @Override
     public void setup(String text, int hint, int error, int image) {
         super.setup(text, hint, error, image);
@@ -43,7 +46,7 @@ public class CardViewHolderDatePicker extends CardViewHolderEditText {
                 getCalendar().set(Calendar.YEAR, year);
                 getCalendar().set(Calendar.MONTH, monthOfYear);
                 getCalendar().set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel();
+                update();
             }
 
         };
@@ -69,12 +72,46 @@ public class CardViewHolderDatePicker extends CardViewHolderEditText {
         });
     }
 
-    private void updateLabel() {
+
+    @Override
+    public void setCallBack() {
+        date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+
+                // TODO Auto-generated method stub
+                getCalendar().set(Calendar.YEAR, year);
+                getCalendar().set(Calendar.MONTH, monthOfYear);
+                getCalendar().set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                update();
+            }
+
+        };    }
+
+    private void update() {
+
+        viewHolderDateCallbacks.onDateChanged(getId()
+                ,myCalendar.get(Calendar.YEAR)
+                ,myCalendar.get(Calendar.MONTH)
+                ,myCalendar.get(Calendar.DAY_OF_MONTH)
+        );
 
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
 
         getEditText().setText(sdf.format(myCalendar.getTime()));
+    }
+
+    /**
+     * Callbacks interface that all activities using this fragment must implement.
+     */
+    public static interface ViewHolderDateCallbacks {
+        /**
+         * Called when an item in the navigation drawer is selected.
+         */
+        void onDateChanged(int id, int year, int month, int day);
     }
 
 }

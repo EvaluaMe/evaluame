@@ -11,8 +11,20 @@ import android.view.View;
  */
 public abstract class BaseCardViewHolder extends RecyclerView.ViewHolder {
 
-    public BaseCardViewHolder(View itemView) {
+    private int id;
+
+    public BaseCardViewHolder(View itemView, int id) {
         super(itemView);
+        this.id = id;
+    }
+
+
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getStringResource(int name){

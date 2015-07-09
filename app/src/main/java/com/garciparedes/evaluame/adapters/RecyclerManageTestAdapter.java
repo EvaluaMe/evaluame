@@ -16,11 +16,17 @@ import com.garciparedes.evaluame.viewholders.cards.CardViewHolderEditText;
 import com.garciparedes.evaluame.viewholders.cards.CardViewHolderNumberPicker;
 import com.garciparedes.evaluame.viewholders.cards.CardViewHolderTimePicker;
 
+import java.util.Calendar;
+
 
 /**
  * Created by garciparedes on 18/6/15.
  */
-public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardViewHolder>{
+public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardViewHolder>
+        implements CardViewHolderDatePicker.ViewHolderDateCallbacks
+        , CardViewHolderNumberPicker.OnNumberCallbacks
+        , CardViewHolderEditText.OnEditTextCallbacks
+        , CardViewHolderTimePicker.OnTimeCallbacks{
 
     private static final int TYPE_IMPUT_NAME = 0;
     private static final int TYPE_IMPUT_VALUE = 1;
@@ -70,22 +76,22 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
 
         switch (viewType){
             case TYPE_IMPUT_NAME:
-                return new CardViewHolderEditText(parent);
+                return new CardViewHolderEditText(parent, TYPE_IMPUT_NAME, this);
 
             case TYPE_IMPUT_VALUE:
-                return new CardViewHolderNumberPicker(parent);
+                return new CardViewHolderNumberPicker(parent, TYPE_IMPUT_VALUE, this);
 
             case TYPE_IMPUT_TYPE:
-                return new CardViewHolderEditText(parent);
+                return new CardViewHolderEditText(parent, TYPE_IMPUT_TYPE, this);
 
             case TYPE_IMPUT_DATE:
-                return new CardViewHolderDatePicker(parent);
+                return new CardViewHolderDatePicker(parent, TYPE_IMPUT_DATE, this);
 
             case TYPE_IMPUT_TIME:
-                return new CardViewHolderTimePicker(parent);
+                return new CardViewHolderTimePicker(parent, TYPE_IMPUT_TIME, this);
 
             case TYPE_IMPUT_SCORE:
-                return new CardViewHolderNumberPicker(parent);
+                return new CardViewHolderNumberPicker(parent, TYPE_IMPUT_SCORE, this);
 
             default:
                 return null;
@@ -163,26 +169,7 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
     }
 
     private void setupName(final CardViewHolderEditText holder){
-        holder.setImage(R.drawable.ic_action_about);
-        holder.setHint(R.string.name);
-        holder.setError(R.string.fail_name);
-        holder.setText(mExam.getName());
-        holder.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                mExam.setName(holder.getText());
-            }
-        });
+        holder.setup(mExam.getName(), R.string.name, R.string.fail_name, R.drawable.ic_action_about);
     }
 
     private void setupValue(CardViewHolderNumberPicker holder) {
@@ -212,5 +199,62 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
                 , R.string.score, R.string.score_error
                 , R.drawable.ic_action_accept_dark
         );
+    }
+
+    /**
+     * Called when an item in the navigation drawer is selected.
+     *
+     * @param year
+     * @param month
+     * @param day
+     */
+    @Override
+    public void onDateChanged(int id, int year, int month, int day) {
+        if (id == TYPE_IMPUT_DATE) {
+            mExam.getDate().set(Calendar.YEAR, year);
+            mExam.getDate().set(Calendar.MONTH, month);
+            mExam.getDate().set(Calendar.DAY_OF_MONTH, day);
+        }
+    }
+
+    /**
+     * Called when an item in the navigation drawer is selected.
+     *
+     * @param number
+     */
+    @Override
+    public void onNumberChanged(int id, double number) {
+        System.out.println("HOLA");
+        if(id == TYPE_IMPUT_VALUE){
+            mExam.setPercentage((float) number);
+        }
+    }
+
+    /**
+     * Called when an item in the navigation drawer is selected.
+     *
+     * @param id
+     * @param text
+     */
+    @Override
+    public void onTextChanged(int id, String text) {
+        if(id == TYPE_IMPUT_NAME){
+            mExam.setName(text);
+        }
+    }
+
+    /**
+     * Called when an item in the navigation drawer is selected.
+     *
+     * @param id
+     * @param hour
+     * @param minute
+     */
+    @Override
+    public void onTimeChanged(int id, int hour, int minute) {
+        if (id == TYPE_IMPUT_TIME){
+            mExam.getDate().set(Calendar.HOUR, hour);
+            mExam.getDate().set(Calendar.MINUTE, minute);
+        }
     }
 }

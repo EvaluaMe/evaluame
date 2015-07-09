@@ -57,7 +57,7 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
      */
     @Override
     public CardViewHolderEditText onCreateViewHolder(ViewGroup parent, int viewType) {
-        CardViewHolderEditText pvh = new CardViewHolderEditText(parent);
+        CardViewHolderEditText pvh = new CardViewHolderEditText(parent, 0);
         return pvh;
     }
 

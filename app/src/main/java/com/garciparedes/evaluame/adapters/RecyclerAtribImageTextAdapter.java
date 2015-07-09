@@ -57,7 +57,7 @@ public class RecyclerAtribImageTextAdapter extends RecyclerView.Adapter<BaseCard
 
         switch (viewType){
             case TYPE_TEXT_VIEW:
-                return new CardViewHolderTextView(parent);
+                return new CardViewHolderTextView(parent, TYPE_TEXT_VIEW);
             default:
                 return null;
         }

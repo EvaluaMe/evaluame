@@ -22,8 +22,8 @@ public class CardViewHolderTextView extends BaseCardViewHolder {
     private TextView mTextView;
 
 
-    public CardViewHolderTextView(ViewGroup parent) {
-        super(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_atrib_image_text, parent, false));
+    public CardViewHolderTextView(ViewGroup parent, int id) {
+        super(LayoutInflater.from(parent.getContext()).inflate(R.layout.card_atrib_image_text, parent, false), id);
 
         mImgView = (ImageView) itemView.findViewById(R.id.card_view_atrib_image_view);;
         mTextView = (TextView) itemView.findViewById(R.id.card_view_atrib_text_view);
