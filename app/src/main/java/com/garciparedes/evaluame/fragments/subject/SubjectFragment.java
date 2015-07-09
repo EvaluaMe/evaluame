@@ -79,20 +79,6 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-
-        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
-
-
-
-        collapsingToolbar =
-                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
-
         //loadBackdrop();
         return view;
     }
