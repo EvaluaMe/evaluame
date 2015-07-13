@@ -31,8 +31,8 @@ public class CardViewHolderTimePicker extends CardViewHolderEditText {
         return myCalendar;
     }
     @Override
-    public void setup(String text, int hint, int error, int image) {
-        super.setup(text, hint, error, image);
+    public void setup(String text, int hint, int image) {
+        super.setup(text, hint, image);
 
         pickerDialog = new TimePickerDialog(getContext(), time, getCalendar().get(Calendar.HOUR)
                 , getCalendar().get(Calendar.MINUTE),
@@ -69,16 +69,17 @@ public class CardViewHolderTimePicker extends CardViewHolderEditText {
     }
     private void update() {
 
-        String myFormat = "HH:MM"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
         onTimeCallbacks.onTimeChanged(getId(), myCalendar.get(Calendar.HOUR), myCalendar.get(Calendar.MINUTE));
+
+        String myFormat = "hh:mm a"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
         getEditText().setText(sdf.format(myCalendar.getTime()));
     }
 
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */
-    public static interface OnTimeCallbacks {
+    public interface OnTimeCallbacks {
         /**
          * Called when an item in the navigation drawer is selected.
          */

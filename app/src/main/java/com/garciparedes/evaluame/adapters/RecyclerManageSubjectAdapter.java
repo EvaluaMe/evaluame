@@ -12,10 +12,11 @@ import com.garciparedes.evaluame.viewholders.cards.CardViewHolderEditText;
 /**
  * Created by garciparedes on 17/6/15.
  */
-public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewHolderEditText>{
+public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewHolderEditText>
+        implements CardViewHolderEditText.OnEditTextCallbacks{
 
-    private static final int TYPE_IMPUT_NAME = 0;
-    private static final int TYPE_IMPUT_DESCRIPTION = 1;
+    private static final int TYPE_INPUT_NAME = 0;
+    private static final int TYPE_INPUT_DESCRIPTION = 1;
 
 
     private Subject mSubject;
@@ -54,8 +55,17 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
      */
     @Override
     public CardViewHolderEditText onCreateViewHolder(ViewGroup parent, int viewType) {
-        CardViewHolderEditText pvh = new CardViewHolderEditText(parent, 0);
-        return pvh;
+        switch (viewType) {
+
+            case TYPE_INPUT_NAME:
+                return new CardViewHolderEditText(parent, TYPE_INPUT_NAME, this);
+
+            case TYPE_INPUT_DESCRIPTION:
+                return new CardViewHolderEditText(parent, TYPE_INPUT_DESCRIPTION, this);
+
+            default:
+                return null;
+        }
     }
 
     /**
@@ -79,28 +89,13 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
     public void onBindViewHolder(final CardViewHolderEditText holder, int position) {
 
         switch (holder.getItemViewType()){
-            case TYPE_IMPUT_NAME:
+            case TYPE_INPUT_NAME:
 
-                holder.setImage(R.drawable.ic_action_about);
-                holder.setHint(R.string.name);
-                holder.setError(R.string.fail_name);
-                holder.setText(mSubject.getName());
-                holder.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View view, boolean b) {
-                        mSubject.setName(holder.getText());
-                    }
-                });
+                holder.setup(mSubject.getName(), R.string.name,  R.drawable.ic_action_about);
                 break;
-            case TYPE_IMPUT_DESCRIPTION:
-                holder.setHint(R.string.description);
-                holder.setText(mSubject.getDescription());
-                holder.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View view, boolean b) {
-                        mSubject.setDescription(holder.getText());
-                    }
-                });
+            case TYPE_INPUT_DESCRIPTION:
+
+                holder.setup(mSubject.getDescription(), R.string.description,  R.drawable.ic_action_event);
                 break;
             default:
                 break;
@@ -123,4 +118,19 @@ public class RecyclerManageSubjectAdapter extends RecyclerView.Adapter<CardViewH
         super.onAttachedToRecyclerView(recyclerView);
     }
 
+    /**
+     * Called when an item in the navigation drawer is selected.
+     *
+     * @param id
+     * @param text
+     */
+    @Override
+    public void onTextChanged(int id, String text) {
+        if (id == TYPE_INPUT_NAME) {
+            mSubject.setName(text);
+        } else if(id == TYPE_INPUT_DESCRIPTION){
+            mSubject.setDescription(text);
+
+        }
+    }
 }

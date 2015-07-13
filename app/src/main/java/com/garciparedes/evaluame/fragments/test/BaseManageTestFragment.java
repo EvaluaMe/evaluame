@@ -84,7 +84,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        mAdapter = new RecyclerManageTestAdapter(mSubject, newExam);
+        mAdapter = new RecyclerManageTestAdapter(mSubject, newExam, getActivity());
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);

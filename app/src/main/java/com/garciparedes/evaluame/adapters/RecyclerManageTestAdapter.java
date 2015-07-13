@@ -1,17 +1,20 @@
 package com.garciparedes.evaluame.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.enums.ExamType;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.viewholders.cards.BaseCardViewHolder;
 import com.garciparedes.evaluame.viewholders.cards.CardViewHolderDatePicker;
 import com.garciparedes.evaluame.viewholders.cards.CardViewHolderEditText;
 import com.garciparedes.evaluame.viewholders.cards.CardViewHolderNumberPicker;
+import com.garciparedes.evaluame.viewholders.cards.CardViewHolderSpinner;
 import com.garciparedes.evaluame.viewholders.cards.CardViewHolderTimePicker;
 
 import java.util.Calendar;
@@ -24,7 +27,8 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
         implements CardViewHolderDatePicker.ViewHolderDateCallbacks
         , CardViewHolderNumberPicker.OnNumberCallbacks
         , CardViewHolderEditText.OnEditTextCallbacks
-        , CardViewHolderTimePicker.OnTimeCallbacks{
+        , CardViewHolderTimePicker.OnTimeCallbacks
+        , CardViewHolderSpinner.OnSpinnerCallbacks{
 
     private static final int TYPE_INPUT_NAME = 0;
     private static final int TYPE_INPUT_VALUE = 1;
@@ -37,15 +41,22 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
     private Exam mExam;
     private Subject mSubject;
 
-    public RecyclerManageTestAdapter (Subject subject, Exam exam){
+    private Context context;
+
+    public RecyclerManageTestAdapter (Subject subject, Exam exam, Context context){
         this.mSubject = subject;
         this.mExam = exam;
+        this.context = context;
     }
 
 
     @Override
     public int getItemViewType(int position) {
         return position;
+    }
+
+    public Context getContext(){
+        return context;
     }
 
 
@@ -80,7 +91,7 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
                 return new CardViewHolderNumberPicker(parent, TYPE_INPUT_VALUE, this);
 
             case TYPE_INPUT_TYPE:
-                return new CardViewHolderEditText(parent, TYPE_INPUT_TYPE, this);
+                return new CardViewHolderSpinner(parent, TYPE_INPUT_TYPE, this);
 
             case TYPE_INPUT_DATE:
                 return new CardViewHolderDatePicker(parent, TYPE_INPUT_DATE, this);
@@ -126,7 +137,7 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
                 break;
 
             case TYPE_INPUT_TYPE:
-                //setupType((CardViewHolderSpinner) holder);
+                setupType((CardViewHolderSpinner) holder);
                 break;
 
             case TYPE_INPUT_DATE:
@@ -167,34 +178,40 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
     }
 
     private void setupName(final CardViewHolderEditText holder){
-        holder.setup(mExam.getName(), R.string.name, R.string.fail_name, R.drawable.ic_action_about);
+        holder.setup(mExam.getName(), R.string.name, R.drawable.ic_action_about);
     }
 
     private void setupValue(CardViewHolderNumberPicker holder) {
 
         holder.setup(mExam.getPercentageString()
-                , R.string.value, R.string.value_error
+                , R.string.value
                 , R.drawable.ic_action_weight
         );
     }
 
+
+
+    public void setupType(CardViewHolderSpinner holder) {
+        holder.setup(ExamType.values(getContext()), mExam.getType().ordinal());
+    }
+
     private void setupDate(CardViewHolderDatePicker holder) {
         holder.setup(mExam.getDateString(holder.getContext())
-                ,R.string.date,R.string.date_error
-                ,R.drawable.ic_action_event
+                , R.string.date
+                , R.drawable.ic_action_event
         );
     }
 
     private void setupTime(CardViewHolderTimePicker holder) {
         holder.setup(mExam.getTimeString(holder.getContext())
-                ,R.string.time,R.string.time_error
+                ,R.string.time
                 ,R.drawable.ic_action_time
         );
     }
 
     private void setupScore(CardViewHolderNumberPicker holder) {
         holder.setup(mExam.getMarkString()
-                , R.string.score, R.string.score_error
+                , R.string.score
                 , R.drawable.ic_action_accept_dark
         );
     }
@@ -254,6 +271,19 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
         if (id == TYPE_INPUT_TIME){
             mExam.getDate().set(Calendar.HOUR, hour);
             mExam.getDate().set(Calendar.MINUTE, minute);
+        }
+    }
+
+    /**
+     * Called when an item in the navigation drawer is selected.
+     *
+     * @param id
+     * @param pos
+     */
+    @Override
+    public void onPosChanged(int id, int pos) {
+        if (id == TYPE_INPUT_TYPE){
+            mExam.setType(ExamType.values()[pos]);
         }
     }
 }

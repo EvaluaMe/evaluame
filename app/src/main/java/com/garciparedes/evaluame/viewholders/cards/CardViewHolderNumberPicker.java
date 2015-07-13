@@ -20,8 +20,8 @@ public class CardViewHolderNumberPicker extends CardViewHolderEditText {
     }
 
     @Override
-    public void setup( String text, int hint, int error, int image) {
-        super.setup(text, hint, error, image);
+    public void setup( String text, int hint, int image) {
+        super.setup(text, hint, image);
 
         getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
 

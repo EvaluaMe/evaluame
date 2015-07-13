@@ -32,6 +32,7 @@ public class CardViewHolderEditText extends BaseCardViewHolder {
         mImgView = (ImageView) itemView.findViewById(R.id.card_view_image_view);
         mEditText = (EditText) itemView.findViewById(R.id.card_edit_text_subject);
         mTextInputLayout = (TextInputLayout) itemView.findViewById(R.id.card_view_text_input_layout);
+        setErrorEnabled(false);
     }
 
     public CardViewHolderEditText(ViewGroup parent, int id, OnEditTextCallbacks onEditTextCallbacks) {
@@ -39,10 +40,9 @@ public class CardViewHolderEditText extends BaseCardViewHolder {
         this.onEditTextCallbacks = onEditTextCallbacks;
     }
 
-    public void setup( String text, int hint, int error, int image) {
+    public void setup( String text, int hint, int image) {
         setText(text);
         setHint(hint);
-        setError(error);
         setImage(image);
 
         setCallBack();
@@ -115,6 +115,10 @@ public class CardViewHolderEditText extends BaseCardViewHolder {
 
     public TextInputLayout getTextInputLayout() {
         return mTextInputLayout;
+    }
+
+    public void setErrorEnabled(boolean errorEnabled) {
+        getTextInputLayout().setErrorEnabled(errorEnabled);
     }
 
     /**

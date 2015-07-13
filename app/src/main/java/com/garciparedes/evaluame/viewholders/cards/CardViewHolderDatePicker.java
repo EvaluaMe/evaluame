@@ -32,8 +32,8 @@ public class CardViewHolderDatePicker extends CardViewHolderEditText {
     }
 
     @Override
-    public void setup(String text, int hint, int error, int image) {
-        super.setup(text, hint, error, image);
+    public void setup(String text, int hint, int image) {
+        super.setup(text, hint, image);
 
 
         date = new DatePickerDialog.OnDateSetListener() {
@@ -98,7 +98,7 @@ public class CardViewHolderDatePicker extends CardViewHolderEditText {
                 ,myCalendar.get(Calendar.DAY_OF_MONTH)
         );
 
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "EEE, MMMMM d, yyyy"	; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
 
         getEditText().setText(sdf.format(myCalendar.getTime()));
