@@ -45,9 +45,8 @@ public class CardViewHolderNumberPicker extends CardViewHolderEditText {
                 double value = 0.0;
 
                 try{
-                    value =Double.valueOf(getText());
+                    value = Double.valueOf(getText());
                 }catch (NumberFormatException e){
-                    setText(0);
                 }
 
                 onNumberCallbacks.onNumberChanged(getId(), value);
