@@ -56,5 +56,6 @@
     <string name="time_error">HH/MM</string>
     <string name="value_error">## %</string>
     <string name="score_error">## %</string>
+    <string name="app_description">Gestiona tus calificaciones del colegio, instituto o universidad de una manera fácil y sencilla!  EvaluaMe te permite almacenar y gestionar las calificaciones de tus asignaturas. </string>
 
 </resources>

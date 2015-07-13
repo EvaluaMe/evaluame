@@ -21,6 +21,9 @@ import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
+import com.mikepenz.aboutlibraries.util.Colors;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -126,6 +129,22 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.nav_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
+                break;
+
+            case R.id.nav_about:
+
+                new LibsBuilder()
+                        //Pass the fields of your application to the lib so it can find all external lib information
+                        .withFields(R.string.class.getFields())
+                                //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                        .withActivityColor(new Colors(getResources().getColor(R.color.green_app), getResources().getColor(R.color.green_app_dark)))
+                        .withAboutIconShown(true)
+                        .withAboutVersionShown(true)
+                        .withAboutDescription(getResources().getString(R.string.app_description))
+
+                                //start the activity
+                        .start(this);
                 break;
 
             default:

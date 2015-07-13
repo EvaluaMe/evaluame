@@ -57,5 +57,6 @@
     <string name="time_error">HH/MM</string>
     <string name="value_error">## %</string>
     <string name="score_error">## %</string>
+    <string name="app_description">Manage your marks from school, college or university in an easy and simple way!  EvaluaMe allows you to store and manage the qualifications of your subjects.</string>
 
 </resources>
