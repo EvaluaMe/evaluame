@@ -58,5 +58,9 @@
     <string name="value_error">## %</string>
     <string name="score_error">## %</string>
     <string name="app_description">Manage your marks from school, college or university in an easy and simple way!  EvaluaMe allows you to store and manage the qualifications of your subjects.</string>
+    <string name="receive_notifications">Receive Notifications</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="my_account">My Account</string>
 
 </resources>

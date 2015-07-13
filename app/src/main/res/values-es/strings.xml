@@ -57,5 +57,9 @@
     <string name="value_error">## %</string>
     <string name="score_error">## %</string>
     <string name="app_description">Gestiona tus calificaciones del colegio, instituto o universidad de una manera fácil y sencilla!  EvaluaMe te permite almacenar y gestionar las calificaciones de tus asignaturas. </string>
+    <string name="receive_notifications">Recibir Notificaciones</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="username">Nombre de Usuario</string>
+    <string name="my_account">Mi Cuenta</string>
 
 </resources>

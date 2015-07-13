@@ -2,16 +2,16 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="My Account">
+        android:title="@string/my_account">
 
         <Preference
-            android:title="Username"
-            android:summary="rishabhp"
+            android:title="@string/username"
+            android:summary="username"
             android:key="username" />
 
         <EditTextPreference
-            android:title="Email"
-            android:summary="rishabh.pugalia@gmail.com"
+            android:title="@string/email"
+            android:summary="username@username.com"
             android:key="email" />
 
     </PreferenceCategory>
@@ -20,8 +20,7 @@
         android:title="Advanced">
 
         <CheckBoxPreference
-            android:title="Receive Notifications"
-            android:summary="Want to receive Push Notifications ?"
+            android:title="@string/receive_notifications"
             android:key="receiveNotifications"
             android:defaultValue="true" />
 
@@ -33,25 +32,6 @@
             android:entryValues="@array/countryValues" />
 
             -->
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="Sub Screens">
-
-        <PreferenceScreen
-            android:key="voicemail_category"
-            android:title="Voicemail"
-            android:persistent="false">
-
-            <Preference
-                android:title="Provider"
-                android:summary="Airtel"
-                android:key="provider" />
-
-            <!-- and other preference objects ... -->
-
-        </PreferenceScreen>
 
     </PreferenceCategory>
 
