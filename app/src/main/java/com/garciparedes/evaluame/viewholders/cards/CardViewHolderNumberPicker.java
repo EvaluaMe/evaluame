@@ -23,7 +23,7 @@ public class CardViewHolderNumberPicker extends CardViewHolderEditText {
     public void setup( String text, int hint, int image) {
         super.setup(text, hint, image);
 
-        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER);
+        getEditText().setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
     }
 
