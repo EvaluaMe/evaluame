@@ -76,17 +76,17 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-        mAdapter = new RecyclerManageTestAdapter(mSubject, newExam, getActivity());
+        mAdapter = new RecyclerManageTestAdapter(getSubject(), newExam, getActivity());
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        customizeActionBar( mSubject.getColor(), mSubject.getName(), null);
+        customizeActionBar( getSubject().getColor(), getSubject().getName(), null);
 
         if (mFAButtonBar != null) {
-            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(mSubject.getColor()));
+            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(getSubject().getColor()));
             mFAButtonBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -129,7 +129,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
     @Override
     public void replaceFragment() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, TestFragment.newInstance(mSubject, newExam))
+                .replace(R.id.container, TestFragment.newInstance(getSubject(), newExam))
                 .commit();
     }
 }

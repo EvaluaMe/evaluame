@@ -87,8 +87,6 @@ public class SubjectListFragment extends BaseFragment {
 
     @Override
     public void onBackPressed() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, HomeFragment.newInstance())
-                .commit();
+        changeFragment(HomeFragment.newInstance());
     }
 }

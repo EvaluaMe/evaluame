@@ -2,7 +2,9 @@ package com.garciparedes.evaluame.fragments.subject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.activities.MainActivity;
@@ -84,22 +87,56 @@ public class SubjectFragment extends BaseSubjectFragment {
         return view;
     }
 
+    @Override
+    public void customizeActionBar(int color, String title, String subTitle) {
+
+        final TextView expandedTextView = (TextView) getCollapsingToolbar().findViewById(R.id.expanded_toolbar_title);
+        final TextView collapsedTextView = (TextView) getToolbar().findViewById(R.id.collapsed_toolbar_title);
+
+        expandedTextView.setText(title);
+        collapsedTextView.setText(title);
+
+
+        if (getToolbar() != null) {
+            getToolbar().setBackgroundColor(color);
+
+            if (subTitle != null) {
+                getToolbar().setSubtitle(subTitle);
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getActivity().getWindow().setStatusBarColor(ColorUtil.getDarkness(color));
+            }
+        }
+
+        if(getCollapsingToolbar() != null){
+            getCollapsingToolbar().setBackgroundColor(color);
+            getCollapsingToolbar().setDrawingCacheBackgroundColor(color);
+            getCollapsingToolbar().setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
+            //collapsingToolbar.setStatusBarScrimColor(color);
+            getCollapsingToolbar().setContentScrimColor(color);
+
+
+        }
+
+
+    }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        customizeActionBar( mSubject.getColor(), mSubject.getName(), mSubject.getName());
+        customizeActionBar(getSubject().getColor(), getSubject().getName(), getSubject().getName());
 
 
         //mCards.add(new DescriptionCard(getActivity(), mSubject));
-        if (mSubject.getWeightedAverage() > 0) {
-            mCards.add(new PieChartCard(getActivity(), mSubject));
+        if (getSubject().getWeightedAverage() > 0) {
+            mCards.add(new PieChartCard(getActivity(), getSubject()));
         }
-        mCards.add(new StatsSubjectCard(getActivity(), mSubject));
+        mCards.add(new StatsSubjectCard(getActivity(), getSubject()));
 
-        for (int i = 0; i < mSubject.getExamList().size(); i++) {
-            mCards.add(initCard(mSubject.getTestElement(i)));
+        for (int i = 0; i < getSubject().getExamList().size(); i++) {
+            mCards.add(initCard(getSubject().getTestElement(i)));
         }
 
         if (mRecyclerView != null) {
@@ -112,14 +149,13 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         if (mFAButton != null) {
-            mFAButton.setRippleColor(ColorUtil.getComplimentColor(mSubject.getColor()));
-            //mFAButton.attachToRecyclerView(mRecyclerView);
+            mFAButton.setRippleColor(ColorUtil.getComplimentColor(getSubject().getColor()));
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.container, AddTestFragment.newInstance(mSubject))
+                            .replace(R.id.container, AddTestFragment.newInstance(getSubject()))
                             .commit();
 
                 }
@@ -127,14 +163,13 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
 
         if (mFAButtonBar != null) {
-            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(mSubject.getColor()));
-            //mFAButton.attachToRecyclerView(mRecyclerView);
+            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(getSubject().getColor()));
             mFAButtonBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.container, EditSubjectFragment.newInstance(mSubject))
+                            .replace(R.id.container, EditSubjectFragment.newInstance(getSubject()))
                             .commit();
 
                 }
@@ -144,7 +179,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     public ExamCard initCard(final Exam exam) {
         // Create a Card
-        ExamCard card = new ExamCard(getActivity(), mSubject, exam);
+        ExamCard card = new ExamCard(getActivity(), getSubject(), exam);
 
         card.setSwipeable(true);
         card.setId(exam.getName());
@@ -154,7 +189,7 @@ public class SubjectFragment extends BaseSubjectFragment {
             @Override
             public void onButtonItemClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, EditTestFragment.newInstance(mSubject, ((ExamCard) card).getExam()))
+                        .replace(R.id.container, EditTestFragment.newInstance(getSubject(), ((ExamCard) card).getExam()))
                         .commit();
 
             }
@@ -164,7 +199,7 @@ public class SubjectFragment extends BaseSubjectFragment {
             @Override
             public void onClick(Card card, View view) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container, TestFragment.newInstance(mSubject, exam))
+                        .replace(R.id.container, TestFragment.newInstance(getSubject(), exam))
                         .commit();
             }
         });
@@ -218,8 +253,8 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        if (mSubject != null) {
-            if (mSubject.isStarred()) {
+        if (getSubject() != null) {
+            if (getSubject().isStarred()) {
                 menu.getItem(0).setIcon(R.drawable.ic_action_important_dark);
             }
         }
@@ -260,12 +295,12 @@ public class SubjectFragment extends BaseSubjectFragment {
     }
 
     public  void starSubject(MenuItem item){
-        if (mSubject.isStarred()) {
-            mSubject.setStarred(false);
+        if (getSubject().isStarred()) {
+            getSubject().setStarred(false);
             item.setIcon(getResources().getDrawable(R.drawable.ic_action_not_important_dark));
             ListDB.saveData(getActivity());
         } else {
-            mSubject.setStarred(true);
+            getSubject().setStarred(true);
             item.setIcon(getResources().getDrawable(R.drawable.ic_action_important_dark));
             ListDB.saveData(getActivity());
 
@@ -275,7 +310,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
     public void editMark() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, EditTestFragment.newInstance(mSubject, clickedExam))
+                .replace(R.id.container, EditTestFragment.newInstance(getSubject(), clickedExam))
                 .commit();
 
     }
@@ -296,10 +331,10 @@ public class SubjectFragment extends BaseSubjectFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // if this button is clicked, close
                         // current activity
-                        ListDB.removeTest(getActivity(), mSubject, clickedExam);
+                        ListDB.removeTest(getActivity(), getSubject(), clickedExam);
 
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
+                                .replace(R.id.container, SubjectFragment.newInstance(getSubject()))
                                 .commit();
 
                     }
@@ -338,7 +373,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                         // if this button is clicked, close
                         // current activity
 
-                        ListDB.removeSubject(getActivity(), mSubject);
+                        ListDB.removeSubject(getActivity(), getSubject());
 
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container, HomeFragment.newInstance())
@@ -367,7 +402,7 @@ public class SubjectFragment extends BaseSubjectFragment {
      */
     public void editSubject() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, EditSubjectFragment.newInstance(mSubject))
+                .replace(R.id.container, EditSubjectFragment.newInstance(getSubject()))
                 .commit();
 
     }

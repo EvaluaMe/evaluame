@@ -57,15 +57,13 @@ public class EditTestFragment extends BaseManageTestFragment {
         */
 
         exam.paste(newExam);
-        ListDB.sortExams(mSubject);
+        ListDB.sortExams(getSubject());
         ListDB.saveData(getActivity());
     }
 
 
     @Override
     public void onBackPressed() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, TestFragment.newInstance(mSubject, exam))
-                .commit();
+        changeFragment(TestFragment.newInstance(getSubject(), exam));
     }
 }

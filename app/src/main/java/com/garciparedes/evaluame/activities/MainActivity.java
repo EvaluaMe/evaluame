@@ -53,8 +53,6 @@ public class MainActivity extends AppCompatActivity
         if (mNavigationView != null) {
             setupDrawerContent(mNavigationView);
         }
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
 
         if (savedInstanceState != null) {

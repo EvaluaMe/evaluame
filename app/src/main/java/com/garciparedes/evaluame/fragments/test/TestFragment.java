@@ -92,18 +92,18 @@ public class TestFragment extends BaseSubjectFragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
 
-        customizeActionBar(mSubject.getColor(), mExam.getName(), mSubject.getName());
+        customizeActionBar(getSubject().getColor(), mExam.getName(), getSubject().getName());
 
 
         if (mFAButtonBar != null) {
-            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(mSubject.getColor()));
+            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(getSubject().getColor()));
             //mFAButton.attachToRecyclerView(mRecyclerView);
             mFAButtonBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     getFragmentManager().beginTransaction()
-                            .replace(R.id.container, EditTestFragment.newInstance(mSubject, mExam))
+                            .replace(R.id.container, EditTestFragment.newInstance(getSubject(), mExam))
                             .commit();
 
                 }
@@ -121,7 +121,7 @@ public class TestFragment extends BaseSubjectFragment {
     @Override
     public void onBackPressed() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
+                .replace(R.id.container, SubjectFragment.newInstance(getSubject()))
                 .commit();
     }
 
@@ -174,10 +174,10 @@ public class TestFragment extends BaseSubjectFragment {
                     public void onClick(DialogInterface dialog, int id) {
                         // if this button is clicked, close
                         // current activity
-                        ListDB.removeTest(getActivity(), mSubject, mExam);
+                        ListDB.removeTest(getActivity(), getSubject(), mExam);
 
                         getFragmentManager().beginTransaction()
-                                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
+                                .replace(R.id.container, SubjectFragment.newInstance(getSubject()))
                                 .commit();
 
                     }
@@ -200,9 +200,7 @@ public class TestFragment extends BaseSubjectFragment {
      *
      */
     public void editMark() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, EditTestFragment.newInstance(mSubject, mExam))
-                .commit();
+        changeFragment(EditTestFragment.newInstance(getSubject(), mExam));
 
     }
 }

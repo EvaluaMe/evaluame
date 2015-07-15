@@ -3,12 +3,11 @@ package com.garciparedes.evaluame.fragments;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 
 import com.garciparedes.evaluame.R;
@@ -23,6 +22,10 @@ public abstract class BaseFragment extends Fragment {
     private FragmentCallbacks mCallbacks;
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbar;
+    //DrawerLayout drawerLayout;
+    //ActionBarDrawerToggle drawerToggle;
+    private AppBarLayout appBarLayout;
+    private CoordinatorLayout coordinatorLayout;
 
 
     /**
@@ -77,13 +80,19 @@ public abstract class BaseFragment extends Fragment {
      */
     public void initToolbar(View view){
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-
+        collapsingToolbar =
+                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+        appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
         getMainActivity().setSupportActionBar(toolbar);
 
         getMainActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getMainActivity().getSupportActionBar().setHomeButtonEnabled(true);
-        collapsingToolbar =
-                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+
+        //drawerLayout = (DrawerLayout) getMainActivity().findViewById(R.id.drawer_layout);
+        //drawerToggle = new ActionBarDrawerToggle(getMainActivity(), drawerLayout, 0,0);
+        //drawerLayout.setDrawerListener(drawerToggle);
+        coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.main_content);
+
     }
 
 
@@ -96,16 +105,8 @@ public abstract class BaseFragment extends Fragment {
      */
     public void customizeActionBar(int color, String title , String subTitle){
 
-        ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
-
         if (toolbar != null) {
             toolbar.setBackgroundColor(color);
-
-
-            if (title != null) {
-                //toolbar.setTitle(title);
-                actionBar.setTitle(title);
-            }
 
             if (subTitle != null) {
                 toolbar.setSubtitle(subTitle);
@@ -146,5 +147,22 @@ public abstract class BaseFragment extends Fragment {
      */
     public void changeFragment(BaseFragment fragment){
         getMainActivity().changeFragment(fragment);
+    }
+
+
+    public Toolbar getToolbar() {
+        return toolbar;
+    }
+
+    public CollapsingToolbarLayout getCollapsingToolbar() {
+        return collapsingToolbar;
+    }
+
+    public AppBarLayout getAppBarLayout() {
+        return appBarLayout;
+    }
+
+    public CoordinatorLayout getCoordinatorLayout() {
+        return coordinatorLayout;
     }
 }

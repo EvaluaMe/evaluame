@@ -30,14 +30,14 @@ public class AddTestFragment extends BaseManageTestFragment {
 
     @Override
     public void setOnClickButton() {
-        ListDB.addTest(getActivity(), mSubject, newExam);
+        ListDB.addTest(getActivity(), getSubject(), newExam);
     }
 
 
     @Override
     public void onBackPressed() {
         getFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
+                .replace(R.id.container, SubjectFragment.newInstance(getSubject()))
                 .commit();
     }
 }

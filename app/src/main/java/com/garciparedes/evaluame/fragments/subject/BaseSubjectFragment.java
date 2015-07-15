@@ -13,7 +13,7 @@ public abstract class BaseSubjectFragment extends BaseFragment {
 
     public static final String SUBJECT = "subject";
 
-    protected Subject mSubject;
+    private Subject mSubject;
 
     /**
      * @param savedInstanceState
@@ -28,5 +28,13 @@ public abstract class BaseSubjectFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mSubject = getArguments().getParcelable(SUBJECT);
+    }
+
+    public Subject getSubject() {
+        return mSubject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.mSubject = subject;
     }
 }

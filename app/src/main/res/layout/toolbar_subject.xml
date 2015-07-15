@@ -22,12 +22,35 @@
             android:scaleType="centerCrop"
             app:layout_collapseMode="parallax" />
 
+        <TextView
+            android:id="@+id/expanded_toolbar_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Programacion Orientada a Objetos"
+            android:gravity="center"
+            android:layout_gravity="center"
+            app:layout_collapseMode="parallax"
+            android:paddingTop="?attr/actionBarSize"
+            android:textAppearance="@style/ToolbarExpandedTitle"/>
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_collapseMode="pin" />
+            app:layout_collapseMode="pin" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Programacion Orientada a Objetos"
+                android:id="@+id/collapsed_toolbar_title"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
+
+            </android.support.v7.widget.Toolbar>
+
+
+
 
     </android.support.design.widget.CollapsingToolbarLayout>
 

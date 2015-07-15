@@ -29,7 +29,7 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
      */
     @Override
     public Subject initNewSubject() {
-        return mSubject.copy();
+        return getSubject().copy();
     }
 
     /**
@@ -37,16 +37,12 @@ public class EditSubjectFragment extends BaseManageSubjectFragment {
      */
     @Override
     public void setOnClickButton() {
-
-        mSubject.paste(newSubject);
-
+        getSubject().paste(newSubject);
         ListDB.saveData(getActivity());
     }
 
     @Override
     public void onBackPressed() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(mSubject))
-                .commit();
+        changeFragment(SubjectFragment.newInstance(getSubject()));
     }
 }

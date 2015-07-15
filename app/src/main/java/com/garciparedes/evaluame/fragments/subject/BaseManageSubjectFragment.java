@@ -47,7 +47,6 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
         View view = inflater.inflate(R.layout.fragment_manage_subject, container, false);
 
         mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_manage_subject);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
@@ -70,11 +69,12 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
 
         mAdapter = new RecyclerManageSubjectAdapter(newSubject);
 
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-
+        if(recyclerView != null) {
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+            recyclerView.setAdapter(mAdapter);
+        }
 
         if (mFAButtonBar != null) {
             mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(newSubject.getColor()));
@@ -84,10 +84,7 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
 
                     try {
                         setOnClickButton();
-
-
                         hideKeyboard();
-
                         replaceFragment();
                     } catch (IllegalArgumentException e){
                         Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT)
@@ -126,10 +123,6 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
      */
     @Override
     public void replaceFragment() {
-
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(newSubject))
-                .commit();
-
+        changeFragment(SubjectFragment.newInstance(newSubject));
     }
 }
