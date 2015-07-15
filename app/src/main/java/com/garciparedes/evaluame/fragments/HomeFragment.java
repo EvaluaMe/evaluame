@@ -50,16 +50,7 @@ public class HomeFragment extends BaseFragment {
         mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), mCards);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-
-
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-
-        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
-        collapsingToolbar =
-                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+        initToolbar(view);
 
         return view;
     }

@@ -67,15 +67,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         // Set the dialog text -- this is better done in the XML
         mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-
-        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
-        collapsingToolbar =
-                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+        initToolbar(view);
 
         return view;
     }

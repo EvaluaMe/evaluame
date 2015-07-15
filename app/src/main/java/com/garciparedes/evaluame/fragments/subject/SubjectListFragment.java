@@ -51,15 +51,7 @@ public class SubjectListFragment extends BaseFragment {
 
         mFAButton = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
-        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
-
-        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
-        collapsingToolbar =
-                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+        initToolbar(view);
 
         return view;
     }

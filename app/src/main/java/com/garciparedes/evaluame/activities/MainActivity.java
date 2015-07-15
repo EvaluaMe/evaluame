@@ -5,12 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -34,20 +30,12 @@ public class MainActivity extends AppCompatActivity
         implements BaseFragment.FragmentCallbacks {
 
     private static final String SAVED_FRAGMENT = "saved_fragment";
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
-    //private NavigationDrawerFragment mNavigationDrawerFragment;
 
     private BaseFragment mCurrentFragment;
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
 
-    private ActionBarDrawerToggle mDrawerToggle;
-
+    private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
-    //private Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,40 +44,28 @@ public class MainActivity extends AppCompatActivity
         if (ListDB.getMasterList() == null) {
             getData();
         }
+
         setContentView(R.layout.activity_main);
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
 
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
+        if (mNavigationView != null) {
+            setupDrawerContent(mNavigationView);
         }
         getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 
 
         if (savedInstanceState != null) {
             //Restore the fragment's instance
-            mCurrentFragment = (BaseFragment) getSupportFragmentManager().getFragment(
-                    savedInstanceState, SAVED_FRAGMENT);
+            onCurrentFragmentChanged( (BaseFragment) getSupportFragmentManager().getFragment(
+                    savedInstanceState, SAVED_FRAGMENT));
         } else {
-            mCurrentFragment = HomeFragment.newInstance();
+            onCurrentFragmentChanged(HomeFragment.newInstance());
         }
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container,mCurrentFragment)
-                .commit();
-        //restoreActionBar();
-
-        //mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(mToolbar);
-
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setHomeButtonEnabled(true);
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-
-        setupDrawer();
+        changeFragment();
     }
 
     @Override
@@ -108,112 +84,70 @@ public class MainActivity extends AppCompatActivity
                         mDrawerLayout.closeDrawers();
                         return true;
                     }
-                });
+                }
+        );
     }
 
-    private void setupDrawer() {
 
-    }
-
+    /**
+     *
+     * @param menuItem
+     */
     public void onNavigationDrawerItemSelected(MenuItem menuItem) {
         // update the main content by replacing fragments
-        BaseFragment baseFragment = mCurrentFragment;
 
         switch (menuItem.getItemId()){
 
             case R.id.nav_home:
-                baseFragment = HomeFragment.newInstance();
+                onCurrentFragmentChanged(HomeFragment.newInstance());
                 break;
 
             case R.id.nav_subjects:
-                baseFragment = SubjectListFragment.newInstance();
+                onCurrentFragmentChanged(SubjectListFragment.newInstance());
                 break;
 
             case R.id.nav_settings:
-                startActivity(new Intent(this, SettingsActivity.class));
+                startSettingsActivity();
                 break;
 
             case R.id.nav_about:
-
-                new LibsBuilder()
-                        //Pass the fields of your application to the lib so it can find all external lib information
-                        .withFields(R.string.class.getFields())
-                                //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
-                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
-                        .withActivityColor(new Colors(getResources().getColor(R.color.green_app), getResources().getColor(R.color.green_app_dark)))
-                        .withAboutIconShown(true)
-                        .withAboutVersionShown(true)
-                        .withAboutDescription(getResources().getString(R.string.app_description))
-
-                                //start the activity
-                        .start(this);
+                startAboutActivity();
                 break;
 
             default:
-                baseFragment = mCurrentFragment;
                 break;
         }
-        
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, baseFragment)
-                .commit();
 
-    }
-
-    public void restoreActionBar() {
-
-        /*
-        if (mToolbar == null) {
-            mToolbar = (Toolbar) findViewById(R.id.tool_bar);
-        }
-        if (mToolbar != null){
-            mToolbar.setBackgroundColor(getResources().getColor(R.color.green_app));
-
-            mToolbar.setLayoutParams(
-                    new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT,
-                            ViewGroup.LayoutParams.WRAP_CONTENT
-                    )
-            );
-            mToolbar.setTitle(mTitle);
-            mToolbar.setSubtitle(null);
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            getWindow().setStatusBarColor(getResources().getColor(R.color.green_app_dark));
-        }
-        */
+        changeFragment();
     }
 
 
-
-
-    public Toolbar getToolbar(){
-        /*
-        if (mToolbar == null){
-            mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        }
-        */
-        return new Toolbar(getBaseContext());
-        //return mToolbar;
+    /**
+     * Start Settings Activity.
+     */
+    public void startSettingsActivity(){
+        startActivity(new Intent(this, SettingsActivity.class));
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
 
-        return super.onCreateOptionsMenu(menu);
+    /**
+     * Start About Activity.
+     */
+    public void startAboutActivity(){
+        new LibsBuilder()
+                //Pass the fields of your application to the lib so it can find all external lib information
+                .withFields(R.string.class.getFields())
+                        //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                .withActivityColor(new Colors(getResources().getColor(R.color.green_app), getResources().getColor(R.color.green_app_dark)))
+                .withAboutIconShown(true)
+                .withAboutVersionShown(true)
+                .withAboutDescription(getResources().getString(R.string.app_description))
+
+                        //start the activity
+                .start(this);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     /**
      * Called when an item in the navigation drawer is selected.
@@ -225,6 +159,10 @@ public class MainActivity extends AppCompatActivity
         mCurrentFragment = baseFragment;
     }
 
+
+    /**
+     * This method load stored data to the app.
+     */
     public void getData() {
 
         SharedPreferences appSharedPrefs = PreferenceManager
@@ -241,14 +179,42 @@ public class MainActivity extends AppCompatActivity
         ListDB.setMasterList(mList);
     }
 
+
+    /**
+     * This method call it backPressed method.
+     */
     @Override
     public void onBackPressed() {
-
-            mCurrentFragment.onBackPressed();
-
+        mCurrentFragment.onBackPressed();
     }
 
-    public Fragment getCurrentFragment() {
+
+    /**
+     * Getter of Current Fragment.
+     *
+     * @return mCurrentFragment
+     */
+    public BaseFragment getCurrentFragment() {
         return mCurrentFragment;
+    }
+
+
+    /**
+     * Method who change fragment to current fragment.
+     */
+    public void changeFragment(){
+        changeFragment(getCurrentFragment());
+    }
+
+
+    /**
+     * Method who change fragment.
+     * 
+     * @param fragment
+     */
+    public void changeFragment(BaseFragment fragment){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 }

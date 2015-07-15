@@ -21,8 +21,9 @@ import com.garciparedes.evaluame.utils.ColorUtil;
 public abstract class BaseFragment extends Fragment {
 
     private FragmentCallbacks mCallbacks;
-    public Toolbar toolbar;
-    public CollapsingToolbarLayout collapsingToolbar;
+    private Toolbar toolbar;
+    private CollapsingToolbarLayout collapsingToolbar;
+
 
     /**
      * @param savedInstanceState
@@ -33,23 +34,24 @@ public abstract class BaseFragment extends Fragment {
         setHasOptionsMenu(true);
         mCallbacks.onCurrentFragmentChanged(this);
     }
+
+
+    /**
+     * Method who implements back action.
+     */
     public abstract void onBackPressed();
 
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.global, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-    }
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */
-    public static interface FragmentCallbacks {
+    public interface FragmentCallbacks {
         /**
          * Called when an item in the navigation drawer is selected.
          */
         void onCurrentFragmentChanged(BaseFragment baseFragment);
     }
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -61,24 +63,37 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+
     @Override
     public void onDetach() {
         super.onDetach();
         mCallbacks = null;
     }
 
-    private void setupToolbar(View view){
+
+    /**
+     * Method who initialize toolbar.
+     * @param view
+     */
+    public void initToolbar(View view){
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
 
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+        getMainActivity().setSupportActionBar(toolbar);
 
-        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-
+        getMainActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getMainActivity().getSupportActionBar().setHomeButtonEnabled(true);
+        collapsingToolbar =
+                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
     }
 
 
-
+    /**
+     * Method who customize toolbar.
+     *
+     * @param color
+     * @param title
+     * @param subTitle
+     */
     public void customizeActionBar(int color, String title , String subTitle){
 
         ActionBar actionBar = ((MainActivity) getActivity()).getSupportActionBar();
@@ -109,13 +124,27 @@ public abstract class BaseFragment extends Fragment {
             //collapsingToolbar.setStatusBarScrimColor(color);
             collapsingToolbar.setContentScrimColor(color);
 
+
         }
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ((MainActivity) getActivity()).restoreActionBar();
+
+    /**
+     * Getter of MainActivity.
+     * @return
+     */
+    private MainActivity getMainActivity(){
+        return (MainActivity) getActivity();
+    }
+
+
+    /**
+     * Method who change fragment.
+     *
+     * @param fragment
+     */
+    public void changeFragment(BaseFragment fragment){
+        getMainActivity().changeFragment(fragment);
     }
 }
