@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.BaseFragment;
@@ -64,8 +63,7 @@ public class MainActivity extends AppCompatActivity
         if (navigationView != null) {
             setupDrawerContent(navigationView);
         }
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
+
 
 
         if (savedInstanceState != null) {
