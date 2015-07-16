@@ -3,6 +3,7 @@ package com.garciparedes.evaluame.application;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.parse.Parse;
 
 /**
  * Created by garciparedes on 15/7/15.
