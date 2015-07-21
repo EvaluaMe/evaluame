@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -22,12 +21,17 @@ import com.google.gson.reflect.TypeToken;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
+import com.parse.FindCallback;
 import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
@@ -44,11 +48,14 @@ public class MainActivity extends AppCompatActivity
 
     private ParseUser currentUser;
 
+    private MainActivity mainActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_main);
+        mainActivity = this;
 
 
         currentUser = ParseUser.getCurrentUser();
@@ -65,7 +72,6 @@ public class MainActivity extends AppCompatActivity
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
 
-        setContentView(R.layout.activity_main);
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -90,7 +96,17 @@ public class MainActivity extends AppCompatActivity
     /**
      * Shows the profile of the given user.
      */
-    private void showProfileLoggedIn() {
+    private void showProfileLoggedIn() {;
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("TestObject");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> list, ParseException e) {
+                System.out.println(list.size());
+                Toast.makeText(mainActivity, list.size() + " ", Toast.LENGTH_LONG).show();
+            }
+        });
+
         Toast.makeText(this, currentUser.getUsername(), Toast.LENGTH_LONG).show();
         //ParseUser.logOut();
 
