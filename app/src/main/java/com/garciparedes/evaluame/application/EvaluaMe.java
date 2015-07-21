@@ -3,8 +3,11 @@ package com.garciparedes.evaluame.application;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.garciparedes.evaluame.R;
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
+import com.parse.ParseTwitterUtils;
 
 /**
  * Created by garciparedes on 15/7/15.
@@ -34,9 +37,14 @@ public class EvaluaMe extends Application {
 
         Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
 
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
+        Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
+
+        ParseFacebookUtils.initialize(this);
+
+        // Optional - If you don't want to allow Twitter login, you can
+        // remove this line (and other related ParseTwitterUtils calls)
+        ParseTwitterUtils.initialize("6tef42byALWJl3LKhb13xcpWO",
+                "Q4kYOhMQ3PgfdFelDCC5D3Lq2hylm7lRpPGoQvpk43iNB3nsnF");
 
     }
 

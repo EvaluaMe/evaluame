@@ -21,6 +21,8 @@ import com.google.gson.reflect.TypeToken;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
+import com.parse.ParseUser;
+import com.parse.ui.ParseLoginBuilder;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -29,12 +31,16 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements BaseFragment.FragmentCallbacks {
 
+    private static final int LOGIN_REQUEST = 0;
+
     private static final String SAVED_FRAGMENT = "saved_fragment";
 
     private BaseFragment mCurrentFragment;
 
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
+
+    private ParseUser currentUser;
 
 
     @Override
@@ -46,6 +52,21 @@ public class MainActivity extends AppCompatActivity
         }
 
         setContentView(R.layout.activity_main);
+
+
+        if (currentUser != null) {
+            // User clicked to log out.
+            //ParseUser.logOut();
+            //currentUser = null;
+            showProfileLoggedOut();
+        } else {
+
+            ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
+            builder.setAppLogo(R.drawable.ic_launcher);
+
+            startActivityForResult(builder.build(), LOGIN_REQUEST);
+        }
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -65,6 +86,32 @@ public class MainActivity extends AppCompatActivity
 
         changeFragment();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            showProfileLoggedIn();
+        } else {
+            showProfileLoggedOut();
+        }
+    }
+
+    /**
+     * Shows the profile of the given user.
+     */
+    private void showProfileLoggedIn() {
+
+    }
+
+    /**
+     * Show a message asking the user to log in, toggle login/logout button text.
+     */
+    private void showProfileLoggedOut() {
+
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
