@@ -3,11 +3,9 @@ package com.garciparedes.evaluame.application;
 import android.app.Application;
 import android.content.res.Configuration;
 
-import com.garciparedes.evaluame.R;
 import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
-import com.parse.ParseObject;
-import com.parse.ParseTwitterUtils;
 
 /**
  * Created by garciparedes on 15/7/15.
@@ -35,16 +33,27 @@ public class EvaluaMe extends Application {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
 
-        Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
+        Parse.initialize(this);
 
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
         ParseFacebookUtils.initialize(this);
 
+
+
         // Optional - If you don't want to allow Twitter login, you can
         // remove this line (and other related ParseTwitterUtils calls)
-        ParseTwitterUtils.initialize("6tef42byALWJl3LKhb13xcpWO",
-                "Q4kYOhMQ3PgfdFelDCC5D3Lq2hylm7lRpPGoQvpk43iNB3nsnF");
+        //ParseTwitterUtils.initialize(getString(R.string.twitter_consumer_key),
+        //        getString(R.string.twitter_consumer_secret));
+
+        //ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+
+        // If you would like all objects to be private by default, remove this
+        // line.
+        //defaultACL.setPublicReadAccess(true);
+
+        ParseACL.setDefaultACL(defaultACL, true);
 
     }
 

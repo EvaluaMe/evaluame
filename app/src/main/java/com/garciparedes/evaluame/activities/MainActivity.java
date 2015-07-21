@@ -5,10 +5,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.BaseFragment;
@@ -21,11 +24,17 @@ import com.google.gson.reflect.TypeToken;
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
+import com.parse.ParseAnalytics;
+import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.ui.ParseLoginBuilder;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
@@ -47,25 +56,23 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+        currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            showProfileLoggedIn();
+        } else {
+            showProfileLoggedOut();
+        }
+
         if (ListDB.getMasterList() == null) {
             getData();
         }
 
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
+
+
         setContentView(R.layout.activity_main);
-
-
-        if (currentUser != null) {
-            // User clicked to log out.
-            //ParseUser.logOut();
-            //currentUser = null;
-            showProfileLoggedOut();
-        } else {
-
-            ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
-            builder.setAppLogo(R.drawable.ic_launcher);
-
-            startActivityForResult(builder.build(), LOGIN_REQUEST);
-        }
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -87,21 +94,12 @@ public class MainActivity extends AppCompatActivity
         changeFragment();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
-            showProfileLoggedIn();
-        } else {
-            showProfileLoggedOut();
-        }
-    }
-
     /**
      * Shows the profile of the given user.
      */
     private void showProfileLoggedIn() {
+        Toast.makeText(this, currentUser.getUsername(), Toast.LENGTH_LONG).show();
+        ParseUser.logOut();
 
     }
 
@@ -109,7 +107,11 @@ public class MainActivity extends AppCompatActivity
      * Show a message asking the user to log in, toggle login/logout button text.
      */
     private void showProfileLoggedOut() {
+        // Send user to LoginSignupActivity.class
+        ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
+        builder.setAppLogo(R.drawable.ic_launcher);
 
+        startActivityForResult(builder.build(), LOGIN_REQUEST);
     }
 
 

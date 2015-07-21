@@ -14,6 +14,10 @@
             android:summary="username@username.com"
             android:key="email" />
 
+        <Preference android:title="Acts like a button"
+            android:key="Log Out"
+            android:summary="This is a cool button"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory
