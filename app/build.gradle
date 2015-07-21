@@ -39,6 +39,11 @@ dependencies {
     compile('com.mikepenz:aboutlibraries:5.0.7@aar') {
         transitive = true
     }
+
+    dependencies {
+        compile 'com.parse.bolts:bolts-android:1.+'
+        compile fileTree(dir: 'libs', include: 'Parse-*.jar')
+    }
 }
 
 repositories {
