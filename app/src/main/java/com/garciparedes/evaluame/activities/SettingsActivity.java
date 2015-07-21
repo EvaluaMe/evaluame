@@ -1,16 +1,11 @@
 package com.garciparedes.evaluame.activities;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.PreferenceScreen;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.garciparedes.evaluame.R;
-import com.parse.ParseUser;
 
 public class SettingsActivity extends AppCompatActivity {
 

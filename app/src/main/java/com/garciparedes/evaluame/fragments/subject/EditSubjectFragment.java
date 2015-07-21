@@ -2,7 +2,6 @@ package com.garciparedes.evaluame.fragments.subject;
 
 import android.os.Bundle;
 
-import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
 

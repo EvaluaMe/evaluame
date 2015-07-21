@@ -2,12 +2,10 @@ package com.garciparedes.evaluame.fragments.test;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.adapters.RecyclerManageTestAdapter;
 import com.garciparedes.evaluame.fragments.subject.BaseSubjectFragment;
 import com.garciparedes.evaluame.interfaces.AddData;

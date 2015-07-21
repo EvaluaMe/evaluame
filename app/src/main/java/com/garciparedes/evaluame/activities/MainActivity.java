@@ -8,9 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
@@ -25,16 +23,11 @@ import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
 import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 import com.parse.ui.ParseLoginBuilder;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
@@ -99,7 +92,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void showProfileLoggedIn() {
         Toast.makeText(this, currentUser.getUsername(), Toast.LENGTH_LONG).show();
-        ParseUser.logOut();
+        //ParseUser.logOut();
 
     }
 
