@@ -88,6 +88,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
         final TextView expandedTextView = (TextView) getCollapsingToolbar().findViewById(R.id.expanded_toolbar_title);
         final TextView collapsedTextView = (TextView) getToolbar().findViewById(R.id.collapsed_toolbar_title);
+        collapsedTextView.setVisibility(View.GONE);
 
         expandedTextView.setText(title);
         collapsedTextView.setText(title);
@@ -111,10 +112,19 @@ public class SubjectFragment extends BaseSubjectFragment {
             getCollapsingToolbar().setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
             //collapsingToolbar.setStatusBarScrimColor(color);
             getCollapsingToolbar().setContentScrimColor(color);
-
-
         }
 
+        getCoordinatorLayout().addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+                if (mFAButtonBar.isShown()) {
+                    collapsedTextView.setVisibility(View.GONE);
+                } else {
+                    collapsedTextView.setVisibility(View.VISIBLE);
+
+                }
+            }
+        });
 
     }
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="parse_app_id">Irm18S3p9pCtusyGlCHE7212JPPCkPu9A8Ev9P5r</string>
+    <string name="parse_client_key">BJ5Gi7S83xurjLe3CS1U4ogW8BixKRb39TL2aqkL</string>
+
+    <string name="facebook_app_id">392190444313101</string>
+
+    <string name="twitter_consumer_key">6tef42byALWJl3LKhb13xcpWO</string>
+    <string name="twitter_consumer_secret">Q4kYOhMQ3PgfdFelDCC5D3Lq2hylm7lRpPGoQvpk43iNB3nsnF</string>
+</resources>

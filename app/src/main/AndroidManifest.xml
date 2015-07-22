@@ -58,10 +58,10 @@
 
         <meta-data
             android:name="com.parse.APPLICATION_ID"
-            android:value="Irm18S3p9pCtusyGlCHE7212JPPCkPu9A8Ev9P5r" />
+            android:value="@string/parse_app_id" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
-            android:value="BJ5Gi7S83xurjLe3CS1U4ogW8BixKRb39TL2aqkL" />
+            android:value="@string/parse_client_key" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
