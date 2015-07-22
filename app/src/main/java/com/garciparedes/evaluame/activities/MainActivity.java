@@ -48,15 +48,11 @@ public class MainActivity extends AppCompatActivity
 
     private ParseUser currentUser;
 
-    private MainActivity mainActivity;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mainActivity = this;
-
 
         currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
@@ -98,17 +94,7 @@ public class MainActivity extends AppCompatActivity
      */
     private void showProfileLoggedIn() {;
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("TestObject");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                System.out.println(list.size());
-                Toast.makeText(mainActivity, list.size() + " ", Toast.LENGTH_LONG).show();
-            }
-        });
 
-        Toast.makeText(this, currentUser.getUsername(), Toast.LENGTH_LONG).show();
-        //ParseUser.logOut();
 
     }
 
