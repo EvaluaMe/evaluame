@@ -29,7 +29,8 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_action_new"
-        android:elevation="6dp"/>
+        android:elevation="6dp"
+        app:borderWidth="0dp"/>
 
 
     <android.support.design.widget.FloatingActionButton
@@ -41,6 +42,7 @@
         android:src="@drawable/ic_action_edit_light"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
-        android:elevation="6dp"/>
+        android:elevation="6dp"
+        app:borderWidth="0dp"/>
 
 </android.support.design.widget.CoordinatorLayout>

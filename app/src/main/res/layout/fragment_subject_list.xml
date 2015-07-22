@@ -29,6 +29,7 @@
         android:src="@drawable/ic_action_edit_light"
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
-        android:elevation="@dimen/fab_bar_shadow_elevation"/>
+        android:elevation="@dimen/fab_bar_shadow_elevation"
+        app:borderWidth="0dp"/>
 
 </android.support.design.widget.CoordinatorLayout>
