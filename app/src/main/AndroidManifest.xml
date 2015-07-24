@@ -49,8 +49,9 @@
                 android:value="true"/>
             <meta-data
                 android:name="com.parse.ui.ParseLoginActivity.TWITTER_LOGIN_ENABLED"
-                android:value="true"/>
+                android:value="false"/>
         </activity>
+
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"

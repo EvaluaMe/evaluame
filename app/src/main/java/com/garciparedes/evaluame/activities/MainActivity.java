@@ -8,7 +8,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.garciparedes.evaluame.fragments.BaseFragment;
@@ -16,22 +15,20 @@ import com.garciparedes.evaluame.fragments.HomeFragment;
 import com.garciparedes.evaluame.fragments.subject.SubjectListFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import com.mikepenz.aboutlibraries.Libs;
 import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.mikepenz.aboutlibraries.util.Colors;
-import com.parse.FindCallback;
+
 import com.parse.ParseAnalytics;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
@@ -68,8 +65,6 @@ public class MainActivity extends AppCompatActivity
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
 
-
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
 
@@ -93,9 +88,7 @@ public class MainActivity extends AppCompatActivity
      * Shows the profile of the given user.
      */
     private void showProfileLoggedIn() {;
-
-
-
+        
     }
 
     /**
@@ -116,6 +109,12 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().putFragment(outState, SAVED_FRAGMENT, mCurrentFragment);
     }
 
+
+    /**
+     * Setup Navigation Drawer view.
+     *
+     * @param navigationView navigationView
+     */
     private void setupDrawerContent(final NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -179,14 +178,15 @@ public class MainActivity extends AppCompatActivity
         new LibsBuilder()
                 //Pass the fields of your application to the lib so it can find all external lib information
                 .withFields(R.string.class.getFields())
-                        //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
+                //provide a style (optional) (LIGHT, DARK, LIGHT_DARK_TOOLBAR)
                 .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
                 .withActivityColor(new Colors(getResources().getColor(R.color.green_app), getResources().getColor(R.color.green_app_dark)))
                 .withAboutIconShown(true)
                 .withAboutVersionShown(true)
+                .withAboutAppName(getResources().getString(R.string.app_name))
                 .withAboutDescription(getResources().getString(R.string.app_description))
 
-                        //start the activity
+                //start the activity
                 .start(this);
     }
 
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onCurrentFragmentChanged(BaseFragment baseFragment) {
-        mCurrentFragment = baseFragment;
+        setCurrentFragment(baseFragment);
     }
 
 
@@ -227,9 +227,18 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onBackPressed() {
-        mCurrentFragment.onBackPressed();
+        getCurrentFragment().onBackPressed();
     }
 
+
+    /**
+     * Setter of Current Fragment.
+     *
+     * @param currentFragment currentFragment
+     */
+    public void setCurrentFragment(BaseFragment currentFragment) {
+        this.mCurrentFragment = currentFragment;
+    }
 
     /**
      * Getter of Current Fragment.

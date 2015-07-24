@@ -12,8 +12,7 @@ import com.parse.ParseFacebookUtils;
  */
 public class EvaluaMe extends Application {
 
-    private static final String APPLICATION_ID = "Irm18S3p9pCtusyGlCHE7212JPPCkPu9A8Ev9P5r";
-    private static final String CLIENT_KEY = "BJ5Gi7S83xurjLe3CS1U4ogW8BixKRb39TL2aqkL";
+
     private static EvaluaMe singleton;
 
     public static EvaluaMe getInstance() {
