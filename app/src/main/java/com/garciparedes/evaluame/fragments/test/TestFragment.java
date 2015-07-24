@@ -63,7 +63,7 @@ public class TestFragment extends BaseSubjectFragment {
 
         mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
-        initToolbar(view);
+        initActionBar(view);
 
         return view;
     }

@@ -48,7 +48,7 @@ public class SubjectListFragment extends BaseFragment {
 
         mFAButton = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
-        initToolbar(view);
+        initActionBar(view);
 
         return view;
     }

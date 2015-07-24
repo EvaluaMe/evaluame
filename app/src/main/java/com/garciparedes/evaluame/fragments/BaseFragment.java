@@ -7,6 +7,9 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -19,11 +22,20 @@ import com.garciparedes.evaluame.utils.ColorUtil;
  */
 public abstract class BaseFragment extends Fragment {
 
+    /**
+     * Callbacks interface that all activities using this fragment must implement.
+     */
+    public interface FragmentCallbacks {
+        /**
+         * Called when an item in the navigation drawer is selected.
+         */
+        void onCurrentFragmentChanged(BaseFragment baseFragment);
+    }
+
+
     private FragmentCallbacks mCallbacks;
     private Toolbar toolbar;
     private CollapsingToolbarLayout collapsingToolbar;
-    //DrawerLayout drawerLayout;
-    //ActionBarDrawerToggle drawerToggle;
     private AppBarLayout appBarLayout;
     private CoordinatorLayout coordinatorLayout;
 
@@ -44,16 +56,6 @@ public abstract class BaseFragment extends Fragment {
      */
     public abstract void onBackPressed();
 
-
-    /**
-     * Callbacks interface that all activities using this fragment must implement.
-     */
-    public interface FragmentCallbacks {
-        /**
-         * Called when an item in the navigation drawer is selected.
-         */
-        void onCurrentFragmentChanged(BaseFragment baseFragment);
-    }
 
 
     @Override
@@ -78,23 +80,30 @@ public abstract class BaseFragment extends Fragment {
      * Method who initialize toolbar.
      * @param view
      */
-    public void initToolbar(View view){
+    public void initActionBar(View view){
         toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         collapsingToolbar =
                 (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
         appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
+
         getMainActivity().setSupportActionBar(toolbar);
 
-        getMainActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getMainActivity().getSupportActionBar().setHomeButtonEnabled(true);
+        ActionBar actionBar = getMainActivity().getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
-        //drawerLayout = (DrawerLayout) getMainActivity().findViewById(R.id.drawer_layout);
-        //drawerToggle = new ActionBarDrawerToggle(getMainActivity(), drawerLayout, 0,0);
-        //drawerLayout.setDrawerListener(drawerToggle);
         coordinatorLayout = (CoordinatorLayout) view.findViewById(R.id.main_content);
 
-    }
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(
+                getMainActivity(),  getDrawerLayout(), toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close
+        );
+        getDrawerLayout().setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
 
+    }
 
     /**
      * Method who customize toolbar.
@@ -105,29 +114,23 @@ public abstract class BaseFragment extends Fragment {
      */
     public void customizeActionBar(int color, String title , String subTitle){
 
-        if (toolbar != null) {
-            toolbar.setBackgroundColor(color);
+        if (getToolbar() != null) {
 
             if (subTitle != null) {
-                toolbar.setSubtitle(subTitle);
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                getActivity().getWindow().setStatusBarColor(ColorUtil.getDarkness(color));
+                getToolbar().setSubtitle(subTitle);
             }
         }
 
-        if(collapsingToolbar != null){
-            collapsingToolbar.setBackgroundColor(color);
-            collapsingToolbar.setDrawingCacheBackgroundColor(color);
-            collapsingToolbar.setTitle(title);
-            collapsingToolbar.setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
-            //collapsingToolbar.setStatusBarScrimColor(color);
-            collapsingToolbar.setContentScrimColor(color);
-
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getMainActivity().getWindow().setStatusBarColor(ColorUtil.getDarkness(color));
         }
 
+        if(getCollapsingToolbar() != null){
+            getCollapsingToolbar().setContentScrimColor(color);
+            getCollapsingToolbar().setBackgroundColor(color);
+            getCollapsingToolbar().setTitle(title);
+            getCollapsingToolbar().setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
+        }
     }
 
 
@@ -164,5 +167,9 @@ public abstract class BaseFragment extends Fragment {
 
     public CoordinatorLayout getCoordinatorLayout() {
         return coordinatorLayout;
+    }
+
+    public DrawerLayout getDrawerLayout() {
+        return getMainActivity().getDrawerLayout();
     }
 }

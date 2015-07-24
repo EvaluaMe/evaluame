@@ -48,7 +48,7 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
         mLayoutManager = new LinearLayoutManager(getActivity());
 
 
-        initToolbar(view);
+        initActionBar(view);
 
         return view;
 

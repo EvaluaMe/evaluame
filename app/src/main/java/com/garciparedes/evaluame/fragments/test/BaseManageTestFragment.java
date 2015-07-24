@@ -64,7 +64,7 @@ public abstract class BaseManageTestFragment extends BaseSubjectFragment
         // Set the dialog text -- this is better done in the XML
         mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
-        initToolbar(view);
+        initActionBar(view);
 
         return view;
     }

@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity
 
     private static final String SAVED_FRAGMENT = "saved_fragment";
 
-    private BaseFragment mCurrentFragment;
+    private BaseFragment currentFragment;
 
-    private NavigationView mNavigationView;
-    private DrawerLayout mDrawerLayout;
+    private NavigationView navigationView;
+    private DrawerLayout drawerLayout;
 
     private ParseUser currentUser;
 
@@ -65,11 +65,11 @@ public class MainActivity extends AppCompatActivity
         ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
-        if (mNavigationView != null) {
-            setupDrawerContent(mNavigationView);
+        if (navigationView != null) {
+            setupDrawerContent(navigationView);
         }
 
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        getSupportFragmentManager().putFragment(outState, SAVED_FRAGMENT, mCurrentFragment);
+        getSupportFragmentManager().putFragment(outState, SAVED_FRAGMENT, currentFragment);
     }
 
 
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
                         onNavigationDrawerItemSelected(menuItem);
-                        mDrawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
                         return true;
                     }
                 }
@@ -237,18 +237,25 @@ public class MainActivity extends AppCompatActivity
      * @param currentFragment currentFragment
      */
     public void setCurrentFragment(BaseFragment currentFragment) {
-        this.mCurrentFragment = currentFragment;
+        this.currentFragment = currentFragment;
     }
 
     /**
      * Getter of Current Fragment.
      *
-     * @return mCurrentFragment
+     * @return currentFragment
      */
     public BaseFragment getCurrentFragment() {
-        return mCurrentFragment;
+        return currentFragment;
     }
 
+    public DrawerLayout getDrawerLayout() {
+        return drawerLayout;
+    }
+
+    public NavigationView getNavigationView() {
+        return navigationView;
+    }
 
     /**
      * Method who change fragment to current fragment.

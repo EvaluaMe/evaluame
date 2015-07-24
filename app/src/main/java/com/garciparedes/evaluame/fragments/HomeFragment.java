@@ -47,7 +47,7 @@ public class HomeFragment extends BaseFragment {
         mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), mCards);
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        initToolbar(view);
+        initActionBar(view);
 
         return view;
     }

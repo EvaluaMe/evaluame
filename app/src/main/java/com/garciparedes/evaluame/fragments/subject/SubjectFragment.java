@@ -79,15 +79,15 @@ public class SubjectFragment extends BaseSubjectFragment {
         mLayoutManager = new LinearLayoutManager(getActivity());
 
 
-        initToolbar(view);
+        initActionBar(view);
         return view;
     }
 
     @Override
     public void customizeActionBar(int color, String title, String subTitle) {
 
-        final TextView expandedTextView = (TextView) getCollapsingToolbar().findViewById(R.id.expanded_toolbar_title);
         final TextView collapsedTextView = (TextView) getToolbar().findViewById(R.id.collapsed_toolbar_title);
+        final TextView expandedTextView = (TextView) getCollapsingToolbar().findViewById(R.id.expanded_toolbar_title);
         collapsedTextView.setVisibility(View.GONE);
 
         expandedTextView.setText(title);
@@ -95,7 +95,6 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         if (getToolbar() != null) {
-            getToolbar().setBackgroundColor(color);
 
             if (subTitle != null) {
                 getToolbar().setSubtitle(subTitle);
@@ -107,11 +106,9 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
 
         if(getCollapsingToolbar() != null){
-            getCollapsingToolbar().setBackgroundColor(color);
-            getCollapsingToolbar().setDrawingCacheBackgroundColor(color);
             getCollapsingToolbar().setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
-            //collapsingToolbar.setStatusBarScrimColor(color);
             getCollapsingToolbar().setContentScrimColor(color);
+            getCollapsingToolbar().setBackgroundColor(color);
         }
 
         getCoordinatorLayout().addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
