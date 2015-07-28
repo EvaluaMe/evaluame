@@ -1,62 +1,59 @@
 package com.garciparedes.evaluame.utils;
 
 import android.content.Context;
+import android.text.format.DateFormat;
 
 import com.garciparedes.evaluame.R;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
+ * Utility class to Date.
+ *
  * Created by garciparedes on 10/2/15.
  */
 public class Date {
-    public static String intToStringMonth(Context context, int month) {
-        return context.getResources().getStringArray(R.array.month)[month];
+
+
+    /**
+     * Static function named dateToString
+     * function returns date in String type
+     * based on internal date format.
+     *
+     * @param context App Context
+     * @param calendar Calendar
+     * @return date in String format.
+     */
+    public static String dateToString(Context context, Calendar calendar) {
+        return DateFormat.getLongDateFormat(context).format(calendar.getTime());
     }
 
-    public static String dateToString(Context context, GregorianCalendar gregorianCalendar) {
-        StringBuilder result = new StringBuilder();
-        try {
 
-            result.append(gregorianCalendar.get(Calendar.DAY_OF_MONTH));
-            result.append("/");
-            result.append(intToStringMonth(context, gregorianCalendar.get(Calendar.MONTH)));
-            result.append("/");
-            result.append(gregorianCalendar.get(Calendar.YEAR));
-        } catch (NullPointerException e) {
-            result = nullDateToString();
-        }
-
-        return result.toString();
+    /**
+     * Static function named timeToString
+     * that returns date in String type
+     * based on internal date format.
+     *
+     * @param context App Context
+     * @param calendar Calendar
+     * @return date in String format.
+     */
+    public static String timeToString(Context context, Calendar calendar) {
+        return DateFormat.getTimeFormat(context).format(calendar.getTime());
     }
 
-    public static String timeToString(Context context, GregorianCalendar gregorianCalendar) {
-        StringBuilder result = new StringBuilder();
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
-        try {
-            result.append(timeFormat.format(gregorianCalendar.getTime()));
-        } catch (NullPointerException e) {
-            result = nullTimeToString();
-        }
-
-        return result.toString();
-    }
-
-    public static String dateToString(Context context, int year, int month, int day) {
-        StringBuilder result = new StringBuilder();
-        result.append(day);
-        result.append("/");
-        result.append(intToStringMonth(context, month));
-        result.append("/");
-        result.append(year);
-
-        return result.toString();
-    }
-
-    public static String upcomingDays(Context context, GregorianCalendar gregorianCalendar){
+    /**
+     * Static function named remainingTime
+     * that returns a String expresing
+     * remaining time to now.
+     *
+     * @param context App Context
+     * @param gregorianCalendar Calendar
+     * @return remaining time
+     */
+    public static String remainingTime(Context context, GregorianCalendar gregorianCalendar){
         StringBuilder result = new StringBuilder();
         long millis = (gregorianCalendar.getTimeInMillis() - Calendar.getInstance().getTimeInMillis());
         int days = (int) (millis /(1000*60*60*24));
@@ -80,25 +77,5 @@ public class Date {
 
         }
         return result.toString();
-    }
-
-    private static StringBuilder nullDateToString() {
-        StringBuilder result = new StringBuilder();
-        result.append("--");
-        result.append("/");
-        result.append("--");
-        result.append("/");
-        result.append("----");
-        return result;
-    }
-
-
-
-    private static StringBuilder nullTimeToString() {
-        StringBuilder result = new StringBuilder();
-        result.append("--");
-        result.append(":");
-        result.append("--");
-        return result;
     }
 }

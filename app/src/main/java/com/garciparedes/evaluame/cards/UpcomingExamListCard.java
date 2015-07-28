@@ -137,7 +137,7 @@ public class UpcomingExamListCard extends CardWithList {
         public TestObject(Card parentCard, Exam exam, Subject subject) {
             super(parentCard);
             this.mName = exam.getName();
-            this.mTime = Date.upcomingDays(getContext(), exam.getDate());
+            this.mTime = Date.remainingTime(getContext(), exam.getDate());
             this.mSubjectName = subject.getName();
             this.color = subject.getColor();
             init(exam, subject);

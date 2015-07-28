@@ -6,47 +6,75 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TimePicker;
 
-import java.text.SimpleDateFormat;
+import com.garciparedes.evaluame.utils.Date;
+
 import java.util.Calendar;
-import java.util.Locale;
 
 /**
+ * CardViewHolderDatePicker class.
+ * It is used to create TimePickers.
+ *
  * Created by garciparedes on 23/6/15.
  */
 public class CardViewHolderTimePicker extends CardViewHolderEditText {
 
-    private Calendar myCalendar;
+    private Calendar calendar;
     private TimePickerDialog.OnTimeSetListener time;
     private TimePickerDialog pickerDialog;
-    private OnTimeCallbacks onTimeCallbacks;
+    private OnTimeHolderCallbacks onTimeHolderCallbacks;
 
-    public CardViewHolderTimePicker(ViewGroup parent, int id, OnTimeCallbacks onTimeCallbacks) {
+
+    /**
+     * Constructor of the class.
+     *
+     * @param parent Parent View.
+     * @param id Holder id.
+     * @param onTimeHolderCallbacks Class which implements OnTimeCallbacks.
+     */
+    public CardViewHolderTimePicker(ViewGroup parent, int id, OnTimeHolderCallbacks onTimeHolderCallbacks) {
         super(parent, id);
-        this.myCalendar = Calendar.getInstance();
-        this.onTimeCallbacks = onTimeCallbacks;
+        this.calendar = Calendar.getInstance();
+        this.onTimeHolderCallbacks = onTimeHolderCallbacks;
 
     }
 
+    /**
+     * Setter of calendar.
+     *
+     * @param calendar calendar.
+     */
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
+        updateText();
+    }
+
+
+    /**
+     * Getter of calendar.
+     *
+     * @return calendar.
+     */
     private Calendar getCalendar(){
-        return myCalendar;
+        return calendar;
     }
-    @Override
-    public void setup(String text, int hint, int image) {
-        super.setup(text, hint, image);
 
-        pickerDialog = new TimePickerDialog(getContext(), time, getCalendar().get(Calendar.HOUR)
+
+    /**
+     * Setup method. It's initialize the Holder
+     * and customized.
+     * @param calendar Date to show and modify.
+     * @param hint Hint of EditText.
+     * @param image Image to complement.
+     */
+    public void setup(Calendar calendar, int hint, int image) {
+        super.setup(null, hint, image);
+        setCalendar(calendar);
+
+        pickerDialog = new TimePickerDialog(getContext(), time, getCalendar().get(Calendar.HOUR_OF_DAY)
                 , getCalendar().get(Calendar.MINUTE),
                 DateFormat.is24HourFormat(getContext()));
 
-        getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (b) {
-                    pickerDialog.show();
-                }
-            }
-        });
-
+        getEditText().setFocusable(false);
         getEditText().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,33 +83,56 @@ public class CardViewHolderTimePicker extends CardViewHolderEditText {
         });
     }
 
+
+    /**
+     * Setter of callBack.
+     */
     @Override
     public void setCallBack() {
         time = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                // TODO Auto-generated method stub
-                getCalendar().set(Calendar.HOUR, i);
+                getCalendar().set(Calendar.HOUR_OF_DAY, i);
                 getCalendar().set(Calendar.MINUTE, i1);
                 update();
             }
         };
     }
-    private void update() {
 
-        onTimeCallbacks.onTimeChanged(getId(), myCalendar.get(Calendar.HOUR), myCalendar.get(Calendar.MINUTE));
-
-        String myFormat = "hh:mm a"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.getDefault());
-        getEditText().setText(sdf.format(myCalendar.getTime()));
-    }
 
     /**
-     * Callbacks interface that all activities using this fragment must implement.
+     * Update method.
+     * It call {@link OnTimeHolderCallbacks}
+     * to return user input after select it
+     * and update text label on the card.
      */
-    public interface OnTimeCallbacks {
+    private void update() {
+        onTimeHolderCallbacks.onTimeChanged(getId()
+                , getCalendar().get(Calendar.HOUR_OF_DAY)
+                , getCalendar().get(Calendar.MINUTE)
+        );
+        updateText();
+    }
+
+
+    /**
+     * updateText method.
+     * It setText() with calendar data
+     * and internal system format.
+     */
+    private void updateText(){
+        setText(Date.timeToString(getContext(), getCalendar()));
+    }
+
+
+    /**
+     * Callbacks interface that all Adapters using this holder must implement.
+     */
+    public interface OnTimeHolderCallbacks {
+
+
         /**
-         * Called when an item in the navigation drawer is selected.
+         * Called when time change.
          */
         void onTimeChanged(int id, int hour, int minute);
     }

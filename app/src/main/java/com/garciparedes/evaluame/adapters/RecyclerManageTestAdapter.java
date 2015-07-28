@@ -24,10 +24,10 @@ import java.util.Calendar;
  * Created by garciparedes on 18/6/15.
  */
 public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardViewHolder>
-        implements CardViewHolderDatePicker.ViewHolderDateCallbacks
+        implements CardViewHolderDatePicker.OnDateHolderCallbacks
         , CardViewHolderNumberPicker.OnNumberCallbacks
         , CardViewHolderEditText.OnEditTextCallbacks
-        , CardViewHolderTimePicker.OnTimeCallbacks
+        , CardViewHolderTimePicker.OnTimeHolderCallbacks
         , CardViewHolderSpinner.OnSpinnerCallbacks{
 
     private static final int TYPE_INPUT_NAME = 0;
@@ -196,14 +196,14 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
     }
 
     private void setupDate(CardViewHolderDatePicker holder) {
-        holder.setup(mExam.getDateString(holder.getContext())
+        holder.setup(mExam.getDate()
                 , R.string.date
                 , R.drawable.ic_action_event
         );
     }
 
     private void setupTime(CardViewHolderTimePicker holder) {
-        holder.setup(mExam.getTimeString(holder.getContext())
+        holder.setup(mExam.getDate()
                 ,R.string.time
                 ,R.drawable.ic_action_time
         );
@@ -269,7 +269,7 @@ public class RecyclerManageTestAdapter extends RecyclerView.Adapter<BaseCardView
     @Override
     public void onTimeChanged(int id, int hour, int minute) {
         if (id == TYPE_INPUT_TIME){
-            mExam.getDate().set(Calendar.HOUR, hour);
+            mExam.getDate().set(Calendar.HOUR_OF_DAY, hour);
             mExam.getDate().set(Calendar.MINUTE, minute);
         }
     }
