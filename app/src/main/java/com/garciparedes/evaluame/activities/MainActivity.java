@@ -75,13 +75,11 @@ public class MainActivity extends AppCompatActivity
 
         if (savedInstanceState != null) {
             //Restore the fragment's instance
-            onCurrentFragmentChanged( (BaseFragment) getSupportFragmentManager().getFragment(
+            changeFragment( (BaseFragment) getSupportFragmentManager().getFragment(
                     savedInstanceState, SAVED_FRAGMENT));
         } else {
-            onCurrentFragmentChanged(HomeFragment.newInstance());
+            changeFragment(HomeFragment.newInstance());
         }
-
-        changeFragment();
     }
 
     /**
@@ -140,11 +138,11 @@ public class MainActivity extends AppCompatActivity
         switch (menuItem.getItemId()){
 
             case R.id.nav_home:
-                onCurrentFragmentChanged(HomeFragment.newInstance());
+                changeFragment(HomeFragment.newInstance());
                 break;
 
             case R.id.nav_subjects:
-                onCurrentFragmentChanged(SubjectListFragment.newInstance());
+                changeFragment(SubjectListFragment.newInstance());
                 break;
 
             case R.id.nav_settings:
@@ -158,15 +156,13 @@ public class MainActivity extends AppCompatActivity
             default:
                 break;
         }
-
-        changeFragment();
     }
 
 
     /**
      * Start Settings Activity.
      */
-    public void startSettingsActivity(){
+    public void startSettingsActivity() {
         startActivity(new Intent(this, SettingsActivity.class));
     }
 
@@ -227,7 +223,11 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onBackPressed() {
-        getCurrentFragment().onBackPressed();
+        if (getDrawerLayout().isDrawerOpen(getNavigationView()))
+            getDrawerLayout().closeDrawers();
+        else {
+            getCurrentFragment().onBackPressed();
+        }
     }
 
 
@@ -255,13 +255,6 @@ public class MainActivity extends AppCompatActivity
 
     public NavigationView getNavigationView() {
         return navigationView;
-    }
-
-    /**
-     * Method who change fragment to current fragment.
-     */
-    public void changeFragment(){
-        changeFragment(getCurrentFragment());
     }
 
 
