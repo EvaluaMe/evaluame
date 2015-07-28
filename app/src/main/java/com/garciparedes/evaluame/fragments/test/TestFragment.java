@@ -2,6 +2,7 @@ package com.garciparedes.evaluame.fragments.test;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -93,7 +94,11 @@ public class TestFragment extends BaseSubjectFragment {
 
 
         if (mFAButtonBar != null) {
-            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(getSubject().getColor()));
+            mFAButtonBar.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                            ColorUtil.getComplimentColor(getSubject().getColor())
+                    )
+            );
             //mFAButton.attachToRecyclerView(mRecyclerView);
             mFAButtonBar.setOnClickListener(new View.OnClickListener() {
                 @Override

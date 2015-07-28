@@ -1,6 +1,7 @@
 package com.garciparedes.evaluame.fragments.subject;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -74,7 +75,13 @@ public abstract class BaseManageSubjectFragment extends BaseSubjectFragment impl
         }
 
         if (mFAButtonBar != null) {
-            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(newSubject.getColor()));
+            mFAButtonBar.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                            ColorUtil.getComplimentColor(newSubject.getColor()
+
+                            )
+                    )
+            );
             mFAButtonBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

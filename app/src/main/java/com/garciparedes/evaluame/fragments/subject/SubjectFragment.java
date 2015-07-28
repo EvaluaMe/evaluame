@@ -2,6 +2,7 @@ package com.garciparedes.evaluame.fragments.subject;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -152,7 +153,11 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
         if (mFAButton != null) {
-            mFAButton.setRippleColor(ColorUtil.getComplimentColor(getSubject().getColor()));
+            mFAButton.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                            ColorUtil.getComplimentColor(getSubject().getColor())
+                    )
+            );
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -166,7 +171,11 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
 
         if (mFAButtonBar != null) {
-            mFAButtonBar.setRippleColor(ColorUtil.getComplimentColor(getSubject().getColor()));
+            mFAButtonBar.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                            ColorUtil.getComplimentColor(getSubject().getColor())
+                    )
+            );
             mFAButtonBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

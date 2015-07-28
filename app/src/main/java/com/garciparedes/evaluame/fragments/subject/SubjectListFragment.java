@@ -1,5 +1,6 @@
 package com.garciparedes.evaluame.fragments.subject;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -67,7 +68,11 @@ public class SubjectListFragment extends BaseFragment {
         recyclerSubjetList.setAdapter(mAdapter);
 
         if (mFAButton != null) {
-            mFAButton.setRippleColor(ColorUtil.getComplimentColor(getResources().getColor(R.color.green_app)));
+            mFAButton.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                            ColorUtil.getComplimentColor(getResources().getColor(R.color.green_app))
+                    )
+            );
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
