@@ -161,11 +161,7 @@ public class SubjectFragment extends BaseSubjectFragment {
             mFAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.container, AddTestFragment.newInstance(getSubject()))
-                            .commit();
-
+                    changeFragment(AddTestFragment.newInstance(getSubject()));
                 }
             });
         }
@@ -179,11 +175,7 @@ public class SubjectFragment extends BaseSubjectFragment {
             mFAButtonBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.container, EditSubjectFragment.newInstance(getSubject()))
-                            .commit();
-
+                    changeFragment(EditSubjectFragment.newInstance(getSubject()));
                 }
             });
         }
@@ -200,19 +192,14 @@ public class SubjectFragment extends BaseSubjectFragment {
         card.getCardHeader().setOtherButtonClickListener(new CardHeader.OnClickCardHeaderOtherButtonListener() {
             @Override
             public void onButtonItemClick(Card card, View view) {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, EditTestFragment.newInstance(getSubject(), ((ExamCard) card).getExam()))
-                        .commit();
-
+                changeFragment(EditTestFragment.newInstance(getSubject(), ((ExamCard) card).getExam()));
             }
         });
 
         card.setOnClickListener(new Card.OnCardClickListener() {
             @Override
             public void onClick(Card card, View view) {
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, TestFragment.newInstance(getSubject(), exam))
-                        .commit();
+                changeFragment(TestFragment.newInstance(getSubject(), exam));
             }
         });
         card.setLongClickable(true);
@@ -321,10 +308,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
 
     public void editMark() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, EditTestFragment.newInstance(getSubject(), clickedExam))
-                .commit();
-
+        changeFragment(EditTestFragment.newInstance(getSubject(), clickedExam));
     }
 
     public void deleteMark(){
@@ -344,11 +328,7 @@ public class SubjectFragment extends BaseSubjectFragment {
                         // if this button is clicked, close
                         // current activity
                         ListDB.removeTest(getActivity(), getSubject(), clickedExam);
-
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.container, SubjectFragment.newInstance(getSubject()))
-                                .commit();
-
+                        changeFragment(SubjectFragment.newInstance(getSubject()));
                     }
                 })
                 .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -387,11 +367,7 @@ public class SubjectFragment extends BaseSubjectFragment {
 
                         ListDB.removeSubject(getActivity(), getSubject());
 
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.container, HomeFragment.newInstance())
-                                .commit();
-
-
+                        changeFragment(HomeFragment.newInstance());
                     }
                 })
                 .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -413,16 +389,11 @@ public class SubjectFragment extends BaseSubjectFragment {
      *
      */
     public void editSubject() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, EditSubjectFragment.newInstance(getSubject()))
-                .commit();
-
+        changeFragment(EditSubjectFragment.newInstance(getSubject()));
     }
 
     @Override
     public void onBackPressed() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, HomeFragment.newInstance())
-                .commit();
+        changeFragment(HomeFragment.newInstance());
     }
 }

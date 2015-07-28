@@ -104,10 +104,7 @@ public class TestFragment extends BaseSubjectFragment {
                 @Override
                 public void onClick(View v) {
 
-                    getFragmentManager().beginTransaction()
-                            .replace(R.id.container, EditTestFragment.newInstance(getSubject(), mExam))
-                            .commit();
-
+                    changeFragment(EditTestFragment.newInstance(getSubject(), mExam));
                 }
             });
         }
@@ -122,9 +119,7 @@ public class TestFragment extends BaseSubjectFragment {
 
     @Override
     public void onBackPressed() {
-        getFragmentManager().beginTransaction()
-                .replace(R.id.container, SubjectFragment.newInstance(getSubject()))
-                .commit();
+        changeFragment(SubjectFragment.newInstance(getSubject()));
     }
 
     @Override
@@ -178,10 +173,7 @@ public class TestFragment extends BaseSubjectFragment {
                         // current activity
                         ListDB.removeTest(getActivity(), getSubject(), mExam);
 
-                        getFragmentManager().beginTransaction()
-                                .replace(R.id.container, SubjectFragment.newInstance(getSubject()))
-                                .commit();
-
+                        changeFragment(SubjectFragment.newInstance(getSubject()));
                     }
                 })
                 .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {

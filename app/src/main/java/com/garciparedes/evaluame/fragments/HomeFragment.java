@@ -58,10 +58,10 @@ public class HomeFragment extends BaseFragment {
 
 
         customizeActionBar(getResources().getColor(R.color.green_app),getResources().getString(R.string.home),null);
-        mCards.add(new StarredSubjectListCard(getActivity(), getFragmentManager()));
+        mCards.add(new StarredSubjectListCard(getMainActivity()));
         //mCards.add(new BarChartCard(getActivity()));
 
-        mCards.add(new UpcomingExamListCard(getActivity(), getFragmentManager()));
+        mCards.add(new UpcomingExamListCard(getMainActivity()));
         if (((UpcomingExamListCard) mCards.get(1)).isEmpty()){
             mCards.remove(1);
         }

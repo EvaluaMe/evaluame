@@ -138,7 +138,7 @@ public abstract class BaseFragment extends Fragment {
      * Getter of MainActivity.
      * @return
      */
-    private MainActivity getMainActivity(){
+    public MainActivity getMainActivity(){
         return (MainActivity) getActivity();
     }
 

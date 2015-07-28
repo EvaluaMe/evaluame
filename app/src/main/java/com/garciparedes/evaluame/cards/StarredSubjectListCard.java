@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.fragments.subject.SubjectFragment;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
@@ -31,14 +32,17 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
 public class StarredSubjectListCard extends CardWithList {
 
     private BarChart mBarChart;
-    private FragmentManager fragmentManager;
+    private MainActivity mainActivity;
 
-    public StarredSubjectListCard(Context context, FragmentManager fragmentManager) {
-        super(context);
-        this.fragmentManager = fragmentManager;
+    public StarredSubjectListCard(MainActivity mainActivity) {
+        super(mainActivity);
+        this.mainActivity = mainActivity;
         init();
     }
 
+    public MainActivity getMainActivity() {
+        return mainActivity;
+    }
 
     @Override
     protected CardHeader initCardHeader() {
@@ -134,9 +138,7 @@ public class StarredSubjectListCard extends CardWithList {
             setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.container, SubjectFragment.newInstance(mSubject))
-                            .commit();
+                    getMainActivity().changeFragment(SubjectFragment.newInstance(mSubject));
                 }
             });
 

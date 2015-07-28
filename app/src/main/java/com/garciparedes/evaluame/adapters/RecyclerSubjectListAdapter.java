@@ -67,10 +67,7 @@ public class RecyclerSubjectListAdapter extends RecyclerView.Adapter<RecyclerSub
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity) view.getContext()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container, SubjectFragment.newInstance(subject))
-                        .commit();
+                ((MainActivity) view.getContext()).changeFragment(SubjectFragment.newInstance(subject));
             }
         });
     }

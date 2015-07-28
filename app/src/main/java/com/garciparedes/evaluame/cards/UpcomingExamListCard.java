@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
+import com.garciparedes.evaluame.activities.MainActivity;
 import com.garciparedes.evaluame.fragments.test.TestFragment;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
@@ -30,16 +31,18 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
 public class UpcomingExamListCard extends CardWithList {
 
 
-    private FragmentManager fragmentManager;
+    private MainActivity mainActivity;
 
 
-    public UpcomingExamListCard(Context context,  FragmentManager fragmentManager) {
-        super(context);
-        this.fragmentManager = fragmentManager;
-
+    public UpcomingExamListCard(MainActivity mainActivity) {
+        super(mainActivity);
+        this.mainActivity = mainActivity;
         init();
     }
 
+    public MainActivity getMainActivity() {
+        return mainActivity;
+    }
 
     @Override
     protected CardHeader initCardHeader() {
@@ -149,9 +152,7 @@ public class UpcomingExamListCard extends CardWithList {
             setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.container, TestFragment.newInstance(subject, exam))
-                            .commit();
+                    getMainActivity().changeFragment(TestFragment.newInstance(subject, exam));
                 }
             });
 
