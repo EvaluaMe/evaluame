@@ -249,10 +249,22 @@ public class MainActivity extends AppCompatActivity
         return currentFragment;
     }
 
+
+    /**
+     * Getter of Drawer Layout.
+     *
+     * @return drawerLayout
+     */
     public DrawerLayout getDrawerLayout() {
         return drawerLayout;
     }
 
+
+    /**
+     * Getter of NavigationView.
+     *
+     * @return navigationView
+     */
     public NavigationView getNavigationView() {
         return navigationView;
     }
