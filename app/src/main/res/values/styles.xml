@@ -9,7 +9,7 @@
 
     <!-- Login Theme. -->
     <style name="LoginTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:background">@color/green_app_dark</item>
+        <item name="android:windowBackground">@color/green_app_dark</item>
         <item name="colorPrimary">@color/green_app</item>
         <item name="colorPrimaryDark">@color/green_app_dark</item>
         <item name="colorAccent">@color/green_app_pressed</item>
