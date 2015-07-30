@@ -1,11 +1,13 @@
 package com.garciparedes.evaluame.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.garciparedes.evaluame.R;
+import com.parse.ParseUser;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -20,6 +22,18 @@ public class SettingsActivity extends AppCompatActivity {
 
         getFragmentManager().beginTransaction().replace(R.id.container, new MyPreferenceFragment()).commit();
     }
+
+
+    /**
+     * It's method is called to LogOut
+     */
+    public void logOut(){
+        ParseUser.logOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
 
     public static class MyPreferenceFragment extends PreferenceFragment
     {
