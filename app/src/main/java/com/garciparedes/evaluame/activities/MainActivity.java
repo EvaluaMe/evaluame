@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
     private void showProfileLoggedOut() {
         // Send user to LoginSignupActivity.class
         ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
-        builder.setAppLogo(R.drawable.ic_launcher);
+        builder.setAppLogo(R.drawable.logo);
 
         startActivityForResult(builder.build(), LOGIN_REQUEST);
     }
