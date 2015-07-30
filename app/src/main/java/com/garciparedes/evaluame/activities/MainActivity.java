@@ -100,6 +100,13 @@ public class MainActivity extends AppCompatActivity
         startActivityForResult(builder.build(), LOGIN_REQUEST);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (ParseUser.getCurrentUser() == null){
+            finish();
+        }
+    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
