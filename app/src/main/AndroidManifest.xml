@@ -12,9 +12,10 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <!--Main Activity-->
+
+        <!--Login Activity-->
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.LoginActivity"
             android:label="@string/app_name">
 
             <intent-filter>
@@ -23,6 +24,14 @@
             </intent-filter>
 
         </activity>
+
+
+        <!--Main Activity-->
+        <activity
+            android:name=".activities.MainActivity"
+            android:label="@string/app_name">
+        </activity>
+
 
         <activity android:name=".activities.SettingsActivity"
             android:parentActivityName=".activities.MainActivity">
@@ -36,6 +45,7 @@
             </intent-filter>
 
         </activity>
+
 
         <activity
             android:name="com.parse.ui.ParseLoginActivity"
@@ -56,11 +66,13 @@
                 android:value="false"/>
         </activity>
 
+
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges=
                 "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
+
 
         <meta-data
             android:name="com.parse.APPLICATION_ID"

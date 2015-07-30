@@ -34,8 +34,6 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity
         implements BaseFragment.FragmentCallbacks {
 
-    private static final int LOGIN_REQUEST = 0;
-
     private static final String SAVED_FRAGMENT = "saved_fragment";
 
     private BaseFragment currentFragment;
@@ -52,11 +50,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
-            showProfileLoggedIn();
-        } else {
-            showProfileLoggedOut();
-        }
 
         if (ListDB.getMasterList() == null) {
             getData();
@@ -82,31 +75,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * Shows the profile of the given user.
-     */
-    private void showProfileLoggedIn() {;
-        
-    }
-
-    /**
-     * Show a message asking the user to log in, toggle login/logout button text.
-     */
-    private void showProfileLoggedOut() {
-        // Send user to LoginSignupActivity.class
-        ParseLoginBuilder builder = new ParseLoginBuilder(MainActivity.this);
-        builder.setAppLogo(R.drawable.logo);
-
-        startActivityForResult(builder.build(), LOGIN_REQUEST);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (ParseUser.getCurrentUser() == null){
-            finish();
-        }
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
