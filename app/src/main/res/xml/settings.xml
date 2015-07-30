@@ -4,15 +4,20 @@
     <PreferenceCategory
         android:title="@string/my_account">
 
-        <EditTextPreference
+        <Preference
             android:title="@string/username"
-            android:summary="username"
-            android:key="username" />
+            android:key="username"
+            android:summary="username"/>
 
-        <EditTextPreference
+        <Preference
             android:title="@string/email"
             android:summary="username@username.com"
             android:key="email" />
+
+        <Preference
+            android:title="@string/name"
+            android:key="name"
+            android:summary="name"/>
 
         <Preference
             android:title="@string/logout"

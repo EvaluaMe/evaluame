@@ -2,18 +2,14 @@ package com.garciparedes.evaluame.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
 
 import com.garciparedes.evaluame.R;
 import com.parse.ParseUser;
@@ -46,7 +42,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     public static class MyPreferenceFragment extends PreferenceFragment {
 
-        private ParseUser parseUser;
+        private ParseUser currentUser;
 
         private SharedPreferences.Editor editor;
         private SharedPreferences sharedPreferences;
@@ -56,22 +52,28 @@ public class SettingsActivity extends AppCompatActivity {
         {
             super.onCreate(savedInstanceState);
 
-            parseUser = ParseUser.getCurrentUser();
+            currentUser = ParseUser.getCurrentUser();
 
             sharedPreferences =PreferenceManager.getDefaultSharedPreferences(getActivity());
             editor = sharedPreferences.edit();
 
-            editor.putString("email", ParseUser.getCurrentUser().getEmail());
-            editor.putString("username", ParseUser.getCurrentUser().getUsername());
-
+            editor.putString("email", currentUser.getEmail());
+            editor.putString("username", currentUser.getUsername());
+            editor.putString("name", currentUser.get("name").toString());
 
             editor.apply();
 
             addPreferencesFromResource(R.xml.settings);
 
-            EditTextPreference editTextPreferenceUsername = (EditTextPreference) findPreference("username");
+            Preference preferenceUsername = findPreference("username");
+            preferenceUsername.setSummary(sharedPreferences.getString("username", ""));
 
-            editTextPreferenceUsername.setSummary(sharedPreferences.getString("username", ""));
+            Preference preferenceEmail = findPreference("email");
+            preferenceEmail.setSummary(sharedPreferences.getString("email", ""));
+
+            Preference preferenceName = findPreference("name");
+            preferenceName.setSummary(sharedPreferences.getString("name", ""));
+
         }
 
         public SettingsActivity getSettingActivity(){
@@ -83,28 +85,8 @@ public class SettingsActivity extends AppCompatActivity {
         @Override
         public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
             switch (preference.getTitleRes()){
-                case (R.string.receive_notifications):
-                    Snackbar.make(getView(), "Hola", Snackbar.LENGTH_LONG).show();
-                    return true;
-
-                case (R.string.username):
-
-                    String string = sharedPreferences.getString("username", "");
-                    Snackbar.make(getView(), string, Snackbar.LENGTH_LONG).show();
-                    preference.setSummary(string);
-                    parseUser.setUsername(string);
-                    parseUser.saveInBackground();
-
-                    Toast.makeText(getActivity(),parseUser.getUsername(), Toast.LENGTH_LONG).show();
-
-                    return true;
-
-                case (R.string.email):
-
-                    return true;
 
                 case (R.string.logout):
-                    Snackbar.make(getView(), "Hola", Snackbar.LENGTH_LONG).show();
                     getSettingActivity().logOut();
                     return true;
 
