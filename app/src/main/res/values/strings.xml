@@ -62,5 +62,6 @@
     <string name="email">Email</string>
     <string name="username">Username</string>
     <string name="my_account">My Account</string>
+    <string name="logout">Log Out</string>
 
 </resources>

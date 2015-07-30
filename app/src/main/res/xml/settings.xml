@@ -4,7 +4,7 @@
     <PreferenceCategory
         android:title="@string/my_account">
 
-        <Preference
+        <EditTextPreference
             android:title="@string/username"
             android:summary="username"
             android:key="username" />
@@ -14,7 +14,8 @@
             android:summary="username@username.com"
             android:key="email" />
 
-        <Preference android:title="Acts like a button"
+        <Preference
+            android:title="@string/logout"
             android:key="Log Out"
             android:summary="This is a cool button"/>
 
