@@ -3,9 +3,11 @@ package com.garciparedes.evaluame.application;
 import android.app.Application;
 import android.content.res.Configuration;
 
+import com.garciparedes.evaluame.model.racional.Racional;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseObject;
 
 /**
  * Created by garciparedes on 15/7/15.
@@ -37,6 +39,7 @@ public class EvaluaMe extends Application {
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
         ParseFacebookUtils.initialize(this);
+        ParseObject.registerSubclass(Racional.class);
 
 
 

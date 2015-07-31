@@ -25,7 +25,6 @@ import com.mikepenz.aboutlibraries.util.Colors;
 
 import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
-import com.parse.ui.ParseLoginBuilder;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
