@@ -8,7 +8,7 @@ import com.parse.ParseObject;
 /**
  * Created by garciparedes on 1/8/15.
  */
-@ParseClassName(Score.CLASS_NAME)
+@ParseClassName(this.CLASS_NAME)
 public class Score extends ParseObject {
 
 
