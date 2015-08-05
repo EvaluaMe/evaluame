@@ -8,7 +8,7 @@ import com.parse.ParseObject;
 /**
  * Created by garciparedes on 1/8/15.
  */
-@ParseClassName(this.CLASS_NAME)
+@ParseClassName(Score.CLASS_NAME)
 public class Score extends ParseObject {
 
 
@@ -22,9 +22,8 @@ public class Score extends ParseObject {
     public static final String CLASS_NAME = "Score";
 
     private static final String RESULT_TYPE = "result";
-    private static final String MAX_TYPE = "max";
     private static final String STUDENT_TYPE = "student";
-    private static final String PROOF_TYPE = "proof";
+    public static final String PROOF_TYPE = "proof";
 
 
 
@@ -39,12 +38,11 @@ public class Score extends ParseObject {
      *
      * Initialized to parameter values the Score object.
      */
-    public static Score newInstance(double result, double max
+    public static Score newInstance(double result
             , Student student, Proof proof){
 
         Score score = new Score();
         score.setResult(result);
-        score.setMax(max);
         score.setStudent(student);
         score.setProof(proof);
 
@@ -89,17 +87,6 @@ public class Score extends ParseObject {
 
 
     /**
-     * Setter of max attribute.
-     *
-     * @param value int with new numerator's value.
-     */
-    public void setMax(double value){
-        put(MAX_TYPE, value);
-    }
-
-
-
-    /**
      * Setter of student attribute.
      *
      * @param value with student of this score.
@@ -130,16 +117,6 @@ public class Score extends ParseObject {
         return getDouble(RESULT_TYPE);
     }
 
-
-
-    /**
-     * Getter of max.
-     *
-     * @return max int with max's value.
-     */
-    public double getMax(){
-        return getDouble(MAX_TYPE);
-    }
 
 
     /**
