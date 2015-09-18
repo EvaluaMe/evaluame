@@ -25,16 +25,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop" />
-
-            <TextView
-                android:id="@+id/expanded_toolbar_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Programacion Orientada a Objetos"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:paddingTop="?attr/actionBarSize"
-                android:textAppearance="@style/ToolbarExpandedTitle"/>
         </FrameLayout>
 
         <android.support.v7.widget.Toolbar
@@ -44,18 +34,6 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:layout_collapseMode="pin" >
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Programacion Orientada a Objetos"
-                android:id="@+id/collapsed_toolbar_title"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
-
-            </android.support.v7.widget.Toolbar>
-
-
-
-
+        </android.support.v7.widget.Toolbar>
     </android.support.design.widget.CollapsingToolbarLayout>
-
 </android.support.design.widget.AppBarLayout>

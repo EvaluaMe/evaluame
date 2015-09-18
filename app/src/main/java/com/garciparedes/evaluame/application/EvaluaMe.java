@@ -3,7 +3,10 @@ package com.garciparedes.evaluame.application;
 import android.app.Application;
 import android.content.res.Configuration;
 
-import com.garciparedes.evaluame.model.rational.Rational;
+import com.garciparedes.evaluame.model.proof.IndividualProof;
+import com.garciparedes.evaluame.model.proof.Proof;
+import com.garciparedes.evaluame.model.proof.ProofSet;
+import com.garciparedes.evaluame.model.score.Score;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseFacebookUtils;
@@ -39,7 +42,13 @@ public class EvaluaMe extends Application {
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
 
         ParseFacebookUtils.initialize(this);
-        ParseObject.registerSubclass(Rational.class);
+
+
+        ParseObject.registerSubclass(Proof.class);
+        ParseObject.registerSubclass(ProofSet.class);
+        ParseObject.registerSubclass(IndividualProof.class);
+
+        ParseObject.registerSubclass(Score.class);
 
 
 

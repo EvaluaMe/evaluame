@@ -5,8 +5,10 @@ import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,15 +45,15 @@ import it.gmariotti.cardslib.library.recyclerview.view.CardRecyclerView;
 public class SubjectFragment extends BaseSubjectFragment {
 
 
-    private FloatingActionButton mFAButton;
-    private FloatingActionButton mFAButtonBar;
+    private FloatingActionButton fAButton;
+    private FloatingActionButton fAButtonBar;
 
-    private CardArrayRecyclerViewAdapter mCardArrayAdapter;
-    private CardRecyclerView mRecyclerView;
-    private LinearLayoutManager mLayoutManager;
+    private CardArrayRecyclerViewAdapter cardArrayAdapter;
+    private CardRecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
 
     private Exam clickedExam;
-    ArrayList<Card> mCards;
+    ArrayList<Card> cards;
 
     public static SubjectFragment newInstance(Subject subject) {
         SubjectFragment subjectFragment = new SubjectFragment();
@@ -68,16 +70,16 @@ public class SubjectFragment extends BaseSubjectFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_subject, container, false);
-        mRecyclerView = (CardRecyclerView) view.findViewById(R.id.subject_card_list);
-        mFAButton = (FloatingActionButton) view.findViewById(R.id.fab);
-        mFAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
+        recyclerView = (CardRecyclerView) view.findViewById(R.id.subject_card_list);
+        fAButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        fAButtonBar = (FloatingActionButton) view.findViewById(R.id.fab_bar);
 
-        mCards = new ArrayList<Card>();
+        cards = new ArrayList<Card>();
 
         //Standard array
-        mCardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), mCards);
+        cardArrayAdapter = new CardArrayRecyclerViewAdapter(getActivity(), cards);
 
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        layoutManager = new LinearLayoutManager(getActivity());
 
 
         initActionBar(view);
@@ -87,15 +89,9 @@ public class SubjectFragment extends BaseSubjectFragment {
     @Override
     public void customizeActionBar(int color, String title, String subTitle) {
 
-        final TextView collapsedTextView = (TextView) getToolbar().findViewById(R.id.collapsed_toolbar_title);
-        final TextView expandedTextView = (TextView) getCollapsingToolbar().findViewById(R.id.expanded_toolbar_title);
-        collapsedTextView.setVisibility(View.GONE);
-
-        expandedTextView.setText(title);
-        collapsedTextView.setText(title);
-
-
         if (getToolbar() != null) {
+
+            getToolbar().setTitle(title);
 
             if (subTitle != null) {
                 getToolbar().setSubtitle(subTitle);
@@ -107,22 +103,11 @@ public class SubjectFragment extends BaseSubjectFragment {
         }
 
         if(getCollapsingToolbar() != null){
-            getCollapsingToolbar().setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
             getCollapsingToolbar().setContentScrimColor(color);
             getCollapsingToolbar().setBackgroundColor(color);
+            getCollapsingToolbar().setTitle(title);
+            getCollapsingToolbar().setExpandedTitleTextAppearance(R.style.ToolbarExpandedTitle);
         }
-
-        getCoordinatorLayout().addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
-            @Override
-            public void onLayoutChange(View view, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
-                if (mFAButtonBar.isShown()) {
-                    collapsedTextView.setVisibility(View.GONE);
-                } else {
-                    collapsedTextView.setVisibility(View.VISIBLE);
-
-                }
-            }
-        });
 
     }
 
@@ -133,32 +118,32 @@ public class SubjectFragment extends BaseSubjectFragment {
         customizeActionBar(getSubject().getColor(), getSubject().getName(), getSubject().getName());
 
 
-        //mCards.add(new DescriptionCard(getActivity(), mSubject));
+        //cards.add(new DescriptionCard(getActivity(), mSubject));
         if (getSubject().getWeightedAverage() > 0) {
-            mCards.add(new PieChartCard(getActivity(), getSubject()));
+            cards.add(new PieChartCard(getActivity(), getSubject()));
         }
-        mCards.add(new StatsSubjectCard(getActivity(), getSubject()));
+        cards.add(new StatsSubjectCard(getActivity(), getSubject()));
 
         for (int i = 0; i < getSubject().getExamList().size(); i++) {
-            mCards.add(initCard(getSubject().getTestElement(i)));
+            cards.add(initCard(getSubject().getTestElement(i)));
         }
 
-        if (mRecyclerView != null) {
-            mRecyclerView.setAdapter(mCardArrayAdapter);
-            if (mRecyclerView.getLayoutManager() == null) {
-                mRecyclerView.setLayoutManager(mLayoutManager);
+        if (recyclerView != null) {
+            recyclerView.setAdapter(cardArrayAdapter);
+            if (recyclerView.getLayoutManager() == null) {
+                recyclerView.setLayoutManager(layoutManager);
             }
-            registerForContextMenu(mRecyclerView);
+            registerForContextMenu(recyclerView);
         }
 
 
-        if (mFAButton != null) {
-            mFAButton.setBackgroundTintList(
+        if (fAButton != null) {
+            fAButton.setBackgroundTintList(
                     ColorStateList.valueOf(
                             ColorUtil.getComplimentColor(getSubject().getColor())
                     )
             );
-            mFAButton.setOnClickListener(new View.OnClickListener() {
+            fAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     changeFragment(AddTestFragment.newInstance(getSubject()));
@@ -166,13 +151,13 @@ public class SubjectFragment extends BaseSubjectFragment {
             });
         }
 
-        if (mFAButtonBar != null) {
-            mFAButtonBar.setBackgroundTintList(
+        if (fAButtonBar != null) {
+            fAButtonBar.setBackgroundTintList(
                     ColorStateList.valueOf(
                             ColorUtil.getComplimentColor(getSubject().getColor())
                     )
             );
-            mFAButtonBar.setOnClickListener(new View.OnClickListener() {
+            fAButtonBar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     changeFragment(EditSubjectFragment.newInstance(getSubject()));

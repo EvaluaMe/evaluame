@@ -23,10 +23,16 @@
         <item name="android:textSize">30sp</item>
     </style>
 
-    <style name="ToolbarExpandedTitle" parent="@style/Base.TextAppearance.AppCompat.Title">
+    <style name="ToolbarExpandedTitle" parent="TextAppearance.AppCompat">
         <item name="android:textSize">48sp</item>
         <item name="android:singleLine">false</item>
+        <item name="android:state_multiline">true</item>
+        <item name="android:minLines">3</item>
         <item name="android:maxLines">4</item>
+        <item name="android:gravity">left</item>
+        <item name="android:layout_height">300dp</item>
+        <item name="android:layout_width">wrap_content</item>
+
     </style>
 
     <style name="ToolbarCollapsedTitle" parent="@style/Base.TextAppearance.AppCompat.Title">
@@ -42,5 +48,9 @@
         <item name="android:paddingBottom">16dp</item>
         <item name="android:orientation">vertical</item>
         <item name="android:gravity">center</item>
+
+
     </style>
+
+
 </resources>
