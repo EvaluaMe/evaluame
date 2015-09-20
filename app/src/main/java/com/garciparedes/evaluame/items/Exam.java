@@ -3,11 +3,10 @@ package com.garciparedes.evaluame.items;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.app.FragmentActivity;
 
-import com.garciparedes.evaluame.Util.Date;
-import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.enums.ExamType;
+import com.garciparedes.evaluame.utils.Date;
+import com.garciparedes.evaluame.utils.Number;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -156,10 +155,10 @@ public class Exam implements Parcelable, Comparable<Exam> {
     public String getPercentageString() {
 
         if (getPercentage() == 0){
-            return Number.NAN_STRING + "%";
+            return Number.NAN_STRING;
         }
 
-        return (Number.toString(getPercentage(), "%"));
+        return (Number.toString(getPercentage(), ""));
     }
 
 

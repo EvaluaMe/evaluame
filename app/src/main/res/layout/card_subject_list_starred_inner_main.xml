@@ -18,10 +18,11 @@
         android:minHeight="55dp">
 
         <!-- icon -->
-        <ImageView android:layout_width="48dp"
+        <ImageView
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_margin="5dp"
-            android:id="@+id/card_subject_list_starred_inner_image"/>
+            android:id="@+id/card_subject_list_starred_inner_image" />
 
         <!-- title -->
         <TextView
@@ -32,13 +33,7 @@
             android:textColor="@color/grey"
             android:textSize="20sp"
             tools:text="Subject"
-            android:layout_centerVertical="true"
-            />
-
-
-
-
-
+            android:layout_centerVertical="true" />
 
 
     </RelativeLayout>

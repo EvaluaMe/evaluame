@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="@string/my_account">
+
+        <Preference
+            android:title="@string/username"
+            android:key="username"
+            android:summary="username"/>
+
+        <Preference
+            android:title="@string/email"
+            android:summary="username@username.com"
+            android:key="email" />
+
+        <Preference
+            android:title="@string/name"
+            android:key="name"
+            android:summary="name"/>
+
+        <Preference
+            android:title="@string/logout"
+            android:key="@string/logout"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Advanced">
+
+        <CheckBoxPreference
+            android:title="@string/receive_notifications"
+            android:key="receiveNotifications"
+            android:defaultValue="true" />
+
+        <!--
+        <ListPreference
+            android:title="Country"
+            android:key="country"
+            android:entries="@array/country"
+            android:entryValues="@array/countryValues" />
+
+            -->
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

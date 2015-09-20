@@ -1,176 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <include layout="@layout/toolbar_manage_test"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_list"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    <android.support.design.widget.FloatingActionButton
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin">
+        android:id="@+id/fab_bar"
+        android:layout_width="wrap_content"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|right|end"
+        android:src="@drawable/ic_action_accept_light"
+        android:layout_margin="@dimen/fab_margin"
+        android:clickable="true"
+        android:elevation="@dimen/fab_bar_shadow_elevation"/>
 
-        <EditText
-            android:id="@+id/edit_text_dialog"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textCapSentences"/>
-
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/edit_text_dialog"
-            android:id="@+id/text_view_relative_global"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/text_vertical_margin"
-                android:layout_marginBottom="@dimen/text_vertical_margin">
-
-
-                <TextView
-                    android:id="@+id/text_view_dialog_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/set_value"
-                    android:textSize="@dimen/text_size_medium"
-                    android:layout_weight="1"/>
-
-                <TextView
-                    android:id="@+id/textView_set_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="- - . - - %"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_size_large"
-                    android:layout_weight="2"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/text_vertical_margin"
-                android:layout_marginBottom="@dimen/text_vertical_margin">
-
-
-                <TextView
-                    android:id="@+id/text_view_dialog_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/set_type"
-                    android:textSize="@dimen/text_size_medium"
-                    android:layout_alignParentLeft="true"
-                    android:layout_weight="1"/>
-
-                <Spinner
-                    android:id="@+id/spinner_set_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:spinnerMode="dropdown"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:layout_weight="2"/>
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/text_vertical_margin"
-                android:layout_marginBottom="@dimen/text_vertical_margin">
-
-                <TextView
-                    android:id="@+id/text_view_dialog_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/set_date"
-                    android:textSize="@dimen/text_size_medium"
-                    android:layout_weight="1"/>
-
-                <TextView
-                    android:id="@+id/textView_set_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="xx-xx-xxxx"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_size_large"
-                    android:layout_weight="2"
-                    />
-
-            </TableRow>
-
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/text_vertical_margin"
-                android:layout_marginBottom="@dimen/text_vertical_margin">
-
-                <TextView
-                    android:id="@+id/text_view_dialog_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/set_time"
-                    android:textSize="@dimen/text_size_medium"
-                    android:layout_weight="1"/>
-
-                <TextView
-                    android:id="@+id/textView_set_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="xx:xx"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_size_large"
-                    android:layout_weight="2"
-                    />
-
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/text_vertical_margin"
-                android:layout_marginBottom="@dimen/text_vertical_margin">
-
-                <TextView
-                    android:id="@+id/text_view_dialog_mark"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/set_score"
-                    android:textSize="@dimen/text_size_medium"
-                    android:layout_weight="1"/>
-
-                <TextView
-                    android:id="@+id/textView_set_mark"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="- - . - -"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/text_size_large"
-                    android:layout_weight="2"
-                    />
-
-            </TableRow>
-        </TableLayout>
-
-        <Button
-            android:id="@+id/button_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/text_view_relative_global"
-            android:layout_gravity="bottom"
-            android:text="@string/create_test"
-            android:layout_margin="20dp"
-            style="?android:attr/buttonBarButtonStyle"/>
-
-    </RelativeLayout>
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>

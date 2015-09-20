@@ -7,11 +7,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Date;
-import com.garciparedes.evaluame.fragments.ExamFragment;
+import com.garciparedes.evaluame.activities.MainActivity;
+import com.garciparedes.evaluame.fragments.test.TestFragment;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
+import com.garciparedes.evaluame.utils.Date;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,22 +31,24 @@ import it.gmariotti.cardslib.library.prototypes.LinearListView;
 public class UpcomingExamListCard extends CardWithList {
 
 
-    private FragmentManager fragmentManager;
+    private MainActivity mainActivity;
 
 
-    public UpcomingExamListCard(Context context,  FragmentManager fragmentManager) {
-        super(context);
-        this.fragmentManager = fragmentManager;
-
+    public UpcomingExamListCard(MainActivity mainActivity) {
+        super(mainActivity);
+        this.mainActivity = mainActivity;
         init();
     }
 
+    public MainActivity getMainActivity() {
+        return mainActivity;
+    }
 
     @Override
     protected CardHeader initCardHeader() {
 
         CustomCardHeader cardHeader = new CustomCardHeader(getContext());
-        cardHeader.setTitle(getContext().getString(R.string.title_upcoming_exams));
+        cardHeader.setTitle(getContext().getString(R.string.upcoming_exams));
 
         return cardHeader;
     }
@@ -137,7 +140,7 @@ public class UpcomingExamListCard extends CardWithList {
         public TestObject(Card parentCard, Exam exam, Subject subject) {
             super(parentCard);
             this.mName = exam.getName();
-            this.mTime = Date.upcomingDays(getContext(), exam.getDate());
+            this.mTime = Date.remainingTime(getContext(), exam.getDate());
             this.mSubjectName = subject.getName();
             this.color = subject.getColor();
             init(exam, subject);
@@ -149,9 +152,7 @@ public class UpcomingExamListCard extends CardWithList {
             setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(LinearListView parent, View view, int position, ListObject object) {
-                    fragmentManager.beginTransaction()
-                            .replace(R.id.container, ExamFragment.newInstance(subject, exam))
-                            .commit();
+                    getMainActivity().changeFragment(TestFragment.newInstance(subject, exam));
                 }
             });
 

@@ -5,19 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.Color;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
+import com.garciparedes.evaluame.utils.ColorUtil;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
  * Created by garciparedes on 7/2/15.
@@ -50,7 +48,7 @@ public class PieChartCard extends Card {
      */
     private void init(Context context) {
         CustomCardHeader cardHeader = new CustomCardHeader(context,subject.getColor());
-        cardHeader.setTitle(getContext().getString(R.string.title_chart));
+        cardHeader.setTitle(getContext().getString(R.string.chart));
         addCardHeader(cardHeader);
     }
 
@@ -59,9 +57,9 @@ public class PieChartCard extends Card {
     public void setupInnerViewElements(ViewGroup parent, View view) {
         mChart = (PieChart) parent.findViewById(R.id.card_chart_pie);
         mChart.setTouchEnabled(false);
-        mChart.setDrawLegend(false);
+        //mChart.setDrawLegend(false);
 
-        mChart.setDrawYValues(false);
+        //mChart.setDrawYValues(false);
         mChart.setDescription("");
 
         // radius of the center hole in percent of maximum radius
@@ -85,7 +83,7 @@ public class PieChartCard extends Card {
         for (int j = 0; j < subject.getExamList().size(); j++) {
             introduce(subject.getExamList().get(j), j);
         }
-        yVals.setColors(Color.getColorPalette(subject.getColor()));
+        yVals.setColors(ColorUtil.getColorPalette(subject.getColor()));
 
         mChart.setData(data);
         mChart.animateXY(1500, 1500);

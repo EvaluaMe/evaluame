@@ -25,7 +25,7 @@
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true" />
 
 
         <TextView
@@ -36,7 +36,7 @@
             tools:text="7.75"
             android:layout_centerInParent="true"
             android:textSize="26sp"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true" />
 
         <TextView
             android:id="@+id/card_test_list_inner_percentage"
@@ -48,9 +48,7 @@
             android:textSize="28sp"
             android:layout_marginRight="26dp"
             android:layout_toLeftOf="@id/card_test_list_inner_mark"
-            android:layout_centerVertical="true"/>
-
-
+            android:layout_centerVertical="true" />
 
 
     </RelativeLayout>

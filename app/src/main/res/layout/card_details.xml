@@ -18,8 +18,7 @@
         android:textSize="48sp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:text="Name"
-        />
+        android:text="Name" />
 
     <TextView
         android:id="@+id/card_details_description_textView"
@@ -28,7 +27,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textColor="@color/white"
-        android:text="Description"
-        />
+        android:text="Description" />
 
 </RelativeLayout>
