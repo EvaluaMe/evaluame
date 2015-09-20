@@ -35,8 +35,8 @@ public class BarChartCard extends BaseChartCard {
         if (mBarChart != null) {
             mBarChart.setTouchEnabled(false);
             mBarChart.setDescription("");
-            mBarChart.setDrawLegend(false);
-            mBarChart.setDrawXLabels(false);
+            //mBarChart.setDrawLegend(false);
+            //mBarChart.setDrawXLabels(false);
             setValues();
         }
     }

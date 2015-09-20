@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="month">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </array>
+
+    <array name="exam_type">
+        <item>Delivery</item>
+        <item>Continue Work</item>
+        <item>Homework</item>
+        <item>Practice</item>
+        <item>Exam</item>
+    </array>
+
+    <string-array name="countryValues" />
+    <string-array name="country" />
+
+</resources>

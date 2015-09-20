@@ -36,7 +36,7 @@ public class StatsSubjectCard extends Card {
     private void init(Context context) {
         //Create a CardHeader
         CustomCardHeader header = new CustomCardHeader(context, subject.getColor());
-        header.setTitle(context.getString(R.string.title_stats));
+        header.setTitle(context.getString(R.string.stats));
         addCardHeader(header);
     }
 
@@ -56,7 +56,7 @@ public class StatsSubjectCard extends Card {
 
         if (weightedAverageTitleTextView != null)
             weightedAverageTitleTextView.setText(
-                    getContext().getString(R.string.title_weighted_average)
+                    getContext().getString(R.string.weighted_average)
                             + ": "
             );
 
@@ -66,7 +66,7 @@ public class StatsSubjectCard extends Card {
 
         if (averageTitleTextView != null)
             averageTitleTextView.setText(
-                    getContext().getString(R.string.title_average)
+                    getContext().getString(R.string.average)
                             + ": "
             );
 
@@ -76,7 +76,7 @@ public class StatsSubjectCard extends Card {
 
         if (ratioTitleTextView != null)
             ratioTitleTextView.setText(
-                    getContext().getString(R.string.title_ratio)
+                    getContext().getString(R.string.ratio)
                             + ": "
             );
 

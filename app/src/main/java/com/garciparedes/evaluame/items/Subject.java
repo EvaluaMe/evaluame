@@ -3,8 +3,8 @@ package com.garciparedes.evaluame.items;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.garciparedes.evaluame.Util.Color;
-import com.garciparedes.evaluame.Util.Number;
+import com.garciparedes.evaluame.utils.ColorUtil;
+import com.garciparedes.evaluame.utils.Number;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class Subject implements Parcelable {
         this.description = description;
         this.mStarred = false;
         this.examList = new ArrayList<>();
-        this.mColor = Color.getRandomColor();
+        this.mColor = ColorUtil.getRandomColor();
     }
 
     /**
@@ -127,7 +127,7 @@ public class Subject implements Parcelable {
 
     public int getColor() {
         if(mColor == 0){
-            mColor = Color.getRandomColor();
+            mColor = ColorUtil.getRandomColor();
         }
         return mColor;
     }

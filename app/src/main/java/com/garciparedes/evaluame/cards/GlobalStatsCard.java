@@ -6,16 +6,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.garciparedes.evaluame.R;
-import com.garciparedes.evaluame.Util.*;
-import com.garciparedes.evaluame.Util.Number;
 import com.garciparedes.evaluame.items.Exam;
 import com.garciparedes.evaluame.items.Subject;
 import com.garciparedes.evaluame.provider.ListDB;
+import com.garciparedes.evaluame.utils.Number;
 
 import java.util.Calendar;
 
 import it.gmariotti.cardslib.library.internal.Card;
-import it.gmariotti.cardslib.library.internal.CardHeader;
 
 /**
  * Created by garciparedes on 22/2/15.
@@ -46,7 +44,7 @@ public class GlobalStatsCard extends Card {
 
         //Create a CardHeader
         CustomCardHeader header = new CustomCardHeader(context);
-        header.setTitle(context.getString(R.string.title_stats));
+        header.setTitle(context.getString(R.string.stats));
         //header.setButtonExpandVisible(true);
         addCardHeader(header);
 
@@ -98,17 +96,17 @@ public class GlobalStatsCard extends Card {
 
         if (averageTitleTextView != null)
             averageTitleTextView.setText(
-                    getContext().getString(R.string.title_average)
+                    getContext().getString(R.string.average)
                             + ": "
             );
 
         if (averageValueTextView != null)
-            averageValueTextView.setText(com.garciparedes.evaluame.Util.Number.toString(average));
+            averageValueTextView.setText(com.garciparedes.evaluame.utils.Number.toString(average));
 
 
         if (ratioTitleTextView != null)
             ratioTitleTextView.setText(
-                    getContext().getString(R.string.title_ratio)
+                    getContext().getString(R.string.ratio)
                             + ": "
             );
 

@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:textSize="@dimen/text_size_large"
             android:text="Average:"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/card_stats_average_value_textView"
@@ -27,7 +27,7 @@
             android:textSize="@dimen/text_size_large"
             android:text="8"
             android:gravity="center"
-            android:singleLine="true"/>
+            android:singleLine="true" />
     </TableRow>
 
     <TableRow
@@ -41,7 +41,7 @@
             android:layout_height="match_parent"
             android:textSize="@dimen/text_size_large"
             android:text="Ratio:"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/card_stats_ratio_value_textView"
@@ -50,7 +50,7 @@
             android:textSize="@dimen/text_size_large"
             android:text="1.22"
             android:gravity="center"
-            android:singleLine="true"/>
+            android:singleLine="true" />
 
     </TableRow>
 </TableLayout>
