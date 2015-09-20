@@ -62,5 +62,6 @@
     <string name="username">Nombre de Usuario</string>
     <string name="my_account">Mi Cuenta</string>
     <string name="logout">Log Out</string>
+    <string name="log_out_confirmation">¿Estás seguro de que quieres cerrar sesión?</string>
 
 </resources>

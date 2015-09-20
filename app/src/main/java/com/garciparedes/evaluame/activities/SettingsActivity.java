@@ -1,13 +1,14 @@
 package com.garciparedes.evaluame.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -87,12 +88,46 @@ public class SettingsActivity extends AppCompatActivity {
             switch (preference.getTitleRes()){
 
                 case (R.string.logout):
-                    getSettingActivity().logOut();
+                    logOut();
                     return true;
 
             }
             return super.onPreferenceTreeClick(preferenceScreen, preference);
 
+        }
+
+        public void logOut(){
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    getActivity());
+
+            // set title
+            alertDialogBuilder.setTitle(getString(R.string.logout));
+
+            // set dialog message
+            alertDialogBuilder
+                    .setMessage(getString(R.string.log_out_confirmation))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // if this button is clicked, close
+                            // current activity
+                            getSettingActivity().logOut();
+                        }
+                    })
+                    .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // if this button is clicked, just close
+                            // the dialog box and do nothing
+                            dialog.cancel();
+                        }
+                    });
+
+            // create alert dialog
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+            // show it
+            alertDialog.show();
         }
     }
 }

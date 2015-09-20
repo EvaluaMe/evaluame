@@ -63,5 +63,6 @@
     <string name="username">Username</string>
     <string name="my_account">My Account</string>
     <string name="logout">Log Out</string>
+    <string name="log_out_confirmation">Are you sure to Log Out?</string>
 
 </resources>

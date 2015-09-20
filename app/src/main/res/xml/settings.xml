@@ -21,8 +21,7 @@
 
         <Preference
             android:title="@string/logout"
-            android:key="Log Out"
-            android:summary="This is a cool button"/>
+            android:key="@string/logout"/>
 
     </PreferenceCategory>
 
